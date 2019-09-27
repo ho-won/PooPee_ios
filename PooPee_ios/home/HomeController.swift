@@ -69,7 +69,7 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     }
     
     func refresh() {
-        
+        // 111
     }
     
     func setListener() {
