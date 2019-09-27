@@ -1,0 +1,87 @@
+//
+//  DBVersionTask.swift
+//  PooPee_ios
+//
+//  Created by ho1 on 20/09/2019.
+//  Copyright © 2019 ho1. All rights reserved.
+//
+
+import Foundation
+import UIKit
+
+class DBVersionTask {
+    var progressBar: UIProgressView! = nil
+    var dbVer = 0
+    
+    var onSuccess: ()->()
+    var onFalied: ()->()
+    
+    init(progress: UIProgressView!, onSuccess: @escaping ()->(), onFalied: @escaping ()->()){
+        self.progressBar = progress
+        self.onSuccess = onSuccess
+        self.onFalied = onFalied
+        start()
+    }
+    
+    /*
+     * 차량 DB 버전체크
+     */
+    func start() {
+        BaseTask().requestPost(url: NetDefine.DB_CHECK
+            , onSuccess: { response in
+                if (response.getInt(key: "rst_code") == 0) {
+                    self.dbVer = response.getInt(key: "db_ver")
+                    
+                    if (SharedManager.instance.getDbVer() == self.dbVer) {
+                        self.onSuccess()
+                    } else {
+                        let fileName = response.getString(key: "file_name")
+                        let url = NetDefine.BASE_APP + "sql/" + fileName
+                        self.downloadDB(url: url, fileName: fileName)
+                    }
+                } else {
+                    self.onFalied()
+                }
+        }
+            , onFailed: { statusCode in
+                self.onFalied()
+        })
+    }
+    
+    /*
+     * db download
+     */
+    public func downloadDB(url: String, fileName: String) {
+        if (progressBar != nil) {
+            progressBar.isHidden = false
+        }
+        
+        let fileUrl = MyUtil.getSaveFileUrl(fileName: url)
+        
+        BaseTask().download(url: url, fileUrl: fileUrl
+            , onProgress: { progress in
+                if (self.progressBar != nil) {
+                    DispatchQueue.main.async {
+                        self.progressBar.setProgress(Float(progress.fractionCompleted * 100), animated: true)
+                    }
+                }
+        }
+            , onSuccess: { data in
+                let oldDbVersion = SharedManager.instance.getDbVer()
+                let newDbVersion = self.dbVer
+                for i in oldDbVersion ..< newDbVersion {
+                    do {
+                        let path = ObserverManager.getPath() + "toilet_v" + String(i) + ".sqlite"
+                        try FileManager.default.removeItem(atPath: path)
+                    }
+                    catch {
+                        
+                    }
+                }
+                
+                SharedManager.instance.setDbVer(value: self.dbVer)
+                self.onSuccess()
+        })
+    }
+    
+}

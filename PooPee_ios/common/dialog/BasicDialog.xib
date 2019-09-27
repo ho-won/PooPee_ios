@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BasicDialog" customModule="base_ios" customModuleProvider="target">
+            <connections>
+                <outlet property="layout_dialog" destination="QW6-wl-Auq" id="Bbh-eV-IyO"/>
+                <outlet property="root_view" destination="iN0-l3-epB" id="NMY-S4-Erp"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QW6-wl-Auq">
+                    <rect key="frame" x="37.5" y="233.5" width="300" height="200"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="POJ-HP-1jt">
+                            <rect key="frame" x="220" y="160" width="80" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="80" id="0Xk-gx-ETT"/>
+                                <constraint firstAttribute="height" constant="40" id="S4B-we-MR6"/>
+                            </constraints>
+                            <state key="normal" title="yes"/>
+                            <connections>
+                                <action selector="btn_yes_tap:" destination="-1" eventType="touchUpInside" id="eKe-ah-ItA"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UQ1-ED-Mic">
+                            <rect key="frame" x="140" y="160" width="80" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="80" id="gCC-Tj-0ge"/>
+                                <constraint firstAttribute="height" constant="40" id="xSJ-GF-vhb"/>
+                            </constraints>
+                            <state key="normal" title="no"/>
+                            <connections>
+                                <action selector="btn_no_tap:" destination="-1" eventType="touchUpInside" id="8aM-jE-qTk"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="2NU-x9-ahl"/>
+                        <constraint firstAttribute="bottom" secondItem="POJ-HP-1jt" secondAttribute="bottom" id="K2U-cg-BOC"/>
+                        <constraint firstAttribute="width" constant="300" id="Nsi-zG-WRA"/>
+                        <constraint firstAttribute="bottom" secondItem="UQ1-ED-Mic" secondAttribute="bottom" id="j8U-hH-mia"/>
+                        <constraint firstItem="POJ-HP-1jt" firstAttribute="leading" secondItem="UQ1-ED-Mic" secondAttribute="trailing" id="jJz-LP-flV"/>
+                        <constraint firstAttribute="trailing" secondItem="POJ-HP-1jt" secondAttribute="trailing" id="sZE-PP-8Qm"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="QW6-wl-Auq" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="9Q6-VB-eHU"/>
+                <constraint firstItem="QW6-wl-Auq" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="VgR-dh-sKN"/>
+            </constraints>
+            <point key="canvasLocation" x="132" y="154.27286356821591"/>
+        </view>
+    </objects>
+</document>

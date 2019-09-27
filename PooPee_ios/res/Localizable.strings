@@ -1,0 +1,100 @@
+/* 
+  Localizable.strings
+  base_ios
+
+  Created by Jung ho Seo on 2018. 11. 8..
+  Copyright © 2018년 EMEYE. All rights reserved.
+*/
+
+"app_name" = "PooPee";
+"contentDescription" = "contentDescription";
+
+"app_name" = "PooPee";
+"contentDescription" = "contentDescription";
+
+// word
+"yes" = "예";
+"no" = "아니오";
+"login" = "로그인";
+"logout" = "로그아웃";
+"confirm" = "확인";
+"cancel" = "취소";
+"complete" = "완료";
+"modified" = "수정";
+"change" = "변경";
+"update" = "업데이트";
+"setting" = "설정";
+"current_version" = "현재버전";
+"new_version" = "최신버전";
+"name" = "이름";
+"email" = "이메일";
+"phone_number" = "휴대폰번호";
+"delete" = "삭제";
+"report" = "신고";
+"send" = "전송";
+"send_mail" = "메일보내기";
+"man" = "남자";
+"women" = "여자";
+"close" = "닫기";
+
+// dialog
+"dialog_assign_new_version_update" = "새로운 업데이트가 있습니다. 원활한 사용을 위해서 업데이트를 추천합니다.\n업데이트 하시겠습니까?";
+"dialog_force_new_version_update" = "새로운 업데이트가 있습니다. 업데이트 후에 사용할 수 있습니다.\n업데이트 하시겠습니까?";
+"dialog_download_request" = "화장실정보 다운로드가 필요합니다. 통신환경을 확인 후 재시도해주세요.";
+"dialog_no_show" = "다시보지않기";
+
+// toast
+"toast_checking_service" = "서비스점검중입니다";
+"toast_loading_fail" = "불러오는데 실패했습니다";
+"toast_network_not_connected" = "네트워크 상태를 확인 후 다시 시도하세요";
+"toast_alphanumeric" = "영문자와 숫자만 허용합니다";
+"toast_alphanumeric_hangul" = "영문자와 숫자, 한글만 허용합니다";
+"toast_please_all_input" = "모든항목을 입력해주세요";
+"toast_login_condition" = "아이디/비밀번호를 입력하세요";
+"toast_login_fail" = "로그인에 실패했습니다";
+"toast_join_condition_01" = "비밀번호가 일치하지 않습니다";
+"toast_join_condition_02" = "성별을 선택해주세요";
+"toast_join_complete" = "회원가입이 완료되었습니다";
+"toast_join_id_fail" = "이미 사용중인 아이디입니다";
+"toast_update_complete" = "수정했습니다";
+"toast_delete_complete" = "삭제했습니다";
+"toast_report_complete" = "신고했습니다";
+
+// gallery
+"gallery_select_dir" = "폴더선택";
+"gallery_show_all" = "전체보기";
+"gallery_back_to_dir" = "이전 폴더로 이동";
+"gallery_upload" = "올리기";
+
+// toast
+"toast_please_permission" = "권한이 필요한 작업입니다";
+
+// nav
+"nav_text_01" = "내정보";
+"nav_text_02" = "공지사항";
+"nav_text_03" = "문의하기";
+"nav_text_04" = "설정";
+"nav_text_05" = "PooPee 문의사항";
+"nav_text_06" = "로그인하기";
+
+// home
+"home_text_01" = "장소,주소 검색";
+"home_text_02" = "상세보기";
+"home_text_03" = "댓글수 %@";
+"home_text_04" = "좋아요수 %@";
+"home_text_05" = "댓글입력";
+"home_text_06" = "삭제하시겠습니까?";
+"home_text_07" = "신고내용입력";
+"home_text_08" = "내위치";
+"home_text_09" = "어디에서 화장실을 찾고있나요?";
+
+// login
+"login_01" = "로그인을 해주세요";
+"login_02" = "아이디 입력";
+"login_03" = "비밀번호 입력";
+"login_04" = "회원가입";
+"login_05" = "비밀번호 입력";
+"login_06" = "비밀번호 확인";
+"login_07" = "변경할 비밀번호 입력";
+"login_08" = "변경할 비밀번호 확인";
+"login_09" = "닉네임 입력";
