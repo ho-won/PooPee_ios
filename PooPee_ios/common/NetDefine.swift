@@ -28,8 +28,7 @@ struct NetDefine {
     static let COMMENT_UPDATE = "comments/updateComment" // [PUT] 댓글수정
     static let COMMENT_REPORT_CREATE = "commentReports/createReport" // [POST] 댓글신고
     
-    static let KAKAO_LOCAL = "https://dapi.kakao.com/v2/"
     static let KAKAO_API_KEY = "dff7010c98c6542a9977f13c10d71a91"
-    static let KAKAO_LOCAL_SEARCH = "local/search/keyword.json" // 카카오지도 키워드 검색
+    static let KAKAO_LOCAL_SEARCH = "https://dapi.kakao.com/v2/local/search/keyword.json" // 카카오지도 키워드 검색
     
 }

@@ -9,7 +9,7 @@ import Alamofire
 
 class BaseTask {
     
-    func requestPost(url: String, params: Parameters = Parameters(), onSuccess: @escaping (_ response: NSDictionary)->(), onFailed: @escaping (_ statusCode: Int)->()) {
+    func requestPost(url: String, params: Parameters = Parameters(), headers: HTTPHeaders = HTTPHeaders(), onSuccess: @escaping (_ response: NSDictionary)->(), onFailed: @escaping (_ statusCode: Int)->()) {
         print("url : \(url)")
         print("params : \(params.description)")
         
@@ -17,7 +17,8 @@ class BaseTask {
             NetDefine.BASE_APP + url,
             method: .post,
             parameters: params,
-            encoding: URLEncoding.default
+            encoding: URLEncoding.default,
+            headers: headers
             )
             .responseJSON { (response) in
                 self.onResponse(response: response, onSuccess: onSuccess, onFailed: onFailed)
@@ -69,7 +70,7 @@ class BaseTask {
         }
     }
     
-    func requestPostFullUrl(url: String, params: Parameters = Parameters(), onSuccess: @escaping (_ response: NSDictionary)->(), onFailed: @escaping (_ statusCode: Int)->()) {
+    func requestPostFullUrl(url: String, params: Parameters = Parameters(), headers: HTTPHeaders = HTTPHeaders(), onSuccess: @escaping (_ response: NSDictionary)->(), onFailed: @escaping (_ statusCode: Int)->()) {
         print("url : \(url)")
         print("params : \(params.description)")
         
@@ -77,7 +78,8 @@ class BaseTask {
             url,
             method: .post,
             parameters: params,
-            encoding: URLEncoding.default
+            encoding: URLEncoding.default,
+            headers: headers
             )
             .responseJSON { (response) in
                 self.onResponse(response: response, onSuccess: onSuccess, onFailed: onFailed)
