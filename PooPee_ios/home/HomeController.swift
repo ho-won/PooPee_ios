@@ -12,8 +12,12 @@ import CoreLocation
 
 class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelegate {
     @IBOutlet var map_view: UIView!
+    
     @IBOutlet var btn_menu: UIButton!
+    @IBOutlet var btn_menu_marginTop: NSLayoutConstraint!
+    
     @IBOutlet var layout_my_position: bg_my_position!
+    @IBOutlet var layout_my_position_marginTop: NSLayoutConstraint!
     @IBOutlet var tv_my_position: UILabel!
     
     @IBOutlet var layout_bottom_bg: UIView!
@@ -25,6 +29,9 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     
     @IBOutlet var layout_ad_mob: UIView!
     
+    var mNavMainView = NavMainView()
+    var mHoSlideMenu = HoSlideMenu()
+    
     var mMapView: MTMapView!
     var mLocationManager = CLLocationManager()
     
@@ -35,17 +42,31 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setStatusColor(color: colors.main_content_background)
-        hideKeyboardWhenTappedAround()
         setupViewResizerOnKeyboardShown()
+        
+        let toolbarMarginTop = UIApplication.shared.statusBarFrame.height + 12
+        btn_menu_marginTop.constant = toolbarMarginTop
+        layout_my_position_marginTop.constant = toolbarMarginTop
         
         tv_my_position.text = "home_text_08".localized
         tv_search_ex.text = "home_text_09".localized
         edt_search.textColor = colors.text_main
         edt_search.setHint(hint: "home_text_01".localized, color: colors.main_hint)
         
+        tl_search.register(UINib(nibName: "KakaoKeywordCell", bundle: nil), forCellReuseIdentifier: "KakaoKeywordCell")
+        tl_search.dataSource = self
+        tl_search.delegate = self
+        
+        mHoSlideMenu.setMenuView(menu_view: mNavMainView, menu_width: dimen.home_menu_width)
+        view.addSubview(mHoSlideMenu)
+        
         _init()
         setListener()
+    }
+    
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        refresh()
     }
     
     func _init() {
@@ -71,33 +92,32 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     }
     
     func refresh() {
-        // 111
+        mNavMainView.refresh()
     }
     
     func setListener() {
+        layout_bottom_bg.setOnClickListener {
+            self.edt_search.resignFirstResponder()
+        }
         btn_search_delete.setOnClickListener {
             self.edt_search.text = ""
             self.tl_search.setVisibility(gone: true, dimen: 0, attribute: .height)
         }
-        edt_search.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        edt_search.addTextChangedListener {
+            if (self.edt_search.text!.isEmpty) {
+                self.tl_search.setVisibility(gone: true, dimen: 0, attribute: .height)
+            } else {
+                self.tl_search.setVisibility(gone: false, dimen: 240, attribute: .height)
+                self.taskKakaoLocalSearch(query: self.edt_search.text!)
+            }
+        }
         layout_my_position.setOnClickListener {
             if (SharedManager.instance.getLatitude() > 0) {
                 self.mMapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: true)
             }
         }
         btn_menu.setOnClickListener {
-//            drawer_layout.openDrawer(GravityCompat.START)
-        }
-    }
-    
-    @objc func textFieldDidChange(textfield: UITextField) {
-        if (textfield == edt_search) {
-            if (edt_search.text!.isEmpty) {
-                self.tl_search.setVisibility(gone: true, dimen: 0, attribute: .height)
-            } else {
-                self.tl_search.setVisibility(gone: false, dimen: 240, attribute: .height)
-                taskKakaoLocalSearch(query: edt_search.text!)
-            }
+            self.mHoSlideMenu.showMenu()
         }
     }
     
@@ -150,13 +170,12 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     }
     
     func mapView(_ mapView: MTMapView!, selectedPOIItem poiItem: MTMapPOIItem!) -> Bool {
-//        val toilet = Toilet()
-//        toilet.toilet_id = p1!!.tag
-//        toilet.name = p1.itemName
-//
-//        val dialog = ToiletDialog()
-//        dialog.setToilet(toilet)
-//        dialog.show(supportFragmentManager, "ToiletDialog")
+        let toilet = SQLiteManager.instance.getToilet(id: poiItem.tag)
+        let dialog = ToiletDialog()
+        print("HO_TEST:\(toilet.toilet_id)")
+        dialog.setToilet(toilet: toilet)
+        dialog.refresh()
+        dialog.show(view: ObserverManager.root.view)
         return false
     }
     
@@ -176,8 +195,8 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     
     func checkPopup() {
         if (SharedManager.instance.getNoticeImage().count > 0) {
-//            val dialog = PopupDialog()
-//            dialog.show(supportFragmentManager, "PopupDialog")
+            let dialog = PopupDialog()
+            dialog.show(view: ObserverManager.root.view)
         }
     }
 
@@ -215,60 +234,32 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         })
     }
     
+}
+
+extension HomeController: UITableViewDelegate, UITableViewDataSource {
     
-    /**
-     * [POST]
-     */
-    func task() {
-        var params: Parameters = Parameters()
-        params.updateValue("", forKey: "")
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return mKeywordList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "KakaoKeywordCell")! as! KakaoKeywordCell
+        let position = indexPath.row
         
-        BaseTask().requestPost(url: NetDefine.TEST_API, params: params
-            , onSuccess: { response in
-                
-        }
-            , onFailed: { statusCode in
-                
-        })
+        cell.tv_title.text = mKeywordList[position].place_name
+        cell.tv_sub.text = mKeywordList[position].address_name
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let position = indexPath.row
+        
+        edt_search.text = mKeywordList[position].place_name
+
+        mMapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: mKeywordList[position].latitude, longitude: mKeywordList[position].longitude)), animated: true)
+        edt_search.resignFirstResponder()
+        tl_search.setVisibility(gone: true, dimen: 0, attribute: .height)
     }
     
 }
-
-///**
-// * 공지사항 목록 adapter
-// */
-//inner class ListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-//
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-//        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_kakao_keyword, parent, false))
-//    }
-//
-//    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-//        (holder as ViewHolder).update(position)
-//    }
-//
-//    override fun getItemCount(): Int {
-//        return mKeywordList.size
-//    }
-//
-//    override fun getItemViewType(position: Int): Int {
-//        return 0
-//    }
-//
-//    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-//
-//        @SuppressLint("SetTextI18n")
-//        fun update(position: Int) {
-//            itemView.tv_title.text = mKeywordList[position].place_name
-//            itemView.tv_sub.text = mKeywordList[position].address_name
-//
-//            itemView.layout_title.setOnClickListener {
-//                edt_search.setText( mKeywordList[position].place_name)
-//                edt_search.setSelection(mKeywordList[position].place_name.count())
-//                mMapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(mKeywordList[position].latitude, mKeywordList[position].longitude), true)
-//                MyUtil.keyboardHide(edt_search)
-//                rv_search.visibility = View.GONE
-//            }
-//        }
-//    }
-//}

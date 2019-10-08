@@ -122,11 +122,47 @@ class MyLabel : UILabel {
 /**
  * TextField (padding 적용)
  */
-class MyTextField: UITextField {
+class MyTextField: UITextField, UITextFieldDelegate {
+    
+    enum PATTERN {
+        case alphanumeric, alphanumeric_hangul
+    }
+    
+    private let PATTERN_ALPHANUMERIC = "^[a-zA-Z0-9]$"
+    private let PATTERN_ALPHANUMERIC_HANGUL = "^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ\\s]$"
+    private var pattern: String! = nil
+    
     private var _paddingLeft = [UITextField: CGFloat]()
     private var _paddingRight = [UITextField: CGFloat]()
     private var _paddingTop = [UITextField: CGFloat]()
     private var _paddingBottom = [UITextField: CGFloat]()
+    private var onTextChanged: (()->())!
+    
+    func setPattern(pattern: PATTERN) {
+        self.delegate = self
+        if (pattern == .alphanumeric) {
+            self.pattern = PATTERN_ALPHANUMERIC
+        } else if (pattern == .alphanumeric_hangul) {
+            self.pattern = PATTERN_ALPHANUMERIC_HANGUL
+        } else {
+            self.pattern = nil
+        }
+    }
+    
+    func isPatternCheck(string: String) -> Bool {
+        if (pattern == nil) {
+            return true
+        }
+        do {
+            let regex = try NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+            if let _ = regex.firstMatch(in: string, options: NSRegularExpression.MatchingOptions.reportCompletion, range: NSMakeRange(0, string.count)) {
+                return true
+            }
+        } catch {
+            return false
+        }
+        return false
+    }
     
     @IBInspectable var paddingLeft: CGFloat {
         get {
@@ -190,6 +226,25 @@ class MyTextField: UITextField {
     
     func setHint(hint: String, color: UIColor) {
         self.attributedPlaceholder = NSAttributedString(string: hint, attributes: [NSAttributedString.Key.foregroundColor: color])
+    }
+    
+    func addTextChangedListener(_ onTextChanged: @escaping ()->()) {
+        self.onTextChanged = onTextChanged
+        addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+    }
+    
+    @objc func textFieldDidChange(textfield: UITextField) {
+        onTextChanged()
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let utf8Char = string.cString(using: .utf8)
+        let isBackSpace = strcmp(utf8Char, "\\b")
+        if (isPatternCheck(string: string) || isBackSpace == -92) {
+            return true
+        } else {
+            return false
+        }
     }
     
 }

@@ -49,15 +49,15 @@ class SQLiteManager {
     /**
      * Toilet 가져오기
      */
-    func getToilet(id: String) -> Toilet? {
+    func getToilet(id: Int) -> Toilet {
         let db = getReadableDatabase()
-        let queryString = "SELECT * FROM toilets WHERE id='" + id + "'";
+        let queryString = "SELECT * FROM toilets WHERE id='\(id)'";
         var cursor: OpaquePointer?
         
         if (sqlite3_prepare(db, queryString, -1, &cursor, nil) != SQLITE_OK) {
             let errmsg = String(cString: sqlite3_errmsg(db)!)
             print("error preparing: \(errmsg)")
-            return nil
+            return Toilet()
         }
         
         var count = false
@@ -69,6 +69,19 @@ class SQLiteManager {
             toilet.name = String(cString: sqlite3_column_text(cursor, 2))
             toilet.address_new = String(cString: sqlite3_column_text(cursor, 3))
             toilet.address_old = String(cString: sqlite3_column_text(cursor, 4))
+            toilet.unisex = String(cString: sqlite3_column_text(cursor, 5))
+            toilet.m_poo = String(cString: sqlite3_column_text(cursor, 6))
+            toilet.m_pee = String(cString: sqlite3_column_text(cursor, 7))
+            toilet.m_d_poo = String(cString: sqlite3_column_text(cursor, 8))
+            toilet.m_d_pee = String(cString: sqlite3_column_text(cursor, 9))
+            toilet.m_c_poo = String(cString: sqlite3_column_text(cursor, 10))
+            toilet.m_c_pee = String(cString: sqlite3_column_text(cursor, 11))
+            toilet.w_poo = String(cString: sqlite3_column_text(cursor, 12))
+            toilet.w_d_poo = String(cString: sqlite3_column_text(cursor, 13))
+            toilet.w_c_poo = String(cString: sqlite3_column_text(cursor, 14))
+            toilet.manager_name = String(cString: sqlite3_column_text(cursor, 15))
+            toilet.manager_tel = String(cString: sqlite3_column_text(cursor, 16))
+            toilet.open_time = String(cString: sqlite3_column_text(cursor, 17))
             toilet.latitude = sqlite3_column_double(cursor, 19)
             toilet.longitude = sqlite3_column_double(cursor, 20)
         }
@@ -78,7 +91,7 @@ class SQLiteManager {
         if (count) {
             return toilet
         } else {
-            return nil
+            return Toilet()
         }
     }
     
@@ -109,6 +122,19 @@ class SQLiteManager {
             toilet.name = String(cString: sqlite3_column_text(cursor, 2))
             toilet.address_new = String(cString: sqlite3_column_text(cursor, 3))
             toilet.address_old = String(cString: sqlite3_column_text(cursor, 4))
+            toilet.unisex = String(cString: sqlite3_column_text(cursor, 5))
+            toilet.m_poo = String(cString: sqlite3_column_text(cursor, 6))
+            toilet.m_pee = String(cString: sqlite3_column_text(cursor, 7))
+            toilet.m_d_poo = String(cString: sqlite3_column_text(cursor, 8))
+            toilet.m_d_pee = String(cString: sqlite3_column_text(cursor, 9))
+            toilet.m_c_poo = String(cString: sqlite3_column_text(cursor, 10))
+            toilet.m_c_pee = String(cString: sqlite3_column_text(cursor, 11))
+            toilet.w_poo = String(cString: sqlite3_column_text(cursor, 12))
+            toilet.w_d_poo = String(cString: sqlite3_column_text(cursor, 13))
+            toilet.w_c_poo = String(cString: sqlite3_column_text(cursor, 14))
+            toilet.manager_name = String(cString: sqlite3_column_text(cursor, 15))
+            toilet.manager_tel = String(cString: sqlite3_column_text(cursor, 16))
+            toilet.open_time = String(cString: sqlite3_column_text(cursor, 17))
             toilet.latitude = sqlite3_column_double(cursor, 19)
             toilet.longitude = sqlite3_column_double(cursor, 20)
             toiletList.append(toilet)

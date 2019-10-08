@@ -83,6 +83,13 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4aA-LY-Alq">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H2D-64-HXB">
+                                                <rect key="frame" x="67" y="244" width="240" height="128"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            </view>
+                                        </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="buF-gB-IQ6">
@@ -267,7 +274,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="MFH-6P-lLe" firstAttribute="trailing" secondItem="Bas-RD-j0R" secondAttribute="trailing" id="1JI-Te-bCH"/>
-                            <constraint firstItem="Bas-RD-j0R" firstAttribute="top" secondItem="MFH-6P-lLe" secondAttribute="top" id="2u0-jD-Zgs"/>
+                            <constraint firstItem="Bas-RD-j0R" firstAttribute="top" secondItem="Eu6-WW-QkZ" secondAttribute="top" id="2u0-jD-Zgs"/>
                             <constraint firstItem="Bas-RD-j0R" firstAttribute="leading" secondItem="MFH-6P-lLe" secondAttribute="leading" id="2vM-AZ-0qw"/>
                             <constraint firstItem="MFH-6P-lLe" firstAttribute="bottom" secondItem="Bas-RD-j0R" secondAttribute="bottom" id="KAN-tX-FUh"/>
                         </constraints>
@@ -275,11 +282,13 @@
                     </view>
                     <connections>
                         <outlet property="btn_menu" destination="buF-gB-IQ6" id="ciE-7W-dAs"/>
+                        <outlet property="btn_menu_marginTop" destination="ffV-aq-vtt" id="4mP-oJ-7Cw"/>
                         <outlet property="btn_search_delete" destination="R4r-k1-bLh" id="URA-af-LTc"/>
                         <outlet property="edt_search" destination="t9P-nT-lkn" id="0kT-l0-N4W"/>
                         <outlet property="layout_ad_mob" destination="Tjq-ur-cnv" id="Ox0-uY-pNa"/>
                         <outlet property="layout_bottom_bg" destination="kpc-UJ-WTk" id="qPx-nn-wJl"/>
                         <outlet property="layout_my_position" destination="rzq-Sp-lVc" id="G5J-K5-28j"/>
+                        <outlet property="layout_my_position_marginTop" destination="yVZ-FP-Mdc" id="UmY-J6-c7Q"/>
                         <outlet property="map_view" destination="4aA-LY-Alq" id="qMO-7F-I6b"/>
                         <outlet property="tl_search" destination="vyq-GF-8r3" id="4TJ-nJ-G08"/>
                         <outlet property="tv_my_position" destination="hQw-kf-6re" id="nAG-f0-R27"/>

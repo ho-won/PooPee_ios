@@ -74,4 +74,10 @@ class StrManager {
         return String(days)
     }
     
+    static func getCurrentDate() -> String {
+        let format = DateFormatter()
+        format.dateFormat  = "yyyy-MM-dd"
+        return format.string(from: Date())
+    }
+    
 }

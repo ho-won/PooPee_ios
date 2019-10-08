@@ -108,3 +108,30 @@ class bg_search_edt: UIView {
         self.backgroundColor = UIColor(hex: "#F9F9F9")!
     }
 }
+
+class bg_login: UIButton {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        self.layer.cornerRadius = 24
+        self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+        self.backgroundColor = colors.main_content_background
+        self.titleLabel?.font =  UIFont.systemFont(ofSize: 14)
+        setEnabled(enable: false)
+    }
+    
+    func setEnabled(enable: Bool) {
+        self.isEnabled = enable
+        if (enable) {
+            self.setTitleColor(colors.primary, for: .normal)
+        } else {
+            self.setTitleColor(UIColor(hex: "#85b3ff"), for: .normal)
+        }
+    }
+}

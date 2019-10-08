@@ -53,12 +53,23 @@ class ObserverManager {
     
     static func getController(name: String) -> BaseController {
         switch name {
+        // Gallery.storyboard
         case "GalleryController": // 앨범목록
             let controller = UIStoryboard(name: "Gallery", bundle: nil).instantiateViewController(withIdentifier: "GalleryController") as! GalleryController
             return controller
         case "CropImageController": // 이미지크롭
             let controller = UIStoryboard(name: "Gallery", bundle: nil).instantiateViewController(withIdentifier: "CropImageController") as! CropImageController
             return controller
+            
+        // Login.storyboard
+        case "LoginController": // 이미지크롭
+            let controller = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "LoginController") as! LoginController
+            return controller
+        case "JoinController": // 이미지크롭
+            let controller = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "JoinController") as! JoinController
+            return controller
+
+        // Main.storyboard
         case "HomeController": // 이미지크롭
             let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeController") as! HomeController
             return controller

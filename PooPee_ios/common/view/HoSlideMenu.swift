@@ -59,7 +59,7 @@ class HoSlideMenu: UIView, UIScrollViewDelegate {
     
     private func setCurrentPage(position: Int) {
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.25, delay: 0, options: UIView.AnimationOptions.curveEaseOut, animations: {
+            UIView.animate(withDuration: 0.4, delay: 0, options: [], animations: {
                 self.scroll_view.contentOffset.x = self.scroll_view.frame.width * CGFloat(position)
                 if (position == 1) {
                     self.layout_bg.alpha = 0

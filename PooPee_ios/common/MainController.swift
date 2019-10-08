@@ -141,10 +141,10 @@ class MainController: BaseController, CLLocationManagerDelegate {
         var params: Parameters = Parameters()
         params.updateValue(SharedManager.instance.getMemberUsername(), forKey: "username")
         params.updateValue(SharedManager.instance.getMemberPassword(), forKey: "password")
-        params.updateValue("", forKey: "pushkey")
+        params.updateValue("test", forKey: "pushkey")
         params.updateValue("ios", forKey: "os")
         
-        BaseTask().requestPost(url: NetDefine.SERVER_CHECK, params: params
+        BaseTask().requestPost(url: NetDefine.LOGIN, params: params
             , onSuccess: { response in
                 if (response.getInt(key: "rst_code") == 0) {
                     SharedManager.instance.setMemberId(value: response.getString(key: "member_id"))
@@ -172,7 +172,7 @@ class MainController: BaseController, CLLocationManagerDelegate {
         BaseTask().requestGet(url: NetDefine.SERVER_CHECK, params: params
             , onSuccess: { response in
                 if (response.getInt(key: "rst_code") == 0) {
-                    SharedManager.instance.setNoticeImage(value: "notice_image")
+                    SharedManager.instance.setNoticeImage(value: response.getString(key: "notice_image"))
                     self.onVersionCheck(response: response); // 버전체크
                 } else {
                     self.view.makeToast(message: "toast_checking_service")
