@@ -70,7 +70,7 @@ class MainController: BaseController, CLLocationManagerDelegate {
      * @param response server version data.
      */
     func onVersionCheck(response: NSDictionary) {
-        let version = response.getString(key: "version_ios");
+        let version = response.getString("version_ios");
         let versions = version.components(separatedBy: ".")
         let appVersions = (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String).components(separatedBy: ".")
         
@@ -139,17 +139,17 @@ class MainController: BaseController, CLLocationManagerDelegate {
      */
     func taskLogin() {
         var params: Parameters = Parameters()
-        params.updateValue(SharedManager.instance.getMemberUsername(), forKey: "username")
-        params.updateValue(SharedManager.instance.getMemberPassword(), forKey: "password")
-        params.updateValue("test", forKey: "pushkey")
-        params.updateValue("ios", forKey: "os")
+        params.put("username", SharedManager.instance.getMemberUsername())
+        params.put("password", SharedManager.instance.getMemberPassword())
+        params.put("pushkey", "test")
+        params.put("os", "ios")
         
-        BaseTask().requestPost(url: NetDefine.LOGIN, params: params
+        BaseTask().request(url: NetDefine.LOGIN, method: .post, params: params
             , onSuccess: { response in
-                if (response.getInt(key: "rst_code") == 0) {
-                    SharedManager.instance.setMemberId(value: response.getString(key: "member_id"))
-                    SharedManager.instance.setMemberName(value: response.getString(key: "name"))
-                    SharedManager.instance.setMemberGender(value: response.getString(key: "gender"))
+                if (response.getInt("rst_code") == 0) {
+                    SharedManager.instance.setMemberId(value: response.getString("member_id"))
+                    SharedManager.instance.setMemberName(value: response.getString("name"))
+                    SharedManager.instance.setMemberGender(value: response.getString("gender"))
                     self.gotoHome()
                 } else {
                     ObserverManager.logout()
@@ -167,12 +167,12 @@ class MainController: BaseController, CLLocationManagerDelegate {
      */
     func taskServerCheck() {
         var params: Parameters = Parameters()
-        params.updateValue(SharedManager.instance.getNoticeDate(), forKey: "date")
+        params.put("date", SharedManager.instance.getNoticeDate())
         
-        BaseTask().requestGet(url: NetDefine.SERVER_CHECK, params: params
+        BaseTask().request(url: NetDefine.SERVER_CHECK, method: .get, params: params
             , onSuccess: { response in
-                if (response.getInt(key: "rst_code") == 0) {
-                    SharedManager.instance.setNoticeImage(value: response.getString(key: "notice_image"))
+                if (response.getInt("rst_code") == 0) {
+                    SharedManager.instance.setNoticeImage(value: response.getString("notice_image"))
                     self.onVersionCheck(response: response); // 버전체크
                 } else {
                     self.view.makeToast(message: "toast_checking_service")

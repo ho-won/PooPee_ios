@@ -9,84 +9,43 @@ import Alamofire
 
 class BaseTask {
     
-    func requestPost(url: String, params: Parameters = Parameters(), headers: HTTPHeaders = HTTPHeaders(), onSuccess: @escaping (_ response: NSDictionary)->(), onFailed: @escaping (_ statusCode: Int)->()) {
+    func request(
+        url: String,
+        method: HTTPMethod = .get,
+        params: Parameters = Parameters(),
+        encoding: ParameterEncoding = URLEncoding.default,
+        headers: HTTPHeaders = HTTPHeaders(),
+        fullUrl: Bool = false,
+        onSuccess: @escaping (_ response: NSDictionary)->(),
+        onFailed: @escaping (_ statusCode: Int)->()
+    ) {
+        var nUrl = url
+        if (!fullUrl) {
+            nUrl = NetDefine.BASE_APP + url
+        }
+        
         print("url : \(url)")
         print("params : \(params.description)")
         
         Alamofire.request(
-            NetDefine.BASE_APP + url,
-            method: .post,
+            nUrl,
+            method: method,
             parameters: params,
-            encoding: URLEncoding.default,
+            encoding: encoding,
             headers: headers
-            )
+        )
             .responseJSON { (response) in
                 self.onResponse(response: response, onSuccess: onSuccess, onFailed: onFailed)
         }
     }
     
-    func requestGet(url: String, params: Parameters = Parameters(), onSuccess: @escaping (_ response: NSDictionary)->(), onFailed: @escaping (_ statusCode: Int)->()) {
-        print("url : \(url)")
-        print("params : \(params.description)")
-        
-        Alamofire.request(
-            NetDefine.BASE_APP + url,
-            method: .get,
-            parameters: params,
-            encoding: URLEncoding.default
-            )
-            .responseJSON { (response) in
-                self.onResponse(response: response, onSuccess: onSuccess, onFailed: onFailed)
-        }
-    }
-    
-    func requestPut(url: String, params: Parameters = Parameters(), onSuccess: @escaping (_ response: NSDictionary)->(), onFailed: @escaping (_ statusCode: Int)->()) {
-        print("url : \(url)")
-        print("params : \(params.description)")
-        
-        Alamofire.request(
-            NetDefine.BASE_APP + url,
-            method: .put,
-            parameters: params,
-            encoding: URLEncoding.default
-            )
-            .responseJSON { (response) in
-                self.onResponse(response: response, onSuccess: onSuccess, onFailed: onFailed)
-        }
-    }
-    
-    func requestDelete(url: String, params: Parameters = Parameters(), onSuccess: @escaping (_ response: NSDictionary)->(), onFailed: @escaping (_ statusCode: Int)->()) {
-        print("url : \(url)")
-        print("params : \(params.description)")
-        
-        Alamofire.request(
-            NetDefine.BASE_APP + url,
-            method: .delete,
-            parameters: params,
-            encoding: URLEncoding.default
-            )
-            .responseJSON { (response) in
-                self.onResponse(response: response, onSuccess: onSuccess, onFailed: onFailed)
-        }
-    }
-    
-    func requestPostFullUrl(url: String, params: Parameters = Parameters(), headers: HTTPHeaders = HTTPHeaders(), onSuccess: @escaping (_ response: NSDictionary)->(), onFailed: @escaping (_ statusCode: Int)->()) {
-        print("url : \(url)")
-        print("params : \(params.description)")
-        
-        Alamofire.request(
-            url,
-            method: .post,
-            parameters: params,
-            encoding: URLEncoding.default,
-            headers: headers
-            )
-            .responseJSON { (response) in
-                self.onResponse(response: response, onSuccess: onSuccess, onFailed: onFailed)
-        }
-    }
-    
-    func upload(url: String, params: Parameters = Parameters(), fileParams: [FileParam], onSuccess: @escaping (_ response: NSDictionary)->(), onFailed: @escaping (_ statusCode: Int)->()) {
+    func upload(
+        url: String,
+        params: Parameters = Parameters(),
+        fileParams: [FileParam],
+        onSuccess: @escaping (_ response: NSDictionary)->(),
+        onFailed: @escaping (_ statusCode: Int)->()
+    ) {
         print("url : \(url)")
         print("params : \(params.description)")
         
@@ -120,7 +79,12 @@ class BaseTask {
         }
     }
     
-    func download(url: String, fileUrl: URL, onProgress: @escaping (_ progress: Progress)->(), onSuccess: @escaping (_ data: DownloadResponse<Data>)->()) {
+    func download(
+        url: String,
+        fileUrl: URL,
+        onProgress: @escaping (_ progress: Progress)->(),
+        onSuccess: @escaping (_ data: DownloadResponse<Data>)->()
+    ) {
         print("url : \(url)")
         let destination: DownloadRequest.DownloadFileDestination = { _, _ in
             return (fileUrl, [.removePreviousFile, .createIntermediateDirectories])
@@ -129,17 +93,21 @@ class BaseTask {
         Alamofire.download(
             url,
             to: destination
-            )
+        )
             .downloadProgress { (progress) in
                 onProgress(progress)
-            }
-            .responseData { (data) in
-                print("download_complete: \(data.destinationURL!)")
-                onSuccess(data)
+        }
+        .responseData { (data) in
+            print("download_complete: \(data.destinationURL!)")
+            onSuccess(data)
         }
     }
     
-    func onResponse(response: DataResponse<Any>, onSuccess: @escaping (_ response: NSDictionary)->(), onFailed: @escaping (_ statusCode: Int)->()) {
+    func onResponse(
+        response: DataResponse<Any>,
+        onSuccess: @escaping (_ response: NSDictionary)->(),
+        onFailed: @escaping (_ statusCode: Int)->()
+    ) {
         var statusCode = 9
         if (response.response != nil) {
             statusCode = response.response!.statusCode
@@ -161,4 +129,10 @@ class BaseTask {
         }
     }
     
+}
+
+extension Parameters {
+    mutating func put(_ key: String, _ value: Any) {
+        updateValue(value, forKey: key)
+    }
 }

@@ -82,20 +82,20 @@ class LoginController: BaseController {
     func taskLogin(username: String, password: String) {
         showLoading()
         var params: Parameters = Parameters()
-        params.updateValue(username, forKey: "username")
-        params.updateValue(password, forKey: "password")
-        params.updateValue("test", forKey: "pushkey")
-        params.updateValue("ios", forKey: "os")
+        params.put("username", username)
+        params.put("password", password)
+        params.put("pushkey", "test")
+        params.put("os", "ios")
         
-        BaseTask().requestPost(url: NetDefine.LOGIN, params: params
+        BaseTask().request(url: NetDefine.LOGIN, method: .post, params: params
             , onSuccess: { response in
-                if (response.getInt(key: "rst_code") == 0) {
+                if (response.getInt("rst_code") == 0) {
                     SharedManager.instance.setLoginCheck(value: true)
-                    SharedManager.instance.setMemberId(value: response.getString(key: "member_id"))
+                    SharedManager.instance.setMemberId(value: response.getString("member_id"))
                     SharedManager.instance.setMemberUsername(value: username)
                     SharedManager.instance.setMemberPassword(value: password)
-                    SharedManager.instance.setMemberName(value: response.getString(key: "name"))
-                    SharedManager.instance.setMemberGender(value: response.getString(key: "gender"))
+                    SharedManager.instance.setMemberName(value: response.getString("name"))
+                    SharedManager.instance.setMemberGender(value: response.getString("gender"))
                     self.finish()
                 } else {
                     self.view.makeToast(message: "toast_login_fail".localized)

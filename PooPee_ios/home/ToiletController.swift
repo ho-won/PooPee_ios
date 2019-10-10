@@ -37,9 +37,9 @@ class ToiletController: BaseController {
      */
     func task() {
         var params: Parameters = Parameters()
-        params.updateValue("", forKey: "")
+        params.put("", "")
         
-        BaseTask().requestPost(url: NetDefine.TEST_API, params: params
+        BaseTask().request(url: NetDefine.TEST_API, method: .post, params: params
             , onSuccess: { response in
                 
         }

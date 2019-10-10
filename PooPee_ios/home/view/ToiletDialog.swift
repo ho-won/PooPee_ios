@@ -98,13 +98,13 @@ class ToiletDialog: BaseDialog {
 
     func taskToiletCount() {
         var params: Parameters = Parameters()
-        params.updateValue(mToilet.toilet_id, forKey: "toilet_id")
+        params.put("toilet_id", mToilet.toilet_id)
         
-        BaseTask().requestGet(url: NetDefine.TOILET_INFO, params: params
+        BaseTask().request(url: NetDefine.TOILET_INFO, method: .get, params: params
             , onSuccess: { response in
-                if (response.getInt(key: "rst_code") == 0) {
-                    self.mToilet.comment_count = response.getString(key: "comment_count")
-                    self.mToilet.like_count = response.getString(key: "like_count")
+                if (response.getInt("rst_code") == 0) {
+                    self.mToilet.comment_count = response.getString("comment_count")
+                    self.mToilet.like_count = response.getString("like_count")
 
                     self.tv_comment_count.text = self.mToilet.comment_count
                     self.tv_like_count.text = self.mToilet.like_count

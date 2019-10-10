@@ -27,15 +27,15 @@ class DBVersionTask {
      * 차량 DB 버전체크
      */
     func start() {
-        BaseTask().requestPost(url: NetDefine.DB_CHECK
+        BaseTask().request(url: NetDefine.DB_CHECK, method: .post
             , onSuccess: { response in
-                if (response.getInt(key: "rst_code") == 0) {
-                    self.dbVer = response.getInt(key: "db_ver")
+                if (response.getInt("rst_code") == 0) {
+                    self.dbVer = response.getInt("db_ver")
                     
                     if (SharedManager.instance.getDbVer() == self.dbVer) {
                         self.onSuccess()
                     } else {
-                        let fileName = response.getString(key: "file_name")
+                        let fileName = response.getString("file_name")
                         let url = NetDefine.BASE_APP + "sql/" + fileName
                         self.downloadDB(url: url, fileName: fileName)
                     }

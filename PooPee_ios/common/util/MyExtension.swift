@@ -516,7 +516,7 @@ extension UIImage {
  */
 extension NSDictionary {
     
-    func getString(key: String) -> String {
+    func getString(_ key: String) -> String {
         if (self.object(forKey: key) as? String != nil) {
             return String(self.object(forKey: key) as! String)
         }
@@ -538,7 +538,7 @@ extension NSDictionary {
         return ""
     }
     
-    func getInt(key: String) -> Int {
+    func getInt(_ key: String) -> Int {
         if (self.object(forKey: key) as? Int != nil) {
             return Int(self.object(forKey: key) as! Int)
         }
@@ -548,7 +548,7 @@ extension NSDictionary {
         return 0
     }
     
-    func getDouble(key: String) -> Double {
+    func getDouble(_ key: String) -> Double {
         if (self.object(forKey: key) as? Double != nil) {
             return self.object(forKey: key) as! Double
         } else if (self.object(forKey: key) as? String != nil) {
@@ -557,28 +557,28 @@ extension NSDictionary {
         return 0.0
     }
     
-    func getBoolean(key: String) -> Bool {
+    func getBoolean(_ key: String) -> Bool {
         if (self.object(forKey: key) as? Bool != nil) {
             return self.object(forKey: key) as! Bool
         }
         return false
     }
     
-    func getJSONArray(key: String) -> NSArray {
+    func getJSONArray(_ key: String) -> NSArray {
         if (self.object(forKey: key) as? NSArray != nil) {
             return self.object(forKey: key) as! NSArray
         }
         return NSArray()
     }
     
-    func getJSONObject(key: String) -> NSDictionary {
+    func getJSONObject(_ key: String) -> NSDictionary {
         if (self.object(forKey: key) as? NSDictionary != nil) {
             return self.object(forKey: key) as! NSDictionary
         }
         return NSDictionary()
     }
     
-    func has(key: String) -> Bool {
+    func has(_ key: String) -> Bool {
         if (self.object(forKey: key) != nil) {
             return true
         }
@@ -592,7 +592,7 @@ extension NSDictionary {
  */
 extension NSArray {
     
-    func getString(index: Int) -> String {
+    func getString(_ index: Int) -> String {
         if (self.object(at: index) as? String != nil) {
             return String(self.object(at: index) as! String)
         }
@@ -614,7 +614,7 @@ extension NSArray {
         return ""
     }
     
-    func getInt(index: Int) -> Int {
+    func getInt(_ index: Int) -> Int {
         if (self.object(at: index) as? Int != nil) {
             return Int(self.object(at: index) as! Int)
         }
@@ -624,7 +624,7 @@ extension NSArray {
         return 0
     }
     
-    func getDouble(index: Int) -> Double {
+    func getDouble(_ index: Int) -> Double {
         if (self.object(at: index) as? Double != nil) {
             return self.object(at: index) as! Double
         } else if (self.object(at: index) as? String != nil) {
@@ -633,14 +633,14 @@ extension NSArray {
         return 0.0
     }
     
-    func getJSONArray(index: Int) -> NSArray {
+    func getJSONArray(_ index: Int) -> NSArray {
         if (self.object(at: index) as? NSArray != nil) {
             return self.object(at: index) as! NSArray
         }
         return NSArray()
     }
     
-    func getJSONObject(index: Int) -> NSDictionary {
+    func getJSONObject(_ index: Int) -> NSDictionary {
         if (self.object(at: index) as? NSDictionary != nil) {
             return self.object(at: index) as! NSDictionary
         }

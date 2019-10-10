@@ -205,24 +205,24 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
      */
     func taskKakaoLocalSearch(query: String) {
         var params: Parameters = Parameters()
-        params.updateValue(query, forKey: "query") // 검색을 원하는 질의어
+        params.put("query", query) // 검색을 원하는 질의어
         
         let headers: HTTPHeaders = [
             "Authorization": "KakaoAK " + NetDefine.KAKAO_API_KEY,
         ]
         
-        BaseTask().requestPostFullUrl(url: NetDefine.KAKAO_LOCAL_SEARCH, params: params, headers: headers
+        BaseTask().request(url: NetDefine.KAKAO_LOCAL_SEARCH, method: .post, params: params, headers: headers, fullUrl: true
             , onSuccess: { response in
                 self.mKeywordList = []
-                let jsonArray = response.getJSONArray(key: "documents")
+                let jsonArray = response.getJSONArray("documents")
 
                 for i in 0 ..< jsonArray.count {
-                    let jsonObject = jsonArray.getJSONObject(index: i)
+                    let jsonObject = jsonArray.getJSONObject(i)
                     let keyword = KaKaoKeyword()
-                    keyword.address_name = jsonObject.getString(key: "address_name")
-                    keyword.place_name = jsonObject.getString(key: "place_name")
-                    keyword.latitude = jsonObject.getDouble(key: "y")
-                    keyword.longitude = jsonObject.getDouble(key: "x")
+                    keyword.address_name = jsonObject.getString("address_name")
+                    keyword.place_name = jsonObject.getString("place_name")
+                    keyword.latitude = jsonObject.getDouble("y")
+                    keyword.longitude = jsonObject.getDouble("x")
 
                     self.mKeywordList.append(keyword)
                 }
