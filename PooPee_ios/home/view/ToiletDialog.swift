@@ -15,8 +15,6 @@ class ToiletDialog: BaseDialog {
     
     @IBOutlet var tv_title: UILabel!
     @IBOutlet var tv_address: UILabel!
-    @IBOutlet var layout_copy: UIView!
-    @IBOutlet var tv_copy: UILabel!
     @IBOutlet var tv_comment: UILabel!
     @IBOutlet var tv_comment_count: UILabel!
     @IBOutlet var tv_like: UILabel!
@@ -47,7 +45,6 @@ class ToiletDialog: BaseDialog {
         root_view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(layout_bg_tap(recognizer:))))
         layout_dialog.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(layout_dialog_tap(recognizer:))))
         
-        tv_copy.text = "copy".localized
         tv_comment.text = "home_text_03".localized
         tv_like.text = "home_text_04".localized
         
@@ -65,11 +62,13 @@ class ToiletDialog: BaseDialog {
     func refresh() {
         tv_title.text = mToilet.name
 
+        var addressText = ""
         if (mToilet.address_new.count > 0) {
-            tv_address.text = mToilet.address_new
+            addressText = mToilet.address_new
         } else {
-            tv_address.text = mToilet.address_old
+            addressText = mToilet.address_old
         }
+        StrManager.setAddressCopySpan(tv_address: tv_address, addressText: addressText)
 
         tv_comment_count.text = mToilet.comment_count
         tv_like_count.text = mToilet.like_count
@@ -78,9 +77,10 @@ class ToiletDialog: BaseDialog {
     }
     
     func setListener() {
-        layout_copy.setOnClickListener {
-            UIPasteboard.general.string = self.tv_address.text
-            ObserverManager.root.view.makeToast(message: "toast_copy_complete".localized)
+        tv_title.setOnClickListener {
+            let controller = ObserverManager.getController(name: "ToiletController")
+            controller.segueData.putExtra(key: ToiletController.TOILET, data: self.mToilet)
+            ObserverManager.root.startPresent(controller: controller)
         }
         btn_detail.setOnClickListener {
             let controller = ObserverManager.getController(name: "ToiletController")

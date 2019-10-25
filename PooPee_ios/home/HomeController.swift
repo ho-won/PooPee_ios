@@ -32,13 +32,14 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     var mNavMainView = NavMainView()
     var mHoSlideMenu = HoSlideMenu()
     
-    var mMapView: MTMapView!
     var mLocationManager = CLLocationManager()
     
-    let mImageMaker = UIImage(named: "ic_position")!
     var mIsKeyboardShow = false
     
     var mKeywordList: [KaKaoKeyword] = []
+    
+    var mCurrentLatitude: Double = 0 // finishedMapMoveAnimation 가 두번불리는현상때문에 중복방지용
+    var mCurrentLongitude: Double = 0 // finishedMapMoveAnimation 가 두번불리는현상때문에 중복방지용
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,12 +65,26 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         setListener()
     }
     
-    override public func viewWillAppear(_ animated: Bool) {
+    override public func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         refresh()
     }
     
+    override public func viewDidDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        for subview in map_view.subviews {
+            subview.removeFromSuperview()
+        }
+    }
+    
     func _init() {
+        checkPopup()
+    }
+    
+    func refresh() {
+        mCurrentLatitude = 0
+        mCurrentLongitude = 0
+        mNavMainView.refresh()
         if (CLLocationManager.locationServicesEnabled()) {
             mLocationManager = CLLocationManager()
             mLocationManager.delegate = self
@@ -78,21 +93,16 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
             mLocationManager.startUpdatingLocation()
         }
         
-        mMapView = MTMapView(frame: map_view.bounds)
+        ObserverManager.mapView = MTMapView(frame: map_view.bounds)
+        ObserverManager.mapView.setZoomLevel(2, animated: true)
         
-        mMapView.delegate = self
-        mMapView.baseMapType = .standard
-        map_view.addSubview(mMapView)
+        ObserverManager.mapView.delegate = self
+        ObserverManager.mapView.baseMapType = .standard
+        map_view.addSubview(ObserverManager.mapView)
         
         if (SharedManager.instance.getLatitude() > 0) {
-            mMapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: true)
+            ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: true)
         }
-        
-        checkPopup()
-    }
-    
-    func refresh() {
-        mNavMainView.refresh()
     }
     
     func setListener() {
@@ -113,7 +123,8 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         }
         layout_my_position.setOnClickListener {
             if (SharedManager.instance.getLatitude() > 0) {
-                self.mMapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: true)
+                ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: true)
+                ObserverManager.mapView.setZoomLevel(2, animated: true)
             }
         }
         btn_menu.setOnClickListener {
@@ -158,14 +169,16 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     }
     
     func mapView(_ mapView: MTMapView!, finishedMapMoveAnimation mapCenterPoint: MTMapPoint!) {
-        
-        let latitude = mapCenterPoint.mapPointGeo().latitude
-        let longitude = mapCenterPoint.mapPointGeo().longitude
-        
-        mMapView.removeAllPOIItems()
-        let toiletList = SQLiteManager.instance.getToiletList(latitude: latitude, longitude: longitude)
-        for toilet in toiletList {
-            self.addPOIItem(toilet: toilet, latitude: toilet.latitude, longitude: toilet.longitude)
+        if (mCurrentLatitude != mapCenterPoint.mapPointGeo().latitude
+            && mCurrentLongitude != mapCenterPoint.mapPointGeo().longitude) {
+            mCurrentLatitude = mapCenterPoint.mapPointGeo().latitude
+            mCurrentLongitude = mapCenterPoint.mapPointGeo().longitude
+            
+            ObserverManager.mapView.removeAllPOIItems()
+            let toiletList = SQLiteManager.instance.getToiletList(latitude: mCurrentLatitude, longitude: mCurrentLongitude)
+            for toilet in toiletList {
+                ObserverManager.addPOIItem(toilet: toilet)
+            }
         }
     }
     
@@ -177,20 +190,6 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         dialog.refresh()
         dialog.show(view: ObserverManager.root.view)
         return false
-    }
-    
-    func addPOIItem(toilet: Toilet, latitude: Double, longitude: Double) {
-        let marker = MTMapPOIItem()
-        marker.itemName = toilet.name
-        marker.tag = toilet.toilet_id
-        marker.mapPoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: latitude, longitude: longitude))
-        marker.markerType = MTMapPOIItemMarkerType.customImage // 마커타입을 커스텀 마커로 지정.
-        marker.customImage = mImageMaker // 마커 이미지.
-        marker.markerSelectedType = MTMapPOIItemMarkerSelectedType.customImage // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
-        marker.customSelectedImage = mImageMaker
-        marker.customImageAnchorPointOffset = MTMapImageOffset(offsetX: 30, offsetY: 0)
-        mMapView.add(marker)
-        
     }
     
     func checkPopup() {
@@ -257,7 +256,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
         
         edt_search.text = mKeywordList[position].place_name
 
-        mMapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: mKeywordList[position].latitude, longitude: mKeywordList[position].longitude)), animated: true)
+        ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: mKeywordList[position].latitude, longitude: mKeywordList[position].longitude)), animated: true)
         edt_search.resignFirstResponder()
         tl_search.setVisibility(gone: true, dimen: 0, attribute: .height)
     }

@@ -80,4 +80,18 @@ class StrManager {
         return format.string(from: Date())
     }
     
+    static func setAddressCopySpan(tv_address: UILabel, addressText: String) {
+        let fullString = NSMutableAttributedString(string: addressText + " ")
+        let imageAttachment = NSTextAttachment()
+        imageAttachment.image = UIImage(named: "ic_copy")
+        imageAttachment.bounds = CGRect(x: 0, y: -2, width: 12, height: 14)
+        let imageString = NSAttributedString(attachment: imageAttachment)
+        fullString.append(imageString)
+        tv_address.attributedText = fullString
+        tv_address.setOnClickListener {
+            UIPasteboard.general.string = tv_address.text
+            ObserverManager.root.view.makeToast(message: "toast_copy_complete".localized)
+        }
+    }
+    
 }

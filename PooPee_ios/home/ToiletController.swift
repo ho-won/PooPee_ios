@@ -21,7 +21,9 @@ class ToiletController: BaseController {
     }
     
     func _init() {
-        
+        _ = view.layer.observe(\.bounds) { object, _ in
+            print(object.bounds)
+        }
     }
     
     func refresh() {
