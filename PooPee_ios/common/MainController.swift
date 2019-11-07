@@ -11,7 +11,7 @@ import UIKit
 import Alamofire
 import CoreLocation
 
-class MainController: BaseController, CLLocationManagerDelegate {
+class MainController: BaseController {
     @IBOutlet var layout_drop: UIView!
     @IBOutlet var iv_drop: UIImageView!
     @IBOutlet var iv_drop_top: NSLayoutConstraint!
@@ -43,14 +43,6 @@ class MainController: BaseController, CLLocationManagerDelegate {
     }
     
     func onServiceCheck() {
-        if (CLLocationManager.locationServicesEnabled()) {
-            let locationManager = CLLocationManager()
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.requestAlwaysAuthorization()
-            locationManager.startUpdatingLocation()
-        }
-        
         _ = DBVersionTask(progress: progress_file_download,
                           onSuccess: {
                             self.taskServerCheck()
@@ -183,12 +175,6 @@ class MainController: BaseController, CLLocationManagerDelegate {
                 self.view.makeToast(message: "toast_checking_service")
                 self.finish()
         })
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        SharedManager.instance.setLatitude(value: locValue.latitude)
-        SharedManager.instance.setLongitude(value: locValue.longitude)
     }
     
 }

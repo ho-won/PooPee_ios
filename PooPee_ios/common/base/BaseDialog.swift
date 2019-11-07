@@ -15,6 +15,12 @@ class BaseDialog: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+
+        self.alpha = 0
+        UIView.animate(withDuration: 0.2) {
+            self.alpha = 1.0
+        }
+        
         self.isHidden = true
         self.addSubview(layout_bg)
         layout_bg.backgroundColor = .black

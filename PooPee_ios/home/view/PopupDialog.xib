@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,6 +14,7 @@
                 <outlet property="btn_show" destination="KIe-0F-V9g" id="tUo-7Y-9je"/>
                 <outlet property="iv_popup" destination="lUz-6P-xMe" id="mbU-my-9zU"/>
                 <outlet property="iv_popup_height" destination="ADq-Rb-OeM" id="9QW-js-zrX"/>
+                <outlet property="layout_btn" destination="Xx4-Ea-eTQ" id="Pg8-E5-KX7"/>
                 <outlet property="layout_dialog" destination="rkn-ud-6OJ" id="2OY-2U-Uz5"/>
                 <outlet property="root_view" destination="gbd-S5-tP7" id="o5P-do-fzc"/>
             </connections>
@@ -24,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rkn-ud-6OJ">
-                    <rect key="frame" x="57" y="378" width="300" height="140"/>
+                    <rect key="frame" x="57" y="378" width="300" height="140.5"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lUz-6P-xMe">
                             <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
@@ -32,8 +33,15 @@
                                 <constraint firstAttribute="height" constant="100" id="ADq-Rb-OeM"/>
                             </constraints>
                         </imageView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7jo-ih-tEX" userLabel="line_01">
+                            <rect key="frame" x="0.0" y="100" width="300" height="0.5"/>
+                            <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="0.5" id="gkA-xU-4wb"/>
+                            </constraints>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xx4-Ea-eTQ">
-                            <rect key="frame" x="0.0" y="100" width="300" height="40"/>
+                            <rect key="frame" x="0.0" y="100.5" width="300" height="40"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KIe-0F-V9g">
                                     <rect key="frame" x="0.0" y="0.0" width="38" height="40"/>
@@ -52,6 +60,7 @@
                                     </state>
                                 </button>
                             </subviews>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="KIe-0F-V9g" firstAttribute="top" secondItem="Xx4-Ea-eTQ" secondAttribute="top" id="2wE-ja-cNe"/>
                                 <constraint firstItem="KIe-0F-V9g" firstAttribute="leading" secondItem="Xx4-Ea-eTQ" secondAttribute="leading" id="7cT-aJ-Iej"/>
@@ -63,15 +72,17 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="lUz-6P-xMe" secondAttribute="trailing" id="8Z8-Te-rRZ"/>
                         <constraint firstItem="lUz-6P-xMe" firstAttribute="leading" secondItem="rkn-ud-6OJ" secondAttribute="leading" id="EIC-18-MYO"/>
                         <constraint firstItem="lUz-6P-xMe" firstAttribute="top" secondItem="rkn-ud-6OJ" secondAttribute="top" id="EYC-gY-1Pc"/>
+                        <constraint firstItem="Xx4-Ea-eTQ" firstAttribute="top" secondItem="7jo-ih-tEX" secondAttribute="bottom" id="GpM-9t-X1z"/>
                         <constraint firstAttribute="width" constant="300" id="NGX-pe-85z"/>
+                        <constraint firstAttribute="trailing" secondItem="7jo-ih-tEX" secondAttribute="trailing" id="TeV-JW-wmQ"/>
                         <constraint firstAttribute="trailing" secondItem="Xx4-Ea-eTQ" secondAttribute="trailing" id="W8M-29-7mG"/>
-                        <constraint firstItem="Xx4-Ea-eTQ" firstAttribute="top" secondItem="lUz-6P-xMe" secondAttribute="bottom" id="XVr-ly-dQB"/>
+                        <constraint firstItem="7jo-ih-tEX" firstAttribute="top" secondItem="lUz-6P-xMe" secondAttribute="bottom" id="XVr-ly-dQB"/>
                         <constraint firstItem="Xx4-Ea-eTQ" firstAttribute="leading" secondItem="rkn-ud-6OJ" secondAttribute="leading" id="YgU-dF-KeU"/>
+                        <constraint firstItem="7jo-ih-tEX" firstAttribute="leading" secondItem="rkn-ud-6OJ" secondAttribute="leading" id="b4v-Ft-p9b"/>
                         <constraint firstItem="Xx4-Ea-eTQ" firstAttribute="leading" secondItem="rkn-ud-6OJ" secondAttribute="leading" id="bGL-nF-Hf1"/>
                         <constraint firstAttribute="bottom" secondItem="Xx4-Ea-eTQ" secondAttribute="bottom" id="pMQ-i4-rxY"/>
                     </constraints>

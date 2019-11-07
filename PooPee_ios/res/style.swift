@@ -44,6 +44,20 @@ class toolbar_tv_title: UILabel {
     }
 }
 
+class main_line: UIView {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        self.backgroundColor = colors.main_line
+    }
+}
+
 /*
  * 뷰(바텀라인)
  * 공통
@@ -133,5 +147,211 @@ class bg_login: UIButton {
         } else {
             self.setTitleColor(UIColor(hex: "#85b3ff"), for: .normal)
         }
+    }
+}
+
+class cb_up_down: UIButton {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        setSelected(selected: false)
+    }
+    func setSelected(selected: Bool) {
+        self.isSelected = selected
+        if (self.isSelected) {
+            self.setImage(UIImage(named: "ic_tap_up")!, for: UIControl.State.normal)
+        } else {
+            self.setImage(UIImage(named: "ic_tap_down")!, for: UIControl.State.normal)
+        }
+    }
+}
+
+class cb_option_01: UIButton {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        setSelected(selected: false)
+    }
+    func setSelected(selected: Bool) {
+        self.isSelected = selected
+        if (self.isSelected) {
+            self.setImage(UIImage(named: "ic_public_pressed")!, for: UIControl.State.normal)
+        } else {
+            self.setImage(UIImage(named: "ic_public_normal")!, for: UIControl.State.normal)
+        }
+    }
+}
+
+class cb_option_02: UIButton {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        setSelected(selected: false)
+    }
+    func setSelected(selected: Bool) {
+        self.isSelected = selected
+        if (self.isSelected) {
+            self.setImage(UIImage(named: "ic_man_pressed")!, for: UIControl.State.normal)
+        } else {
+            self.setImage(UIImage(named: "ic_man_normal")!, for: UIControl.State.normal)
+        }
+    }
+}
+
+class cb_option_03: UIButton {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        setSelected(selected: false)
+    }
+    func setSelected(selected: Bool) {
+        self.isSelected = selected
+        if (self.isSelected) {
+            self.setImage(UIImage(named: "ic_woman_pressed")!, for: UIControl.State.normal)
+        } else {
+            self.setImage(UIImage(named: "ic_woman_normal")!, for: UIControl.State.normal)
+        }
+    }
+}
+
+class cb_option_04: UIButton {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        setSelected(selected: false)
+    }
+    func setSelected(selected: Bool) {
+        self.isSelected = selected
+        if (self.isSelected) {
+            self.setImage(UIImage(named: "ic_disorder_pressed")!, for: UIControl.State.normal)
+        } else {
+            self.setImage(UIImage(named: "ic_disorder_normal")!, for: UIControl.State.normal)
+        }
+    }
+}
+
+class cb_option_05: UIButton {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        setSelected(selected: false)
+    }
+    func setSelected(selected: Bool) {
+        self.isSelected = selected
+        if (self.isSelected) {
+            self.setImage(UIImage(named: "ic_mchild_pressed")!, for: UIControl.State.normal)
+        } else {
+            self.setImage(UIImage(named: "ic_mchild_normal")!, for: UIControl.State.normal)
+        }
+    }
+}
+
+class cb_option_06: UIButton {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        setSelected(selected: false)
+    }
+    func setSelected(selected: Bool) {
+        self.isSelected = selected
+        if (self.isSelected) {
+            self.setImage(UIImage(named: "ic_wchild_pressed")!, for: UIControl.State.normal)
+        } else {
+            self.setImage(UIImage(named: "ic_wchild_normal")!, for: UIControl.State.normal)
+        }
+    }
+}
+
+class btn_like: UIButton {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        setSelected(selected: false)
+    }
+    func setSelected(selected: Bool) {
+        self.isSelected = selected
+        if (self.isSelected) {
+            self.setImage(UIImage(named: "ic_heart_pressed")!, for: UIControl.State.normal)
+        } else {
+            self.setImage(UIImage(named: "ic_heart_normal")!, for: UIControl.State.normal)
+        }
+    }
+}
+
+class dash: UIView {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        self.addDashedBorder(lineWidth: 1, color: colors.main_line)
+    }
+}
+
+class bg_layout_like: UIView {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        self.layer.borderWidth = 1
+        self.layer.borderColor = colors.main_line.cgColor
+        self.layer.cornerRadius = 12
     }
 }

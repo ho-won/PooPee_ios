@@ -14,6 +14,7 @@ public class BaseController: UIViewController {
     var segueData = SegueData() // 현재 SegueData (getIntent 용도)
     var newSegueData = SegueData() // 보낼 SegueData (putExtra 용도)
     var resultSegueData = SegueData() // 안드로이드의 onActivityResult 용도
+    var isViewDidAppear = false // viewDidAppear 두번호출 방지
     
     override public func viewDidLoad() {
         super.viewDidLoad()

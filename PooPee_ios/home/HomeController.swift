@@ -66,12 +66,16 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     }
     
     override public func viewDidAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        refresh()
+        if (!isViewDidAppear) {
+            print("HomeController_viewDidAppear")
+            isViewDidAppear = true
+            refresh()
+        }
     }
     
     override public func viewDidDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
+        print("HomeController_viewDidDisappear")
+        isViewDidAppear = false
         for subview in map_view.subviews {
             subview.removeFromSuperview()
         }

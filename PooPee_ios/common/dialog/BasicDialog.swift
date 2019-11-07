@@ -12,10 +12,14 @@ class BasicDialog: BaseDialog {
     @IBOutlet var root_view: UIView!
     @IBOutlet weak var layout_dialog: UIView!
     
-    var onRightButton: ()->()
-    var onLeftButton: ()->()
+    @IBOutlet var tv_content: UILabel!
+    @IBOutlet var btn_left: UIButton!
+    @IBOutlet var btn_right: UIButton!
     
-    init(onRightButton: @escaping ()->(), onLeftButton: @escaping ()->()){
+    var onLeftButton: ()->()
+    var onRightButton: ()->()
+    
+    init(onLeftButton: @escaping ()->(), onRightButton: @escaping ()->()){
         self.onRightButton = onRightButton
         self.onLeftButton = onLeftButton
         super.init(frame: CGRect(x: 0, y: 0, width: MyUtil.screenWidth, height: MyUtil.screenHeight))
@@ -36,15 +40,44 @@ class BasicDialog: BaseDialog {
         
         root_view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(layout_bg_tap(recognizer:))))
         layout_dialog.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(layout_dialog_tap(recognizer:))))
+        
+        tv_content.textColor = colors.dialog_text_content
+        tv_content.font = UIFont.systemFont(ofSize: 14)
+        
+        btn_left.setTitleColor(colors.dialog_text_btn_left, for: .normal)
+        btn_left.titleLabel?.font =  UIFont.boldSystemFont(ofSize: 16)
+        btn_right.setTitleColor(colors.dialog_text_btn_right, for: .normal)
+        btn_right.titleLabel?.font =  UIFont.boldSystemFont(ofSize: 16)
+        
+        btn_left.setVisibility(gone: true, dimen: 0, attribute: .width)
+        btn_right.setVisibility(gone: true, dimen: 0, attribute: .width)
+        
+        setListener()
     }
     
-    @IBAction func btn_yes_tap(_ sender: Any) {
-        onRightButton()
+    func setListener() {
+        btn_left.setOnClickListener {
+            self.onLeftButton()
+            self.dismiss()
+        }
+        btn_right.setOnClickListener {
+            self.onRightButton()
+            self.dismiss()
+        }
     }
     
-    @IBAction func btn_no_tap(_ sender: Any) {
-        onLeftButton()
-        dismiss()
+    func setTextContent(_ text: String) {
+        tv_content.text = text
+    }
+    
+    func setBtnLeft(_ text: String) {
+        btn_left.setTitle(text, for: .normal)
+        btn_left.setVisibility(gone: false, dimen: 0, attribute: .width)
+    }
+    
+    func setBtnRight(_ text: String) {
+        btn_right.setTitle(text, for: .normal)
+        btn_right.setVisibility(gone: false, dimen: 0, attribute: .width)
     }
     
 }

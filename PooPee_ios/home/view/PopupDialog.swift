@@ -14,6 +14,8 @@ class PopupDialog: BaseDialog {
     @IBOutlet weak var layout_dialog: UIView!
     @IBOutlet var iv_popup: UIImageView!
     @IBOutlet var iv_popup_height: NSLayoutConstraint!
+    
+    @IBOutlet var layout_btn: UIView!
     @IBOutlet var btn_show: UIButton!
     @IBOutlet var btn_close: UIButton!
     
@@ -37,7 +39,7 @@ class PopupDialog: BaseDialog {
         root_view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(layout_bg_tap(recognizer:))))
         layout_dialog.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(layout_dialog_tap(recognizer:))))
         
-        layout_dialog.layer.cornerRadius = 2
+        layout_btn.cornerRadius(corner: [.bottomLeft, .bottomRight], radius: 2)
         
         btn_show.setTitle("dialog_no_show".localized, for: .normal)
         btn_close.setTitle("close".localized, for: .normal)

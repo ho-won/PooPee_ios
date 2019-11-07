@@ -67,6 +67,14 @@ extension UIView {
         return borders
     }
     
+    func cornerRadius(corner: UIRectCorner, radius: Int) {
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corner, cornerRadii: CGSize(width: radius, height: radius))
+        let maskLayer = CAShapeLayer()
+        maskLayer.frame = bounds
+        maskLayer.path = path.cgPath
+        layer.mask = maskLayer
+    }
+    
     /**
      * 마름모형태로 변경
      */
@@ -162,6 +170,21 @@ extension UIView {
             }, completion: {_ in
                 toast.removeFromSuperview()
             })
+        }
+    }
+    
+    func addDashedBorder(lineWidth: CGFloat, lineDashPattern: [NSNumber] = [2, 3], color: UIColor) {
+        DispatchQueue.main.async {
+            let shapeLayer = CAShapeLayer()
+            shapeLayer.strokeColor = color.cgColor
+            shapeLayer.lineWidth = lineWidth
+            shapeLayer.lineDashPattern = lineDashPattern
+            
+            let path = CGMutablePath()
+            path.addLines(between: [CGPoint(x: 0, y: 0), CGPoint(x: self.frame.width, y: 0)])
+            shapeLayer.path = path
+            
+            self.layer.addSublayer(shapeLayer)
         }
     }
     
@@ -324,14 +347,6 @@ extension UIScrollView {
 }
 
 extension UILabel {
-    
-    func cornerRadius(corner: UIRectCorner, radius: Int) {
-        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corner, cornerRadii: CGSize(width: radius, height: radius))
-        let maskLayer = CAShapeLayer()
-        maskLayer.frame = bounds
-        maskLayer.path = path.cgPath
-        layer.mask = maskLayer
-    }
     
     func setLineSpacing(lineSpacing: CGFloat = 0.0, lineHeightMultiple: CGFloat = 0.0) {
         guard let labelText = self.text else { return }
