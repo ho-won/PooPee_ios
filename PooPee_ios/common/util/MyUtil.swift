@@ -101,6 +101,27 @@ class MyUtil {
             return nil
         }
     }
+    
+    /**
+     * device 의 앱 알림상태확인
+     */
+    static func areNotificationsEnabled(completionHandler: @escaping (_ areNotificationsEnabled: Bool)->()) {
+        UNUserNotificationCenter.current().getNotificationSettings(completionHandler: { settings in
+            switch settings.authorizationStatus {
+            case .authorized, .provisional:
+                completionHandler(true)
+                print("push:authorized")
+            case .denied:
+                completionHandler(false)
+                print("push:denied")
+            case .notDetermined:
+                completionHandler(false)
+                print("push:not determined, ask user for permission now")
+            default:
+                completionHandler(false)
+            }
+        })
+    }
 
 }
 

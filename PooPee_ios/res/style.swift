@@ -355,3 +355,95 @@ class bg_layout_like: UIView {
         self.layer.cornerRadius = 12
     }
 }
+
+class btn_comment_send: UIButton {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        setEnabled(false)
+    }
+    func setEnabled(_ enable: Bool) {
+        self.isSelected = enable
+        if (self.isSelected) {
+            self.setImage(UIImage(named: "btn_send_pressed")!, for: UIControl.State.normal)
+            self.isUserInteractionEnabled = true
+        } else {
+            self.setImage(UIImage(named: "btn_send_normal")!, for: UIControl.State.normal)
+            self.isUserInteractionEnabled = false
+        }
+    }
+}
+
+class edt_commnet: UITextView, UITextViewDelegate {
+    var placeholderLabel : UILabel!
+    var onTextChanged: (()->())!
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    
+    override init(frame: CGRect, textContainer: NSTextContainer?) {
+        super.init(frame: frame, textContainer: textContainer)
+        _init()
+    }
+    
+    func _init() {
+        self.textColor = colors.text_main
+        self.font = UIFont.systemFont(ofSize: 14)
+//        self.textContainerInset = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
+        self.delegate = self
+    }
+    
+    func setHint(hint: String) {
+        if (placeholderLabel == nil) {
+            placeholderLabel = UILabel()
+            placeholderLabel.font = UIFont.systemFont(ofSize: (self.font?.pointSize)!)
+            placeholderLabel.sizeToFit()
+            placeholderLabel.textColor = colors.main_hint
+            placeholderLabel.isHidden = !self.text.isEmpty
+            self.addSubview(placeholderLabel)
+            placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                self.placeholderLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
+                self.placeholderLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
+                self.placeholderLabel.heightAnchor.constraint(equalToConstant: 32)
+            ])
+        }
+        placeholderLabel.text = hint
+    }
+    
+    func refreshPlaceholder() {
+        if (placeholderLabel != nil) {
+            placeholderLabel.isHidden = !self.text.isEmpty
+        }
+    }
+    
+    override var text: String! {
+        didSet {
+            if (placeholderLabel != nil) {
+                placeholderLabel.isHidden = !self.text.isEmpty
+            }
+        }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if (placeholderLabel != nil) {
+            placeholderLabel.isHidden = !self.text.isEmpty
+        }
+        if (onTextChanged != nil) {
+            onTextChanged()
+        }
+    }
+    
+    func addTextChangedListener(_ onTextChanged: @escaping ()->()) {
+        self.onTextChanged = onTextChanged
+    }
+    
+}

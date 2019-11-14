@@ -308,12 +308,11 @@ extension ToiletController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.btn_comment.setOnClickListener {
             if (SharedManager.instance.isLoginCheck()) {
-//                val dialog = CommentCreateDialog(
-//                    onCreate = {
-//                        taskCommentCreate(it)
-//                    }
-//                )
-//                dialog.show(supportFragmentManager, "ToiletDialog")
+                let dialog = CommentCreateDialog(
+                    onCommentCreate: { it in
+                        self.taskCommentCreate(comment: it)
+                })
+                dialog.show(view: ObserverManager.root.view)
             } else {
                 let controller = ObserverManager.getController(name: "LoginController")
                 ObserverManager.root.startPresent(controller: controller)

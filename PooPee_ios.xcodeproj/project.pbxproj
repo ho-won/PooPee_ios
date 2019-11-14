@@ -117,6 +117,7 @@
 		B62354D8236278BD004F615F /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62354D7236278BD004F615F /* SettingController.swift */; };
 		B62354DA236278EF004F615F /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B62354D9236278EF004F615F /* Menu.storyboard */; };
 		B62354DC2362CF55004F615F /* HoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62354DB2362CF55004F615F /* HoTableView.swift */; };
+		B6442813237A6DD700BFFF70 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6442812237A6DD700BFFF70 /* LogManager.swift */; };
 		B6450CF52366834F00106010 /* ToiletCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6450CF32366834F00106010 /* ToiletCommentCell.swift */; };
 		B6450CF62366834F00106010 /* ToiletCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6450CF42366834F00106010 /* ToiletCommentCell.xib */; };
 		B6450CF82366AB6B00106010 /* ToiletHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6450CF72366AB6B00106010 /* ToiletHeaderCell.swift */; };
@@ -308,6 +309,7 @@
 		B62354D7236278BD004F615F /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
 		B62354D9236278EF004F615F /* Menu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
 		B62354DB2362CF55004F615F /* HoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoTableView.swift; sourceTree = "<group>"; };
+		B6442812237A6DD700BFFF70 /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
 		B6450CF32366834F00106010 /* ToiletCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToiletCommentCell.swift; sourceTree = "<group>"; };
 		B6450CF42366834F00106010 /* ToiletCommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToiletCommentCell.xib; sourceTree = "<group>"; };
 		B6450CF72366AB6B00106010 /* ToiletHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToiletHeaderCell.swift; sourceTree = "<group>"; };
@@ -685,6 +687,7 @@
 				AAC046782331F4BE00D5D5F6 /* MyDateFormat.swift */,
 				AAC046792331F4BE00D5D5F6 /* PermissionManager.swift */,
 				AAC0467A2331F4BE00D5D5F6 /* MyExtension.swift */,
+				B6442812237A6DD700BFFF70 /* LogManager.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -1082,6 +1085,7 @@
 				AAC046B92331F4BF00D5D5F6 /* SegueData.swift in Sources */,
 				AAE6D2B6234AF18100DEC86C /* LoginController.swift in Sources */,
 				AAC046A72331F4BF00D5D5F6 /* MyCustomClass.swift in Sources */,
+				B6442813237A6DD700BFFF70 /* LogManager.swift in Sources */,
 				AAC046BF2331F4BF00D5D5F6 /* CopyDialog.swift in Sources */,
 				AAC046BE2331F4BF00D5D5F6 /* BaseDialog.swift in Sources */,
 				AACEC568234C7209009087BD /* ToiletController.swift in Sources */,

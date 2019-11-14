@@ -10,6 +10,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommentCreateDialog" customModule="PooPee_ios" customModuleProvider="target">
             <connections>
+                <outlet property="btn_comment_delete" destination="Lyp-e5-fbj" id="3Ko-0q-KCN"/>
+                <outlet property="btn_send" destination="yUE-Au-eS2" id="oWX-Cg-kn4"/>
+                <outlet property="edt_comment" destination="pm6-vw-6wA" id="EsI-sY-Py6"/>
+                <outlet property="edt_comment_height" destination="opy-P8-SPY" id="u5g-Nf-Ud3"/>
                 <outlet property="layout_dialog" destination="2lL-v6-cJA" id="ODz-ek-yCP"/>
                 <outlet property="root_view" destination="b0c-fg-8xB" id="3zg-8F-VRo"/>
             </connections>
@@ -19,78 +23,70 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2lL-v6-cJA">
-                    <rect key="frame" x="57" y="395" width="300" height="106.5"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2lL-v6-cJA" customClass="bg_search_layout" customModule="PooPee_ios" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="802" width="414" height="60"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5le-M4-y1Z">
-                            <rect key="frame" x="28" y="0.0" width="256" height="106.5"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Wb-yN-Lii" customClass="bg_search_edt" customModule="PooPee_ios" customModuleProvider="target">
+                            <rect key="frame" x="10" y="11" width="394" height="40"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bL-G7-U71">
-                                    <rect key="frame" x="0.0" y="22" width="256" height="20.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dUq-kA-ov1">
-                                    <rect key="frame" x="0.0" y="54.5" width="256" height="40"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X31-0B-M8P" userLabel="btn_left">
-                                            <rect key="frame" x="192" y="0.0" width="32" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="0z4-2X-sc6"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                            <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BoW-zl-FDo" userLabel="btn_right">
-                                            <rect key="frame" x="224" y="0.0" width="32" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="kAO-IS-Jde"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                            <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
-                                        </button>
-                                    </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pm6-vw-6wA" customClass="edt_commnet" customModule="PooPee_ios" customModuleProvider="target">
+                                    <rect key="frame" x="12" y="3.5" width="302" height="33"/>
                                     <constraints>
-                                        <constraint firstItem="BoW-zl-FDo" firstAttribute="top" secondItem="dUq-kA-ov1" secondAttribute="top" id="1RF-3j-Cjf"/>
-                                        <constraint firstAttribute="bottom" secondItem="X31-0B-M8P" secondAttribute="bottom" id="6AJ-9w-i41"/>
-                                        <constraint firstItem="X31-0B-M8P" firstAttribute="top" secondItem="dUq-kA-ov1" secondAttribute="top" id="PiM-hY-Xjx"/>
-                                        <constraint firstAttribute="height" constant="40" id="bzK-sH-4q7"/>
-                                        <constraint firstItem="BoW-zl-FDo" firstAttribute="leading" secondItem="X31-0B-M8P" secondAttribute="trailing" id="kaV-IE-xXy"/>
-                                        <constraint firstAttribute="trailing" secondItem="BoW-zl-FDo" secondAttribute="trailing" id="o22-dt-36p"/>
-                                        <constraint firstAttribute="bottom" secondItem="BoW-zl-FDo" secondAttribute="bottom" id="rcS-uI-Hd3"/>
+                                        <constraint firstAttribute="height" constant="33" id="opy-P8-SPY"/>
                                     </constraints>
-                                </view>
+                                    <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                </textView>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lyp-e5-fbj">
+                                    <rect key="frame" x="314" y="2" width="36" height="36"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="36" id="4bH-o3-nCL"/>
+                                        <constraint firstAttribute="width" constant="36" id="E11-HK-X1i"/>
+                                    </constraints>
+                                    <state key="normal" image="ic_delete"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yUE-Au-eS2" customClass="btn_comment_send" customModule="PooPee_ios" customModuleProvider="target">
+                                    <rect key="frame" x="354" y="0.0" width="40" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="3kX-WC-6Dv"/>
+                                        <constraint firstAttribute="height" constant="40" id="lqB-Nn-v8z"/>
+                                    </constraints>
+                                    <state key="normal" image="btn_send_pressed"/>
+                                </button>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="3bL-G7-U71" secondAttribute="trailing" id="6UO-bF-cta"/>
-                                <constraint firstItem="dUq-kA-ov1" firstAttribute="leading" secondItem="5le-M4-y1Z" secondAttribute="leading" id="6tp-lb-dsr"/>
-                                <constraint firstAttribute="trailing" secondItem="dUq-kA-ov1" secondAttribute="trailing" id="IHV-za-3gh"/>
-                                <constraint firstAttribute="bottom" secondItem="dUq-kA-ov1" secondAttribute="bottom" constant="12" id="KXF-Bb-p6g"/>
-                                <constraint firstItem="3bL-G7-U71" firstAttribute="leading" secondItem="5le-M4-y1Z" secondAttribute="leading" id="Y2V-gf-BXi"/>
-                                <constraint firstItem="3bL-G7-U71" firstAttribute="top" secondItem="5le-M4-y1Z" secondAttribute="top" constant="22" id="i2e-bF-boS"/>
-                                <constraint firstItem="dUq-kA-ov1" firstAttribute="top" secondItem="3bL-G7-U71" secondAttribute="bottom" constant="12" id="zfb-k4-hpu"/>
+                                <constraint firstItem="Lyp-e5-fbj" firstAttribute="leading" secondItem="pm6-vw-6wA" secondAttribute="trailing" id="1Ec-fY-jY1"/>
+                                <constraint firstAttribute="trailing" secondItem="yUE-Au-eS2" secondAttribute="trailing" id="HK1-7L-xe6"/>
+                                <constraint firstAttribute="bottom" secondItem="pm6-vw-6wA" secondAttribute="bottom" constant="3.5" id="YQf-Mu-Ui5"/>
+                                <constraint firstItem="yUE-Au-eS2" firstAttribute="leading" secondItem="Lyp-e5-fbj" secondAttribute="trailing" constant="4" id="dEl-Qz-j49"/>
+                                <constraint firstItem="Lyp-e5-fbj" firstAttribute="centerY" secondItem="5Wb-yN-Lii" secondAttribute="centerY" id="gH6-We-gMA"/>
+                                <constraint firstItem="pm6-vw-6wA" firstAttribute="top" secondItem="5Wb-yN-Lii" secondAttribute="top" constant="3.5" id="kxi-Ja-w1a"/>
+                                <constraint firstItem="yUE-Au-eS2" firstAttribute="centerY" secondItem="5Wb-yN-Lii" secondAttribute="centerY" id="mak-Wj-WHL"/>
+                                <constraint firstItem="pm6-vw-6wA" firstAttribute="leading" secondItem="5Wb-yN-Lii" secondAttribute="leading" constant="12" id="rKz-Ri-akw"/>
                             </constraints>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="5le-M4-y1Z" firstAttribute="top" secondItem="2lL-v6-cJA" secondAttribute="top" id="71m-9z-Qs7"/>
-                        <constraint firstAttribute="trailing" secondItem="5le-M4-y1Z" secondAttribute="trailing" constant="16" id="RCR-lL-wp3"/>
-                        <constraint firstItem="5le-M4-y1Z" firstAttribute="leading" secondItem="2lL-v6-cJA" secondAttribute="leading" constant="28" id="nJJ-RD-4wV"/>
-                        <constraint firstAttribute="bottom" secondItem="5le-M4-y1Z" secondAttribute="bottom" id="pLs-CC-7z9"/>
-                        <constraint firstAttribute="width" constant="300" id="rVX-Ih-s68"/>
+                        <constraint firstAttribute="trailing" secondItem="5Wb-yN-Lii" secondAttribute="trailing" constant="10" id="JWi-eL-Zcb"/>
+                        <constraint firstItem="5Wb-yN-Lii" firstAttribute="leading" secondItem="2lL-v6-cJA" secondAttribute="leading" constant="10" id="W5S-Gb-eD5"/>
+                        <constraint firstItem="5Wb-yN-Lii" firstAttribute="top" secondItem="2lL-v6-cJA" secondAttribute="top" constant="11" id="ln0-7H-hHE"/>
+                        <constraint firstAttribute="bottom" secondItem="5Wb-yN-Lii" secondAttribute="bottom" constant="9" id="qir-Lu-6ve"/>
                     </constraints>
                 </view>
             </subviews>
             <constraints>
-                <constraint firstItem="2lL-v6-cJA" firstAttribute="centerY" secondItem="b0c-fg-8xB" secondAttribute="centerY" id="fFL-9a-H6o"/>
-                <constraint firstItem="2lL-v6-cJA" firstAttribute="centerX" secondItem="b0c-fg-8xB" secondAttribute="centerX" id="ngu-4G-OZl"/>
+                <constraint firstItem="2lL-v6-cJA" firstAttribute="leading" secondItem="ggb-bG-GxB" secondAttribute="leading" id="4e7-q4-SD3"/>
+                <constraint firstItem="ggb-bG-GxB" firstAttribute="trailing" secondItem="2lL-v6-cJA" secondAttribute="trailing" id="Ygd-0F-cfY"/>
+                <constraint firstItem="ggb-bG-GxB" firstAttribute="bottom" secondItem="2lL-v6-cJA" secondAttribute="bottom" id="yAT-BS-o3v"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ggb-bG-GxB"/>
             <point key="canvasLocation" x="132" y="154.27286356821591"/>
         </view>
     </objects>
+    <resources>
+        <image name="btn_send_pressed" width="80" height="80"/>
+        <image name="ic_delete" width="72" height="72"/>
+    </resources>
 </document>

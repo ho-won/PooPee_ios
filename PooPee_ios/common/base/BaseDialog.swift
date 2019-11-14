@@ -50,7 +50,7 @@ class BaseDialog: UIView {
     }
     
     // on keyboard view resize
-    func setupViewResizerOnKeyboardShown(layout_dialog_height: NSLayoutConstraint, layout_dialog_height_origin: CGFloat) {
+    func setupViewResizerOnKeyboardShown(layout_dialog_height: NSLayoutConstraint? = nil, layout_dialog_height_origin: CGFloat? = nil) {
         dialog_height = layout_dialog_height
         dialog_height_origin = layout_dialog_height_origin
         NotificationCenter.default.addObserver(self,
@@ -73,10 +73,11 @@ class BaseDialog: UIView {
                                      y: self.frame.origin.y,
                                      width: self.frame.width,
                                      height: window.origin.y + window.height - keyboardSize.height)
-            
-            let height = window.origin.y + window.height - keyboardSize.height - 20
-            if (dialog_height.constant > height) {
-                dialog_height.constant = height
+            if (dialog_height != nil) {
+                let height = window.origin.y + window.height - keyboardSize.height - 20
+                if (dialog_height.constant > height) {
+                    dialog_height.constant = height
+                }
             }
         } else {
             debugPrint("We're showing the keyboard and either the keyboard size or window is nil: panic widely.")
@@ -91,7 +92,9 @@ class BaseDialog: UIView {
                                      y: self.frame.origin.y,
                                      width: self.frame.width,
                                      height: window.origin.y + window.height)
-            dialog_height.constant = dialog_height_origin
+            if (dialog_height != nil) {
+                dialog_height.constant = dialog_height_origin
+            }
         } else {
             debugPrint("We're about to hide the keyboard and the keyboard size is nil. Now is the rapture.")
         }
