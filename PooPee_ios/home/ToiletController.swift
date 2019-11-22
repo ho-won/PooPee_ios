@@ -16,7 +16,6 @@ class ToiletController: BaseController {
     @IBOutlet var tv_like: UILabel!
     @IBOutlet var tv_like_count: UILabel!
     
-    
     @IBOutlet var table_view: UITableView!
     
     private var mToilet: Toilet = Toilet()
@@ -304,7 +303,7 @@ extension ToiletController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.tv_manager_tel.setOnClickListener {
             guard let number = URL(string: "tel://" + self.mToilet.manager_tel) else { return }
-            UIApplication.shared.open(number, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+            UIApplication.shared.open(number, options: self.convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
         }
         cell.btn_comment.setOnClickListener {
             if (SharedManager.instance.isLoginCheck()) {
@@ -352,19 +351,21 @@ extension ToiletController: UITableViewDelegate, UITableViewDataSource {
                     dialog.setBtnRight("cancel".localized)
                     dialog.show(view: ObserverManager.root.view)
                 } else if (menuItem.id == 2) {
-//                    val dialog = CommentUpdateDialog(
-//                        onUpdate = { comment ->
-//                            mCommentList[position] = comment
-//                            notifyItemChanged(position)
-//                        }
-//                    )
-//                    dialog.setComment(mCommentList[position])
-//                    dialog.show(supportFragmentManager, "ToiletDialog")
+                    let dialog = CommentUpdateDialog(
+                        onUpdate: { comment in
+                            self.mCommentList[position] = comment
+                            
+                            let indexPath = IndexPath(item: position, section: 0)
+                            self.table_view.reloadRows(at: [indexPath], with: .none)
+                        }
+                    )
+                    dialog.setComment(self.mCommentList[position])
+                    dialog.show(view: ObserverManager.root.view)
                 } else if (menuItem.id == 3) {
                     if (SharedManager.instance.isLoginCheck()) {
-//                        val dialog = CommentReportDialog()
-//                        dialog.setComment(mCommentList[position])
-//                        dialog.show(supportFragmentManager, "CommentReportDialog")
+                        let dialog = CommentReportDialog()
+                        dialog.setComment(self.mCommentList[position])
+                        dialog.show(view: ObserverManager.root.view)
                     } else {
                         let controller = ObserverManager.getController(name: "LoginController")
                         ObserverManager.root.startPresent(controller: controller)
@@ -374,9 +375,4 @@ extension ToiletController: UITableViewDelegate, UITableViewDataSource {
         popupMenu.show(view: ObserverManager.root.view)
     }
     
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
-    return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

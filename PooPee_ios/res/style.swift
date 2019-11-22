@@ -172,6 +172,28 @@ class cb_up_down: UIButton {
     }
 }
 
+class cb_up_down_notice: UIButton {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        setSelected(selected: false)
+    }
+    func setSelected(selected: Bool) {
+        self.isSelected = selected
+        if (self.isSelected) {
+            self.setImage(UIImage(named: "ic_tap_seleted")!, for: UIControl.State.normal)
+        } else {
+            self.setImage(UIImage(named: "ic_tap_down")!, for: UIControl.State.normal)
+        }
+    }
+}
+
 class cb_option_01: UIButton {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -446,4 +468,170 @@ class edt_commnet: UITextView, UITextViewDelegate {
         self.onTextChanged = onTextChanged
     }
     
+}
+
+class base_edt: MyTextField {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        self.layer.cornerRadius = 9
+        self.backgroundColor = UIColor(hex: "#F9F9F9")!
+        self.textColor = UIColor(hex: "#292d34")
+        self.font = UIFont.systemFont(ofSize: 13)
+        self.tintColor = colors.primary
+        self.paddingTop = 12
+        self.paddingBottom = 12
+        self.paddingLeft = 12
+        self.paddingRight = 12
+    }
+}
+
+class bg_base_edt: UIView {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        self.layer.cornerRadius = 9
+        self.backgroundColor = UIColor(hex: "#F9F9F9")!
+    }
+}
+
+class switch_push: UISwitch {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        self.clipsToBounds = true
+        self.layer.masksToBounds = true
+        self.onTintColor = colors.primary
+        self.tintColor = UIColor(hex: "#EDECEF")
+        self.layer.cornerRadius = self.frame.height / 2
+        self.backgroundColor = UIColor(hex: "#EDECEF")
+        self.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+        self.thumbTintColor = UIColor(hex: "#FFFFFF")
+    }
+    
+    var onChanged: (()->())!
+    /**
+     * android setOnCheckedChangedListener 같은용도
+     */
+    func setOnCheckedChangedListener(_ onChanged: @escaping ()->()) {
+        self.addTarget(self, action: #selector(switchStateDidChange(_:)), for: .valueChanged)
+        self.onChanged = onChanged
+    }
+    
+    @objc private func onClick(recognizer: TabRecongnizer) {
+        recognizer.onClick()
+    }
+    
+    @objc func switchStateDidChange(_ sender:UISwitch!) {
+        onChanged()
+        if (self.isOn) {
+            self.thumbTintColor = UIColor(hex: "#FFFFFF")
+        } else {
+            self.thumbTintColor = UIColor(hex: "#FFFFFF")
+        }
+    }
+}
+
+class cb_gender_man: UIButton {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        self.cornerRadius(corner: [.topLeft, .bottomLeft], radius: 9)
+        self.titleLabel!.font = UIFont.systemFont(ofSize: 13)
+        setSelected(selected: false)
+    }
+    func setSelected(selected: Bool) {
+        self.isSelected = selected
+        if (self.isSelected) {
+            self.backgroundColor = .white
+            self.setTitleColor(colors.primary, for: .normal)
+        } else {
+            self.backgroundColor = UIColor(hex: "#F9F9F9")
+            self.setTitleColor(UIColor(hex: "#d0d2d5"), for: .normal)
+        }
+        self.setNeedsDisplay()
+    }
+    override func draw(_ rect: CGRect) {
+        let bezierPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: rect.width, height: rect.height), byRoundingCorners: [.topLeft, .bottomLeft], cornerRadii: CGSize(width: 9, height: 9))
+        if (self.isSelected) {
+            colors.primary.setStroke()
+        } else {
+            UIColor(hex: "#F9F9F9")!.setStroke()
+        }
+        bezierPath.lineWidth = 1
+        bezierPath.stroke()
+        
+        let cgContext: CGContext = UIGraphicsGetCurrentContext()!
+        cgContext.saveGState()
+        cgContext.addPath(bezierPath.cgPath)
+        cgContext.closePath()
+        cgContext.restoreGState()
+    }
+}
+
+class cb_gender_woman: UIButton {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        self.cornerRadius(corner: [.topRight, .bottomRight], radius: 9)
+        self.titleLabel!.font = UIFont.systemFont(ofSize: 13)
+        setSelected(selected: false)
+    }
+    func setSelected(selected: Bool) {
+        self.isSelected = selected
+        if (self.isSelected) {
+            self.backgroundColor = .white
+            self.setTitleColor(colors.primary, for: .normal)
+        } else {
+            self.backgroundColor = UIColor(hex: "#F9F9F9")
+            self.setTitleColor(UIColor(hex: "#d0d2d5"), for: .normal)
+        }
+        self.setNeedsDisplay()
+    }
+    override func draw(_ rect: CGRect) {
+        let bezierPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: rect.width, height: rect.height), byRoundingCorners: [.topRight, .bottomRight], cornerRadii: CGSize(width: 9, height: 9))
+        if (self.isSelected) {
+            colors.primary.setStroke()
+        } else {
+            UIColor(hex: "#F9F9F9")!.setStroke()
+        }
+        bezierPath.lineWidth = 1
+        bezierPath.stroke()
+        
+        let cgContext: CGContext = UIGraphicsGetCurrentContext()!
+        cgContext.saveGState()
+        cgContext.addPath(bezierPath.cgPath)
+        cgContext.closePath()
+        cgContext.restoreGState()
+    }
 }

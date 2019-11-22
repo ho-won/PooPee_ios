@@ -14,8 +14,8 @@ class ObserverManager {
     static let testServer = false // 테스트용인지 체크
     static let isShowLog = true // Log 노출여부 체크
     
-    static var root: BaseController! = MainController() // 현재 Controller
-    static var preRoot: BaseController! = MainController() // 직전 Controller
+    static var root: BaseController = MainController() // 현재 Controller
+    static var preRoot: BaseController = MainController() // 직전 Controller
     
     static let DISTANCE: Double = 0.02
     
@@ -24,22 +24,6 @@ class ObserverManager {
     
     static func isTestServer() -> Bool {
         return testServer
-    }
-    
-    static func getRoot() -> BaseController {
-        return root
-    }
-    
-    static func setRoot(root: BaseController) {
-        ObserverManager.root = root
-    }
-    
-    static func getPreRoot() -> BaseController {
-        return preRoot
-    }
-    
-    static func setPreRoot(preRoot: BaseController) {
-        ObserverManager.preRoot = preRoot
     }
     
     static func getPath() -> String {
@@ -96,7 +80,7 @@ class ObserverManager {
         case "NoticeController": // 회원가입
             let controller = UIStoryboard(name: "Menu", bundle: nil).instantiateViewController(withIdentifier: "NoticeController") as! NoticeController
             return controller
-        case "SettingController": // 약관
+        case "SettingController": // 설정
             let controller = UIStoryboard(name: "Menu", bundle: nil).instantiateViewController(withIdentifier: "SettingController") as! SettingController
             return controller
             

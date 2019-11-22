@@ -12,22 +12,21 @@ import UIKit
 public class BaseController: UIViewController {
     var indicator: UIActivityIndicatorView! = nil
     var segueData = SegueData() // 현재 SegueData (getIntent 용도)
-    var newSegueData = SegueData() // 보낼 SegueData (putExtra 용도)
     var resultSegueData = SegueData() // 안드로이드의 onActivityResult 용도
     var isViewDidAppear = false // viewDidAppear 두번호출 방지
     
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        ObserverManager.setPreRoot(preRoot: ObserverManager.getRoot())
-        ObserverManager.setRoot(root: self)
+        ObserverManager.preRoot = ObserverManager.root
+        ObserverManager.root = self
     }
     
     override public func viewWillAppear(_ animated: Bool) {
-        if (ObserverManager.getRoot().resultSegueData.resultCode == SegueData.RESULT_OK) {
-            onControllerResult(requestCode: ObserverManager.getRoot().resultSegueData.requestCode, data: ObserverManager.getRoot().resultSegueData)
+        if (ObserverManager.root.resultSegueData.resultCode == SegueData.RESULT_OK) {
+            onControllerResult(requestCode: ObserverManager.root.resultSegueData.requestCode, data: ObserverManager.root.resultSegueData)
         }
-        ObserverManager.setRoot(root: self)
+        ObserverManager.root = self
     }
     
     override public var preferredStatusBarStyle: UIStatusBarStyle {
@@ -104,7 +103,7 @@ public class BaseController: UIViewController {
      * 홈버튼 클릭시 HomeController 이동
      */
     @objc private func btn_home_tap(recognizer: UITapGestureRecognizer) {
-        var currentController = ObserverManager.getRoot()
+        var currentController = ObserverManager.root
         currentController.dismiss(animated: false, completion: nil)
         while let presentedController: BaseController = currentController.presentingViewController as? BaseController {
             currentController = presentedController
@@ -182,7 +181,7 @@ public class BaseController: UIViewController {
      * 컨트롤러 종료
      */
     public func finish() {
-        ObserverManager.setPreRoot(preRoot: ObserverManager.getRoot())
+        ObserverManager.preRoot = ObserverManager.root
         
         let transition: CATransition = CATransition()
         transition.duration = 0.25
@@ -197,7 +196,7 @@ public class BaseController: UIViewController {
      * 컨트롤러 종료
      */
     public func finishFromRight() {
-        ObserverManager.setPreRoot(preRoot: ObserverManager.getRoot())
+        ObserverManager.preRoot = ObserverManager.root
         
         let transition: CATransition = CATransition()
         transition.duration = 0.25
@@ -210,6 +209,10 @@ public class BaseController: UIViewController {
     
     func onControllerResult(requestCode: Int, data: SegueData) {
         
+    }
+    
+    func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+        return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
     }
     
 }

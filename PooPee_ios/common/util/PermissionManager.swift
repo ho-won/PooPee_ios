@@ -18,7 +18,7 @@ class PermissionManager {
             let controller = ObserverManager.getController(name: "GalleryController") as! GalleryController
             controller.listener = listener
             controller.mMultiSelectSize = multiSelectSize
-            ObserverManager.getRoot().startPresent(controller: controller)
+            ObserverManager.root.startPresent(controller: controller)
             break
         case .denied, .restricted:
             // as above
@@ -40,7 +40,7 @@ class PermissionManager {
                         let controller = ObserverManager.getController(name: "GalleryController") as! GalleryController
                         controller.listener = listener
                         controller.mMultiSelectSize = multiSelectSize
-                        ObserverManager.getRoot().startPresent(controller: controller)
+                        ObserverManager.root.startPresent(controller: controller)
                     }
                     break
                 case .denied, .restricted:
@@ -66,7 +66,7 @@ class PermissionManager {
                 imagePicker.delegate = delegate
                 imagePicker.sourceType = .camera;
                 imagePicker.allowsEditing = false
-                ObserverManager.getRoot().present(imagePicker, animated: true, completion: nil)
+                ObserverManager.root.present(imagePicker, animated: true, completion: nil)
             }
         } else {
             AVCaptureDevice.requestAccess(for: .video, completionHandler: { (granted: Bool) in
@@ -78,7 +78,7 @@ class PermissionManager {
                             imagePicker.delegate = delegate
                             imagePicker.sourceType = .camera;
                             imagePicker.allowsEditing = false
-                            ObserverManager.getRoot().present(imagePicker, animated: true, completion: nil)
+                            ObserverManager.root.present(imagePicker, animated: true, completion: nil)
                         }
                     } else {
                         //access denied
@@ -88,7 +88,7 @@ class PermissionManager {
                         
                         if UIApplication.shared.canOpenURL(settingsUrl) {
                             UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                                ObserverManager.getRoot().view.makeToast(message: "Please allow camera permissions")
+                                ObserverManager.root.view.makeToast(message: "Please allow camera permissions")
                             })
                         }
                     }

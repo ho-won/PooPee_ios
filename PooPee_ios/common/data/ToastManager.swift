@@ -13,13 +13,13 @@ class ToastManager {
     
     static func showToast(rst_code: Int, msg: String) {
         if (msg.count > 0) {
-            ObserverManager.getRoot().view.makeToast(message: msg)
+            ObserverManager.root.view.makeToast(message: msg)
             return
         }
         
         switch (rst_code) {
         case 9:
-            ObserverManager.getRoot().view.makeToast(message: "toast_loading_fail".localized)
+            ObserverManager.root.view.makeToast(message: "toast_loading_fail".localized)
             break
         default:
             break

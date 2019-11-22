@@ -11,9 +11,15 @@ import Foundation
 class LogManager {
     static let TAG = "HO1_TEST"
     
-    static func e(tag: String = TAG, message: Any) {
+    static func e(tag: String, message: Any) {
         if (ObserverManager.isShowLog) {
             print("\(tag) : \(message)")
+        }
+    }
+    
+    static func e(_ message: Any) {
+        if (ObserverManager.isShowLog) {
+            print("\(TAG) : \(message)")
         }
     }
     

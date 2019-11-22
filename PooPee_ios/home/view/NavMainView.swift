@@ -102,7 +102,8 @@ class NavMainView: UIView, MFMailComposeViewControllerDelegate {
             self.sendEmail()
         }
         layout_setting.setOnClickListener {
-
+            let controller = ObserverManager.getController(name: "SettingController")
+            ObserverManager.root.startPresent(controller: controller)
         }
         btn_logout.setOnClickListener {
             if (SharedManager.instance.isLoginCheck()) {

@@ -27,6 +27,7 @@ class SharedManager {
     let NOTICE_IMAGE = "NOTICE_IMAGE" // 서버공지 이미지
     let LATITUDE = "LATITUDE" // latitude
     let LONGITUDE = "LONGITUDE" // longitude
+    let PUSH = "PUSH" // 푸시알림
     
     private init() {
         
@@ -162,6 +163,18 @@ class SharedManager {
     
     func setLongitude(value: Double) {
         UserDefaults.standard.set(value, forKey: LONGITUDE)
+    }
+    
+    func isPush() -> Bool {
+        if (UserDefaults.standard.object(forKey: PUSH) != nil) {
+            return UserDefaults.standard.bool(forKey: PUSH)
+        } else {
+            return false
+        }
+    }
+    
+    func setPush(value: Bool) {
+        UserDefaults.standard.set(value, forKey: PUSH)
     }
     
 }

@@ -61,7 +61,7 @@ class LoginController: BaseController {
             }
         }
         layout_join.setOnClickListener {
-            let controller = ObserverManager.getController(name: "JoinActivity")
+            let controller = ObserverManager.getController(name: "JoinController")
             self.startPresent(controller: controller)
         }
         edt_username.addTextChangedListener {

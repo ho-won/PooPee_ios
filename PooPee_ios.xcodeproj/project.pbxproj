@@ -130,6 +130,8 @@
 		B6461A1323726851005E087C /* CommentReportDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6461A1223726851005E087C /* CommentReportDialog.xib */; };
 		B6461A152372685F005E087C /* CommentUpdateDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6461A142372685F005E087C /* CommentUpdateDialog.swift */; };
 		B6461A172372686A005E087C /* CommentUpdateDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6461A162372686A005E087C /* CommentUpdateDialog.xib */; };
+		B679DCED23837039000FE802 /* NoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B679DCEC23837039000FE802 /* NoticeCell.swift */; };
+		B679DCEF23837042000FE802 /* NoticeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B679DCEE23837042000FE802 /* NoticeCell.xib */; };
 		D3B890A771667C1D5E9A69AF /* Pods_PooPee_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D9EE43D9624DAB35E72A06 /* Pods_PooPee_ios.framework */; };
 /* End PBXBuildFile section */
 
@@ -322,6 +324,8 @@
 		B6461A1223726851005E087C /* CommentReportDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentReportDialog.xib; sourceTree = "<group>"; };
 		B6461A142372685F005E087C /* CommentUpdateDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentUpdateDialog.swift; sourceTree = "<group>"; };
 		B6461A162372686A005E087C /* CommentUpdateDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentUpdateDialog.xib; sourceTree = "<group>"; };
+		B679DCEC23837039000FE802 /* NoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCell.swift; sourceTree = "<group>"; };
+		B679DCEE23837042000FE802 /* NoticeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeCell.xib; sourceTree = "<group>"; };
 		ECC7EFD804F1700A2F829A52 /* Pods_PooPee_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PooPee_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0EF81011080642BDDA044BD /* Pods-PooPee_iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PooPee_iosUITests.debug.xcconfig"; path = "Target Support Files/Pods-PooPee_iosUITests/Pods-PooPee_iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -790,6 +794,7 @@
 			isa = PBXGroup;
 			children = (
 				AAE6D2C0234B00AC00DEC86C /* model */,
+				B679DCEB23837007000FE802 /* view */,
 				AAE6D2BE234B006E00DEC86C /* MyInfoController.swift */,
 				AAE6D2BC234B006400DEC86C /* NoticeController.swift */,
 				B62354D7236278BD004F615F /* SettingController.swift */,
@@ -804,6 +809,15 @@
 				AAE6D2C1234B00BA00DEC86C /* Notice.swift */,
 			);
 			path = model;
+			sourceTree = "<group>";
+		};
+		B679DCEB23837007000FE802 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				B679DCEC23837039000FE802 /* NoticeCell.swift */,
+				B679DCEE23837042000FE802 /* NoticeCell.xib */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -953,6 +967,7 @@
 				AA222A6F233DD9CC00D9354A /* info_box_tail.png in Resources */,
 				AA222A72233DD9CC00D9354A /* map_pin.png in Resources */,
 				AA222A64233DD9CC00D9354A /* copyright.png in Resources */,
+				B679DCEF23837042000FE802 /* NoticeCell.xib in Resources */,
 				AA222A70233DD9CC00D9354A /* noimage256.png in Resources */,
 				AA222A69233DD9CC00D9354A /* map_pin@3x.png in Resources */,
 				B62354DA236278EF004F615F /* Menu.storyboard in Resources */,
@@ -1121,6 +1136,7 @@
 				AAC046BA2331F4BF00D5D5F6 /* ToastManager.swift in Sources */,
 				B6451C522371654200090649 /* PopupMenu.swift in Sources */,
 				AACEC55F234C621B009087BD /* PopupDialog.swift in Sources */,
+				B679DCED23837039000FE802 /* NoticeCell.swift in Sources */,
 				AAC0469D2331F4BF00D5D5F6 /* dimen.swift in Sources */,
 				AACEC564234C6B02009087BD /* ToiletDialog.swift in Sources */,
 				B62354D623627897004F615F /* TermsController.swift in Sources */,
