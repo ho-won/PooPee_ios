@@ -17,6 +17,21 @@ class JoinController: BaseController {
     @IBOutlet var rb_man: cb_gender_man!
     @IBOutlet var rb_woman: cb_gender_woman!
     
+    @IBOutlet var edt_username: base_edt!
+    @IBOutlet var tv_overlap: tv_overlap!
+    
+    @IBOutlet var ic_id_ex: UIImageView!
+    @IBOutlet var tv_id_ex: UILabel!
+    
+    
+    
+    
+    
+    @IBOutlet var ic_password_ex: UIImageView!
+    @IBOutlet var tv_password_ex: UILabel!
+    
+    
+    
     @IBOutlet var layout_back: UIView!
     @IBOutlet var tv_back: UILabel!
     @IBOutlet var layout_join: UIView!
@@ -26,6 +41,8 @@ class JoinController: BaseController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setStatusColor(color: colors.main_content_background)
+        setupViewResizerOnKeyboardShown()
+        hideKeyboardWhenTappedAround()
         
         tv_title.text = "login_04".localized
         edt_name.setHint(hint: "login_09".localized, color: UIColor(hex: "#d0d2d5")!)

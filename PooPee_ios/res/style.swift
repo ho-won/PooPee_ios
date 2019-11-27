@@ -635,3 +635,51 @@ class cb_gender_woman: UIButton {
         cgContext.restoreGState()
     }
 }
+
+class tv_overlap: MyLabel {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        self.paddingLeft = 12
+        self.paddingRight = 12
+        self.font = UIFont.systemFont(ofSize: 12)
+        setEnabled(false)
+    }
+    func setEnabled(_ enabled: Bool) {
+        self.isEnabled = enabled
+        self.isUserInteractionEnabled = enabled
+        if (self.isEnabled) {
+            self.textColor = colors.primary
+        } else {
+            self.textColor = UIColor(hex: "#d0d2d5")
+        }
+    }
+}
+
+class cb_terms: UIButton {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        setSelected(selected: false)
+    }
+    func setSelected(selected: Bool) {
+        self.isSelected = selected
+        if (self.isSelected) {
+            self.setImage(UIImage(named: "ic_checkbox_pressed")!, for: UIControl.State.normal)
+        } else {
+            self.setImage(UIImage(named: "ic_checkbox_normal")!, for: UIControl.State.normal)
+        }
+    }
+}
