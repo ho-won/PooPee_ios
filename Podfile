@@ -19,5 +19,6 @@ target 'PooPee_ios' do
   
   pod 'Alamofire', '~> 4.7' # http 통신용
   pod 'Kingfisher' # 이미지로딩
+  pod 'lottie-ios'
 
 end

@@ -9,9 +9,11 @@
 import UIKit
 import Alamofire
 import CoreLocation
+import Lottie
 
 class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelegate {
     @IBOutlet var map_view: UIView!
+    @IBOutlet var lottie_my_position: AnimationView!
     
     @IBOutlet var btn_menu: UIButton!
     @IBOutlet var btn_menu_marginTop: NSLayoutConstraint!
@@ -61,6 +63,13 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         mHoSlideMenu.setMenuView(menu_view: mNavMainView, menu_width: dimen.home_menu_width)
         view.addSubview(mHoSlideMenu)
         
+        
+        let animation = Animation.named("btn_me")
+        lottie_my_position.animation = animation
+        lottie_my_position.contentMode = .scaleAspectFit
+        lottie_my_position.loopMode = .loop
+        setMyPosition(isHidden: true)
+        
         _init()
         setListener()
     }
@@ -105,7 +114,9 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         map_view.addSubview(ObserverManager.mapView)
         
         if (SharedManager.instance.getLatitude() > 0) {
-            ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: true)
+            ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: false)
+            ObserverManager.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
+            setMyPosition(isHidden: false)
         }
     }
     
@@ -127,8 +138,10 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         }
         layout_my_position.setOnClickListener {
             if (SharedManager.instance.getLatitude() > 0) {
-                ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: true)
-                ObserverManager.mapView.setZoomLevel(2, animated: true)
+                ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: false)
+                ObserverManager.mapView.setZoomLevel(2, animated: false)
+                ObserverManager.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
+                self.setMyPosition(isHidden: false)
             }
         }
         btn_menu.setOnClickListener {
@@ -183,16 +196,25 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
             for toilet in toiletList {
                 ObserverManager.addPOIItem(toilet: toilet)
             }
+            if (SharedManager.instance.getLatitude() > 0) {
+                ObserverManager.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
+            }
         }
     }
     
+    func mapView(_ mapView: MTMapView!, centerPointMovedTo mapCenterPoint: MTMapPoint!) {
+        setMyPosition(isHidden: true)
+    }
+    
     func mapView(_ mapView: MTMapView!, selectedPOIItem poiItem: MTMapPOIItem!) -> Bool {
-        let toilet = SQLiteManager.instance.getToilet(id: poiItem.tag)
-        let dialog = ToiletDialog()
-        print("HO_TEST:\(toilet.toilet_id)")
-        dialog.setToilet(toilet: toilet)
-        dialog.refresh()
-        dialog.show(view: ObserverManager.root.view)
+        if (poiItem.tag > 0) {
+            let toilet = SQLiteManager.instance.getToilet(id: poiItem.tag)
+            let dialog = ToiletDialog()
+            print("HO_TEST:\(toilet.toilet_id)")
+            dialog.setToilet(toilet: toilet)
+            dialog.refresh()
+            dialog.show(view: ObserverManager.root.view)
+        }
         return false
     }
     
@@ -200,6 +222,15 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         if (SharedManager.instance.getNoticeImage().count > 0) {
             let dialog = PopupDialog()
             dialog.show(view: ObserverManager.root.view)
+        }
+    }
+    
+    func setMyPosition(isHidden: Bool) {
+        lottie_my_position.isHidden = isHidden
+        if (lottie_my_position.isHidden == true) {
+            lottie_my_position.stop()
+        } else {
+            lottie_my_position.play()
         }
     }
 
@@ -263,6 +294,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
         ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: mKeywordList[position].latitude, longitude: mKeywordList[position].longitude)), animated: true)
         edt_search.resignFirstResponder()
         tl_search.setVisibility(gone: true, dimen: 0, attribute: .height)
+        setMyPosition(isHidden: true)
     }
     
 }

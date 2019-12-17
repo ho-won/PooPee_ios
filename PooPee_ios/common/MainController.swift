@@ -19,7 +19,6 @@ class MainController: BaseController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setStatusColor(color: colors.main_content_background)
         
         _init()
     }

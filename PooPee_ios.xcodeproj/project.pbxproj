@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -117,6 +117,8 @@
 		B62354D8236278BD004F615F /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62354D7236278BD004F615F /* SettingController.swift */; };
 		B62354DA236278EF004F615F /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B62354D9236278EF004F615F /* Menu.storyboard */; };
 		B62354DC2362CF55004F615F /* HoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62354DB2362CF55004F615F /* HoTableView.swift */; };
+		B635A4B923A76F09000B1E73 /* btn_me.json in Resources */ = {isa = PBXBuildFile; fileRef = B635A4B823A76F09000B1E73 /* btn_me.json */; };
+		B635A4BB23A76FC5000B1E73 /* img_0.png in Resources */ = {isa = PBXBuildFile; fileRef = B635A4BA23A76FC5000B1E73 /* img_0.png */; };
 		B6442813237A6DD700BFFF70 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6442812237A6DD700BFFF70 /* LogManager.swift */; };
 		B6450CF52366834F00106010 /* ToiletCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6450CF32366834F00106010 /* ToiletCommentCell.swift */; };
 		B6450CF62366834F00106010 /* ToiletCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6450CF42366834F00106010 /* ToiletCommentCell.xib */; };
@@ -311,6 +313,8 @@
 		B62354D7236278BD004F615F /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
 		B62354D9236278EF004F615F /* Menu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
 		B62354DB2362CF55004F615F /* HoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoTableView.swift; sourceTree = "<group>"; };
+		B635A4B823A76F09000B1E73 /* btn_me.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = btn_me.json; sourceTree = "<group>"; };
+		B635A4BA23A76FC5000B1E73 /* img_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_0.png; path = images/img_0.png; sourceTree = "<group>"; };
 		B6442812237A6DD700BFFF70 /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
 		B6450CF32366834F00106010 /* ToiletCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToiletCommentCell.swift; sourceTree = "<group>"; };
 		B6450CF42366834F00106010 /* ToiletCommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToiletCommentCell.xib; sourceTree = "<group>"; };
@@ -562,6 +566,7 @@
 		AAC0462E2331F36100D5D5F6 /* PooPee_ios */ = {
 			isa = PBXGroup;
 			children = (
+				B635A4BC23A77BD1000B1E73 /* images */,
 				AAC0466F2331F4BE00D5D5F6 /* common */,
 				AAC046642331F4BE00D5D5F6 /* gallery */,
 				AAC0465D2331F4BE00D5D5F6 /* home */,
@@ -574,6 +579,8 @@
 				AAC046362331F36200D5D5F6 /* Assets.xcassets */,
 				AAC0463B2331F36200D5D5F6 /* Info.plist */,
 				AAC047172332006500D5D5F6 /* Header.h */,
+				B635A4B823A76F09000B1E73 /* btn_me.json */,
+				B635A4BA23A76FC5000B1E73 /* img_0.png */,
 			);
 			path = PooPee_ios;
 			sourceTree = "<group>";
@@ -811,6 +818,13 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		B635A4BC23A77BD1000B1E73 /* images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
 		B679DCEB23837007000FE802 /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -945,6 +959,7 @@
 				AA222A6D233DD9CC00D9354A /* point_sprite.png in Resources */,
 				B6461A0F23726839005E087C /* CommentCreateDialog.xib in Resources */,
 				AAC046B12331F4BF00D5D5F6 /* BasicDialog.xib in Resources */,
+				B635A4BB23A76FC5000B1E73 /* img_0.png in Resources */,
 				AA222A5E233DD9CC00D9354A /* shadow_balloon.png in Resources */,
 				AA222A63233DD9CC00D9354A /* map_pin_shadow@3x.png in Resources */,
 				B6450CF62366834F00106010 /* ToiletCommentCell.xib in Resources */,
@@ -952,6 +967,7 @@
 				AA222A76233DD9CC00D9354A /* daum_th_line.png in Resources */,
 				AA222A5D233DD9CC00D9354A /* map_pin_custom.png in Resources */,
 				AA222A61233DD9CC00D9354A /* map_pin_custom@3x.png in Resources */,
+				B635A4B923A76F09000B1E73 /* btn_me.json in Resources */,
 				AA222A62233DD9CC00D9354A /* map_pinup@3x.png in Resources */,
 				AA222A6A233DD9CC00D9354A /* map_present_tracking.png in Resources */,
 				AAC0469A2331F4BF00D5D5F6 /* Localizable.strings in Resources */,
@@ -1023,18 +1039,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PooPee_ios/Pods-PooPee_ios-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-PooPee_ios/Pods-PooPee_ios-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-PooPee_ios/Pods-PooPee_ios-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

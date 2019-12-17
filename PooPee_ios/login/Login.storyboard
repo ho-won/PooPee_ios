@@ -617,10 +617,16 @@
                         <viewLayoutGuide key="safeArea" id="TWT-tg-Ja0"/>
                     </view>
                     <connections>
+                        <outlet property="cb_terms_01" destination="MK6-Zr-gZ7" id="B4f-em-T0z"/>
+                        <outlet property="cb_terms_02" destination="kIQ-aB-5u6" id="RE5-B4-cVa"/>
+                        <outlet property="cb_terms_03" destination="Fk8-ui-Pff" id="cbh-9a-zgf"/>
                         <outlet property="edt_name" destination="57X-3M-T06" id="bHC-zR-ubR"/>
+                        <outlet property="edt_password" destination="0tq-GL-dTX" id="FGv-CV-sSG"/>
+                        <outlet property="edt_password_confirm" destination="guq-fo-VJJ" id="HYZ-6J-yjv"/>
                         <outlet property="edt_username" destination="JTo-lT-1G6" id="oHm-Du-asC"/>
-                        <outlet property="ic_id_ex" destination="LNq-gS-o7F" id="MSD-7l-3dV"/>
+                        <outlet property="iv_id_ex" destination="LNq-gS-o7F" id="1Or-vN-2k1"/>
                         <outlet property="iv_join" destination="5Su-xt-Cwz" id="8u1-xj-4Ee"/>
+                        <outlet property="iv_password_ex" destination="gaf-Xi-xZV" id="kMv-aq-z6t"/>
                         <outlet property="layout_back" destination="iYJ-rj-Y3E" id="OSJ-ci-ZGv"/>
                         <outlet property="layout_join" destination="FFh-xg-KPB" id="zHE-OC-ngi"/>
                         <outlet property="rb_man" destination="jl6-Rk-PQp" id="pzE-VA-eiG"/>
@@ -630,6 +636,10 @@
                         <outlet property="tv_id_ex" destination="aPP-uy-YUN" id="xkW-5a-5qv"/>
                         <outlet property="tv_join" destination="hZt-mV-bFM" id="ED7-wb-2eJ"/>
                         <outlet property="tv_overlap" destination="eni-TH-dNi" id="uho-p4-87Q"/>
+                        <outlet property="tv_password_ex" destination="J4T-Ji-JFy" id="7ix-ak-8DT"/>
+                        <outlet property="tv_terms_01_detail" destination="lci-N3-b85" id="oa8-bZ-Fdc"/>
+                        <outlet property="tv_terms_02_detail" destination="Rpd-bz-kx3" id="qre-WY-c82"/>
+                        <outlet property="tv_terms_03_detail" destination="eBF-MZ-7s1" id="88I-oP-5ed"/>
                         <outlet property="tv_title" destination="Oie-YU-JE3" id="jbG-Zw-e0R"/>
                     </connections>
                 </viewController>

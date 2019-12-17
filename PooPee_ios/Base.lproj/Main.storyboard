@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -82,8 +82,15 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4aA-LY-Alq">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bfj-Iy-sIl" customClass="AnimationView" customModule="Lottie">
+                                        <rect key="frame" x="171.5" y="317.5" width="32" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="TFw-VC-BCq"/>
+                                            <constraint firstAttribute="width" constant="32" id="TVP-sY-1X4"/>
+                                        </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="buF-gB-IQ6">
                                         <rect key="frame" x="12" y="12" width="36" height="36"/>
@@ -244,6 +251,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="4aA-LY-Alq" secondAttribute="trailing" id="4an-OG-jHv"/>
+                                    <constraint firstItem="Bfj-Iy-sIl" firstAttribute="centerY" secondItem="Bas-RD-j0R" secondAttribute="centerY" id="5BZ-zR-Esr"/>
                                     <constraint firstItem="kpc-UJ-WTk" firstAttribute="leading" secondItem="Bas-RD-j0R" secondAttribute="leading" id="Apt-x9-eS4"/>
                                     <constraint firstAttribute="trailing" secondItem="Tjq-ur-cnv" secondAttribute="trailing" id="Ej7-gT-7ug"/>
                                     <constraint firstItem="Z5E-1I-kdW" firstAttribute="leading" secondItem="Bas-RD-j0R" secondAttribute="leading" id="JcQ-C3-mrt"/>
@@ -252,7 +260,8 @@
                                     <constraint firstItem="4aA-LY-Alq" firstAttribute="leading" secondItem="Bas-RD-j0R" secondAttribute="leading" id="SRT-oW-cuT"/>
                                     <constraint firstAttribute="bottom" secondItem="Tjq-ur-cnv" secondAttribute="bottom" id="XPu-CL-Fmb"/>
                                     <constraint firstItem="Tjq-ur-cnv" firstAttribute="top" secondItem="Z5E-1I-kdW" secondAttribute="bottom" id="aqp-Ir-HPq"/>
-                                    <constraint firstItem="Tjq-ur-cnv" firstAttribute="top" secondItem="4aA-LY-Alq" secondAttribute="bottom" id="b3D-Rd-zhz"/>
+                                    <constraint firstAttribute="bottom" secondItem="4aA-LY-Alq" secondAttribute="bottom" id="b3D-Rd-zhz"/>
+                                    <constraint firstItem="Bfj-Iy-sIl" firstAttribute="centerX" secondItem="Bas-RD-j0R" secondAttribute="centerX" id="cS4-2c-1rJ"/>
                                     <constraint firstItem="buF-gB-IQ6" firstAttribute="top" secondItem="Bas-RD-j0R" secondAttribute="top" constant="12" id="ffV-aq-vtt"/>
                                     <constraint firstItem="Tjq-ur-cnv" firstAttribute="leading" secondItem="Bas-RD-j0R" secondAttribute="leading" id="hbR-qR-e9Q"/>
                                     <constraint firstAttribute="trailing" secondItem="rzq-Sp-lVc" secondAttribute="trailing" constant="12" id="iXQ-ec-WBS"/>
@@ -282,6 +291,7 @@
                         <outlet property="layout_bottom_bg" destination="kpc-UJ-WTk" id="qPx-nn-wJl"/>
                         <outlet property="layout_my_position" destination="rzq-Sp-lVc" id="G5J-K5-28j"/>
                         <outlet property="layout_my_position_marginTop" destination="yVZ-FP-Mdc" id="UmY-J6-c7Q"/>
+                        <outlet property="lottie_my_position" destination="Bfj-Iy-sIl" id="ove-PG-Qgq"/>
                         <outlet property="map_view" destination="4aA-LY-Alq" id="qMO-7F-I6b"/>
                         <outlet property="tl_search" destination="vyq-GF-8r3" id="4TJ-nJ-G08"/>
                         <outlet property="tv_my_position" destination="hQw-kf-6re" id="nAG-f0-R27"/>

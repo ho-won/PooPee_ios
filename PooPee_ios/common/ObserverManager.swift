@@ -21,6 +21,8 @@ class ObserverManager {
     
     static var mapView: MTMapView!
     static let imageMaker = UIImage(named: "ic_position")!
+    static let imageMe = UIImage(named: "ic_marker")!
+    static var my_position: MTMapPOIItem! = nil
     
     static func isTestServer() -> Bool {
         return testServer
@@ -50,6 +52,23 @@ class ObserverManager {
         marker.customSelectedImage = imageMaker
         marker.customImageAnchorPointOffset = MTMapImageOffset(offsetX: 30, offsetY: 0)
         mapView.add(marker)
+    }
+    
+    static func addMyPosition(latitude: Double, longitude: Double) {
+        if (my_position != nil) {
+            mapView.remove(my_position)
+        }
+        my_position = MTMapPOIItem()
+        my_position.itemName = "내위치"
+        my_position.tag = -1
+        my_position.mapPoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: latitude, longitude: longitude))
+        my_position.markerType = MTMapPOIItemMarkerType.customImage // 마커타입을 커스텀 마커로 지정.
+        my_position.customImage = imageMe // 마커 이미지.
+        my_position.markerSelectedType = MTMapPOIItemMarkerSelectedType.customImage // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+        my_position.customSelectedImage = imageMe
+        let imageOffset = Int32(imageMe.size.height / 2)
+        my_position.customImageAnchorPointOffset = MTMapImageOffset(offsetX: imageOffset, offsetY: imageOffset)
+        mapView.add(my_position)
     }
     
     static func getController(name: String) -> BaseController {
