@@ -86,10 +86,10 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bfj-Iy-sIl" customClass="AnimationView" customModule="Lottie">
-                                        <rect key="frame" x="171.5" y="317.5" width="32" height="32"/>
+                                        <rect key="frame" x="155.5" y="301.5" width="64" height="64"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="32" id="TFw-VC-BCq"/>
-                                            <constraint firstAttribute="width" constant="32" id="TVP-sY-1X4"/>
+                                            <constraint firstAttribute="height" constant="64" id="TFw-VC-BCq"/>
+                                            <constraint firstAttribute="width" constant="64" id="TVP-sY-1X4"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="buF-gB-IQ6">
