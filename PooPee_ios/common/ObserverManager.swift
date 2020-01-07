@@ -14,8 +14,8 @@ class ObserverManager {
     static let testServer = false // 테스트용인지 체크
     static let isShowLog = true // Log 노출여부 체크
     
-    static var root: BaseController = MainController() // 현재 Controller
-    static var preRoot: BaseController = MainController() // 직전 Controller
+    static var root: BaseController! = MainController() // 현재 Controller
+    static var preRoot: BaseController! = MainController() // 직전 Controller
     
     static let DISTANCE: Double = 0.02
     

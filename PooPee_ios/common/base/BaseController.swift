@@ -23,7 +23,7 @@ public class BaseController: UIViewController {
     }
     
     override public func viewWillAppear(_ animated: Bool) {
-        if (ObserverManager.root.resultSegueData.resultCode == SegueData.RESULT_OK) {
+        if (ObserverManager.root != nil && ObserverManager.root.resultSegueData.resultCode == SegueData.RESULT_OK) {
             onControllerResult(requestCode: ObserverManager.root.resultSegueData.requestCode, data: ObserverManager.root.resultSegueData)
         }
         ObserverManager.root = self
@@ -103,7 +103,10 @@ public class BaseController: UIViewController {
      * 홈버튼 클릭시 HomeController 이동
      */
     @objc private func btn_home_tap(recognizer: UITapGestureRecognizer) {
-        var currentController = ObserverManager.root
+        if (ObserverManager.root == nil) {
+            return
+        }
+        var currentController = ObserverManager.root!
         currentController.dismiss(animated: false, completion: nil)
         while let presentedController: BaseController = currentController.presentingViewController as? BaseController {
             currentController = presentedController

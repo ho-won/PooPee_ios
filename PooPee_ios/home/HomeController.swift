@@ -113,10 +113,12 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         ObserverManager.mapView.baseMapType = .standard
         map_view.addSubview(ObserverManager.mapView)
         
-        if (SharedManager.instance.getLatitude() > 0) {
-            ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: false)
-            ObserverManager.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
-            setMyPosition(isHidden: false)
+        DispatchQueue.main.async {
+            if (SharedManager.instance.getLatitude() > 0) {
+                ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: false)
+                ObserverManager.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
+                self.setMyPosition(isHidden: false)
+            }
         }
     }
     
@@ -190,7 +192,7 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
             && mCurrentLongitude != mapCenterPoint.mapPointGeo().longitude) {
             mCurrentLatitude = mapCenterPoint.mapPointGeo().latitude
             mCurrentLongitude = mapCenterPoint.mapPointGeo().longitude
-            
+
             ObserverManager.mapView.removeAllPOIItems()
             let toiletList = SQLiteManager.instance.getToiletList(latitude: mCurrentLatitude, longitude: mCurrentLongitude)
             for toilet in toiletList {
