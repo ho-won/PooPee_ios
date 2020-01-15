@@ -18,7 +18,9 @@ public class BaseController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        ObserverManager.preRoot = ObserverManager.root
+        if (ObserverManager.root != nil) {
+            ObserverManager.preRoot = ObserverManager.root
+        }
         ObserverManager.root = self
     }
     
@@ -216,6 +218,10 @@ public class BaseController: UIViewController {
     
     func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
         return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+    }
+    
+    func onLocationChanged() {
+        
     }
     
 }

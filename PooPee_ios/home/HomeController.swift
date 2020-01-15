@@ -43,6 +43,8 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     var mCurrentLatitude: Double = 0 // finishedMapMoveAnimation 가 두번불리는현상때문에 중복방지용
     var mCurrentLongitude: Double = 0 // finishedMapMoveAnimation 가 두번불리는현상때문에 중복방지용
     
+    var mIsMyPositionMove = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewResizerOnKeyboardShown()
@@ -140,6 +142,7 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         }
         layout_my_position.setOnClickListener {
             if (SharedManager.instance.getLatitude() > 0) {
+                self.mIsMyPositionMove = true
                 ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: false)
                 ObserverManager.mapView.setZoomLevel(2, animated: false)
                 ObserverManager.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
@@ -185,6 +188,12 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         SharedManager.instance.setLatitude(value: locValue.latitude)
         SharedManager.instance.setLongitude(value: locValue.longitude)
+        
+        if (SharedManager.instance.getLatitude() > 0) {
+            ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: false)
+            ObserverManager.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
+            self.setMyPosition(isHidden: false)
+        }
     }
     
     func mapView(_ mapView: MTMapView!, finishedMapMoveAnimation mapCenterPoint: MTMapPoint!) {
@@ -205,6 +214,7 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     }
     
     func mapView(_ mapView: MTMapView!, centerPointMovedTo mapCenterPoint: MTMapPoint!) {
+        mIsMyPositionMove = false
         setMyPosition(isHidden: true)
     }
     
@@ -291,6 +301,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let position = indexPath.row
         
+        mIsMyPositionMove = false
         edt_search.text = mKeywordList[position].place_name
 
         ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: mKeywordList[position].latitude, longitude: mKeywordList[position].longitude)), animated: true)
