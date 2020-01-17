@@ -65,8 +65,10 @@ class ToiletDialog: BaseDialog {
         var addressText = ""
         if (mToilet.address_new.count > 0) {
             addressText = mToilet.address_new
-        } else {
+        } else if (mToilet.address_old.count > 0) {
             addressText = mToilet.address_old
+        } else {
+
         }
         StrManager.setAddressCopySpan(tv_address: tv_address, addressText: addressText)
 
