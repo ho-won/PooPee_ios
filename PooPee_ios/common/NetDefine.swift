@@ -35,5 +35,6 @@ struct NetDefine {
     
     static let KAKAO_API_KEY = "dff7010c98c6542a9977f13c10d71a91"
     static let KAKAO_LOCAL_SEARCH = "https://dapi.kakao.com/v2/local/search/keyword.json" // 카카오지도 키워드 검색
+    static let KAKAO_COORD_TO_ADDRESS = "https://dapi.kakao.com/v2/local/geo/coord2address.json" // 카카오 좌표 -> 주소 변환
     
 }

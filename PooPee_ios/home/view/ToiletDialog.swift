@@ -68,7 +68,7 @@ class ToiletDialog: BaseDialog {
         } else if (mToilet.address_old.count > 0) {
             addressText = mToilet.address_old
         } else {
-
+            taskKakaoCoordToAddress()
         }
         StrManager.setAddressCopySpan(tv_address: tv_address, addressText: addressText)
 
@@ -110,6 +110,39 @@ class ToiletDialog: BaseDialog {
 
                     self.tv_comment_count.text = self.mToilet.comment_count
                     self.tv_like_count.text = self.mToilet.like_count
+                }
+        }
+            , onFailed: { statusCode in
+                
+        })
+    }
+
+    /**
+     * [GET] 카카오 좌표 -> 주소 변환
+     */
+    func taskKakaoCoordToAddress() {
+        var params: Parameters = Parameters()
+        params.put("x", mToilet.longitude) // longitude
+        params.put("y", mToilet.latitude) // latitude
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "KakaoAK " + NetDefine.KAKAO_API_KEY,
+        ]
+        
+        BaseTask().request(url: NetDefine.KAKAO_COORD_TO_ADDRESS, method: .get, params: params, headers: headers, fullUrl: true
+            , onSuccess: { it in
+                let totalCount = it.getJSONObject("meta").getInt("total_count")
+                if (totalCount > 0) {
+                    let jsonObject = it.getJSONArray("documents").getJSONObject(0)
+
+                    var addressText = ""
+                    if (jsonObject.getJSONObject("road_address").has("address_name")) {
+                        addressText = jsonObject.getJSONObject("road_address").getString("address_name")
+                    } else if (jsonObject.getJSONObject("address").has("address_name")) {
+                        addressText = jsonObject.getJSONObject("address").getString("address_name")
+                    }
+                    self.mToilet.address_new = addressText
+                    StrManager.setAddressCopySpan(tv_address: self.tv_address, addressText: addressText)
                 }
         }
             , onFailed: { statusCode in
