@@ -40,10 +40,12 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     
     var mKeywordList: [KaKaoKeyword] = []
     
-    var mCurrentLatitude: Double = 0 // finishedMapMoveAnimation 가 두번불리는현상때문에 중복방지용
-    var mCurrentLongitude: Double = 0 // finishedMapMoveAnimation 가 두번불리는현상때문에 중복방지용
+    var mIsMyPositionMove = true // 내위치기준으로 맵중심이동여부
+    var mIsFirstOnCreate = true // onCreate 체크 (내위치기준으로 맵중심을 이동할지 확인하기위해)
     
-    var mIsMyPositionMove = true
+    // finishedMapMoveAnimation 가 두번불리는현상때문에 중복방지용
+    var mLastLatitude: Double = 0 // 마지막 중심 latitude
+    var mLastLongitude: Double = 0 // 마지막 중심 longitude
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,8 +99,6 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     }
     
     func refresh() {
-        mCurrentLatitude = 0
-        mCurrentLongitude = 0
         mNavMainView.refresh()
         if (CLLocationManager.locationServicesEnabled()) {
             mLocationManager = CLLocationManager()
@@ -115,12 +115,22 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         ObserverManager.mapView.baseMapType = .standard
         map_view.addSubview(ObserverManager.mapView)
         
-        DispatchQueue.main.async {
-            if (SharedManager.instance.getLatitude() > 0) {
-                ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: false)
-                ObserverManager.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
-                self.setMyPosition(isHidden: false)
+        // 현재위치기준으로 중심점 변경
+        if (mIsFirstOnCreate) {
+            mIsFirstOnCreate = false
+            DispatchQueue.main.async {
+                if (SharedManager.instance.getLatitude() > 0) {
+                    ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: false)
+                    ObserverManager.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
+                    self.setMyPosition(isHidden: false)
+                }
             }
+        } else {
+            if (mLastLatitude == 0) {
+                mLastLatitude = ObserverManager.mapView.mapCenterPoint.mapPointGeo().latitude
+                mLastLongitude = ObserverManager.mapView.mapCenterPoint.mapPointGeo().longitude
+            }
+            ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: mLastLatitude, longitude: mLastLongitude)), animated: false)
         }
     }
     
@@ -197,13 +207,13 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     }
     
     func mapView(_ mapView: MTMapView!, finishedMapMoveAnimation mapCenterPoint: MTMapPoint!) {
-        if (mCurrentLatitude != mapCenterPoint.mapPointGeo().latitude
-            && mCurrentLongitude != mapCenterPoint.mapPointGeo().longitude) {
-            mCurrentLatitude = mapCenterPoint.mapPointGeo().latitude
-            mCurrentLongitude = mapCenterPoint.mapPointGeo().longitude
+        if (mLastLatitude != mapCenterPoint.mapPointGeo().latitude
+            && mLastLongitude != mapCenterPoint.mapPointGeo().longitude) {
+            mLastLatitude = mapCenterPoint.mapPointGeo().latitude
+            mLastLongitude = mapCenterPoint.mapPointGeo().longitude
 
             ObserverManager.mapView.removeAllPOIItems()
-            let toiletList = SQLiteManager.instance.getToiletList(latitude: mCurrentLatitude, longitude: mCurrentLongitude)
+            let toiletList = SQLiteManager.instance.getToiletList(latitude: mLastLatitude, longitude: mLastLongitude)
             for toilet in toiletList {
                 ObserverManager.addPOIItem(toilet: toilet)
             }
