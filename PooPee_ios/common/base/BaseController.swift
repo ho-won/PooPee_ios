@@ -18,14 +18,16 @@ public class BaseController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        if (ObserverManager.root != nil) {
+        if (NSStringFromClass(ObserverManager.root.classForCoder) != NSStringFromClass(MainController().classForCoder)) {
             ObserverManager.preRoot = ObserverManager.root
+        } else {
+            ObserverManager.preRoot = MainController()
         }
         ObserverManager.root = self
     }
     
     override public func viewWillAppear(_ animated: Bool) {
-        if (ObserverManager.root != nil && ObserverManager.root.resultSegueData.resultCode == SegueData.RESULT_OK) {
+        if (ObserverManager.root.resultSegueData.resultCode == SegueData.RESULT_OK) {
             onControllerResult(requestCode: ObserverManager.root.resultSegueData.requestCode, data: ObserverManager.root.resultSegueData)
         }
         ObserverManager.root = self
