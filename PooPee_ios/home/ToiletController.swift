@@ -178,9 +178,10 @@ class ToiletController: BaseController {
         BaseTask().request(url: NetDefine.COMMENT_DELETE, method: .delete, params: params
             , onSuccess: { it in
                 if (it.getInt("rst_code") == 0) {
-                    let indexPath = IndexPath(item: position, section: 0)
-                    self.mCommentList.remove(at: indexPath.row)
-                    self.table_view.deleteRows(at: [indexPath], with: .automatic)
+//                    let indexPath = IndexPath(item: position, section: 0)
+//                    self.mCommentList.remove(at: indexPath.row)
+//                    self.table_view.deleteRows(at: [indexPath], with: .automatic)
+                    self.taskCommentList()
                     self.view.makeToast(message: "toast_delete_complete".localized)
                 }
                 self.hideLoading()

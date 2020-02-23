@@ -47,6 +47,7 @@ class CommentCreateDialog: BaseDialog {
         edt_comment_height.constant = edt_comment_min_height
         edt_comment.becomeFirstResponder()
         edt_comment.setHint(hint: "home_text_05".localized)
+        edt_comment.setMaxLength(1000)
         
         _init()
         setListener()

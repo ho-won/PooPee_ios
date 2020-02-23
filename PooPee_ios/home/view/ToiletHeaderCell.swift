@@ -94,10 +94,10 @@ class ToiletHeaderCell: UITableViewCell {
         
         tv_comment.text = "home_text_03".localized
 
-        cb_tap_address.setSelected(selected: false)
-        layout_detail_address.setVisibility(gone: true, dimen: 0, attribute: .height)
-        cb_tap_manager.setSelected(selected: true)
-        layout_detail_manager.setVisibility(gone: false, dimen: 0, attribute: .height)
+        cb_tap_address.setSelected(selected: true)
+        layout_detail_address.setVisibility(gone: false, dimen: 0, attribute: .height)
+        cb_tap_manager.setSelected(selected: false)
+        layout_detail_manager.setVisibility(gone: true, dimen: 0, attribute: .height)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

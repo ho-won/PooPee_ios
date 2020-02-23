@@ -405,6 +405,7 @@ class btn_comment_send: UIButton {
 class edt_commnet: UITextView, UITextViewDelegate {
     var placeholderLabel : UILabel!
     var onTextChanged: (()->())!
+    var maxLength: Int = 0
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -441,6 +442,10 @@ class edt_commnet: UITextView, UITextViewDelegate {
         placeholderLabel.text = hint
     }
     
+    func setMaxLength(_ length: Int) {
+        maxLength = length
+    }
+    
     func refreshPlaceholder() {
         if (placeholderLabel != nil) {
             placeholderLabel.isHidden = !self.text.isEmpty
@@ -461,6 +466,18 @@ class edt_commnet: UITextView, UITextViewDelegate {
         }
         if (onTextChanged != nil) {
             onTextChanged()
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let currentText = textView.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
+        
+        if (maxLength > 0) {
+            return updatedText.count <= maxLength
+        } else {
+            return true
         }
     }
     

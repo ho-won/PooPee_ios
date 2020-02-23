@@ -88,6 +88,7 @@ class ToiletDialog: BaseDialog {
             let controller = ObserverManager.getController(name: "ToiletController")
             controller.segueData.putExtra(key: ToiletController.TOILET, data: self.mToilet)
             ObserverManager.root.startPresent(controller: controller)
+            self.dismiss()
         }
         btn_close.setOnClickListener {
             self.dismiss()
