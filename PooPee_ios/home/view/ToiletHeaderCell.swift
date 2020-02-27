@@ -12,6 +12,7 @@ class ToiletHeaderCell: UITableViewCell {
     @IBOutlet var root_view: UIView!
     
     @IBOutlet var map_view: UIView!
+    @IBOutlet var map_view_click: UIView!
     @IBOutlet var btn_like: btn_like!
     
     @IBOutlet var tv_address: UILabel!

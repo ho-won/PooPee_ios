@@ -207,19 +207,16 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     }
     
     func mapView(_ mapView: MTMapView!, finishedMapMoveAnimation mapCenterPoint: MTMapPoint!) {
-        if (mLastLatitude != mapCenterPoint.mapPointGeo().latitude
-            && mLastLongitude != mapCenterPoint.mapPointGeo().longitude) {
-            mLastLatitude = mapCenterPoint.mapPointGeo().latitude
-            mLastLongitude = mapCenterPoint.mapPointGeo().longitude
+        mLastLatitude = mapCenterPoint.mapPointGeo().latitude
+        mLastLongitude = mapCenterPoint.mapPointGeo().longitude
 
-            ObserverManager.mapView.removeAllPOIItems()
-            let toiletList = SQLiteManager.instance.getToiletList(latitude: mLastLatitude, longitude: mLastLongitude)
-            for toilet in toiletList {
-                ObserverManager.addPOIItem(toilet: toilet)
-            }
-            if (SharedManager.instance.getLatitude() > 0) {
-                ObserverManager.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
-            }
+        ObserverManager.mapView.removeAllPOIItems()
+        let toiletList = SQLiteManager.instance.getToiletList(latitude: mLastLatitude, longitude: mLastLongitude)
+        for toilet in toiletList {
+            ObserverManager.addPOIItem(toilet: toilet)
+        }
+        if (SharedManager.instance.getLatitude() > 0) {
+            ObserverManager.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
         }
     }
     

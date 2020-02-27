@@ -283,6 +283,9 @@ extension ToiletController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func setListener(cell: ToiletHeaderCell, position: Int) {
+        cell.map_view_click.setOnClickListener {
+            self.finish()
+        }
         cell.cb_tap_address.setOnClickListener {
             cell.cb_tap_address.setSelected(selected: !cell.cb_tap_address.isSelected)
             cell.layout_detail_address.setVisibility(gone: !cell.cb_tap_address.isSelected, dimen: 0, attribute: .height)
