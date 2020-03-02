@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -235,16 +235,18 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tjq-ur-cnv">
                                         <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_banner_ex" translatesAutoresizingMaskIntoConstraints="NO" id="9UY-LV-W0v">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5r5-Dj-naD" customClass="GADBannerView">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
-                                            </imageView>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            </view>
                                         </subviews>
+                                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="9UY-LV-W0v" secondAttribute="trailing" id="8aE-Gg-Rpv"/>
-                                            <constraint firstItem="9UY-LV-W0v" firstAttribute="leading" secondItem="Tjq-ur-cnv" secondAttribute="leading" id="9fS-J0-VDF"/>
-                                            <constraint firstAttribute="bottom" secondItem="9UY-LV-W0v" secondAttribute="bottom" id="9y3-d1-doh"/>
-                                            <constraint firstItem="9UY-LV-W0v" firstAttribute="top" secondItem="Tjq-ur-cnv" secondAttribute="top" id="Mys-WU-82U"/>
+                                            <constraint firstAttribute="trailing" secondItem="5r5-Dj-naD" secondAttribute="trailing" constant="0.10000000000000001" id="2AF-yC-PPO"/>
+                                            <constraint firstAttribute="bottom" secondItem="5r5-Dj-naD" secondAttribute="bottom" constant="0.10000000000000001" id="IvH-Jn-DsU"/>
+                                            <constraint firstItem="5r5-Dj-naD" firstAttribute="leading" secondItem="Tjq-ur-cnv" secondAttribute="leading" constant="0.10000000000000001" id="McQ-tH-a0g"/>
                                             <constraint firstAttribute="height" constant="50" id="sDy-Se-fUt"/>
+                                            <constraint firstItem="5r5-Dj-naD" firstAttribute="top" secondItem="Tjq-ur-cnv" secondAttribute="top" constant="0.10000000000000001" id="vri-Yk-BKn"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -283,11 +285,11 @@
                         <viewLayoutGuide key="safeArea" id="MFH-6P-lLe"/>
                     </view>
                     <connections>
+                        <outlet property="ad_view" destination="5r5-Dj-naD" id="tM4-y4-4vL"/>
                         <outlet property="btn_menu" destination="buF-gB-IQ6" id="ciE-7W-dAs"/>
                         <outlet property="btn_menu_marginTop" destination="ffV-aq-vtt" id="4mP-oJ-7Cw"/>
                         <outlet property="btn_search_delete" destination="R4r-k1-bLh" id="URA-af-LTc"/>
                         <outlet property="edt_search" destination="t9P-nT-lkn" id="0kT-l0-N4W"/>
-                        <outlet property="layout_ad_mob" destination="Tjq-ur-cnv" id="Ox0-uY-pNa"/>
                         <outlet property="layout_bottom_bg" destination="kpc-UJ-WTk" id="qPx-nn-wJl"/>
                         <outlet property="layout_my_position" destination="rzq-Sp-lVc" id="G5J-K5-28j"/>
                         <outlet property="layout_my_position_marginTop" destination="yVZ-FP-Mdc" id="UmY-J6-c7Q"/>
@@ -419,7 +421,6 @@
         <image name="ic_myposition" width="72" height="72"/>
         <image name="ic_navigationbar_back" width="80" height="80"/>
         <image name="ic_search" width="72" height="72"/>
-        <image name="img_banner_ex" width="720" height="100"/>
         <image name="img_check" width="64" height="48"/>
         <image name="img_drop" width="72" height="72"/>
         <image name="img_symbol" width="200" height="200"/>

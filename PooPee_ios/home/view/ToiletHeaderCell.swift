@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class ToiletHeaderCell: UITableViewCell {
     @IBOutlet var root_view: UIView!
@@ -60,7 +61,7 @@ class ToiletHeaderCell: UITableViewCell {
     @IBOutlet var tv_open_time_title: UILabel!
     @IBOutlet var tv_open_time: UILabel!
     
-    @IBOutlet var layout_ad_mob: UIView!
+    @IBOutlet var ad_view: GADBannerView!
     
     @IBOutlet var tv_comment: UILabel!
     @IBOutlet var tv_comment_count: UILabel!
@@ -99,6 +100,11 @@ class ToiletHeaderCell: UITableViewCell {
         layout_detail_address.setVisibility(gone: false, dimen: 0, attribute: .height)
         cb_tap_manager.setSelected(selected: false)
         layout_detail_manager.setVisibility(gone: true, dimen: 0, attribute: .height)
+        
+        ad_view.adSize = kGADAdSizeBanner
+        ad_view.adUnitID = "banner_ad_unit_id".localized
+        ad_view.rootViewController = ObserverManager.root
+        ad_view.load(GADRequest())
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

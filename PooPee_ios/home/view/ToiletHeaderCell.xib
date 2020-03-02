@@ -730,15 +730,17 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i7e-ga-dFv" userLabel="layout_ad">
                                 <rect key="frame" x="0.0" y="525.5" width="320" height="50"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_banner_ex" translatesAutoresizingMaskIntoConstraints="NO" id="9Hr-UR-QjP">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VIF-5x-ghW" customClass="GADBannerView">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
-                                    </imageView>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    </view>
                                 </subviews>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="9Hr-UR-QjP" firstAttribute="top" secondItem="i7e-ga-dFv" secondAttribute="top" id="DpW-jg-AmT"/>
-                                    <constraint firstItem="9Hr-UR-QjP" firstAttribute="leading" secondItem="i7e-ga-dFv" secondAttribute="leading" id="bBo-pE-RRp"/>
-                                    <constraint firstAttribute="bottom" secondItem="9Hr-UR-QjP" secondAttribute="bottom" id="po1-kn-s7M"/>
-                                    <constraint firstAttribute="trailing" secondItem="9Hr-UR-QjP" secondAttribute="trailing" id="q0b-bz-oK2"/>
+                                    <constraint firstAttribute="trailing" secondItem="VIF-5x-ghW" secondAttribute="trailing" constant="0.01" id="64S-5e-tYB"/>
+                                    <constraint firstItem="VIF-5x-ghW" firstAttribute="top" secondItem="i7e-ga-dFv" secondAttribute="top" constant="0.01" id="eNt-HO-eSS"/>
+                                    <constraint firstItem="VIF-5x-ghW" firstAttribute="leading" secondItem="i7e-ga-dFv" secondAttribute="leading" constant="0.01" id="fuo-FB-gKg"/>
+                                    <constraint firstAttribute="bottom" secondItem="VIF-5x-ghW" secondAttribute="bottom" constant="0.01" id="tFh-to-4zQ"/>
                                     <constraint firstAttribute="height" constant="50" id="uDK-Oh-65S"/>
                                 </constraints>
                             </view>
@@ -829,6 +831,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="ZL9-aO-T7V"/>
             <connections>
+                <outlet property="ad_view" destination="VIF-5x-ghW" id="gu2-kW-Qi9"/>
                 <outlet property="btn_comment" destination="4CI-ak-EyP" id="YdN-9k-bdl"/>
                 <outlet property="btn_like" destination="Zn8-Qe-1dh" id="2Hh-RE-6T4"/>
                 <outlet property="cb_option_01" destination="9OQ-uV-Mei" id="EmI-qH-3gI"/>
@@ -839,7 +842,6 @@
                 <outlet property="cb_option_06" destination="AJd-S5-C3H" id="Kox-qA-eHg"/>
                 <outlet property="cb_tap_address" destination="AOh-mL-87H" id="PgW-hH-7u5"/>
                 <outlet property="cb_tap_manager" destination="PiB-ZE-AXA" id="fct-To-UyH"/>
-                <outlet property="layout_ad_mob" destination="i7e-ga-dFv" id="4rX-39-Jxr"/>
                 <outlet property="layout_detail_address" destination="kwj-rN-T1s" id="Tth-yF-1rK"/>
                 <outlet property="layout_detail_manager" destination="9zM-Ph-Wld" id="AaI-sq-Kpw"/>
                 <outlet property="map_view" destination="cP5-LV-TaN" id="Akx-ij-D7L"/>
@@ -881,6 +883,5 @@
     </objects>
     <resources>
         <image name="ic_comment" width="80" height="80"/>
-        <image name="img_banner_ex" width="720" height="100"/>
     </resources>
 </document>

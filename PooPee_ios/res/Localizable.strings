@@ -9,6 +9,10 @@
 "app_name" = "PooPee";
 "contentDescription" = "contentDescription";
 
+"admob_app_id" = "ca-app-pub-2933424745841582~3156554647";
+"banner_ad_unit_id" = "ca-app-pub-2933424745841582/9578971692";
+"banner_ad_unit_id_for_test" = "ca-app-pub-3940256099942544/6300978111";
+
 // word
 "yes" = "예";
 "no" = "아니오";

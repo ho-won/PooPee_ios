@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import CoreLocation
 import Lottie
+import GoogleMobileAds
 
 class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelegate {
     @IBOutlet var map_view: UIView!
@@ -29,7 +30,7 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     @IBOutlet var btn_search_delete: UIButton!
     @IBOutlet var tl_search: UITableView!
     
-    @IBOutlet var layout_ad_mob: UIView!
+    @IBOutlet var ad_view: GADBannerView!
     
     var mNavMainView = NavMainView()
     var mHoSlideMenu = HoSlideMenu()
@@ -72,7 +73,13 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         lottie_my_position.animation = animation
         lottie_my_position.contentMode = .scaleAspectFit
         lottie_my_position.loopMode = .loop
+        lottie_my_position.isUserInteractionEnabled = false
         setMyPosition(isHidden: true)
+        
+        ad_view.adSize = kGADAdSizeBanner
+        ad_view.adUnitID = "banner_ad_unit_id".localized
+        ad_view.rootViewController = self
+        ad_view.load(GADRequest())
         
         _init()
         setListener()
