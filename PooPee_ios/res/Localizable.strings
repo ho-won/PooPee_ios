@@ -96,6 +96,8 @@
 "home_text_10" = "관리기관";
 "home_text_11" = "댓글수정";
 "home_text_12" = "신고하기";
+"home_text_13" = "내위치전송";
+"home_text_14" = "[PooPee]\n내 현재 위치입니다!\n\n";
 
 // login
 "login_01" = "로그인을 해주세요";

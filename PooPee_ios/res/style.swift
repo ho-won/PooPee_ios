@@ -544,17 +544,14 @@ class switch_push: UISwitch {
         self.thumbTintColor = UIColor(hex: "#FFFFFF")
     }
     
-    var onChanged: (()->())!
+    
     /**
      * android setOnCheckedChangedListener 같은용도
      */
+    var onChanged: (()->())!
     func setOnCheckedChangedListener(_ onChanged: @escaping ()->()) {
         self.addTarget(self, action: #selector(switchStateDidChange(_:)), for: .valueChanged)
         self.onChanged = onChanged
-    }
-    
-    @objc private func onClick(recognizer: TabRecongnizer) {
-        recognizer.onClick()
     }
     
     @objc func switchStateDidChange(_ sender:UISwitch!) {
@@ -698,5 +695,20 @@ class cb_terms: UIButton {
         } else {
             self.setImage(UIImage(named: "ic_checkbox_normal")!, for: UIControl.State.normal)
         }
+    }
+}
+
+class bg_sms: UIView {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        self.layer.cornerRadius = 18
+        self.backgroundColor = UIColor(hex: "#ff536a")!
     }
 }

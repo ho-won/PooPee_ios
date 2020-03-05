@@ -8,8 +8,9 @@
 
 import UIKit
 import Alamofire
+import MessageUI
 
-class ToiletDialog: BaseDialog {
+class ToiletDialog: BaseDialog, MFMessageComposeViewControllerDelegate {
     @IBOutlet var root_view: UIView!
     @IBOutlet weak var layout_dialog: UIView!
     
@@ -22,6 +23,9 @@ class ToiletDialog: BaseDialog {
     
     @IBOutlet var btn_close: UIButton!
     @IBOutlet var btn_detail: UIButton!
+    
+    @IBOutlet var layout_sms: bg_sms!
+    @IBOutlet var tv_sms: UILabel!
     
     var mToilet: Toilet = Toilet()
     
@@ -45,6 +49,7 @@ class ToiletDialog: BaseDialog {
         root_view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(layout_bg_tap(recognizer:))))
         layout_dialog.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(layout_dialog_tap(recognizer:))))
         
+        tv_sms.text = "home_text_13".localized
         tv_comment.text = "home_text_03".localized
         tv_like.text = "home_text_04".localized
         
@@ -79,6 +84,18 @@ class ToiletDialog: BaseDialog {
     }
     
     func setListener() {
+        layout_sms.setOnClickListener {
+            var addressText = ""
+            if (self.mToilet.address_new.count > 0) {
+                addressText = self.mToilet.address_new
+            } else {
+                addressText = self.mToilet.address_old
+            }
+            let messageController = MFMessageComposeViewController()
+            messageController.messageComposeDelegate = self
+            messageController.body = "home_text_14".localized + addressText
+            ObserverManager.root.present(messageController, animated: true, completion: nil)
+        }
         tv_title.setOnClickListener {
             let controller = ObserverManager.getController(name: "ToiletController")
             controller.segueData.putExtra(key: ToiletController.TOILET, data: self.mToilet)
@@ -149,6 +166,10 @@ class ToiletDialog: BaseDialog {
             , onFailed: { statusCode in
                 
         })
+    }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        controller.dismiss(animated: true, completion: nil)
     }
     
 }

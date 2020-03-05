@@ -3,55 +3,55 @@
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "appicon_40x40.png",
+      "filename" : "poopee_appicon40.png",
       "scale" : "2x"
     },
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "appicon_60x60.png",
+      "filename" : "poopee_appicon60.png",
       "scale" : "3x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "appicon_58x58.png",
+      "filename" : "poopee_appicon58.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "appicon_87x87.png",
+      "filename" : "poopee_appicon87.png",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "appicon_80x80.png",
+      "filename" : "poopee_appicon80.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "appicon_120x120.png",
+      "filename" : "poopee_appicon120.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "appicon_120x120-1.png",
+      "filename" : "poopee_appicon120-1.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "appicon_180x180.png",
+      "filename" : "poopee_appicon180.png",
       "scale" : "3x"
     },
     {
       "size" : "1024x1024",
       "idiom" : "ios-marketing",
-      "filename" : "appicon_1024x1024.png",
+      "filename" : "poopee_appicon1024.png",
       "scale" : "1x"
     }
   ],

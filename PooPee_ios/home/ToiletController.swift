@@ -8,8 +8,9 @@
 
 import UIKit
 import Alamofire
+import MessageUI
 
-class ToiletController: BaseController {
+class ToiletController: BaseController, MFMessageComposeViewControllerDelegate {
     static let TOILET = "toilet"
     
     @IBOutlet var tv_toolbar_title: UIButton!
@@ -17,6 +18,9 @@ class ToiletController: BaseController {
     @IBOutlet var tv_like_count: UILabel!
     
     @IBOutlet var table_view: UITableView!
+    
+    @IBOutlet var layout_sms: bg_sms!
+    @IBOutlet var tv_sms: UILabel!
     
     private var mToilet: Toilet = Toilet()
     private var mCommentList: [Comment] = []
@@ -29,6 +33,7 @@ class ToiletController: BaseController {
         table_view.register(UINib(nibName: "ToiletCommentCell", bundle: nil), forCellReuseIdentifier: "ToiletCommentCell")
         
         tv_like.text = "home_text_04".localized
+        tv_sms.text = "home_text_13".localized
         
         _init()
         setListener()
@@ -61,7 +66,18 @@ class ToiletController: BaseController {
     }
     
     func setListener() {
-        
+        layout_sms.setOnClickListener {
+            var addressText = ""
+            if (self.mToilet.address_new.count > 0) {
+                addressText = self.mToilet.address_new
+            } else {
+                addressText = self.mToilet.address_old
+            }
+            let messageController = MFMessageComposeViewController()
+            messageController.messageComposeDelegate = self
+            messageController.body = "home_text_14".localized + addressText
+            self.present(messageController, animated: true, completion: nil)
+        }
     }
     
     /**
@@ -189,6 +205,10 @@ class ToiletController: BaseController {
             , onFailed: { statusCode in
                 self.hideLoading()
         })
+    }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        controller.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func onBackPressed(_ sender: Any) {

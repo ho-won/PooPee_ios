@@ -11,7 +11,7 @@ import Foundation
 struct NetDefine {
     static let NETWORK_TIMEOUT = 30000;
     
-    static let BASE_APP = ObserverManager.isTestServer() ? "http://49.236.137.205/PooPee_server/" : "http://49.236.137.205/PooPee_server/"
+    static let BASE_APP = ObserverManager.isTestServer() ? "http://poopee.ho1.co.kr/" : "http://poopee.ho1.co.kr/"
     
     static let TEST_API = "test" // test
     static let DB_CHECK = "etcs/dbCheck" // [GET] toilet db 버전체크

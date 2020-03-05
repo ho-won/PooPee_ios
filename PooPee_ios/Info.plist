@@ -19,7 +19,9 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-2933424745841582~3156554647</string>
 	<key>KAKAO_APP_KEY</key>
 	<string>53565fe7d8355fff626939459a32e7d0</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -49,8 +51,6 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-2933424745841582~3156554647</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

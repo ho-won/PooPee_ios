@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,12 +13,14 @@
                 <outlet property="btn_close" destination="nSh-ra-Aoi" id="pqA-fZ-jmM"/>
                 <outlet property="btn_detail" destination="HNI-fi-4cV" id="Vfp-hT-z10"/>
                 <outlet property="layout_dialog" destination="2Xs-sG-QGp" id="M1m-0c-Lbg"/>
+                <outlet property="layout_sms" destination="Weq-kJ-8TZ" id="TU4-3y-JBP"/>
                 <outlet property="root_view" destination="nA6-Cn-53h" id="Lhs-zl-lZe"/>
                 <outlet property="tv_address" destination="qAm-Y6-ZnU" id="MY9-cE-hHj"/>
                 <outlet property="tv_comment" destination="we3-Ba-Ld4" id="R0a-83-pWk"/>
                 <outlet property="tv_comment_count" destination="AXH-C0-jn1" id="XFa-pF-47F"/>
                 <outlet property="tv_like" destination="aoF-yO-RUE" id="bwj-Fd-pkb"/>
                 <outlet property="tv_like_count" destination="Ly8-ma-wYq" id="aFx-46-Ntx"/>
+                <outlet property="tv_sms" destination="CHP-l3-Gv0" id="l6F-MH-R5L"/>
                 <outlet property="tv_title" destination="8Rw-ik-tUu" id="IGO-DT-x2f"/>
             </connections>
         </placeholder>
@@ -179,9 +181,38 @@
                         <constraint firstAttribute="trailing" secondItem="nqE-WG-F4B" secondAttribute="trailing" constant="20" id="xlA-JT-2hp"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Weq-kJ-8TZ" customClass="bg_sms" customModule="PooPee_ios" customModuleProvider="target">
+                    <rect key="frame" x="347.5" y="684.5" width="54.5" height="36"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_send" translatesAutoresizingMaskIntoConstraints="NO" id="C6d-TT-u0t">
+                            <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="36" id="DOA-cf-UxR"/>
+                                <constraint firstAttribute="height" constant="36" id="pA3-Gh-cDe"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CHP-l3-Gv0">
+                            <rect key="frame" x="36" y="10" width="6.5" height="16"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="36" id="03b-ti-SKj"/>
+                        <constraint firstItem="CHP-l3-Gv0" firstAttribute="centerY" secondItem="Weq-kJ-8TZ" secondAttribute="centerY" id="9Xf-hO-ZZ2"/>
+                        <constraint firstItem="C6d-TT-u0t" firstAttribute="centerY" secondItem="Weq-kJ-8TZ" secondAttribute="centerY" id="FKI-Um-9bM"/>
+                        <constraint firstItem="CHP-l3-Gv0" firstAttribute="leading" secondItem="C6d-TT-u0t" secondAttribute="trailing" constant="0.01" id="RUp-ED-avL"/>
+                        <constraint firstItem="C6d-TT-u0t" firstAttribute="leading" secondItem="Weq-kJ-8TZ" secondAttribute="leading" constant="0.01" id="eik-VZ-WUF"/>
+                        <constraint firstAttribute="trailing" secondItem="CHP-l3-Gv0" secondAttribute="trailing" constant="12" id="k4H-0a-bfI"/>
+                    </constraints>
+                </view>
             </subviews>
             <constraints>
+                <constraint firstItem="2Xs-sG-QGp" firstAttribute="top" secondItem="Weq-kJ-8TZ" secondAttribute="bottom" constant="8" id="4Dr-4G-oOd"/>
                 <constraint firstItem="P4A-YY-4po" firstAttribute="bottom" secondItem="2Xs-sG-QGp" secondAttribute="bottom" id="Prx-GG-RE3"/>
+                <constraint firstItem="P4A-YY-4po" firstAttribute="trailing" secondItem="Weq-kJ-8TZ" secondAttribute="trailing" constant="12" id="Qqp-YD-1Ek"/>
                 <constraint firstItem="2Xs-sG-QGp" firstAttribute="leading" secondItem="P4A-YY-4po" secondAttribute="leading" id="Wyy-af-qsL"/>
                 <constraint firstItem="P4A-YY-4po" firstAttribute="trailing" secondItem="2Xs-sG-QGp" secondAttribute="trailing" id="mai-lV-US2"/>
             </constraints>
@@ -189,4 +220,7 @@
             <point key="canvasLocation" x="131.8840579710145" y="154.01785714285714"/>
         </view>
     </objects>
+    <resources>
+        <image name="ic_send" width="144" height="144"/>
+    </resources>
 </document>
