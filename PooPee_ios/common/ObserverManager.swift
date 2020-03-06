@@ -13,6 +13,7 @@ class ObserverManager {
     static let APPLE_ID = "1426273940"
     static let testServer = false // 테스트용인지 체크
     static let isShowLog = true // Log 노출여부 체크
+    static var isForeground = true // foreground background 체크
     
     static var root: BaseController! = MainController() // 현재 Controller
     static var preRoot: BaseController! = MainController() // 직전 Controller

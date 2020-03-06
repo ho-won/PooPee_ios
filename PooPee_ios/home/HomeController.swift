@@ -171,31 +171,31 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         }
     }
     
-    override func setupViewResizerOnKeyboardShown() {
-        super.setupViewResizerOnKeyboardShown()
-    }
-    
     override func keyboardWillShowForResizing(notification: Notification) {
+        if (UIApplication.shared.applicationState != .active) {
+            return
+        }
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
             let window = self.view.window?.frame {
             self.view.frame = CGRect(x: self.view.frame.origin.x,
                                      y: self.view.frame.origin.y,
                                      width: self.view.frame.width,
                                      height: window.origin.y + window.height - keyboardSize.height)
-            self.view.layoutIfNeeded()
             mIsKeyboardShow = true
             layout_bottom_bg.isHidden = false
         }
     }
     
     override func keyboardWillHideForResizing(notification: Notification) {
+        if (UIApplication.shared.applicationState != .active || self.view.frame.height == MyUtil.screenHeight) {
+            return
+        }
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             let viewHeight = self.view.frame.height
             self.view.frame = CGRect(x: self.view.frame.origin.x,
                                      y: self.view.frame.origin.y,
                                      width: self.view.frame.width,
                                      height: viewHeight + keyboardSize.height)
-            self.view.layoutIfNeeded()
             mIsKeyboardShow = false
             layout_bottom_bg.isHidden = true
         }

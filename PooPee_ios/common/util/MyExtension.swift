@@ -224,6 +224,9 @@ extension UIViewController {
      * show keyboard view resize listener (Controller)
      */
     @objc func keyboardWillShowForResizing(notification: Notification) {
+        if (UIApplication.shared.applicationState != .active) {
+            return
+        }
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
             let window = self.view.window?.frame {
             self.view.frame = CGRect(x: self.view.frame.origin.x,
@@ -238,6 +241,9 @@ extension UIViewController {
      * hide keyboard view resize listener (Controller)
      */
     @objc func keyboardWillHideForResizing(notification: Notification) {
+        if (UIApplication.shared.applicationState != .active || self.view.frame.height == MyUtil.screenHeight) {
+            return
+        }
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             let viewHeight = self.view.frame.height
             self.view.frame = CGRect(x: self.view.frame.origin.x,

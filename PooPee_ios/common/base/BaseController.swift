@@ -24,6 +24,20 @@ public class BaseController: UIViewController {
             ObserverManager.preRoot = MainController()
         }
         ObserverManager.root = self
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+    }
+
+    @objc func appMovedToForeground() {
+        print("App moved to ForeGround!")
+        ObserverManager.isForeground = true
+    }
+
+    @objc func appMovedToBackground() {
+        print("App moved to Background!")
+        ObserverManager.isForeground = false
     }
     
     override public func viewWillAppear(_ animated: Bool) {
