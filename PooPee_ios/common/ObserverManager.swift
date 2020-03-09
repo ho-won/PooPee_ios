@@ -24,6 +24,7 @@ class ObserverManager {
     static let imageMaker = UIImage(named: "ic_position")!
     static let imageMe = UIImage(named: "ic_marker")!
     static var my_position: MTMapPOIItem! = nil
+    static var isTolietControllerBack = false // 화장실 상세보기에서 돌아왔는지 체크
     
     static func isTestServer() -> Bool {
         return testServer

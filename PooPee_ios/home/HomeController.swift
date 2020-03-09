@@ -87,14 +87,12 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     
     override public func viewDidAppear(_ animated: Bool) {
         if (!isViewDidAppear) {
-            print("HomeController_viewDidAppear")
             isViewDidAppear = true
             refresh()
         }
     }
     
     override public func viewDidDisappear(_ animated: Bool) {
-        print("HomeController_viewDidDisappear")
         isViewDidAppear = false
         for subview in map_view.subviews {
             subview.removeFromSuperview()
@@ -214,16 +212,13 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     }
     
     func mapView(_ mapView: MTMapView!, finishedMapMoveAnimation mapCenterPoint: MTMapPoint!) {
-        mLastLatitude = mapCenterPoint.mapPointGeo().latitude
-        mLastLongitude = mapCenterPoint.mapPointGeo().longitude
-
-        ObserverManager.mapView.removeAllPOIItems()
-        let toiletList = SQLiteManager.instance.getToiletList(latitude: mLastLatitude, longitude: mLastLongitude)
-        for toilet in toiletList {
-            ObserverManager.addPOIItem(toilet: toilet)
-        }
-        if (SharedManager.instance.getLatitude() > 0) {
-            ObserverManager.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
+        if (NSStringFromClass(ObserverManager.root.classForCoder) == NSStringFromClass(HomeController().classForCoder)) {
+            if (ObserverManager.isTolietControllerBack) {
+                ObserverManager.isTolietControllerBack = false
+                setToliets(latitude: mapCenterPoint.mapPointGeo().latitude, longitude: mapCenterPoint.mapPointGeo().longitude)
+            } else if (mLastLatitude != mapCenterPoint.mapPointGeo().latitude || mLastLongitude != mapCenterPoint.mapPointGeo().longitude) {
+                setToliets(latitude: mapCenterPoint.mapPointGeo().latitude, longitude: mapCenterPoint.mapPointGeo().longitude)
+            }
         }
     }
     
@@ -236,7 +231,6 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         if (poiItem.tag > 0) {
             let toilet = SQLiteManager.instance.getToilet(id: poiItem.tag)
             let dialog = ToiletDialog()
-            print("HO_TEST:\(toilet.toilet_id)")
             dialog.setToilet(toilet: toilet)
             dialog.refresh()
             dialog.show(view: ObserverManager.root.view)
@@ -257,6 +251,20 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
             lottie_my_position.stop()
         } else {
             lottie_my_position.play()
+        }
+    }
+    
+    func setToliets(latitude: Double, longitude: Double) {
+        mLastLatitude = latitude
+        mLastLongitude = longitude
+
+        ObserverManager.mapView.removeAllPOIItems()
+        let toiletList = SQLiteManager.instance.getToiletList(latitude: mLastLatitude, longitude: mLastLongitude)
+        for toilet in toiletList {
+            ObserverManager.addPOIItem(toilet: toilet)
+        }
+        if (SharedManager.instance.getLatitude() > 0) {
+            ObserverManager.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
         }
     }
 

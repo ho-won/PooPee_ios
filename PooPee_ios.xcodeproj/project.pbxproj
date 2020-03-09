@@ -313,7 +313,7 @@
 		B62354D9236278EF004F615F /* Menu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
 		B62354DB2362CF55004F615F /* HoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoTableView.swift; sourceTree = "<group>"; };
 		B635A4B823A76F09000B1E73 /* btn_me.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = btn_me.json; sourceTree = "<group>"; };
-		B635A4BA23A76FC5000B1E73 /* img_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_0.png; path = images/img_0.png; sourceTree = "<group>"; };
+		B635A4BA23A76FC5000B1E73 /* img_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_0.png; sourceTree = "<group>"; };
 		B6442812237A6DD700BFFF70 /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
 		B6450CF32366834F00106010 /* ToiletCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToiletCommentCell.swift; sourceTree = "<group>"; };
 		B6450CF42366834F00106010 /* ToiletCommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToiletCommentCell.xib; sourceTree = "<group>"; };
@@ -566,7 +566,6 @@
 		AAC0462E2331F36100D5D5F6 /* PooPee_ios */ = {
 			isa = PBXGroup;
 			children = (
-				B635A4BC23A77BD1000B1E73 /* images */,
 				AAC0466F2331F4BE00D5D5F6 /* common */,
 				AAC046642331F4BE00D5D5F6 /* gallery */,
 				AAC0465D2331F4BE00D5D5F6 /* home */,
@@ -579,8 +578,6 @@
 				AAC046362331F36200D5D5F6 /* Assets.xcassets */,
 				AAC0463B2331F36200D5D5F6 /* Info.plist */,
 				AAC047172332006500D5D5F6 /* Header.h */,
-				B635A4B823A76F09000B1E73 /* btn_me.json */,
-				B635A4BA23A76FC5000B1E73 /* img_0.png */,
 			);
 			path = PooPee_ios;
 			sourceTree = "<group>";
@@ -617,6 +614,7 @@
 		AAC0465F2331F4BE00D5D5F6 /* res */ = {
 			isa = PBXGroup;
 			children = (
+				B635A4BC23A77BD1000B1E73 /* images */,
 				AAC046602331F4BE00D5D5F6 /* Localizable.strings */,
 				AAC046622331F4BE00D5D5F6 /* color.swift */,
 				AAC046632331F4BE00D5D5F6 /* dimen.swift */,
@@ -821,6 +819,8 @@
 		B635A4BC23A77BD1000B1E73 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				B635A4B823A76F09000B1E73 /* btn_me.json */,
+				B635A4BA23A76FC5000B1E73 /* img_0.png */,
 			);
 			path = images;
 			sourceTree = "<group>";

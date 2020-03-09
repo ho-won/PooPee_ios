@@ -54,6 +54,7 @@ class ToiletController: BaseController, MFMessageComposeViewControllerDelegate {
     
     func _init() {
         mToilet = segueData.getExtra(key: ToiletController.TOILET) as! Toilet
+        ObserverManager.isTolietControllerBack = true
         
         tv_toolbar_title.setTitle(mToilet.name, for: .normal)
         
@@ -78,22 +79,6 @@ class ToiletController: BaseController, MFMessageComposeViewControllerDelegate {
             messageController.body = "home_text_14".localized + addressText
             self.present(messageController, animated: true, completion: nil)
         }
-    }
-    
-    /**
-     * [POST]
-     */
-    func task() {
-        var params: Parameters = Parameters()
-        params.put("", "")
-        
-        BaseTask().request(url: NetDefine.TEST_API, method: .post, params: params
-            , onSuccess: { response in
-                
-        }
-            , onFailed: { statusCode in
-                
-        })
     }
     
     /**
