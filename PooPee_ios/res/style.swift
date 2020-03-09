@@ -574,9 +574,11 @@ class cb_gender_man: UIButton {
         _init()
     }
     func _init() {
-        self.cornerRadius(corner: [.topLeft, .bottomLeft], radius: 9)
-        self.titleLabel!.font = UIFont.systemFont(ofSize: 13)
-        setSelected(selected: false)
+        DispatchQueue.main.async {
+            self.cornerRadius(corner: [.topLeft, .bottomLeft], radius: 9)
+            self.titleLabel!.font = UIFont.systemFont(ofSize: 13)
+            self.setSelected(selected: false)
+        }
     }
     func setSelected(selected: Bool) {
         self.isSelected = selected
@@ -604,6 +606,7 @@ class cb_gender_man: UIButton {
         cgContext.addPath(bezierPath.cgPath)
         cgContext.closePath()
         cgContext.restoreGState()
+        self.setNeedsDisplay()
     }
 }
 
@@ -617,9 +620,11 @@ class cb_gender_woman: UIButton {
         _init()
     }
     func _init() {
-        self.cornerRadius(corner: [.topRight, .bottomRight], radius: 9)
-        self.titleLabel!.font = UIFont.systemFont(ofSize: 13)
-        setSelected(selected: false)
+        DispatchQueue.main.async {
+            self.cornerRadius(corner: [.topRight, .bottomRight], radius: 9)
+            self.titleLabel!.font = UIFont.systemFont(ofSize: 13)
+            self.setSelected(selected: false)
+        }
     }
     func setSelected(selected: Bool) {
         self.isSelected = selected
