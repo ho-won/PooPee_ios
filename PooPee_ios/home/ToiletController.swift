@@ -54,7 +54,6 @@ class ToiletController: BaseController, MFMessageComposeViewControllerDelegate {
     
     func _init() {
         mToilet = segueData.getExtra(key: ToiletController.TOILET) as! Toilet
-        ObserverManager.isTolietControllerBack = true
         
         tv_toolbar_title.setTitle(mToilet.name, for: .normal)
         

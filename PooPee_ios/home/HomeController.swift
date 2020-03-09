@@ -45,6 +45,7 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     var mIsFirstOnCreate = true // onCreate 체크 (내위치기준으로 맵중심을 이동할지 확인하기위해)
     
     // finishedMapMoveAnimation 가 두번불리는현상때문에 중복방지용
+    var mIsRefresh = false // 처음 로딩인지 체크
     var mLastLatitude: Double = 0 // 마지막 중심 latitude
     var mLastLongitude: Double = 0 // 마지막 중심 longitude
     
@@ -104,6 +105,7 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     }
     
     func refresh() {
+        mIsRefresh = true
         mNavMainView.refresh()
         if (CLLocationManager.locationServicesEnabled()) {
             mLocationManager = CLLocationManager()
@@ -213,8 +215,8 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     
     func mapView(_ mapView: MTMapView!, finishedMapMoveAnimation mapCenterPoint: MTMapPoint!) {
         if (NSStringFromClass(ObserverManager.root.classForCoder) == NSStringFromClass(HomeController().classForCoder)) {
-            if (ObserverManager.isTolietControllerBack) {
-                ObserverManager.isTolietControllerBack = false
+            if (mIsRefresh) {
+                mIsRefresh = false
                 setToliets(latitude: mapCenterPoint.mapPointGeo().latitude, longitude: mapCenterPoint.mapPointGeo().longitude)
             } else if (mLastLatitude != mapCenterPoint.mapPointGeo().latitude || mLastLongitude != mapCenterPoint.mapPointGeo().longitude) {
                 setToliets(latitude: mapCenterPoint.mapPointGeo().latitude, longitude: mapCenterPoint.mapPointGeo().longitude)
