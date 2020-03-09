@@ -156,8 +156,6 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
             }
         }
         layout_my_position.setOnClickListener {
-            SharedManager.instance.setLatitude(value: 38.044034)
-            SharedManager.instance.setLongitude(value: 128.270545)
             if (SharedManager.instance.getLatitude() > 0) {
                 self.mIsMyPositionMove = true
                 ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: false)
@@ -231,6 +229,8 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     
     func mapView(_ mapView: MTMapView!, selectedPOIItem poiItem: MTMapPOIItem!) -> Bool {
         if (poiItem.tag > 0) {
+            tl_search.setVisibility(gone: true, dimen: 0, attribute: .height)
+            
             let toilet = SQLiteManager.instance.getToilet(id: poiItem.tag)
             let dialog = ToiletDialog()
             dialog.setToilet(toilet: toilet)
