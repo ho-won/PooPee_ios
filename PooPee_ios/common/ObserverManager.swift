@@ -21,8 +21,8 @@ class ObserverManager {
     static let DISTANCE: Double = 0.02
     
     static var mapView: MTMapView!
-    static let imageMaker = UIImage(named: "ic_position")!
-    static let imageMe = UIImage(named: "ic_marker")!
+    static let imageMaker = UIImage(named: "ic_position")!.imageResize(sizeChange: CGSize(width: 14, height: 16))
+    static let imageMe = UIImage(named: "ic_marker")!.imageResize(sizeChange: CGSize(width: 30, height: 30))
     static var my_position: MTMapPOIItem! = nil
     static var isTolietControllerBack = false // 화장실 상세보기에서 돌아왔는지 체크
     
@@ -52,7 +52,9 @@ class ObserverManager {
         marker.customImage = imageMaker // 마커 이미지.
         marker.markerSelectedType = MTMapPOIItemMarkerSelectedType.customImage // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
         marker.customSelectedImage = imageMaker
-        marker.customImageAnchorPointOffset = MTMapImageOffset(offsetX: 30, offsetY: 0)
+        
+        let imageOffset = Int32(imageMaker.size.height)
+        marker.customImageAnchorPointOffset = MTMapImageOffset(offsetX: imageOffset, offsetY: imageOffset)
         mapView.add(marker)
     }
     
@@ -60,6 +62,7 @@ class ObserverManager {
         if (my_position != nil) {
             mapView.remove(my_position)
         }
+        
         my_position = MTMapPOIItem()
         my_position.itemName = "내위치"
         my_position.tag = -1
@@ -68,7 +71,8 @@ class ObserverManager {
         my_position.customImage = imageMe // 마커 이미지.
         my_position.markerSelectedType = MTMapPOIItemMarkerSelectedType.customImage // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
         my_position.customSelectedImage = imageMe
-        let imageOffset = Int32(imageMe.size.height / 2)
+        
+        let imageOffset = Int32(imageMe.size.height)
         my_position.customImageAnchorPointOffset = MTMapImageOffset(offsetX: imageOffset, offsetY: imageOffset)
         mapView.add(my_position)
     }
@@ -118,4 +122,19 @@ class ObserverManager {
         }
     }
     
+}
+extension UIImage {
+
+    func imageResize (sizeChange:CGSize)-> UIImage{
+
+        let hasAlpha = true
+        let scale: CGFloat = 0.0 // Use scale factor of main screen
+
+        UIGraphicsBeginImageContextWithOptions(sizeChange, !hasAlpha, scale)
+        self.draw(in: CGRect(origin: CGPoint.zero, size: sizeChange))
+
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        return scaledImage!
+    }
+
 }

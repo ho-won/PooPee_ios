@@ -156,6 +156,8 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
             }
         }
         layout_my_position.setOnClickListener {
+            SharedManager.instance.setLatitude(value: 38.044034)
+            SharedManager.instance.setLongitude(value: 128.270545)
             if (SharedManager.instance.getLatitude() > 0) {
                 self.mIsMyPositionMove = true
                 ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: false)
