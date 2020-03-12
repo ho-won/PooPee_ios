@@ -24,6 +24,7 @@ class ObserverManager {
     static let imageMaker = UIImage(named: "ic_position")!.imageResize(sizeChange: CGSize(width: 14, height: 16))
     static let imageMe = UIImage(named: "ic_marker")!.imageResize(sizeChange: CGSize(width: 30, height: 30))
     static var my_position: MTMapPOIItem! = nil
+    static var currentToilet: Toilet = Toilet()
     
     static func isTestServer() -> Bool {
         return testServer
@@ -114,6 +115,9 @@ class ObserverManager {
             return controller
         case "ToiletController": // 화장실상세보기
             let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ToiletController") as! ToiletController
+            return controller
+        case "MaskController": // 마스크구매
+            let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MaskController") as! MaskController
             return controller
         default:
             let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController") as! MainController

@@ -118,6 +118,7 @@
 		B62354DC2362CF55004F615F /* HoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62354DB2362CF55004F615F /* HoTableView.swift */; };
 		B635A4B923A76F09000B1E73 /* btn_me.json in Resources */ = {isa = PBXBuildFile; fileRef = B635A4B823A76F09000B1E73 /* btn_me.json */; };
 		B635A4BB23A76FC5000B1E73 /* img_0.png in Resources */ = {isa = PBXBuildFile; fileRef = B635A4BA23A76FC5000B1E73 /* img_0.png */; };
+		B64276CC241724AE00EC17D6 /* MaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64276CB241724AE00EC17D6 /* MaskController.swift */; };
 		B6442813237A6DD700BFFF70 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6442812237A6DD700BFFF70 /* LogManager.swift */; };
 		B6450CF52366834F00106010 /* ToiletCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6450CF32366834F00106010 /* ToiletCommentCell.swift */; };
 		B6450CF62366834F00106010 /* ToiletCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6450CF42366834F00106010 /* ToiletCommentCell.xib */; };
@@ -314,6 +315,7 @@
 		B62354DB2362CF55004F615F /* HoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoTableView.swift; sourceTree = "<group>"; };
 		B635A4B823A76F09000B1E73 /* btn_me.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = btn_me.json; sourceTree = "<group>"; };
 		B635A4BA23A76FC5000B1E73 /* img_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_0.png; sourceTree = "<group>"; };
+		B64276CB241724AE00EC17D6 /* MaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskController.swift; sourceTree = "<group>"; };
 		B6442812237A6DD700BFFF70 /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
 		B6450CF32366834F00106010 /* ToiletCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToiletCommentCell.swift; sourceTree = "<group>"; };
 		B6450CF42366834F00106010 /* ToiletCommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToiletCommentCell.xib; sourceTree = "<group>"; };
@@ -607,6 +609,7 @@
 				AABC56BE2334BD2E008E61DE /* view */,
 				AAC0465E2331F4BE00D5D5F6 /* HomeController.swift */,
 				AACEC567234C7209009087BD /* ToiletController.swift */,
+				B64276CB241724AE00EC17D6 /* MaskController.swift */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -1158,6 +1161,7 @@
 				B6461A1123726849005E087C /* CommentReportDialog.swift in Sources */,
 				AAC046A12331F4BF00D5D5F6 /* DirSelectDialog.swift in Sources */,
 				AAC046A82331F4BF00D5D5F6 /* MyAnimation.swift in Sources */,
+				B64276CC241724AE00EC17D6 /* MaskController.swift in Sources */,
 				B6450CF82366AB6B00106010 /* ToiletHeaderCell.swift in Sources */,
 				AAC046AF2331F4BF00D5D5F6 /* MainController.swift in Sources */,
 				AAC046A92331F4BF00D5D5F6 /* StrManager.swift in Sources */,
@@ -1337,7 +1341,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.3;
+				CURRENT_PROJECT_VERSION = 1.4;
 				DEVELOPMENT_TEAM = 2QRKV87SPM;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1392,7 +1396,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.3;
+				CURRENT_PROJECT_VERSION = 1.4;
 				DEVELOPMENT_TEAM = 2QRKV87SPM;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

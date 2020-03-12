@@ -843,6 +843,7 @@
                 <outlet property="cb_tap_address" destination="AOh-mL-87H" id="PgW-hH-7u5"/>
                 <outlet property="cb_tap_manager" destination="PiB-ZE-AXA" id="fct-To-UyH"/>
                 <outlet property="layout_detail_address" destination="kwj-rN-T1s" id="Tth-yF-1rK"/>
+                <outlet property="layout_detail_icon" destination="EGT-Pi-QDj" id="O9i-2Q-nwu"/>
                 <outlet property="layout_detail_manager" destination="9zM-Ph-Wld" id="AaI-sq-Kpw"/>
                 <outlet property="map_view" destination="cP5-LV-TaN" id="Akx-ij-D7L"/>
                 <outlet property="map_view_click" destination="Pa7-q8-ARd" id="fuH-Em-arC"/>

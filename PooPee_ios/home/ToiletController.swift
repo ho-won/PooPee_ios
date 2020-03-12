@@ -54,7 +54,7 @@ class ToiletController: BaseController, MFMessageComposeViewControllerDelegate {
     
     func _init() {
         mToilet = segueData.getExtra(key: ToiletController.TOILET) as! Toilet
-        
+        ObserverManager.currentToilet = mToilet
         tv_toolbar_title.setTitle(mToilet.name, for: .normal)
         
         table_view.dataSource = self
@@ -213,58 +213,6 @@ extension ToiletController: UITableViewDelegate, UITableViewDataSource {
         
         if (position == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ToiletHeaderCell")! as! ToiletHeaderCell
-            
-            ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: mToilet.latitude, longitude: mToilet.longitude)), animated: true)
-            ObserverManager.addPOIItem(toilet: mToilet)
-            
-            var addressText: String
-            if (mToilet.address_new.count > 0) {
-                addressText = mToilet.address_new
-            } else {
-                addressText = mToilet.address_old
-            }
-            StrManager.setAddressCopySpan(tv_address: cell.tv_address, addressText: addressText)
-            
-            // 남녀공용
-            cell.cb_option_01.setSelected(selected: mToilet.unisex == "Y")
-            
-            // 남자화장실
-            let option02Count = (Int(mToilet.m_poo) ?? 0) + (Int(mToilet.m_pee) ?? 0)
-            cell.cb_option_02.setSelected(selected: option02Count > 0)
-            
-            // 여자화장실
-            let option03Count = (Int(mToilet.w_poo) ?? 0)
-            cell.cb_option_03.setSelected(selected: option03Count > 0)
-            
-            // 장애인화장실
-            let option04Count = (Int(mToilet.m_d_poo) ?? 0) + (Int(mToilet.m_d_pee) ?? 0) + (Int(mToilet.w_d_poo) ?? 0)
-            cell.cb_option_04.setSelected(selected: option04Count > 0)
-            
-            // 남자어린이화장실
-            let option05Count = (Int(mToilet.m_c_poo) ?? 0) + (Int(mToilet.m_c_pee) ?? 0)
-            cell.cb_option_05.setSelected(selected: option05Count > 0)
-            
-            // 여자어린이화장실
-            let option06Count = (Int(mToilet.w_c_poo) ?? 0)
-            cell.cb_option_06.setSelected(selected: option06Count > 0)
-            
-            cell.tv_m_poo.text = mToilet.m_poo
-            cell.tv_m_pee.text = mToilet.m_pee
-            cell.tv_m_d_poo.text = mToilet.m_d_poo
-            cell.tv_m_d_pee.text = mToilet.m_d_pee
-            cell.tv_m_c_poo.text = mToilet.m_c_poo
-            cell.tv_m_c_pee.text = mToilet.m_c_pee
-            
-            cell.tv_w_poo.text = mToilet.w_poo
-            cell.tv_w_d_poo.text = mToilet.w_d_poo
-            cell.tv_w_c_poo.text = mToilet.w_c_poo
-            
-            cell.tv_manager_name.text = mToilet.manager_name
-            cell.tv_manager_tel.text = mToilet.manager_tel
-            cell.tv_open_time.text = mToilet.open_time
-            
-            cell.tv_comment_count.text = mToilet.comment_count
-            cell.btn_like.setSelected(selected: mToilet.like_check)
             
             setListener(cell: cell, position: position)
             return cell

@@ -26,6 +26,7 @@ class ToiletHeaderCell: UITableViewCell {
     @IBOutlet var cb_option_05: cb_option_05!
     @IBOutlet var cb_option_06: cb_option_06!
     
+    @IBOutlet var layout_detail_icon: UIView!
     @IBOutlet var layout_detail_address: UIView!
     
     @IBOutlet var tv_m: UILabel!
@@ -95,16 +96,80 @@ class ToiletHeaderCell: UITableViewCell {
         tv_open_time_title.text = "toilet_option_12".localized
         
         tv_comment.text = "home_text_03".localized
-
-        cb_tap_address.setSelected(selected: true)
-        layout_detail_address.setVisibility(gone: false, dimen: 0, attribute: .height)
-        cb_tap_manager.setSelected(selected: false)
-        layout_detail_manager.setVisibility(gone: true, dimen: 0, attribute: .height)
         
         ad_view.adSize = kGADAdSizeBanner
         ad_view.adUnitID = "banner_ad_unit_id".localized
         ad_view.rootViewController = ObserverManager.root
         ad_view.load(GADRequest())
+
+        
+        ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: ObserverManager.currentToilet.latitude, longitude: ObserverManager.currentToilet.longitude)), animated: true)
+        ObserverManager.addPOIItem(toilet: ObserverManager.currentToilet)
+        
+        if (ObserverManager.currentToilet.type == "졸음쉼터" || ObserverManager.currentToilet.type == "휴게소") {
+            cb_tap_address.isHidden = true
+            cb_tap_address.setSelected(selected: false)
+            cb_tap_manager.setSelected(selected: true)
+            layout_detail_icon.setVisibility(gone: true, dimen: 0, attribute: .height)
+            layout_detail_address.setVisibility(gone: true, dimen: 0, attribute: .height)
+            layout_detail_manager.setVisibility(gone: false, dimen: 0, attribute: .height)
+        } else {
+            cb_tap_address.isHidden = false
+            cb_tap_address.setSelected(selected: true)
+            cb_tap_manager.setSelected(selected: false)
+            layout_detail_icon.setVisibility(gone: false, dimen: 64, attribute: .height)
+            layout_detail_address.setVisibility(gone: false, dimen: 0, attribute: .height)
+            layout_detail_manager.setVisibility(gone: true, dimen: 0, attribute: .height)
+        }
+        
+        var addressText: String
+        if (ObserverManager.currentToilet.address_new.count > 0) {
+            addressText = ObserverManager.currentToilet.address_new
+        } else {
+            addressText = ObserverManager.currentToilet.address_old
+        }
+        StrManager.setAddressCopySpan(tv_address: tv_address, addressText: addressText)
+        
+        // 남녀공용
+        cb_option_01.setSelected(selected: ObserverManager.currentToilet.unisex == "Y")
+        
+        // 남자화장실
+        let option02Count = (Int(ObserverManager.currentToilet.m_poo) ?? 0) + (Int(ObserverManager.currentToilet.m_pee) ?? 0)
+        cb_option_02.setSelected(selected: option02Count > 0)
+        
+        // 여자화장실
+        let option03Count = (Int(ObserverManager.currentToilet.w_poo) ?? 0)
+        cb_option_03.setSelected(selected: option03Count > 0)
+        
+        // 장애인화장실
+        let option04Count = (Int(ObserverManager.currentToilet.m_d_poo) ?? 0) + (Int(ObserverManager.currentToilet.m_d_pee) ?? 0) + (Int(ObserverManager.currentToilet.w_d_poo) ?? 0)
+        cb_option_04.setSelected(selected: option04Count > 0)
+        
+        // 남자어린이화장실
+        let option05Count = (Int(ObserverManager.currentToilet.m_c_poo) ?? 0) + (Int(ObserverManager.currentToilet.m_c_pee) ?? 0)
+        cb_option_05.setSelected(selected: option05Count > 0)
+        
+        // 여자어린이화장실
+        let option06Count = (Int(ObserverManager.currentToilet.w_c_poo) ?? 0)
+        cb_option_06.setSelected(selected: option06Count > 0)
+        
+        tv_m_poo.text = ObserverManager.currentToilet.m_poo
+        tv_m_pee.text = ObserverManager.currentToilet.m_pee
+        tv_m_d_poo.text = ObserverManager.currentToilet.m_d_poo
+        tv_m_d_pee.text = ObserverManager.currentToilet.m_d_pee
+        tv_m_c_poo.text = ObserverManager.currentToilet.m_c_poo
+        tv_m_c_pee.text = ObserverManager.currentToilet.m_c_pee
+        
+        tv_w_poo.text = ObserverManager.currentToilet.w_poo
+        tv_w_d_poo.text = ObserverManager.currentToilet.w_d_poo
+        tv_w_c_poo.text = ObserverManager.currentToilet.w_c_poo
+        
+        tv_manager_name.text = ObserverManager.currentToilet.manager_name
+        tv_manager_tel.text = ObserverManager.currentToilet.manager_tel
+        tv_open_time.text = ObserverManager.currentToilet.open_time
+        
+        tv_comment_count.text = ObserverManager.currentToilet.comment_count
+        btn_like.setSelected(selected: ObserverManager.currentToilet.like_check)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
