@@ -106,12 +106,10 @@ class NavMainView: UIView, MFMailComposeViewControllerDelegate {
             ObserverManager.root.startPresent(controller: controller)
         }
         btn_logout.setOnClickListener {
-            let controller = ObserverManager.getController(name: "MaskController")
-            ObserverManager.root.startPresent(controller: controller)
-//            if (SharedManager.instance.isLoginCheck()) {
-//                ObserverManager.logout()
-//                self.refresh()
-//            }
+            if (SharedManager.instance.isLoginCheck()) {
+                ObserverManager.logout()
+                self.refresh()
+            }
         }
     }
     

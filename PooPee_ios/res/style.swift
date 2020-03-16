@@ -136,7 +136,7 @@ class bg_login: UIButton {
         self.layer.cornerRadius = 24
         self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         self.backgroundColor = colors.main_content_background
-        self.titleLabel?.font =  UIFont.systemFont(ofSize: 14)
+        self.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
         setEnabled(enable: false)
     }
     
@@ -419,7 +419,7 @@ class edt_commnet: UITextView, UITextViewDelegate {
     
     func _init() {
         self.textColor = colors.text_main
-        self.font = UIFont.systemFont(ofSize: 14)
+        self.font = UIFont.systemFont(ofSize: 16)
 //        self.textContainerInset = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
         self.delegate = self
     }
@@ -500,7 +500,7 @@ class base_edt: MyTextField {
         self.layer.cornerRadius = 9
         self.backgroundColor = UIColor(hex: "#F9F9F9")!
         self.textColor = UIColor(hex: "#292d34")
-        self.font = UIFont.systemFont(ofSize: 13)
+        self.font = UIFont.systemFont(ofSize: 15)
         self.tintColor = colors.primary
         self.paddingTop = 12
         self.paddingBottom = 12
@@ -576,7 +576,7 @@ class cb_gender_man: UIButton {
     func _init() {
         DispatchQueue.main.async {
             self.cornerRadius(corner: [.topLeft, .bottomLeft], radius: 9)
-            self.titleLabel!.font = UIFont.systemFont(ofSize: 13)
+            self.titleLabel!.font = UIFont.systemFont(ofSize: 15)
             self.setSelected(selected: false)
         }
     }
@@ -622,7 +622,7 @@ class cb_gender_woman: UIButton {
     func _init() {
         DispatchQueue.main.async {
             self.cornerRadius(corner: [.topRight, .bottomRight], radius: 9)
-            self.titleLabel!.font = UIFont.systemFont(ofSize: 13)
+            self.titleLabel!.font = UIFont.systemFont(ofSize: 15)
             self.setSelected(selected: false)
         }
     }
@@ -667,7 +667,7 @@ class tv_overlap: MyLabel {
     func _init() {
         self.paddingLeft = 12
         self.paddingRight = 12
-        self.font = UIFont.systemFont(ofSize: 12)
+        self.font = UIFont.systemFont(ofSize: 13)
         setEnabled(false)
     }
     func setEnabled(_ enabled: Bool) {
