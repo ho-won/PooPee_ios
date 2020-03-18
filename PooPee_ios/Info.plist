@@ -32,11 +32,11 @@
 		<true/>
 	</dict>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Description</string>
+	<string>현재위치 주변의 화장실을 찾습니다</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Description</string>
+	<string>현재위치 주변의 화장실을 찾습니다</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Description</string>
+	<string>현재위치 주변의 화장실을 찾습니다</string>
 	<key>UILaunchStoryboardName</key>
 	<string>Main</string>
 	<key>UIMainStoryboardFile</key>
