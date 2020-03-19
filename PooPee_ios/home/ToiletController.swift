@@ -31,6 +31,7 @@ class ToiletController: BaseController, MFMessageComposeViewControllerDelegate {
         
         table_view.register(UINib(nibName: "ToiletHeaderCell", bundle: nil), forCellReuseIdentifier: "ToiletHeaderCell")
         table_view.register(UINib(nibName: "ToiletCommentCell", bundle: nil), forCellReuseIdentifier: "ToiletCommentCell")
+        table_view.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 72, right: 0)
         
         tv_like.text = "home_text_04".localized
         tv_sms.text = "home_text_13".localized
