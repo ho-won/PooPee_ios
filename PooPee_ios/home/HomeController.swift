@@ -12,7 +12,7 @@ import CoreLocation
 import Lottie
 import GoogleMobileAds
 
-class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelegate {
+class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate {
     @IBOutlet var map_view: UIView!
     @IBOutlet var lottie_my_position: AnimationView!
     
@@ -61,6 +61,7 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         tv_search_ex.text = "home_text_09".localized
         edt_search.textColor = colors.text_main
         edt_search.setHint(hint: "home_text_01".localized, color: colors.main_hint)
+        edt_search.delegate = self
         
         tl_search.register(UINib(nibName: "KakaoKeywordCell", bundle: nil), forCellReuseIdentifier: "KakaoKeywordCell")
         tl_search.dataSource = self
@@ -170,6 +171,13 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
             self.mHoSlideMenu.showMenu()
         }
     }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if (mKeywordList.count > 0) {
+            setKakaoLocal(kaKoKeyword: mKeywordList[0])
+        }
+        return true
+    }
     
     override func keyboardWillShowForResizing(notification: Notification) {
         if (UIApplication.shared.applicationState != .active) {
@@ -271,6 +279,16 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
             ObserverManager.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
         }
     }
+    
+    func setKakaoLocal(kaKoKeyword: KaKaoKeyword) {
+        mIsMyPositionMove = false
+        edt_search.text = kaKoKeyword.place_name
+
+        ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: kaKoKeyword.latitude, longitude: kaKoKeyword.longitude)), animated: true)
+        edt_search.resignFirstResponder()
+        tl_search.setVisibility(gone: true, dimen: 0, attribute: .height)
+        setMyPosition(isHidden: true)
+    }
 
     /**
      * [GET] 카카오지도 키워드 검색
@@ -326,14 +344,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let position = indexPath.row
-        
-        mIsMyPositionMove = false
-        edt_search.text = mKeywordList[position].place_name
-
-        ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: mKeywordList[position].latitude, longitude: mKeywordList[position].longitude)), animated: true)
-        edt_search.resignFirstResponder()
-        tl_search.setVisibility(gone: true, dimen: 0, attribute: .height)
-        setMyPosition(isHidden: true)
+        setKakaoLocal(kaKoKeyword: mKeywordList[position])
     }
     
 }
