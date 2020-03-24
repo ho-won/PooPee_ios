@@ -214,7 +214,8 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         SharedManager.instance.setLatitude(value: locValue.latitude)
         SharedManager.instance.setLongitude(value: locValue.longitude)
         
-        if (mIsMyPositionMove && SharedManager.instance.getLatitude() > 0) {
+        if (NSStringFromClass(ObserverManager.root.classForCoder) == NSStringFromClass(HomeController().classForCoder)
+            && (mIsMyPositionMove && SharedManager.instance.getLatitude() > 0)) {
             ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: false)
             ObserverManager.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
             self.setMyPosition(isHidden: false)

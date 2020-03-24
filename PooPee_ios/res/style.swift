@@ -574,11 +574,7 @@ class cb_gender_man: UIButton {
         _init()
     }
     func _init() {
-        DispatchQueue.main.async {
-            self.cornerRadius(corner: [.topLeft, .bottomLeft], radius: 9)
-            self.titleLabel!.font = UIFont.systemFont(ofSize: 15)
-            self.setSelected(selected: false)
-        }
+        self.setSelected(selected: false)
     }
     func setSelected(selected: Bool) {
         self.isSelected = selected
@@ -592,6 +588,8 @@ class cb_gender_man: UIButton {
         self.setNeedsDisplay()
     }
     override func draw(_ rect: CGRect) {
+        self.cornerRadius(corner: [.topLeft, .bottomLeft], radius: 9)
+        self.titleLabel!.font = UIFont.systemFont(ofSize: 15)
         let bezierPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: rect.width, height: rect.height), byRoundingCorners: [.topLeft, .bottomLeft], cornerRadii: CGSize(width: 9, height: 9))
         if (self.isSelected) {
             colors.primary.setStroke()
@@ -620,11 +618,7 @@ class cb_gender_woman: UIButton {
         _init()
     }
     func _init() {
-        DispatchQueue.main.async {
-            self.cornerRadius(corner: [.topRight, .bottomRight], radius: 9)
-            self.titleLabel!.font = UIFont.systemFont(ofSize: 15)
-            self.setSelected(selected: false)
-        }
+        self.setSelected(selected: false)
     }
     func setSelected(selected: Bool) {
         self.isSelected = selected
@@ -638,6 +632,8 @@ class cb_gender_woman: UIButton {
         self.setNeedsDisplay()
     }
     override func draw(_ rect: CGRect) {
+        self.cornerRadius(corner: [.topRight, .bottomRight], radius: 9)
+        self.titleLabel!.font = UIFont.systemFont(ofSize: 15)
         let bezierPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: rect.width, height: rect.height), byRoundingCorners: [.topRight, .bottomRight], cornerRadii: CGSize(width: 9, height: 9))
         if (self.isSelected) {
             colors.primary.setStroke()
@@ -652,6 +648,7 @@ class cb_gender_woman: UIButton {
         cgContext.addPath(bezierPath.cgPath)
         cgContext.closePath()
         cgContext.restoreGState()
+        self.setNeedsDisplay()
     }
 }
 
