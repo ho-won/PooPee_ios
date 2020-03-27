@@ -154,7 +154,11 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
             if (self.edt_search.text!.isEmpty) {
                 self.tl_search.setVisibility(gone: true, dimen: 0, attribute: .height)
             } else {
-                self.tl_search.setVisibility(gone: false, dimen: 240, attribute: .height)
+                if (MyUtil.screenHeight < 600) {
+                    self.tl_search.setVisibility(gone: false, dimen: 120, attribute: .height)
+                } else {
+                    self.tl_search.setVisibility(gone: false, dimen: 240, attribute: .height)
+                }
                 self.taskKakaoLocalSearch(query: self.edt_search.text!)
             }
         }
