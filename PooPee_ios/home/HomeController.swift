@@ -43,6 +43,7 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     
     var mIsMyPositionMove = true // 내위치기준으로 맵중심이동여부
     var mIsFirstOnCreate = true // onCreate 체크 (내위치기준으로 맵중심을 이동할지 확인하기위해)
+    var mIsMinTime = true // 3초 단위로 내 위치 체크
     
     // finishedMapMoveAnimation 가 두번불리는현상때문에 중복방지용
     var mIsRefresh = false // 처음 로딩인지 체크
@@ -214,7 +215,14 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if (!mIsMinTime) {
+            return
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.mIsMinTime = true
+        }
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        
         SharedManager.instance.setLatitude(value: locValue.latitude)
         SharedManager.instance.setLongitude(value: locValue.longitude)
         
@@ -223,6 +231,7 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
             ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: false)
             ObserverManager.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
             self.setMyPosition(isHidden: false)
+            mIsMinTime = false
         }
     }
     

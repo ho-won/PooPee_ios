@@ -119,6 +119,8 @@
 		B635A4B923A76F09000B1E73 /* btn_me.json in Resources */ = {isa = PBXBuildFile; fileRef = B635A4B823A76F09000B1E73 /* btn_me.json */; };
 		B635A4BB23A76FC5000B1E73 /* img_0.png in Resources */ = {isa = PBXBuildFile; fileRef = B635A4BA23A76FC5000B1E73 /* img_0.png */; };
 		B64276CC241724AE00EC17D6 /* MaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64276CB241724AE00EC17D6 /* MaskController.swift */; };
+		B6432F262443F2D700FE1AE7 /* KakaoNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6432F252443F2D700FE1AE7 /* KakaoNavi.framework */; };
+		B6432F292443F48B00FE1AE7 /* KakaoCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6432F282443F48B00FE1AE7 /* KakaoCommon.framework */; };
 		B6442813237A6DD700BFFF70 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6442812237A6DD700BFFF70 /* LogManager.swift */; };
 		B6450CF52366834F00106010 /* ToiletCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6450CF32366834F00106010 /* ToiletCommentCell.swift */; };
 		B6450CF62366834F00106010 /* ToiletCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6450CF42366834F00106010 /* ToiletCommentCell.xib */; };
@@ -316,6 +318,8 @@
 		B635A4B823A76F09000B1E73 /* btn_me.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = btn_me.json; sourceTree = "<group>"; };
 		B635A4BA23A76FC5000B1E73 /* img_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_0.png; sourceTree = "<group>"; };
 		B64276CB241724AE00EC17D6 /* MaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskController.swift; sourceTree = "<group>"; };
+		B6432F252443F2D700FE1AE7 /* KakaoNavi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoNavi.framework; sourceTree = "<group>"; };
+		B6432F282443F48B00FE1AE7 /* KakaoCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoCommon.framework; sourceTree = "<group>"; };
 		B6442812237A6DD700BFFF70 /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
 		B6450CF32366834F00106010 /* ToiletCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToiletCommentCell.swift; sourceTree = "<group>"; };
 		B6450CF42366834F00106010 /* ToiletCommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToiletCommentCell.xib; sourceTree = "<group>"; };
@@ -345,7 +349,9 @@
 				AAC047142331FCC600D5D5F6 /* libxml2.tbd in Frameworks */,
 				AAC047122331FCBE00D5D5F6 /* libc++.tbd in Frameworks */,
 				AAC047102331FCB200D5D5F6 /* QuartzCore.framework in Frameworks */,
+				B6432F262443F2D700FE1AE7 /* KakaoNavi.framework in Frameworks */,
 				AAC0470E2331FCAC00D5D5F6 /* CoreLocation.framework in Frameworks */,
+				B6432F292443F48B00FE1AE7 /* KakaoCommon.framework in Frameworks */,
 				AAC0470C2331FCA400D5D5F6 /* SystemConfiguration.framework in Frameworks */,
 				AA222A78233DD9CC00D9354A /* DaumMap.framework in Frameworks */,
 				AAC0470A2331FC9100D5D5F6 /* OpenGLES.framework in Frameworks */,
@@ -545,6 +551,8 @@
 		AAC046232331F36100D5D5F6 = {
 			isa = PBXGroup;
 			children = (
+				B6432F282443F48B00FE1AE7 /* KakaoCommon.framework */,
+				B6432F252443F2D700FE1AE7 /* KakaoNavi.framework */,
 				AA222A34233DD9CC00D9354A /* DaumMap.embeddedframework */,
 				AAC0462E2331F36100D5D5F6 /* PooPee_ios */,
 				AAC046432331F36200D5D5F6 /* PooPee_iosTests */,

@@ -28,6 +28,7 @@ class ToiletDialog: BaseDialog, MFMessageComposeViewControllerDelegate {
     @IBOutlet var tv_sms: UILabel!
     
     var mToilet: Toilet = Toilet()
+    var mAddressText: String = ""
     
     init(){
         super.init(frame: CGRect(x: 0, y: 0, width: MyUtil.screenWidth, height: MyUtil.screenHeight))
@@ -66,20 +67,20 @@ class ToiletDialog: BaseDialog, MFMessageComposeViewControllerDelegate {
     
     func refresh() {
         tv_title.text = mToilet.name
-
-        var addressText = ""
+        
+        mAddressText = ""
         if (mToilet.address_new.count > 0) {
-            addressText = mToilet.address_new
+            mAddressText = mToilet.address_new
         } else if (mToilet.address_old.count > 0) {
-            addressText = mToilet.address_old
+            mAddressText = mToilet.address_old
         } else {
             taskKakaoCoordToAddress()
         }
-        StrManager.setAddressCopySpan(tv_address: tv_address, addressText: addressText)
-
+        StrManager.setAddressCopySpan(tv_address: tv_address, addressText: mAddressText)
+        
         tv_comment_count.text = mToilet.comment_count
         tv_like_count.text = mToilet.like_count
-
+        
         taskToiletCount()
     }
     
@@ -111,12 +112,25 @@ class ToiletDialog: BaseDialog, MFMessageComposeViewControllerDelegate {
         btn_close.setOnClickListener {
             self.dismiss()
         }
+        //        btn_tmap.setOnClickListener {
+        //            UIApplication.shared.open(URL(string: "https://apis.openapi.sk.com/tmap/app/routes?appKey=\(NetDefine.TMAP_API_KEY)&name=\(self.mAddressText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&lon=\(self.mToilet.longitude)&lat=\(self.mToilet.latitude)")!, options: [:], completionHandler: nil)
+        //        }
+        //        btn_kakaonavi.setOnClickListener {
+        //            let destination = KNVLocation(name: self.mAddressText, x: NSNumber(value: self.mToilet.longitude), y: NSNumber(value: self.mToilet.latitude))
+        //            let options = KNVOptions()
+        //            options.routeInfo = true
+        //            options.coordType = .WGS84
+        //            let params = KNVParams(destination: destination, options: options)
+        //            KNVNaviLauncher.shared().navigate(with: params) { (error) in
+        //
+        //            }
+        //        }
     }
-
+    
     func setToilet(toilet: Toilet) {
         mToilet = toilet
     }
-
+    
     func taskToiletCount() {
         var params: Parameters = Parameters()
         params.put("toilet_id", mToilet.toilet_id)
@@ -126,7 +140,7 @@ class ToiletDialog: BaseDialog, MFMessageComposeViewControllerDelegate {
                 if (response.getInt("rst_code") == 0) {
                     self.mToilet.comment_count = response.getString("comment_count")
                     self.mToilet.like_count = response.getString("like_count")
-
+                    
                     self.tv_comment_count.text = self.mToilet.comment_count
                     self.tv_like_count.text = self.mToilet.like_count
                 }
@@ -135,7 +149,7 @@ class ToiletDialog: BaseDialog, MFMessageComposeViewControllerDelegate {
                 
         })
     }
-
+    
     /**
      * [GET] 카카오 좌표 -> 주소 변환
      */
@@ -153,7 +167,7 @@ class ToiletDialog: BaseDialog, MFMessageComposeViewControllerDelegate {
                 let totalCount = it.getJSONObject("meta").getInt("total_count")
                 if (totalCount > 0) {
                     let jsonObject = it.getJSONArray("documents").getJSONObject(0)
-
+                    
                     var addressText = ""
                     if (jsonObject.getJSONObject("road_address").has("address_name")) {
                         addressText = jsonObject.getJSONObject("road_address").getString("address_name")

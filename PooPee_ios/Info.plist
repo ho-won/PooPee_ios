@@ -60,5 +60,10 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>kakaonavi-sdk</string>
+		<string>tmap</string>
+	</array>
 </dict>
 </plist>
