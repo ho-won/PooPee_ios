@@ -714,3 +714,75 @@ class bg_sms: UIView {
         self.backgroundColor = UIColor(hex: "#ff536a")!
     }
 }
+
+class btn_navi: UIView {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        self.backgroundColor = UIColor(hex: "#FFFFFF")!
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        backgroundColor = UIColor(hex: "#f2f6ff")!
+
+    }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        backgroundColor = UIColor(hex: "#FFFFFF")!
+
+    }
+    override func draw(_ rect: CGRect) {
+        self.cornerRadius(corner: [.topLeft, .bottomLeft], radius: 18)
+        let bezierPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: rect.width, height: rect.height), byRoundingCorners: [.topLeft, .bottomLeft], cornerRadii: CGSize(width: 18, height: 18))
+        
+        let cgContext: CGContext = UIGraphicsGetCurrentContext()!
+        cgContext.saveGState()
+        cgContext.addPath(bezierPath.cgPath)
+        cgContext.closePath()
+        cgContext.restoreGState()
+        self.setNeedsDisplay()
+    }
+}
+
+class btn_share: UIView {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        self.backgroundColor = UIColor(hex: "#FFFFFF")!
+        self.layoutIfNeeded()
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        backgroundColor = UIColor(hex: "#f2f6ff")!
+
+    }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        backgroundColor = UIColor(hex: "#FFFFFF")!
+
+    }
+    override func draw(_ rect: CGRect) {
+        self.cornerRadius(corner: [.topRight, .bottomRight], radius: 18)
+        let bezierPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: rect.width, height: rect.height), byRoundingCorners: [.topRight, .bottomRight], cornerRadii: CGSize(width: 18, height: 18))
+        
+        let cgContext: CGContext = UIGraphicsGetCurrentContext()!
+        cgContext.saveGState()
+        cgContext.addPath(bezierPath.cgPath)
+        cgContext.closePath()
+        cgContext.restoreGState()
+        self.setNeedsDisplay()
+    }
+}
+

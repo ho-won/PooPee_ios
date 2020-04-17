@@ -1,0 +1,149 @@
+/* 
+  Localizable.strings
+  base_ios
+
+  Created by Jung ho Seo on 2018. 11. 8..
+  Copyright © 2018년 EMEYE. All rights reserved.
+*/
+
+"app_name" = "PooPee";
+"contentDescription" = "contentDescription";
+
+"admob_app_id" = "ca-app-pub-2933424745841582~4534033734";
+"banner_ad_unit_id" = "ca-app-pub-2933424745841582/3959318660";
+"banner_ad_unit_id_for_test" = "ca-app-pub-3940256099942544/6300978111";
+
+// word
+"yes" = "yes";
+"no" = "no";
+"login" = "login";
+"logout" = "logout";
+"confirm" = "confirm";
+"cancel" = "cancel";
+"complete" = "complete";
+"modified" = "modify";
+"change" = "change";
+"update" = "update";
+"setting" = "setting";
+"current_version" = "Current version";
+"new_version" = "New version";
+"name" = "name";
+"email" = "email";
+"phone_number" = "Phone Number";
+"delete" = "delete";
+"report" = "report";
+"send" = "send";
+"send_mail" = "Send email";
+"man" = "man";
+"women" = "women";
+"close" = "close";
+"copy" = "copy";
+"prev" = "prev";
+
+// dialog
+"dialog_assign_new_version_update" = "There are new updates. We recommend updating for smooth use. \nDo you want to update?";
+"dialog_force_new_version_update" = "There are new updates. It will be available after the update. \nAre you sure you want to update?";
+"dialog_download_request" = "Toilet information download is required. Please check the communication environment and try again.";
+"dialog_no_show" = "Never see again";
+"dialog_finish" = "Are you sure you want to exit PooPee?";
+
+// toast
+"toast_checking_service" = "Under service inspection";
+"toast_loading_fail" = "Failed to load";
+"toast_network_not_connected" = "Please check the network status and try again";
+"toast_alphanumeric" = "Only alphanumeric characters are allowed";
+"toast_alphanumeric_hangul" = "Only alphanumeric characters and Korean characters are allowed";
+"toast_please_all_input" = "Please enter all fields";
+"toast_please_name_input" = "Please enter your nickname";
+"toast_login_condition" = "Please enter your ID / password";
+"toast_login_fail" = "Login failed";
+"toast_join_condition_01" = "Passwords do not match";
+"toast_join_condition_02" = "Please select a gender";
+"toast_join_complete" = "Sign up is complete";
+"toast_join_id_fail" = "This ID is already taken";
+"toast_update_complete" = "It's corrected";
+"toast_delete_complete" = "I deleted it";
+"toast_report_complete" = "I reported it";
+"toast_copy_complete" = "I copied it to the clipboard.";
+"toast_terms_check" = "Agree to all terms";
+
+// gallery
+"gallery_select_dir" = "폴더선택";
+"gallery_show_all" = "전체보기";
+"gallery_back_to_dir" = "이전 폴더로 이동";
+"gallery_upload" = "올리기";
+
+// toast
+"toast_please_permission" = "This is a task that requires permission";
+
+// nav
+"nav_text_01" = "My Info";
+"nav_text_02" = "Notice";
+"nav_text_03" = "Contact";
+"nav_text_04" = "Setting";
+"nav_text_05" = "Inquiry";
+"nav_text_06" = "Login";
+
+// home
+"home_text_01" = "Place, address search";
+"home_text_02" = "View Details";
+"home_text_03" = "comment";
+"home_text_04" = "like";
+"home_text_05" = "Please enter a comment";
+"home_text_06" = "Are you sure you want to delete?";
+"home_text_07" = "Please enter reason for report";
+"home_text_08" = "My location";
+"home_text_09" = "Where are you looking for the bathroom?";
+"home_text_10" = "Management agency";
+"home_text_11" = "Edit";
+"home_text_12" = "Report";
+"home_text_13" = "Send my location";
+"home_text_14" = "[PooPee]\n\nThis is my current location!\n\n";
+"home_text_15" = "App Start";
+"home_text_16" = "Navigation";
+"home_text_17" = "Location Sharing";
+"home_text_18" = "T map";
+"home_text_19" = "KakaoNavi";
+"home_text_20" = "KakaoTalk";
+"home_text_21" = "SMS";
+
+// login
+"login_01" = "Please login";
+"login_02" = "Enter ID";
+"login_03" = "Enter Password";
+"login_04" = "Sign Up";
+"login_05" = "Enter Password";
+"login_06" = "Confirm Password";
+"login_07" = "Enter password to change";
+"login_08" = "Confirm password to change";
+"login_09" = "Enter nickname";
+"login_10" = "Duplicate check";
+"login_11" = "Please enter within 6 ~ 20 letters and numbers";
+"login_12" = "Username is available";
+"login_14" = "Password must! Please remember";
+"login_15" = "Agree to privacy policy";
+"login_16" = "Subscribe Terms of Service";
+"login_17" = "Consent to Terms of Service for Location-Based Services";
+"login_18" = "View Details";
+
+// menu
+"menu_setting_01" = "Please login";
+"menu_setting_02" = "logout";
+"menu_setting_03" = "PUSH Notification";
+"menu_setting_04" = "Privacy Policy";
+"menu_setting_05" = "Terms of Service";
+"menu_setting_06" = "Terms of Service for Location-Based Services";
+
+// toilet
+"toilet_option_01" = "Man";
+"toilet_option_02" = "Women";
+"toilet_option_03" = "Toilet bowl";
+"toilet_option_04" = "Urinal";
+"toilet_option_05" = "Disabled Toilet bowl";
+"toilet_option_06" = "Disabled Urinal";
+"toilet_option_07" = "Child Toilet bowl";
+"toilet_option_08" = "Child Urinal";
+"toilet_option_09" = "Unisex";
+"toilet_option_10" = "Management agency";
+"toilet_option_11" = "Management tel";
+"toilet_option_12" = "Opening time";

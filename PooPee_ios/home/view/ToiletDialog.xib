@@ -13,14 +13,16 @@
                 <outlet property="btn_close" destination="nSh-ra-Aoi" id="pqA-fZ-jmM"/>
                 <outlet property="btn_detail" destination="HNI-fi-4cV" id="Vfp-hT-z10"/>
                 <outlet property="layout_dialog" destination="2Xs-sG-QGp" id="M1m-0c-Lbg"/>
-                <outlet property="layout_sms" destination="Weq-kJ-8TZ" id="TU4-3y-JBP"/>
+                <outlet property="layout_navi" destination="7GH-iv-6p6" id="jGV-Tf-ryK"/>
+                <outlet property="layout_share" destination="XAk-rl-1f0" id="Ewu-X9-6t9"/>
                 <outlet property="root_view" destination="nA6-Cn-53h" id="Lhs-zl-lZe"/>
                 <outlet property="tv_address" destination="qAm-Y6-ZnU" id="MY9-cE-hHj"/>
                 <outlet property="tv_comment" destination="we3-Ba-Ld4" id="R0a-83-pWk"/>
                 <outlet property="tv_comment_count" destination="AXH-C0-jn1" id="XFa-pF-47F"/>
                 <outlet property="tv_like" destination="aoF-yO-RUE" id="bwj-Fd-pkb"/>
                 <outlet property="tv_like_count" destination="Ly8-ma-wYq" id="aFx-46-Ntx"/>
-                <outlet property="tv_sms" destination="CHP-l3-Gv0" id="l6F-MH-R5L"/>
+                <outlet property="tv_navi" destination="jrG-pw-WvV" id="1j0-ib-6hS"/>
+                <outlet property="tv_share" destination="dly-fH-QSP" id="B5E-nr-wj7"/>
                 <outlet property="tv_title" destination="8Rw-ik-tUu" id="IGO-DT-x2f"/>
             </connections>
         </placeholder>
@@ -29,6 +31,94 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UEi-dm-NSy">
+                    <rect key="frame" x="20" y="678" width="374" height="36"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7GH-iv-6p6" customClass="btn_navi" customModule="PooPee_ios" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="187" height="36"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="57Z-i0-yDq">
+                                    <rect key="frame" x="80" y="10" width="27" height="16"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_navigation" translatesAutoresizingMaskIntoConstraints="NO" id="8oV-jc-91V">
+                                            <rect key="frame" x="0.5" y="-2" width="20" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="LNb-MW-knf"/>
+                                                <constraint firstAttribute="width" constant="20" id="Vth-oZ-Oqz"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jrG-pw-WvV">
+                                            <rect key="frame" x="20.5" y="0.0" width="6.5" height="16"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" red="0.14117647058823529" green="0.4392156862745098" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="8oV-jc-91V" firstAttribute="leading" secondItem="57Z-i0-yDq" secondAttribute="leading" constant="0.01" id="66y-vQ-7gB"/>
+                                        <constraint firstAttribute="trailing" secondItem="jrG-pw-WvV" secondAttribute="trailing" constant="0.01" id="EzP-Rr-SVo"/>
+                                        <constraint firstItem="jrG-pw-WvV" firstAttribute="top" secondItem="57Z-i0-yDq" secondAttribute="top" constant="0.01" id="Jei-mG-Ml6"/>
+                                        <constraint firstItem="8oV-jc-91V" firstAttribute="centerY" secondItem="57Z-i0-yDq" secondAttribute="centerY" id="RGo-sR-3b0"/>
+                                        <constraint firstItem="jrG-pw-WvV" firstAttribute="leading" secondItem="8oV-jc-91V" secondAttribute="trailing" constant="0.01" id="T5x-Hb-L65"/>
+                                        <constraint firstAttribute="bottom" secondItem="jrG-pw-WvV" secondAttribute="bottom" constant="0.01" id="go0-4k-Jco"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <constraints>
+                                <constraint firstItem="57Z-i0-yDq" firstAttribute="centerY" secondItem="7GH-iv-6p6" secondAttribute="centerY" id="EV9-UJ-7Kl"/>
+                                <constraint firstItem="57Z-i0-yDq" firstAttribute="centerX" secondItem="7GH-iv-6p6" secondAttribute="centerX" id="ROz-6e-63r"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XAk-rl-1f0" customClass="btn_share" customModule="PooPee_ios" customModuleProvider="target">
+                            <rect key="frame" x="187" y="0.0" width="187" height="36"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mHg-Od-1Rh">
+                                    <rect key="frame" x="80" y="10" width="27" height="16"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_share" translatesAutoresizingMaskIntoConstraints="NO" id="KTH-9G-4EE">
+                                            <rect key="frame" x="0.5" y="-2" width="20" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="DiL-eo-fqs"/>
+                                                <constraint firstAttribute="width" constant="20" id="YCK-k4-SOi"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dly-fH-QSP">
+                                            <rect key="frame" x="20.5" y="0.0" width="6.5" height="16"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" red="0.14117647059999999" green="0.43921568630000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="dly-fH-QSP" firstAttribute="top" secondItem="mHg-Od-1Rh" secondAttribute="top" constant="0.01" id="725-3F-zLQ"/>
+                                        <constraint firstAttribute="trailing" secondItem="dly-fH-QSP" secondAttribute="trailing" constant="0.01" id="AcZ-dz-YGQ"/>
+                                        <constraint firstItem="KTH-9G-4EE" firstAttribute="centerY" secondItem="mHg-Od-1Rh" secondAttribute="centerY" id="C9B-1z-hrn"/>
+                                        <constraint firstAttribute="bottom" secondItem="dly-fH-QSP" secondAttribute="bottom" constant="0.01" id="UBl-dD-9XY"/>
+                                        <constraint firstItem="dly-fH-QSP" firstAttribute="leading" secondItem="KTH-9G-4EE" secondAttribute="trailing" constant="0.01" id="Uoq-Wg-oK7"/>
+                                        <constraint firstItem="KTH-9G-4EE" firstAttribute="leading" secondItem="mHg-Od-1Rh" secondAttribute="leading" constant="0.01" id="kPt-ex-0ax"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <constraints>
+                                <constraint firstItem="mHg-Od-1Rh" firstAttribute="centerX" secondItem="XAk-rl-1f0" secondAttribute="centerX" id="QiU-Ru-EWv"/>
+                                <constraint firstItem="mHg-Od-1Rh" firstAttribute="centerY" secondItem="XAk-rl-1f0" secondAttribute="centerY" id="TcE-5B-yRt"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="36" id="9vh-bU-iAa"/>
+                        <constraint firstAttribute="trailing" secondItem="XAk-rl-1f0" secondAttribute="trailing" constant="0.01" id="LvT-iO-xyf"/>
+                        <constraint firstItem="XAk-rl-1f0" firstAttribute="top" secondItem="UEi-dm-NSy" secondAttribute="top" constant="0.01" id="Soc-TJ-ETb"/>
+                        <constraint firstItem="7GH-iv-6p6" firstAttribute="width" secondItem="UEi-dm-NSy" secondAttribute="width" multiplier="0.5" id="SsM-mi-iLI"/>
+                        <constraint firstItem="7GH-iv-6p6" firstAttribute="leading" secondItem="UEi-dm-NSy" secondAttribute="leading" constant="0.01" id="nO4-4j-hfo"/>
+                        <constraint firstItem="XAk-rl-1f0" firstAttribute="leading" secondItem="7GH-iv-6p6" secondAttribute="trailing" constant="0.01" id="r6E-yy-s5D"/>
+                        <constraint firstAttribute="bottom" secondItem="XAk-rl-1f0" secondAttribute="bottom" constant="0.01" id="t2E-Fg-wlT"/>
+                        <constraint firstItem="7GH-iv-6p6" firstAttribute="top" secondItem="UEi-dm-NSy" secondAttribute="top" constant="0.01" id="vU2-s3-2cp"/>
+                        <constraint firstAttribute="bottom" secondItem="7GH-iv-6p6" secondAttribute="bottom" constant="0.01" id="zj8-Wh-65V"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Xs-sG-QGp" customClass="bg_search_layout" customModule="PooPee_ios" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="722" width="414" height="140"/>
                     <subviews>
@@ -181,46 +271,21 @@
                         <constraint firstAttribute="trailing" secondItem="nqE-WG-F4B" secondAttribute="trailing" constant="20" id="xlA-JT-2hp"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Weq-kJ-8TZ" customClass="bg_sms" customModule="PooPee_ios" customModuleProvider="target">
-                    <rect key="frame" x="347.5" y="678" width="54.5" height="36"/>
-                    <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_send" translatesAutoresizingMaskIntoConstraints="NO" id="C6d-TT-u0t">
-                            <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="36" id="DOA-cf-UxR"/>
-                                <constraint firstAttribute="height" constant="36" id="pA3-Gh-cDe"/>
-                            </constraints>
-                        </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CHP-l3-Gv0">
-                            <rect key="frame" x="36" y="10" width="6.5" height="16"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="36" id="03b-ti-SKj"/>
-                        <constraint firstItem="CHP-l3-Gv0" firstAttribute="centerY" secondItem="Weq-kJ-8TZ" secondAttribute="centerY" id="9Xf-hO-ZZ2"/>
-                        <constraint firstItem="C6d-TT-u0t" firstAttribute="centerY" secondItem="Weq-kJ-8TZ" secondAttribute="centerY" id="FKI-Um-9bM"/>
-                        <constraint firstItem="CHP-l3-Gv0" firstAttribute="leading" secondItem="C6d-TT-u0t" secondAttribute="trailing" constant="0.01" id="RUp-ED-avL"/>
-                        <constraint firstItem="C6d-TT-u0t" firstAttribute="leading" secondItem="Weq-kJ-8TZ" secondAttribute="leading" constant="0.01" id="eik-VZ-WUF"/>
-                        <constraint firstAttribute="trailing" secondItem="CHP-l3-Gv0" secondAttribute="trailing" constant="12" id="k4H-0a-bfI"/>
-                    </constraints>
-                </view>
             </subviews>
             <constraints>
-                <constraint firstItem="2Xs-sG-QGp" firstAttribute="top" secondItem="Weq-kJ-8TZ" secondAttribute="bottom" constant="8" id="4Dr-4G-oOd"/>
+                <constraint firstItem="P4A-YY-4po" firstAttribute="trailing" secondItem="UEi-dm-NSy" secondAttribute="trailing" constant="20" id="Ha3-SC-do5"/>
+                <constraint firstItem="2Xs-sG-QGp" firstAttribute="top" secondItem="UEi-dm-NSy" secondAttribute="bottom" constant="8" id="LeT-hF-Sep"/>
                 <constraint firstItem="P4A-YY-4po" firstAttribute="bottom" secondItem="2Xs-sG-QGp" secondAttribute="bottom" id="Prx-GG-RE3"/>
-                <constraint firstItem="P4A-YY-4po" firstAttribute="trailing" secondItem="Weq-kJ-8TZ" secondAttribute="trailing" constant="12" id="Qqp-YD-1Ek"/>
                 <constraint firstItem="2Xs-sG-QGp" firstAttribute="leading" secondItem="P4A-YY-4po" secondAttribute="leading" id="Wyy-af-qsL"/>
                 <constraint firstItem="P4A-YY-4po" firstAttribute="trailing" secondItem="2Xs-sG-QGp" secondAttribute="trailing" id="mai-lV-US2"/>
+                <constraint firstItem="UEi-dm-NSy" firstAttribute="leading" secondItem="P4A-YY-4po" secondAttribute="leading" constant="20" id="u3I-EJ-It8"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="P4A-YY-4po"/>
             <point key="canvasLocation" x="131.8840579710145" y="154.01785714285714"/>
         </view>
     </objects>
     <resources>
-        <image name="ic_send" width="144" height="144"/>
+        <image name="ic_navigation" width="40" height="40"/>
+        <image name="ic_share" width="40" height="40"/>
     </resources>
 </document>

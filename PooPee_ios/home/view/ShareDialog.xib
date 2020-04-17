@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShareDialog" customModule="PooPee_ios" customModuleProvider="target">
+            <connections>
+                <outlet property="layout_dialog" destination="sUW-nj-Hbi" id="5gn-qB-bVX"/>
+                <outlet property="root_view" destination="2xi-i8-ZA4" id="SjD-Ep-nEq"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="2xi-i8-ZA4">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sUW-nj-Hbi">
+                    <rect key="frame" x="57" y="298" width="300" height="300"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="300" id="c7s-hn-cHh"/>
+                        <constraint firstAttribute="width" constant="300" id="h3m-Dv-nSQ"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="sUW-nj-Hbi" firstAttribute="centerX" secondItem="2xi-i8-ZA4" secondAttribute="centerX" id="8CR-Nb-AaD"/>
+                <constraint firstItem="sUW-nj-Hbi" firstAttribute="centerY" secondItem="2xi-i8-ZA4" secondAttribute="centerY" id="dVF-3I-Vrd"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="tnc-BU-oGz"/>
+            <point key="canvasLocation" x="131.8840579710145" y="154.01785714285714"/>
+        </view>
+    </objects>
+</document>

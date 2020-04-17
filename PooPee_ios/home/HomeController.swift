@@ -215,13 +215,17 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if (!mIsMinTime) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        let newLocation: CLLocation = CLLocation(latitude: locValue.latitude, longitude: locValue.longitude)
+        let oldLocation: CLLocation = CLLocation(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
+        let distance = newLocation.distance(from: oldLocation)
+        
+        if (!mIsMinTime || distance < 5) {
             return
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.mIsMinTime = true
         }
-        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         
         SharedManager.instance.setLatitude(value: locValue.latitude)
         SharedManager.instance.setLongitude(value: locValue.longitude)

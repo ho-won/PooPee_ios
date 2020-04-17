@@ -1,16 +1,16 @@
 /* 
   Localizable.strings
-  base_ios
+  PooPee_ios
 
-  Created by Jung ho Seo on 2018. 11. 8..
-  Copyright © 2018년 EMEYE. All rights reserved.
+  Created by ho1 on 2020/04/17.
+  Copyright © 2020 ho1. All rights reserved.
 */
 
 "app_name" = "PooPee";
 "contentDescription" = "contentDescription";
 
-"admob_app_id" = "ca-app-pub-2933424745841582~3156554647";
-"banner_ad_unit_id" = "ca-app-pub-2933424745841582/9578971692";
+"admob_app_id" = "ca-app-pub-2933424745841582~4534033734";
+"banner_ad_unit_id" = "ca-app-pub-2933424745841582/3959318660";
 "banner_ad_unit_id_for_test" = "ca-app-pub-3940256099942544/6300978111";
 
 // word
@@ -45,6 +45,7 @@
 "dialog_force_new_version_update" = "새로운 업데이트가 있습니다. 업데이트 후에 사용할 수 있습니다.\n업데이트 하시겠습니까?";
 "dialog_download_request" = "화장실정보 다운로드가 필요합니다. 통신환경을 확인 후 재시도해주세요.";
 "dialog_no_show" = "다시보지않기";
+"dialog_finish" = "PooPee를 종료하시겠습니까?";
 
 // toast
 "toast_checking_service" = "서비스점검중입니다";
@@ -97,7 +98,14 @@
 "home_text_11" = "댓글수정";
 "home_text_12" = "신고하기";
 "home_text_13" = "내위치전송";
-"home_text_14" = "[PooPee]\n내 현재 위치입니다!\n\n";
+"home_text_14" = "[PooPee]\n내 현재 위치 입니다!\n";
+"home_text_15" = "앱실행";
+"home_text_16" = "내비연결";
+"home_text_17" = "위치공유";
+"home_text_18" = "T map";
+"home_text_19" = "카카오내비";
+"home_text_20" = "카카오톡";
+"home_text_21" = "문자전송";
 
 // login
 "login_01" = "로그인을 해주세요";

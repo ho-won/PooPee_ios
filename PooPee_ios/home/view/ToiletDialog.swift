@@ -24,8 +24,11 @@ class ToiletDialog: BaseDialog, MFMessageComposeViewControllerDelegate {
     @IBOutlet var btn_close: UIButton!
     @IBOutlet var btn_detail: UIButton!
     
-    @IBOutlet var layout_sms: bg_sms!
-    @IBOutlet var tv_sms: UILabel!
+    @IBOutlet var layout_navi: btn_navi!
+    @IBOutlet var tv_navi: UILabel!
+    
+    @IBOutlet var layout_share: btn_share!
+    @IBOutlet var tv_share: UILabel!
     
     var mToilet: Toilet = Toilet()
     var mAddressText: String = ""
@@ -50,7 +53,9 @@ class ToiletDialog: BaseDialog, MFMessageComposeViewControllerDelegate {
         root_view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(layout_bg_tap(recognizer:))))
         layout_dialog.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(layout_dialog_tap(recognizer:))))
         
-        tv_sms.text = "home_text_13".localized
+        tv_navi.text = "home_text_16".localized
+        tv_share.text = "home_text_17".localized
+        
         tv_comment.text = "home_text_03".localized
         tv_like.text = "home_text_04".localized
         
@@ -85,17 +90,19 @@ class ToiletDialog: BaseDialog, MFMessageComposeViewControllerDelegate {
     }
     
     func setListener() {
-        layout_sms.setOnClickListener {
-            var addressText = ""
-            if (self.mToilet.address_new.count > 0) {
-                addressText = self.mToilet.address_new
-            } else {
-                addressText = self.mToilet.address_old
-            }
-            let messageController = MFMessageComposeViewController()
-            messageController.messageComposeDelegate = self
-            messageController.body = "home_text_14".localized + addressText
-            ObserverManager.root.present(messageController, animated: true, completion: nil)
+        layout_navi.setOnClickListener {
+            let dialog = ShareDialog()
+            dialog.setAction(ShareDialog.ACTION_NAVI)
+            dialog.setToilet(self.mToilet)
+            dialog.refresh()
+            dialog.show(view: ObserverManager.root.view)
+        }
+        layout_share.setOnClickListener {
+            let dialog = ShareDialog()
+            dialog.setAction(ShareDialog.ACTION_SHARE)
+            dialog.setToilet(self.mToilet)
+            dialog.refresh()
+            dialog.show(view: ObserverManager.root.view)
         }
         tv_title.setOnClickListener {
             let controller = ObserverManager.getController(name: "ToiletController")
@@ -112,19 +119,6 @@ class ToiletDialog: BaseDialog, MFMessageComposeViewControllerDelegate {
         btn_close.setOnClickListener {
             self.dismiss()
         }
-        //        btn_tmap.setOnClickListener {
-        //            UIApplication.shared.open(URL(string: "https://apis.openapi.sk.com/tmap/app/routes?appKey=\(NetDefine.TMAP_API_KEY)&name=\(self.mAddressText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&lon=\(self.mToilet.longitude)&lat=\(self.mToilet.latitude)")!, options: [:], completionHandler: nil)
-        //        }
-        //        btn_kakaonavi.setOnClickListener {
-        //            let destination = KNVLocation(name: self.mAddressText, x: NSNumber(value: self.mToilet.longitude), y: NSNumber(value: self.mToilet.latitude))
-        //            let options = KNVOptions()
-        //            options.routeInfo = true
-        //            options.coordType = .WGS84
-        //            let params = KNVParams(destination: destination, options: options)
-        //            KNVNaviLauncher.shared().navigate(with: params) { (error) in
-        //
-        //            }
-        //        }
     }
     
     func setToilet(toilet: Toilet) {
