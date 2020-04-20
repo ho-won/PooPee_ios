@@ -68,16 +68,11 @@ class ToiletController: BaseController, MFMessageComposeViewControllerDelegate {
     
     func setListener() {
         layout_sms.setOnClickListener {
-            var addressText = ""
-            if (self.mToilet.address_new.count > 0) {
-                addressText = self.mToilet.address_new
-            } else {
-                addressText = self.mToilet.address_old
-            }
-            let messageController = MFMessageComposeViewController()
-            messageController.messageComposeDelegate = self
-            messageController.body = "home_text_14".localized + addressText
-            self.present(messageController, animated: true, completion: nil)
+            let dialog = ShareDialog()
+            dialog.setAction(ShareDialog.ACTION_SHARE)
+            dialog.setToilet(self.mToilet)
+            dialog.refresh()
+            dialog.show(view: ObserverManager.root.view)
         }
     }
     

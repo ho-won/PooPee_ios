@@ -18,12 +18,31 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>kakao53565fe7d8355fff626939459a32e7d0</string>
+			</array>
+			<key>CFBundleURLTYpeRole</key>
+			<string>Editor</string>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-2933424745841582~3156554647</string>
 	<key>KAKAO_APP_KEY</key>
 	<string>53565fe7d8355fff626939459a32e7d0</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>kakao53565fe7d8355fff626939459a32e7d0</string>
+		<string>kakaolink</string>
+		<string>kakaotalk-5.9.7</string>
+		<string>kakaonavi-sdk</string>
+		<string>tmap</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -60,10 +79,5 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>kakaonavi-sdk</string>
-		<string>tmap</string>
-	</array>
 </dict>
 </plist>

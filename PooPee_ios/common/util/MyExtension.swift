@@ -195,6 +195,7 @@ extension UIView {
         self.isUserInteractionEnabled = true
         let tabRecongnizer = TabRecongnizer(target: self, action: #selector(onClick(recognizer:)))
         tabRecongnizer.onClick = onClick
+        tabRecongnizer.cancelsTouchesInView = false
         addGestureRecognizer(tabRecongnizer)
     }
     

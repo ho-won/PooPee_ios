@@ -99,7 +99,7 @@ class StrManager {
         fullString.append(imageString)
         tv_address.attributedText = fullString
         tv_address.setOnClickListener {
-            UIPasteboard.general.string = tv_address.text
+            UIPasteboard.general.string = addressText
             ObserverManager.root.view.makeToast(message: "toast_copy_complete".localized)
         }
     }

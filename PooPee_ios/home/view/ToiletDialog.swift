@@ -8,9 +8,8 @@
 
 import UIKit
 import Alamofire
-import MessageUI
 
-class ToiletDialog: BaseDialog, MFMessageComposeViewControllerDelegate {
+class ToiletDialog: BaseDialog {
     @IBOutlet var root_view: UIView!
     @IBOutlet weak var layout_dialog: UIView!
     
@@ -175,10 +174,6 @@ class ToiletDialog: BaseDialog, MFMessageComposeViewControllerDelegate {
             , onFailed: { statusCode in
                 
         })
-    }
-    
-    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
-        controller.dismiss(animated: true, completion: nil)
     }
     
 }

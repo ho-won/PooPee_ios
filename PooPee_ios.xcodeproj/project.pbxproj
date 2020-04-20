@@ -111,6 +111,8 @@
 		AAE6D2BD234B006400DEC86C /* NoticeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE6D2BC234B006400DEC86C /* NoticeController.swift */; };
 		AAE6D2BF234B006E00DEC86C /* MyInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE6D2BE234B006E00DEC86C /* MyInfoController.swift */; };
 		AAE6D2C2234B00BB00DEC86C /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE6D2C1234B00BA00DEC86C /* Notice.swift */; };
+		B609967B244D281E004D591A /* KakaoLink.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6099679244D281D004D591A /* KakaoLink.framework */; };
+		B609967C244D281E004D591A /* KakaoMessageTemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B609967A244D281D004D591A /* KakaoMessageTemplate.framework */; };
 		B60A2C7224498C52005F8D5A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B60A2C7424498C52005F8D5A /* Localizable.strings */; };
 		B60A2C7924498CB0005F8D5A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B60A2C7724498CB0005F8D5A /* Localizable.strings */; };
 		B60A2C7B2449A2E0005F8D5A /* ShareDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60A2C7A2449A2E0005F8D5A /* ShareDialog.swift */; };
@@ -312,6 +314,8 @@
 		AAE6D2BC234B006400DEC86C /* NoticeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeController.swift; sourceTree = "<group>"; };
 		AAE6D2BE234B006E00DEC86C /* MyInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoController.swift; sourceTree = "<group>"; };
 		AAE6D2C1234B00BA00DEC86C /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
+		B6099679244D281D004D591A /* KakaoLink.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoLink.framework; sourceTree = "<group>"; };
+		B609967A244D281D004D591A /* KakaoMessageTemplate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoMessageTemplate.framework; sourceTree = "<group>"; };
 		B60A2C7324498C52005F8D5A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B60A2C7824498CB0005F8D5A /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = Localizable.strings; sourceTree = "<group>"; };
 		B60A2C7A2449A2E0005F8D5A /* ShareDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDialog.swift; sourceTree = "<group>"; };
@@ -353,12 +357,14 @@
 			files = (
 				AAC047162331FCCF00D5D5F6 /* libsqlite3.tbd in Frameworks */,
 				AAC047142331FCC600D5D5F6 /* libxml2.tbd in Frameworks */,
+				B609967C244D281E004D591A /* KakaoMessageTemplate.framework in Frameworks */,
 				AAC047122331FCBE00D5D5F6 /* libc++.tbd in Frameworks */,
 				AAC047102331FCB200D5D5F6 /* QuartzCore.framework in Frameworks */,
 				B6432F262443F2D700FE1AE7 /* KakaoNavi.framework in Frameworks */,
 				AAC0470E2331FCAC00D5D5F6 /* CoreLocation.framework in Frameworks */,
 				B6432F292443F48B00FE1AE7 /* KakaoCommon.framework in Frameworks */,
 				AAC0470C2331FCA400D5D5F6 /* SystemConfiguration.framework in Frameworks */,
+				B609967B244D281E004D591A /* KakaoLink.framework in Frameworks */,
 				AA222A78233DD9CC00D9354A /* DaumMap.framework in Frameworks */,
 				AAC0470A2331FC9100D5D5F6 /* OpenGLES.framework in Frameworks */,
 				9CC8029FB1E92D93FF462A79 /* Pods_PooPee_ios.framework in Frameworks */,
@@ -559,6 +565,8 @@
 		AAC046232331F36100D5D5F6 = {
 			isa = PBXGroup;
 			children = (
+				B6099679244D281D004D591A /* KakaoLink.framework */,
+				B609967A244D281D004D591A /* KakaoMessageTemplate.framework */,
 				B6432F282443F48B00FE1AE7 /* KakaoCommon.framework */,
 				B6432F252443F2D700FE1AE7 /* KakaoNavi.framework */,
 				AA222A34233DD9CC00D9354A /* DaumMap.embeddedframework */,
@@ -1274,6 +1282,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1336,6 +1345,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1394,7 +1404,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 2QRKV87SPM;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1414,7 +1424,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework/Resources",
 				);
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.4.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -1450,7 +1460,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 2QRKV87SPM;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1469,7 +1479,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework/Resources",
 				);
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.4.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
