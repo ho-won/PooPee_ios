@@ -53,6 +53,8 @@ class ShareDialog: BaseDialog, MFMessageComposeViewControllerDelegate {
         root_view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(layout_bg_tap(recognizer:))))
         layout_dialog.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(layout_dialog_tap(recognizer:))))
         
+        layout_dialog.layer.cornerRadius = 20
+        
         _init()
         setListener()
     }
