@@ -9,9 +9,11 @@
 "app_name" = "PooPee";
 "contentDescription" = "contentDescription";
 
-"admob_app_id" = "ca-app-pub-2933424745841582~4534033734";
-"banner_ad_unit_id" = "ca-app-pub-2933424745841582/3959318660";
+"admob_app_id" = "ca-app-pub-2933424745841582~3156554647";
+"banner_ad_unit_id" = "ca-app-pub-2933424745841582/9578971692";
 "banner_ad_unit_id_for_test" = "ca-app-pub-3940256099942544/6300978111";
+"interstitial_ad_unit_id" = "ca-app-pub-2933424745841582/5044545873";
+"interstitial_ad_unit_id_for_test" = "ca-app-pub-3940256099942544/1033173712";
 
 // word
 "yes" = "yes";
@@ -100,12 +102,14 @@
 "home_text_13" = "Send my location";
 "home_text_14" = "[PooPee]\nThis is my current location!\n";
 "home_text_15" = "App Start";
-"home_text_16" = "Navigation";
+"home_text_16" = "Navigation connection";
 "home_text_17" = "Location Sharing";
 "home_text_18" = "T map";
 "home_text_19" = "KakaoNavi";
 "home_text_20" = "KakaoTalk";
 "home_text_21" = "SMS";
+"home_text_22" = "Connect to the navigation app at that address";
+"home_text_23" = "Share the location of the toilet to that address";
 
 // login
 "login_01" = "Please login";

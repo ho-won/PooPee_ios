@@ -9,9 +9,11 @@
 "app_name" = "PooPee";
 "contentDescription" = "contentDescription";
 
-"admob_app_id" = "ca-app-pub-2933424745841582~4534033734";
-"banner_ad_unit_id" = "ca-app-pub-2933424745841582/3959318660";
+"admob_app_id" = "ca-app-pub-2933424745841582~3156554647";
+"banner_ad_unit_id" = "ca-app-pub-2933424745841582/9578971692";
 "banner_ad_unit_id_for_test" = "ca-app-pub-3940256099942544/6300978111";
+"interstitial_ad_unit_id" = "ca-app-pub-2933424745841582/5044545873";
+"interstitial_ad_unit_id_for_test" = "ca-app-pub-3940256099942544/1033173712";
 
 // word
 "yes" = "예";
@@ -100,12 +102,14 @@
 "home_text_13" = "내위치전송";
 "home_text_14" = "[PooPee]\n내 현재 위치 입니다!\n";
 "home_text_15" = "앱실행";
-"home_text_16" = "내비연결";
+"home_text_16" = "내비게이션연결";
 "home_text_17" = "위치공유";
 "home_text_18" = "T map";
 "home_text_19" = "카카오내비";
 "home_text_20" = "카카오톡";
 "home_text_21" = "문자전송";
+"home_text_22" = "해당 주소로 내비게이션 앱에 연결합니다";
+"home_text_23" = "해당 주소로 화장실 위치를 공유합니다";
 
 // login
 "login_01" = "로그인을 해주세요";

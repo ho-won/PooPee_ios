@@ -29,10 +29,13 @@ class ToiletDialog: BaseDialog {
     @IBOutlet var layout_share: btn_share!
     @IBOutlet var tv_share: UILabel!
     
+    var onDetail: (_ it: Toilet)->()
+    
     var mToilet: Toilet = Toilet()
     var mAddressText: String = ""
     
-    init(){
+    init(onDetail: @escaping (_ it: Toilet)->()){
+        self.onDetail = onDetail
         super.init(frame: CGRect(x: 0, y: 0, width: MyUtil.screenWidth, height: MyUtil.screenHeight))
         onCreate()
     }
@@ -110,9 +113,7 @@ class ToiletDialog: BaseDialog {
             self.dismiss()
         }
         btn_detail.setOnClickListener {
-            let controller = ObserverManager.getController(name: "ToiletController")
-            controller.segueData.putExtra(key: ToiletController.TOILET, data: self.mToilet)
-            ObserverManager.root.startPresent(controller: controller)
+            self.onDetail(self.mToilet)
             self.dismiss()
         }
         btn_close.setOnClickListener {

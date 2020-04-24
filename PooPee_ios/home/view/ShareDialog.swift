@@ -20,6 +20,7 @@ class ShareDialog: BaseDialog, MFMessageComposeViewControllerDelegate {
     
     @IBOutlet var tv_title: UILabel!
     @IBOutlet var btn_close: UIButton!
+    @IBOutlet var tv_content: UILabel!
     
     @IBOutlet var layout_01: UIView!
     @IBOutlet var iv_01: UIImageView!
@@ -66,12 +67,14 @@ class ShareDialog: BaseDialog, MFMessageComposeViewControllerDelegate {
     func refresh() {
         if (mAction == ShareDialog.ACTION_NAVI) {
             tv_title.text = "home_text_16".localized
+            tv_content.text = "home_text_22".localized
             tv_01.text = "home_text_18".localized
             tv_02.text = "home_text_19".localized
             iv_01.image = UIImage(named: "ic_tmap")
             iv_02.image = UIImage(named: "ic_kakaonavi")
         } else if (mAction == ShareDialog.ACTION_SHARE) {
             tv_title.text = "home_text_17".localized
+            tv_content.text = "home_text_23".localized
             tv_01.text = "home_text_20".localized
             tv_02.text = "home_text_21".localized
             iv_01.image = UIImage(named: "ic_kakaotalk")
@@ -98,7 +101,8 @@ class ShareDialog: BaseDialog, MFMessageComposeViewControllerDelegate {
                     
                     templateBuilder.content = KMTContentObject { (contentBuilder) in
                         contentBuilder.title = "home_text_14".localized + self.mAddressText
-                        contentBuilder.imageHeight = 0
+                        contentBuilder.imageWidth = 1024
+                        contentBuilder.imageHeight = 500
                         contentBuilder.imageURL = URL.init(string: "http://poopee.ho1.co.kr/image/banner.png")!
                         contentBuilder.link = KMTLinkObject { (linkBuilder) in }
                     }

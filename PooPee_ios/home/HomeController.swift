@@ -12,7 +12,8 @@ import CoreLocation
 import Lottie
 import GoogleMobileAds
 
-class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate {
+class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate, GADInterstitialDelegate {
+    
     @IBOutlet var map_view: UIView!
     @IBOutlet var lottie_my_position: AnimationView!
     
@@ -50,6 +51,10 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     var mLastLatitude: Double = 0 // 마지막 중심 latitude
     var mLastLongitude: Double = 0 // 마지막 중심 longitude
     
+    var mInterstitialAd: GADInterstitial!
+    
+    var mToilet: Toilet = Toilet()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewResizerOnKeyboardShown()
@@ -83,6 +88,10 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         ad_view.adUnitID = "banner_ad_unit_id".localized
         ad_view.rootViewController = self
         ad_view.load(GADRequest())
+        
+        mInterstitialAd = GADInterstitial(adUnitID: "interstitial_ad_unit_id".localized)
+        mInterstitialAd.load(GADRequest())
+        mInterstitialAd.delegate = self
         
         _init()
         setListener()
@@ -214,6 +223,12 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         }
     }
     
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        let controller = ObserverManager.getController(name: "ToiletController")
+        controller.segueData.putExtra(key: ToiletController.TOILET, data: self.mToilet)
+        ObserverManager.root.startPresent(controller: controller)
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         let newLocation: CLLocation = CLLocation(latitude: locValue.latitude, longitude: locValue.longitude)
@@ -260,7 +275,16 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
             tl_search.setVisibility(gone: true, dimen: 0, attribute: .height)
             
             let toilet = SQLiteManager.instance.getToilet(id: poiItem.tag)
-            let dialog = ToiletDialog()
+            let dialog = ToiletDialog(onDetail: { it in
+                self.mToilet = it
+                if (self.mInterstitialAd.isReady) {
+                    self.mInterstitialAd.present(fromRootViewController: self)
+                } else {
+                    let controller = ObserverManager.getController(name: "ToiletController")
+                    controller.segueData.putExtra(key: ToiletController.TOILET, data: self.mToilet)
+                    ObserverManager.root.startPresent(controller: controller)
+                }
+            })
             dialog.setToilet(toilet: toilet)
             dialog.refresh()
             dialog.show(view: ObserverManager.root.view)
