@@ -69,7 +69,7 @@ class MainController: BaseController {
             // 첫번째 자리 버전 업데이트로 무조건 업데이트받아야 앱 실행
             let alert = UIAlertController(title: nil, message: "dialog_force_new_version_update".localized, preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "yes".localized, style: .default, handler: { action in
-                self.updateInPlayMarket()
+                ObserverManager.updateInPlayMarket()
             }))
             alert.addAction(UIAlertAction(title: "no".localized, style: .cancel, handler: { action in
                 exit(0)
@@ -82,8 +82,7 @@ class MainController: BaseController {
             // 두번째 자리 버전 업데이트로 업데이트 팝업 선택 후 앱 실행
             let alert = UIAlertController(title: nil, message: "dialog_assign_new_version_update".localized, preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "yes".localized, style: .default, handler: { action in
-                self.updateInPlayMarket()
-                exit(0)
+                ObserverManager.updateInPlayMarket()
             }))
             alert.addAction(UIAlertAction(title: "no".localized, style: .cancel, handler: { action in
                 self.loginCheck()
@@ -93,15 +92,6 @@ class MainController: BaseController {
             // 현재 앱버전이 최신버전일경우
             loginCheck()
         }
-    }
-    
-    /**
-     * 앱의 스토어로 이동.
-     */
-    func updateInPlayMarket() {
-        // let appStoreLink = "https://itunes.apple.com/app/id\(APPLE_ID)?action=write-review" // 앱 스토어의 리뷰화면으로 바로이동
-        let appStoreLink = "https://itunes.apple.com/app/id\(ObserverManager.APPLE_ID)"
-        UIApplication.shared.open(URL(string: appStoreLink)!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
     }
     
     /**
@@ -176,9 +166,4 @@ class MainController: BaseController {
         })
     }
     
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
-    return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

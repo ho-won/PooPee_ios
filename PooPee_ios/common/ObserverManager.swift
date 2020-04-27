@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class ObserverManager {
-    static let APPLE_ID = "1426273940"
+    static let APPLE_ID = "1501449207"
     static let testServer = false // 테스트용인지 체크
     static let isShowLog = true // Log 노출여부 체크
     static var isForeground = true // foreground background 체크
@@ -75,6 +75,16 @@ class ObserverManager {
         let imageOffset = Int32(imageMe.size.height)
         my_position.customImageAnchorPointOffset = MTMapImageOffset(offsetX: imageOffset, offsetY: imageOffset)
         mapView.add(my_position)
+    }
+    
+    /**
+     * 앱의 스토어로 이동.
+     */
+    static func updateInPlayMarket() {
+        // let appStoreLink = "itms-apps://itunes.apple.com/app/id\(APPLE_ID)?action=write-review" // 앱 스토어의 리뷰화면으로 바로이동
+        if let url = URL(string: "itms-apps://itunes.apple.com/app/id\(ObserverManager.APPLE_ID)"), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
     
     static func getController(name: String) -> BaseController {
