@@ -10,10 +10,13 @@
 "contentDescription" = "contentDescription";
 
 "admob_app_id" = "ca-app-pub-2933424745841582~3156554647";
+
 "banner_ad_unit_id" = "ca-app-pub-2933424745841582/9578971692";
-"banner_ad_unit_id_for_test" = "ca-app-pub-3940256099942544/6300978111";
 "interstitial_ad_unit_id" = "ca-app-pub-2933424745841582/5044545873";
-"interstitial_ad_unit_id_for_test" = "ca-app-pub-3940256099942544/1033173712";
+
+// test
+//"banner_ad_unit_id" = "ca-app-pub-3940256099942544/6300978111";
+//"interstitial_ad_unit_id" = "ca-app-pub-3940256099942544/1033173712";
 
 // word
 "yes" = "yes";
@@ -151,3 +154,11 @@
 "toilet_option_10" = "Management agency";
 "toilet_option_11" = "Management tel";
 "toilet_option_12" = "Opening time";
+
+// permission
+"permission_text_01" = "Permissions for using the app";
+"permission_text_02" = "Location permissions";
+"permission_text_03" = "Check current toilet information around me";
+"permission_text_04" = "Storage permissions";
+"permission_text_05" = "Store toilet information";
+"permission_text_06" = "App permissions require the above two permissions to use the app for convenient use of the PooPee service.";

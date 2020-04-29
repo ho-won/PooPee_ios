@@ -22,5 +22,7 @@ target 'PooPee_ios' do
   pod 'Kingfisher' # 이미지로딩
   pod 'lottie-ios'
   pod 'Google-Mobile-Ads-SDK'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Crashlytics'
 
 end

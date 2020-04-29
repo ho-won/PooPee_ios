@@ -121,12 +121,15 @@
 		B62354D8236278BD004F615F /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62354D7236278BD004F615F /* SettingController.swift */; };
 		B62354DA236278EF004F615F /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B62354D9236278EF004F615F /* Menu.storyboard */; };
 		B62354DC2362CF55004F615F /* HoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62354DB2362CF55004F615F /* HoTableView.swift */; };
+		B6275C3324596FEB004165B5 /* PermissionDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6275C3224596FEB004165B5 /* PermissionDialog.swift */; };
+		B6275C3524596FF3004165B5 /* PermissionDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6275C3424596FF3004165B5 /* PermissionDialog.xib */; };
 		B635A4B923A76F09000B1E73 /* btn_me.json in Resources */ = {isa = PBXBuildFile; fileRef = B635A4B823A76F09000B1E73 /* btn_me.json */; };
 		B635A4BB23A76FC5000B1E73 /* img_0.png in Resources */ = {isa = PBXBuildFile; fileRef = B635A4BA23A76FC5000B1E73 /* img_0.png */; };
 		B64276CC241724AE00EC17D6 /* MaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64276CB241724AE00EC17D6 /* MaskController.swift */; };
 		B6432F262443F2D700FE1AE7 /* KakaoNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6432F252443F2D700FE1AE7 /* KakaoNavi.framework */; };
 		B6432F292443F48B00FE1AE7 /* KakaoCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6432F282443F48B00FE1AE7 /* KakaoCommon.framework */; };
 		B6442813237A6DD700BFFF70 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6442812237A6DD700BFFF70 /* LogManager.swift */; };
+		B6443CAE2458058300200A7A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6443CAD2458058300200A7A /* GoogleService-Info.plist */; };
 		B6450CF52366834F00106010 /* ToiletCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6450CF32366834F00106010 /* ToiletCommentCell.swift */; };
 		B6450CF62366834F00106010 /* ToiletCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6450CF42366834F00106010 /* ToiletCommentCell.xib */; };
 		B6450CF82366AB6B00106010 /* ToiletHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6450CF72366AB6B00106010 /* ToiletHeaderCell.swift */; };
@@ -325,12 +328,15 @@
 		B62354D7236278BD004F615F /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
 		B62354D9236278EF004F615F /* Menu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
 		B62354DB2362CF55004F615F /* HoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoTableView.swift; sourceTree = "<group>"; };
+		B6275C3224596FEB004165B5 /* PermissionDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionDialog.swift; sourceTree = "<group>"; };
+		B6275C3424596FF3004165B5 /* PermissionDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PermissionDialog.xib; sourceTree = "<group>"; };
 		B635A4B823A76F09000B1E73 /* btn_me.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = btn_me.json; sourceTree = "<group>"; };
 		B635A4BA23A76FC5000B1E73 /* img_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_0.png; sourceTree = "<group>"; };
 		B64276CB241724AE00EC17D6 /* MaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskController.swift; sourceTree = "<group>"; };
 		B6432F252443F2D700FE1AE7 /* KakaoNavi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoNavi.framework; sourceTree = "<group>"; };
 		B6432F282443F48B00FE1AE7 /* KakaoCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoCommon.framework; sourceTree = "<group>"; };
 		B6442812237A6DD700BFFF70 /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
+		B6443CAD2458058300200A7A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B6450CF32366834F00106010 /* ToiletCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToiletCommentCell.swift; sourceTree = "<group>"; };
 		B6450CF42366834F00106010 /* ToiletCommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToiletCommentCell.xib; sourceTree = "<group>"; };
 		B6450CF72366AB6B00106010 /* ToiletHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToiletHeaderCell.swift; sourceTree = "<group>"; };
@@ -603,6 +609,7 @@
 				AAC046332331F36100D5D5F6 /* Main.storyboard */,
 				AAC046362331F36200D5D5F6 /* Assets.xcassets */,
 				AAC0463B2331F36200D5D5F6 /* Info.plist */,
+				B6443CAD2458058300200A7A /* GoogleService-Info.plist */,
 				AAC047172332006500D5D5F6 /* Header.h */,
 			);
 			path = PooPee_ios;
@@ -736,6 +743,8 @@
 				AAC0467F2331F4BE00D5D5F6 /* BasicDialog.xib */,
 				B6451C512371654200090649 /* PopupMenu.swift */,
 				B6451C532371657600090649 /* PopupMenu.xib */,
+				B6275C3224596FEB004165B5 /* PermissionDialog.swift */,
+				B6275C3424596FF3004165B5 /* PermissionDialog.xib */,
 			);
 			path = dialog;
 			sourceTree = "<group>";
@@ -889,7 +898,7 @@
 				AAC046282331F36100D5D5F6 /* Sources */,
 				AAC046292331F36100D5D5F6 /* Frameworks */,
 				AAC0462A2331F36100D5D5F6 /* Resources */,
-				FAF2FC8570B14CDB97141F6A /* [CP] Embed Pods Frameworks */,
+				669F3E094281197E3C386128 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1000,6 +1009,7 @@
 				AAE6D2BA234AF1BB00DEC86C /* Login.storyboard in Resources */,
 				AAE6D2AF234AD00200DEC86C /* NavMainView.xib in Resources */,
 				AA222A68233DD9CC00D9354A /* daum_copyright.png in Resources */,
+				B6443CAE2458058300200A7A /* GoogleService-Info.plist in Resources */,
 				AAC0469F2331F4BF00D5D5F6 /* Gallery.storyboard in Resources */,
 				AAE6D2B1234AD1EC00DEC86C /* HoSlideMenu.xib in Resources */,
 				AA222A6D233DD9CC00D9354A /* point_sprite.png in Resources */,
@@ -1031,6 +1041,7 @@
 				AA222A72233DD9CC00D9354A /* map_pin.png in Resources */,
 				AA222A64233DD9CC00D9354A /* copyright.png in Resources */,
 				B679DCEF23837042000FE802 /* NoticeCell.xib in Resources */,
+				B6275C3524596FF3004165B5 /* PermissionDialog.xib in Resources */,
 				AA222A70233DD9CC00D9354A /* noimage256.png in Resources */,
 				AA222A69233DD9CC00D9354A /* map_pin@3x.png in Resources */,
 				B62354DA236278EF004F615F /* Menu.storyboard in Resources */,
@@ -1080,6 +1091,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		669F3E094281197E3C386128 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PooPee_ios/Pods-PooPee_ios-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PooPee_ios/Pods-PooPee_ios-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PooPee_ios/Pods-PooPee_ios-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7E59ACA78E06F064F14647BC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1124,23 +1152,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FAF2FC8570B14CDB97141F6A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PooPee_ios/Pods-PooPee_ios-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PooPee_ios/Pods-PooPee_ios-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PooPee_ios/Pods-PooPee_ios-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1150,6 +1161,7 @@
 			files = (
 				AAC046BB2331F4BF00D5D5F6 /* SharedManager.swift in Sources */,
 				AAC046B82331F4BF00D5D5F6 /* HoSlideMenu.swift in Sources */,
+				B6275C3324596FEB004165B5 /* PermissionDialog.swift in Sources */,
 				AAC046AE2331F4BF00D5D5F6 /* NetDefine.swift in Sources */,
 				AAE6D2AD234ACFF800DEC86C /* NavMainView.swift in Sources */,
 				AAC046A62331F4BF00D5D5F6 /* ObserverManager.swift in Sources */,
@@ -1404,7 +1416,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 2QRKV87SPM;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1424,7 +1436,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework/Resources",
 				);
-				MARKETING_VERSION = 0.0.0;
+				MARKETING_VERSION = 1.6.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -1460,7 +1472,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 2QRKV87SPM;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1479,7 +1491,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework/Resources",
 				);
-				MARKETING_VERSION = 0.0.0;
+				MARKETING_VERSION = 1.6.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
