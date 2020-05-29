@@ -18,7 +18,7 @@ target 'PooPee_ios' do
     # Pods for testing
   end
   
-  pod 'Alamofire', '~> 4.7' # http 통신용
+  pod 'Alamofire' # http 통신용
   pod 'Kingfisher' # 이미지로딩
   pod 'lottie-ios'
   pod 'Google-Mobile-Ads-SDK'

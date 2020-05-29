@@ -27,15 +27,15 @@ class BaseTask {
         print("url : \(url)")
         print("params : \(params.description)")
         
-        Alamofire.request(
+        AF.request(
             nUrl,
             method: method,
             parameters: params,
             encoding: encoding,
             headers: headers
         )
-            .responseJSON { (response) in
-                self.onResponse(response: response, onSuccess: onSuccess, onFailed: onFailed)
+        .responseJSON { (response) in
+            self.onResponse(response: response, onSuccess: onSuccess, onFailed: onFailed)
         }
     }
     
@@ -59,52 +59,47 @@ class BaseTask {
             }
         }
         
-        Alamofire.upload(
+        AF.upload(
             multipartFormData: multipartFormData,
-            usingThreshold: UInt64.init(),
             to: NetDefine.BASE_APP + url,
             method: .post,
             headers: ["Content-type": "multipart/form-data"]
-            )
-        { (result) in
-            switch result{
-            case .success(let upload, _, _):
-                upload.responseJSON { response in
-                    self.onResponse(response: response, onSuccess: onSuccess, onFailed: onFailed)
-                }
-            case .failure(let error):
-                print(error)
-                onFailed(9)
-            }
-        }
+        )
+        .uploadProgress(queue: .main, closure: { progress in
+            //Current upload progress of file
+            print("Upload Progress: \(progress.fractionCompleted)")
+        })
+        .responseJSON(completionHandler: { data in
+            //Do what ever you want to do with response
+            self.onResponse(response: data, onSuccess: onSuccess, onFailed: onFailed)
+        })
     }
     
     func download(
         url: String,
         fileUrl: URL,
         onProgress: @escaping (_ progress: Progress)->(),
-        onSuccess: @escaping (_ data: DownloadResponse<Data>)->()
+        onSuccess: @escaping (_ data: AFDownloadResponse<Data>)->()
     ) {
         print("url : \(url)")
-        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+        let destination: DownloadRequest.Destination = { _, _ in
             return (fileUrl, [.removePreviousFile, .createIntermediateDirectories])
         }
         
-        Alamofire.download(
+        AF.download(
             url,
             to: destination
         )
-            .downloadProgress { (progress) in
-                onProgress(progress)
+        .downloadProgress { (progress) in
+            onProgress(progress)
         }
         .responseData { (data) in
-            print("download_complete: \(data.destinationURL!)")
             onSuccess(data)
         }
     }
     
     func onResponse(
-        response: DataResponse<Any>,
+        response: AFDataResponse<Any>,
         onSuccess: @escaping (_ response: NSDictionary)->(),
         onFailed: @escaping (_ statusCode: Int)->()
     ) {
@@ -114,8 +109,9 @@ class BaseTask {
             print("statusCode : \(statusCode)")
         }
         
-        if let result = response.result.value {
-            let jsonResult = result as? NSDictionary
+        switch response.result {
+        case .success(let data):
+            let jsonResult = data as? NSDictionary
             if (jsonResult != nil) {
                 print("response : \(jsonResult!.description)")
                 onSuccess(jsonResult!)
@@ -123,9 +119,9 @@ class BaseTask {
                 print("onFailed")
                 onFailed(statusCode)
             }
-        } else {
-            print("onFailed")
-            onFailed(statusCode)
+        case .failure(let err):
+            print("err발생")
+            print(err)
         }
     }
     
