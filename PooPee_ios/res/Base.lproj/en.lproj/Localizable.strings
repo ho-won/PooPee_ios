@@ -71,15 +71,14 @@
 "toast_report_complete" = "I reported it";
 "toast_copy_complete" = "I copied it to the clipboard.";
 "toast_terms_check" = "Agree to all terms";
+"toast_send_complete" = "Send is complete";
+"toast_please_permission" = "This is a task that requires permission";
 
 // gallery
-"gallery_select_dir" = "폴더선택";
-"gallery_show_all" = "전체보기";
-"gallery_back_to_dir" = "이전 폴더로 이동";
-"gallery_upload" = "올리기";
-
-// toast
-"toast_please_permission" = "This is a task that requires permission";
+"gallery_select_dir" = "Select folder";
+"gallery_show_all" = "View all";
+"gallery_back_to_dir" = "Go to previous folder";
+"gallery_upload" = "Upload";
 
 // nav
 "nav_text_01" = "My Info";
@@ -88,6 +87,7 @@
 "nav_text_04" = "Setting";
 "nav_text_05" = "Inquiry";
 "nav_text_06" = "Login";
+"nav_text_07" = "Toilet registration";
 
 // home
 "home_text_01" = "Place, address search";
@@ -113,6 +113,8 @@
 "home_text_21" = "SMS";
 "home_text_22" = "Connect to the navigation app at that address";
 "home_text_23" = "Share the location of the toilet to that address";
+"home_text_24" = "Inquiries/Suggestions";
+"home_text_25" = "Please enter your details";
 
 // login
 "login_01" = "Please login";
@@ -154,6 +156,23 @@
 "toilet_option_10" = "Management agency";
 "toilet_option_11" = "Management tel";
 "toilet_option_12" = "Opening time";
+"toilet_btn_01" = "report";
+"toilet_btn_02" = "delete";
+"toilet_btn_03" = "update";
+"toilet_create_text_01" = "Search for a toilet address to register";
+"toilet_create_text_02" = "Select on map";
+"toilet_create_text_03" = "Choose a toilet location";
+"toilet_create_text_04" = "Move the map to locate the toilet.";
+"toilet_create_text_05" = "Toilet registration";
+"toilet_create_text_06" = "Entering toilet information";
+"toilet_create_text_07" = "Toilet name";
+"toilet_create_text_08" = "Toilet name (up to 20 characters)";
+"toilet_create_text_09" = "Toilet description";
+"toilet_create_text_10" = "Enter toilet description";
+"toilet_create_text_11" = "Toilet type";
+"toilet_create_text_12" = "register";
+"toilet_create_text_13" = "Completed registering the toilet";
+"toilet_create_text_14" = "Toilet location search";
 
 // permission
 "permission_text_01" = "Permissions for using the app";

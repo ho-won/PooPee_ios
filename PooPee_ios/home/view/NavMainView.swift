@@ -17,6 +17,9 @@ class NavMainView: UIView, MFMailComposeViewControllerDelegate {
     @IBOutlet var iv_login: UIImageView!
     @IBOutlet var tv_name: UILabel!
     
+    @IBOutlet var layout_toilet_create: UIView!
+    @IBOutlet var tv_toilet_create: UILabel!
+    
     @IBOutlet var layout_my_info: UIView!
     @IBOutlet var tv_my_info: UILabel!
     
@@ -52,6 +55,7 @@ class NavMainView: UIView, MFMailComposeViewControllerDelegate {
         
         layout_content_marginTop.constant = UIApplication.shared.statusBarFrame.height
         
+        tv_toilet_create.text = "nav_text_07".localized
         tv_my_info.text = "nav_text_01".localized
         tv_notice.text = "nav_text_02".localized
         tv_request.text = "nav_text_03".localized
@@ -81,6 +85,15 @@ class NavMainView: UIView, MFMailComposeViewControllerDelegate {
     func setListener() {
         layout_login.setOnClickListener {
             if (!SharedManager.instance.isLoginCheck()) {
+                let controller = ObserverManager.getController(name: "LoginController")
+                ObserverManager.root.startPresent(controller: controller)
+            }
+        }
+        layout_toilet_create.setOnClickListener {
+            if (SharedManager.instance.isLoginCheck()) {
+                let controller = ObserverManager.getController(name: "ToiletSearchController")
+                ObserverManager.root.startPresent(controller: controller)
+            } else {
                 let controller = ObserverManager.getController(name: "LoginController")
                 ObserverManager.root.startPresent(controller: controller)
             }

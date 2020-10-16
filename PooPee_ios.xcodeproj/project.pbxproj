@@ -104,7 +104,6 @@
 		AAE6D2AB234ABEBD00DEC86C /* KakaoKeywordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAE6D2A9234ABEBD00DEC86C /* KakaoKeywordCell.xib */; };
 		AAE6D2AD234ACFF800DEC86C /* NavMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE6D2AC234ACFF800DEC86C /* NavMainView.swift */; };
 		AAE6D2AF234AD00200DEC86C /* NavMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAE6D2AE234AD00200DEC86C /* NavMainView.xib */; };
-		AAE6D2B1234AD1EC00DEC86C /* HoSlideMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAE6D2B0234AD1EC00DEC86C /* HoSlideMenu.xib */; };
 		AAE6D2B6234AF18100DEC86C /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE6D2B5234AF18100DEC86C /* LoginController.swift */; };
 		AAE6D2B8234AF18D00DEC86C /* JoinController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE6D2B7234AF18D00DEC86C /* JoinController.swift */; };
 		AAE6D2BA234AF1BB00DEC86C /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAE6D2B9234AF1BB00DEC86C /* Login.storyboard */; };
@@ -123,9 +122,10 @@
 		B62354DC2362CF55004F615F /* HoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62354DB2362CF55004F615F /* HoTableView.swift */; };
 		B6275C3324596FEB004165B5 /* PermissionDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6275C3224596FEB004165B5 /* PermissionDialog.swift */; };
 		B6275C3524596FF3004165B5 /* PermissionDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6275C3424596FF3004165B5 /* PermissionDialog.xib */; };
+		B62D7A852537F28100DED549 /* ToiletSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62D7A842537F28100DED549 /* ToiletSearchController.swift */; };
+		B62D7A8A2537F29800DED549 /* ToiletCreateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62D7A892537F29800DED549 /* ToiletCreateController.swift */; };
 		B635A4B923A76F09000B1E73 /* btn_me.json in Resources */ = {isa = PBXBuildFile; fileRef = B635A4B823A76F09000B1E73 /* btn_me.json */; };
 		B635A4BB23A76FC5000B1E73 /* img_0.png in Resources */ = {isa = PBXBuildFile; fileRef = B635A4BA23A76FC5000B1E73 /* img_0.png */; };
-		B64276CC241724AE00EC17D6 /* MaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64276CB241724AE00EC17D6 /* MaskController.swift */; };
 		B6432F262443F2D700FE1AE7 /* KakaoNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6432F252443F2D700FE1AE7 /* KakaoNavi.framework */; };
 		B6432F292443F48B00FE1AE7 /* KakaoCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6432F282443F48B00FE1AE7 /* KakaoCommon.framework */; };
 		B6442813237A6DD700BFFF70 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6442812237A6DD700BFFF70 /* LogManager.swift */; };
@@ -144,6 +144,11 @@
 		B6461A172372686A005E087C /* CommentUpdateDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6461A162372686A005E087C /* CommentUpdateDialog.xib */; };
 		B679DCED23837039000FE802 /* NoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B679DCEC23837039000FE802 /* NoticeCell.swift */; };
 		B679DCEF23837042000FE802 /* NoticeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B679DCEE23837042000FE802 /* NoticeCell.xib */; };
+		B68D2B38253843E300AD9262 /* AdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68D2B37253843E300AD9262 /* AdView.swift */; };
+		B6B589F82539557D00027DC5 /* ToiletCreateDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B589F72539557D00027DC5 /* ToiletCreateDialog.swift */; };
+		B6B589FD2539558A00027DC5 /* ToiletCreateDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6B589FC2539558A00027DC5 /* ToiletCreateDialog.xib */; };
+		B6B58A022539559D00027DC5 /* ToiletUpdateDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B58A012539559D00027DC5 /* ToiletUpdateDialog.swift */; };
+		B6B58A07253955B000027DC5 /* ToiletUpdateDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6B58A06253955B000027DC5 /* ToiletUpdateDialog.xib */; };
 		C1977938AA4B01B2F749455C /* Pods_PooPee_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5716735CC53F207E9E141340 /* Pods_PooPee_iosTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -310,7 +315,6 @@
 		AAE6D2A9234ABEBD00DEC86C /* KakaoKeywordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KakaoKeywordCell.xib; sourceTree = "<group>"; };
 		AAE6D2AC234ACFF800DEC86C /* NavMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavMainView.swift; sourceTree = "<group>"; };
 		AAE6D2AE234AD00200DEC86C /* NavMainView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NavMainView.xib; sourceTree = "<group>"; };
-		AAE6D2B0234AD1EC00DEC86C /* HoSlideMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HoSlideMenu.xib; sourceTree = "<group>"; };
 		AAE6D2B5234AF18100DEC86C /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		AAE6D2B7234AF18D00DEC86C /* JoinController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinController.swift; sourceTree = "<group>"; };
 		AAE6D2B9234AF1BB00DEC86C /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
@@ -330,9 +334,10 @@
 		B62354DB2362CF55004F615F /* HoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoTableView.swift; sourceTree = "<group>"; };
 		B6275C3224596FEB004165B5 /* PermissionDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionDialog.swift; sourceTree = "<group>"; };
 		B6275C3424596FF3004165B5 /* PermissionDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PermissionDialog.xib; sourceTree = "<group>"; };
+		B62D7A842537F28100DED549 /* ToiletSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToiletSearchController.swift; sourceTree = "<group>"; };
+		B62D7A892537F29800DED549 /* ToiletCreateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToiletCreateController.swift; sourceTree = "<group>"; };
 		B635A4B823A76F09000B1E73 /* btn_me.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = btn_me.json; sourceTree = "<group>"; };
 		B635A4BA23A76FC5000B1E73 /* img_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_0.png; sourceTree = "<group>"; };
-		B64276CB241724AE00EC17D6 /* MaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskController.swift; sourceTree = "<group>"; };
 		B6432F252443F2D700FE1AE7 /* KakaoNavi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoNavi.framework; sourceTree = "<group>"; };
 		B6432F282443F48B00FE1AE7 /* KakaoCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoCommon.framework; sourceTree = "<group>"; };
 		B6442812237A6DD700BFFF70 /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
@@ -351,6 +356,11 @@
 		B6461A162372686A005E087C /* CommentUpdateDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentUpdateDialog.xib; sourceTree = "<group>"; };
 		B679DCEC23837039000FE802 /* NoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCell.swift; sourceTree = "<group>"; };
 		B679DCEE23837042000FE802 /* NoticeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeCell.xib; sourceTree = "<group>"; };
+		B68D2B37253843E300AD9262 /* AdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdView.swift; sourceTree = "<group>"; };
+		B6B589F72539557D00027DC5 /* ToiletCreateDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToiletCreateDialog.swift; sourceTree = "<group>"; };
+		B6B589FC2539558A00027DC5 /* ToiletCreateDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToiletCreateDialog.xib; sourceTree = "<group>"; };
+		B6B58A012539559D00027DC5 /* ToiletUpdateDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToiletUpdateDialog.swift; sourceTree = "<group>"; };
+		B6B58A06253955B000027DC5 /* ToiletUpdateDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToiletUpdateDialog.xib; sourceTree = "<group>"; };
 		C759BD0A3E536775278B9BA3 /* Pods-PooPee_iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PooPee_iosUITests.debug.xcconfig"; path = "Target Support Files/Pods-PooPee_iosUITests/Pods-PooPee_iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CFEBFBCDA7812FEBDF5A1C45 /* Pods_PooPee_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PooPee_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E09BD614A8857D50B0D82447 /* Pods-PooPee_iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PooPee_iosUITests.release.xcconfig"; path = "Target Support Files/Pods-PooPee_iosUITests/Pods-PooPee_iosUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -544,26 +554,30 @@
 		AABC56BE2334BD2E008E61DE /* view */ = {
 			isa = PBXGroup;
 			children = (
-				AAE6D2A8234ABEBD00DEC86C /* KakaoKeywordCell.swift */,
-				AAE6D2A9234ABEBD00DEC86C /* KakaoKeywordCell.xib */,
-				AAE6D2AC234ACFF800DEC86C /* NavMainView.swift */,
-				AAE6D2AE234AD00200DEC86C /* NavMainView.xib */,
-				AACEC55E234C621B009087BD /* PopupDialog.swift */,
-				AACEC561234C6231009087BD /* PopupDialog.xib */,
-				AACEC563234C6B02009087BD /* ToiletDialog.swift */,
-				AACEC565234C6B0C009087BD /* ToiletDialog.xib */,
-				B6450CF32366834F00106010 /* ToiletCommentCell.swift */,
-				B6450CF42366834F00106010 /* ToiletCommentCell.xib */,
-				B6450CF72366AB6B00106010 /* ToiletHeaderCell.swift */,
-				B6450CF92366AB7800106010 /* ToiletHeaderCell.xib */,
 				B6461A0C23726830005E087C /* CommentCreateDialog.swift */,
 				B6461A0E23726839005E087C /* CommentCreateDialog.xib */,
 				B6461A1023726849005E087C /* CommentReportDialog.swift */,
 				B6461A1223726851005E087C /* CommentReportDialog.xib */,
 				B6461A142372685F005E087C /* CommentUpdateDialog.swift */,
 				B6461A162372686A005E087C /* CommentUpdateDialog.xib */,
+				AAE6D2A8234ABEBD00DEC86C /* KakaoKeywordCell.swift */,
+				AAE6D2A9234ABEBD00DEC86C /* KakaoKeywordCell.xib */,
+				AAE6D2AC234ACFF800DEC86C /* NavMainView.swift */,
+				AAE6D2AE234AD00200DEC86C /* NavMainView.xib */,
+				AACEC55E234C621B009087BD /* PopupDialog.swift */,
+				AACEC561234C6231009087BD /* PopupDialog.xib */,
 				B60A2C7A2449A2E0005F8D5A /* ShareDialog.swift */,
 				B60A2C7C2449A2EF005F8D5A /* ShareDialog.xib */,
+				B6450CF32366834F00106010 /* ToiletCommentCell.swift */,
+				B6450CF42366834F00106010 /* ToiletCommentCell.xib */,
+				B6B589F72539557D00027DC5 /* ToiletCreateDialog.swift */,
+				B6B589FC2539558A00027DC5 /* ToiletCreateDialog.xib */,
+				AACEC563234C6B02009087BD /* ToiletDialog.swift */,
+				AACEC565234C6B0C009087BD /* ToiletDialog.xib */,
+				B6450CF72366AB6B00106010 /* ToiletHeaderCell.swift */,
+				B6450CF92366AB7800106010 /* ToiletHeaderCell.xib */,
+				B6B58A012539559D00027DC5 /* ToiletUpdateDialog.swift */,
+				B6B58A06253955B000027DC5 /* ToiletUpdateDialog.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -571,17 +585,17 @@
 		AAC046232331F36100D5D5F6 = {
 			isa = PBXGroup;
 			children = (
-				B6099679244D281D004D591A /* KakaoLink.framework */,
-				B609967A244D281D004D591A /* KakaoMessageTemplate.framework */,
-				B6432F282443F48B00FE1AE7 /* KakaoCommon.framework */,
-				B6432F252443F2D700FE1AE7 /* KakaoNavi.framework */,
 				AA222A34233DD9CC00D9354A /* DaumMap.embeddedframework */,
+				3F2F63358F4A9E7245B0D336 /* Frameworks */,
+				3C76E74BBEF10995815F6F38 /* Pods */,
 				AAC0462E2331F36100D5D5F6 /* PooPee_ios */,
 				AAC046432331F36200D5D5F6 /* PooPee_iosTests */,
 				AAC0464E2331F36200D5D5F6 /* PooPee_iosUITests */,
 				AAC0462D2331F36100D5D5F6 /* Products */,
-				3C76E74BBEF10995815F6F38 /* Pods */,
-				3F2F63358F4A9E7245B0D336 /* Frameworks */,
+				B6432F282443F48B00FE1AE7 /* KakaoCommon.framework */,
+				B6099679244D281D004D591A /* KakaoLink.framework */,
+				B609967A244D281D004D591A /* KakaoMessageTemplate.framework */,
+				B6432F252443F2D700FE1AE7 /* KakaoNavi.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -599,18 +613,18 @@
 			isa = PBXGroup;
 			children = (
 				AAC0466F2331F4BE00D5D5F6 /* common */,
+				AAC046932331F4BF00D5D5F6 /* copy */,
 				AAC046642331F4BE00D5D5F6 /* gallery */,
 				AAC0465D2331F4BE00D5D5F6 /* home */,
 				AAE6D2B4234AF16500DEC86C /* login */,
 				AAE6D2BB234B003B00DEC86C /* menu */,
-				AAC046932331F4BF00D5D5F6 /* copy */,
 				AAC0465F2331F4BE00D5D5F6 /* res */,
-				AAC0462F2331F36100D5D5F6 /* AppDelegate.swift */,
-				AAC046332331F36100D5D5F6 /* Main.storyboard */,
-				AAC046362331F36200D5D5F6 /* Assets.xcassets */,
-				AAC0463B2331F36200D5D5F6 /* Info.plist */,
-				B6443CAD2458058300200A7A /* GoogleService-Info.plist */,
 				AAC047172332006500D5D5F6 /* Header.h */,
+				B6443CAD2458058300200A7A /* GoogleService-Info.plist */,
+				AAC0463B2331F36200D5D5F6 /* Info.plist */,
+				AAC0462F2331F36100D5D5F6 /* AppDelegate.swift */,
+				AAC046362331F36200D5D5F6 /* Assets.xcassets */,
+				AAC046332331F36100D5D5F6 /* Main.storyboard */,
 			);
 			path = PooPee_ios;
 			sourceTree = "<group>";
@@ -640,7 +654,8 @@
 				AABC56BE2334BD2E008E61DE /* view */,
 				AAC0465E2331F4BE00D5D5F6 /* HomeController.swift */,
 				AACEC567234C7209009087BD /* ToiletController.swift */,
-				B64276CB241724AE00EC17D6 /* MaskController.swift */,
+				B62D7A892537F29800DED549 /* ToiletCreateController.swift */,
+				B62D7A842537F28100DED549 /* ToiletSearchController.swift */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -772,8 +787,8 @@
 			children = (
 				AAC046852331F4BE00D5D5F6 /* viewpager */,
 				AAC0468A2331F4BE00D5D5F6 /* HoSlideMenu.swift */,
-				AAE6D2B0234AD1EC00DEC86C /* HoSlideMenu.xib */,
 				B62354DB2362CF55004F615F /* HoTableView.swift */,
+				B68D2B37253843E300AD9262 /* AdView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -898,7 +913,7 @@
 				AAC046282331F36100D5D5F6 /* Sources */,
 				AAC046292331F36100D5D5F6 /* Frameworks */,
 				AAC0462A2331F36100D5D5F6 /* Resources */,
-				939DD440FB02CAECA325F71C /* [CP] Embed Pods Frameworks */,
+				C0F41FD08B01E8568779373E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -954,7 +969,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1030;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = ho1;
 				TargetAttributes = {
 					AAC0462B2331F36100D5D5F6 = {
@@ -1011,7 +1026,6 @@
 				AA222A68233DD9CC00D9354A /* daum_copyright.png in Resources */,
 				B6443CAE2458058300200A7A /* GoogleService-Info.plist in Resources */,
 				AAC0469F2331F4BF00D5D5F6 /* Gallery.storyboard in Resources */,
-				AAE6D2B1234AD1EC00DEC86C /* HoSlideMenu.xib in Resources */,
 				AA222A6D233DD9CC00D9354A /* point_sprite.png in Resources */,
 				B6461A0F23726839005E087C /* CommentCreateDialog.xib in Resources */,
 				AAC046B12331F4BF00D5D5F6 /* BasicDialog.xib in Resources */,
@@ -1026,6 +1040,7 @@
 				B635A4B923A76F09000B1E73 /* btn_me.json in Resources */,
 				AA222A62233DD9CC00D9354A /* map_pinup@3x.png in Resources */,
 				AA222A6A233DD9CC00D9354A /* map_present_tracking.png in Resources */,
+				B6B58A07253955B000027DC5 /* ToiletUpdateDialog.xib in Resources */,
 				B60A2C7224498C52005F8D5A /* Localizable.strings in Resources */,
 				AAC046B72331F4BF00D5D5F6 /* MyTab.xib in Resources */,
 				AACEC566234C6B0C009087BD /* ToiletDialog.xib in Resources */,
@@ -1037,6 +1052,7 @@
 				AA222A60233DD9CC00D9354A /* detail_button.png in Resources */,
 				AA222A74233DD9CC00D9354A /* noimage.png in Resources */,
 				AAC046372331F36200D5D5F6 /* Assets.xcassets in Resources */,
+				B6B589FD2539558A00027DC5 /* ToiletCreateDialog.xib in Resources */,
 				AA222A6F233DD9CC00D9354A /* info_box_tail.png in Resources */,
 				AA222A72233DD9CC00D9354A /* map_pin.png in Resources */,
 				AA222A64233DD9CC00D9354A /* copyright.png in Resources */,
@@ -1135,7 +1151,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		939DD440FB02CAECA325F71C /* [CP] Embed Pods Frameworks */ = {
+		C0F41FD08B01E8568779373E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1189,6 +1205,7 @@
 				AAC046BC2331F4BF00D5D5F6 /* KeyText.swift in Sources */,
 				AAC046C32331F4BF00D5D5F6 /* CopyCustomView.swift in Sources */,
 				AAE6D2B8234AF18D00DEC86C /* JoinController.swift in Sources */,
+				B62D7A852537F28100DED549 /* ToiletSearchController.swift in Sources */,
 				AAC046A52331F4BF00D5D5F6 /* SQLiteManager.swift in Sources */,
 				AAC046AD2331F4BF00D5D5F6 /* MyExtension.swift in Sources */,
 				AAC046C12331F4BF00D5D5F6 /* CopyView.swift in Sources */,
@@ -1196,6 +1213,7 @@
 				AAC046992331F4BF00D5D5F6 /* HomeController.swift in Sources */,
 				AAC0469C2331F4BF00D5D5F6 /* color.swift in Sources */,
 				AAC0469B2331F4BF00D5D5F6 /* style.swift in Sources */,
+				B6B589F82539557D00027DC5 /* ToiletCreateDialog.swift in Sources */,
 				AAC046A22331F4BF00D5D5F6 /* GalleryDir.swift in Sources */,
 				AAC046302331F36100D5D5F6 /* AppDelegate.swift in Sources */,
 				AAC046B42331F4BF00D5D5F6 /* HoViewPager.swift in Sources */,
@@ -1203,6 +1221,7 @@
 				AAC046B22331F4BF00D5D5F6 /* BaseTask.swift in Sources */,
 				AABC56C42334BD5C008E61DE /* Toilet.swift in Sources */,
 				AAC046BA2331F4BF00D5D5F6 /* ToastManager.swift in Sources */,
+				B68D2B38253843E300AD9262 /* AdView.swift in Sources */,
 				B6451C522371654200090649 /* PopupMenu.swift in Sources */,
 				AACEC55F234C621B009087BD /* PopupDialog.swift in Sources */,
 				B679DCED23837039000FE802 /* NoticeCell.swift in Sources */,
@@ -1218,8 +1237,8 @@
 				B6461A1123726849005E087C /* CommentReportDialog.swift in Sources */,
 				AAC046A12331F4BF00D5D5F6 /* DirSelectDialog.swift in Sources */,
 				AAC046A82331F4BF00D5D5F6 /* MyAnimation.swift in Sources */,
-				B64276CC241724AE00EC17D6 /* MaskController.swift in Sources */,
 				B6450CF82366AB6B00106010 /* ToiletHeaderCell.swift in Sources */,
+				B6B58A022539559D00027DC5 /* ToiletUpdateDialog.swift in Sources */,
 				AAC046AF2331F4BF00D5D5F6 /* MainController.swift in Sources */,
 				AAC046A92331F4BF00D5D5F6 /* StrManager.swift in Sources */,
 				AAC046AC2331F4BF00D5D5F6 /* PermissionManager.swift in Sources */,
@@ -1227,6 +1246,7 @@
 				AAC046B02331F4BF00D5D5F6 /* BasicDialog.swift in Sources */,
 				AABC56BC2334965F008E61DE /* DBVersionTask.swift in Sources */,
 				AAC046AA2331F4BF00D5D5F6 /* MyUtil.swift in Sources */,
+				B62D7A8A2537F29800DED549 /* ToiletCreateController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1317,6 +1337,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1342,7 +1363,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1380,6 +1401,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1399,7 +1421,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1416,7 +1438,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 2QRKV87SPM;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1436,7 +1458,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework/Resources",
 				);
-				MARKETING_VERSION = 1.6.0;
+				MARKETING_VERSION = 2.0.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -1472,7 +1494,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 2QRKV87SPM;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1491,7 +1513,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework/Resources",
 				);
-				MARKETING_VERSION = 1.6.0;
+				MARKETING_VERSION = 2.0.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",

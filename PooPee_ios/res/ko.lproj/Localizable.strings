@@ -71,15 +71,14 @@
 "toast_report_complete" = "신고했습니다";
 "toast_copy_complete" = "클립보드로 복사했습니다";
 "toast_terms_check" = "모든약관에 동의해주세요";
+"toast_send_complete" = "전송했습니다";
+"toast_please_permission" = "권한이 필요한 작업입니다";
 
 // gallery
 "gallery_select_dir" = "폴더선택";
 "gallery_show_all" = "전체보기";
 "gallery_back_to_dir" = "이전 폴더로 이동";
 "gallery_upload" = "올리기";
-
-// toast
-"toast_please_permission" = "권한이 필요한 작업입니다";
 
 // nav
 "nav_text_01" = "내정보";
@@ -88,6 +87,7 @@
 "nav_text_04" = "설정";
 "nav_text_05" = "PooPee 문의사항";
 "nav_text_06" = "로그인하기";
+"nav_text_07" = "화장실등록";
 
 // home
 "home_text_01" = "장소,주소 검색";
@@ -113,6 +113,8 @@
 "home_text_21" = "문자전송";
 "home_text_22" = "해당 주소로 내비게이션 앱에 연결합니다";
 "home_text_23" = "해당 주소로 화장실 위치를 공유합니다";
+"home_text_24" = "문의하기/건의사항";
+"home_text_25" = "내용을 입력해주세요";
 
 // login
 "login_01" = "로그인을 해주세요";
@@ -154,6 +156,23 @@
 "toilet_option_10" = "관리기관명";
 "toilet_option_11" = "관리기관 전화번호";
 "toilet_option_12" = "개방시간";
+"toilet_btn_01" = "신고";
+"toilet_btn_02" = "삭제";
+"toilet_btn_03" = "수정";
+"toilet_create_text_01" = "등록할 화장실 주소를 검색하세요";
+"toilet_create_text_02" = "지도에서 선택";
+"toilet_create_text_03" = "화장실 위치 선택";
+"toilet_create_text_04" = "지도를 움직여 화장실 위치를 지정하세요.";
+"toilet_create_text_05" = "화장실 등록";
+"toilet_create_text_06" = "화장실 정보 입력";
+"toilet_create_text_07" = "화장실명";
+"toilet_create_text_08" = "화장실명 (20자 이내)";
+"toilet_create_text_09" = "화장실 설명";
+"toilet_create_text_10" = "화장실 설명 또는 비밀번호 입력";
+"toilet_create_text_11" = "화장실 구분";
+"toilet_create_text_12" = "등록";
+"toilet_create_text_13" = "화장실을 등록했습니다";
+"toilet_create_text_14" = "화장실 위치 검색";
 
 // permission
 "permission_text_01" = "앱 이용을 위한 권한 안내";

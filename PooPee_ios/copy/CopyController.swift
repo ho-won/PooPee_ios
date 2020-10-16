@@ -1,11 +1,3 @@
-//
-//  CopyController.swift
-//  base_ios
-//
-//  Created by Jung ho Seo on 2018. 11. 8..
-//  Copyright © 2018년 EMEYE. All rights reserved.
-//
-
 import UIKit
 import Alamofire
 

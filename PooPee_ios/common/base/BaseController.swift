@@ -12,7 +12,6 @@ import UIKit
 public class BaseController: UIViewController {
     var indicator: UIActivityIndicatorView! = nil
     var segueData = SegueData() // 현재 SegueData (getIntent 용도)
-    var resultSegueData = SegueData() // 안드로이드의 onActivityResult 용도
     var isViewDidAppear = false // viewDidAppear 두번호출 방지
     
     override public func viewDidLoad() {
@@ -41,8 +40,8 @@ public class BaseController: UIViewController {
     }
     
     override public func viewWillAppear(_ animated: Bool) {
-        if (ObserverManager.root.resultSegueData.resultCode == SegueData.RESULT_OK) {
-            onControllerResult(requestCode: ObserverManager.root.resultSegueData.requestCode, data: ObserverManager.root.resultSegueData)
+        if (ObserverManager.root.segueData.resultCode == SegueData.RESULT_OK) {
+            onControllerResult(requestCode: ObserverManager.root.segueData.requestCode, data: ObserverManager.root.segueData)
         }
         ObserverManager.root = self
     }

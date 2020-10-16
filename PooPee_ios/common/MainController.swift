@@ -109,10 +109,8 @@ class MainController: BaseController {
      * 자동로그인 체크.
      */
     func gotoHome() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            let controller = ObserverManager.getController(name: "HomeController")
-            self.startPresent(controller: controller)
-        }
+        let controller = ObserverManager.getController(name: "HomeController")
+        self.startPresent(controller: controller)
     }
     
     /**

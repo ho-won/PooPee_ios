@@ -31,8 +31,6 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     @IBOutlet var btn_search_delete: UIButton!
     @IBOutlet var tl_search: UITableView!
     
-    @IBOutlet var ad_view: GADBannerView!
-    
     var mNavMainView = NavMainView()
     var mHoSlideMenu = HoSlideMenu()
     
@@ -73,7 +71,7 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         tl_search.dataSource = self
         tl_search.delegate = self
         
-        mHoSlideMenu.setMenuView(menu_view: mNavMainView, menu_width: dimen.home_menu_width)
+        mHoSlideMenu.setMenuView(mNavMainView, dimen.home_menu_width, true)
         view.addSubview(mHoSlideMenu)
         
         
@@ -83,11 +81,6 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         lottie_my_position.loopMode = .loop
         lottie_my_position.isUserInteractionEnabled = false
         setMyPosition(isHidden: true)
-        
-        ad_view.adSize = kGADAdSizeBanner
-        ad_view.adUnitID = "banner_ad_unit_id".localized
-        ad_view.rootViewController = self
-        ad_view.load(GADRequest())
         
         mInterstitialAd = GADInterstitial(adUnitID: "interstitial_ad_unit_id".localized)
         mInterstitialAd.load(GADRequest())

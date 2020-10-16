@@ -786,3 +786,69 @@ class btn_share: UIView {
     }
 }
 
+class cb_toilet_gubun_public: UIButton {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        setSelected(selected: false)
+    }
+    func setSelected(selected: Bool) {
+        self.isSelected = selected
+        if (self.isSelected) {
+            self.setImage(UIImage(named: "ic_public_p")!, for: UIControl.State.normal)
+        } else {
+            self.setImage(UIImage(named: "ic_public_n")!, for: UIControl.State.normal)
+        }
+    }
+}
+
+class cb_toilet_gubun_man: UIButton {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        setSelected(selected: false)
+    }
+    func setSelected(selected: Bool) {
+        self.isSelected = selected
+        if (self.isSelected) {
+            self.setImage(UIImage(named: "ic_man_p")!, for: UIControl.State.normal)
+        } else {
+            self.setImage(UIImage(named: "ic_man_n")!, for: UIControl.State.normal)
+        }
+    }
+}
+
+class cb_toilet_gubun_woman: UIButton {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _init()
+    }
+    func _init() {
+        setSelected(selected: false)
+    }
+    func setSelected(selected: Bool) {
+        self.isSelected = selected
+        if (self.isSelected) {
+            self.setImage(UIImage(named: "ic_woman_p")!, for: UIControl.State.normal)
+        } else {
+            self.setImage(UIImage(named: "ic_woman_n")!, for: UIControl.State.normal)
+        }
+    }
+}
+

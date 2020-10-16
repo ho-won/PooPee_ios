@@ -13,7 +13,7 @@ struct NetDefine {
     
     static let BASE_APP = ObserverManager.isTestServer() ? "http://poopee.ho1.co.kr/" : "http://poopee.ho1.co.kr/"
     
-    static let TEST_API = "test" // test
+    static let TEST_API = "etcs/test" // test
     static let DB_CHECK = "etcs/dbCheck" // [GET] toilet db 버전체크
     static let SERVER_CHECK = "etcs/serverCheck" // [GET] 서버상태체크
     static let LOGIN = "members/login" // [POST] 로그인
@@ -28,6 +28,12 @@ struct NetDefine {
     static let COMMENT_DELETE = "comments/deleteComment" // [DELETE] 댓글삭제
     static let COMMENT_UPDATE = "comments/updateComment" // [PUT] 댓글수정
     static let COMMENT_REPORT_CREATE = "commentReports/createReport" // [POST] 댓글신고
+    static let SUGGEST_CREATE = "suggests/createSuggest" // [POST] 문의하기
+    static let TOILET_CREATE = "toilet2s/createToilet" // [POST] 화장실추가
+    static let TOILET_UPDATE = "toilet2s/updateToilet" // [PUT] 화장실수정
+    static let TOILET_DELETE = "toilet2s/deleteToilet" // [DELETE] 화장삭제
+    static let TOILET_REPORT = "toiletReports/createReport" // [POST] 화장실신고
+    static let TOILET_LIST = "toilet2s/getToiletList" // [GET] 화장실목록
     
     static let TERMS_01 = "etcs/getTerms01" // 개인정보 처리방침
     static let TERMS_02 = "etcs/getTerms02" // 서비스 이용약관

@@ -102,14 +102,9 @@ class SettingController: BaseController {
             ObserverManager.root.startPresent(controller: controller)
         }
         layout_terms_03.setOnClickListener {
-            if (SharedManager.instance.getMemberUsername() == "master") {
-                let controller = ObserverManager.getController(name: "MaskController")
-                ObserverManager.root.startPresent(controller: controller)
-            } else {
-                let controller = ObserverManager.getController(name: "TermsController")
-                controller.segueData.action = TermsController.ACTION_TERMS_03
-                ObserverManager.root.startPresent(controller: controller)
-            }
+            let controller = ObserverManager.getController(name: "TermsController")
+            controller.segueData.action = TermsController.ACTION_TERMS_03
+            ObserverManager.root.startPresent(controller: controller)
         }
     }
     

@@ -83,7 +83,7 @@ class ObserverManager {
     static func updateInPlayMarket() {
         // let appStoreLink = "itms-apps://itunes.apple.com/app/id\(APPLE_ID)?action=write-review" // 앱 스토어의 리뷰화면으로 바로이동
         if let url = URL(string: "itms-apps://itunes.apple.com/app/id\(ObserverManager.APPLE_ID)"), UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            UIApplication.shared.open(url, options: [:], completionHandler: {_ in exit(0)})
         }
     }
     
@@ -126,8 +126,11 @@ class ObserverManager {
         case "ToiletController": // 화장실상세보기
             let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ToiletController") as! ToiletController
             return controller
-        case "MaskController": // 마스크구매
-            let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MaskController") as! MaskController
+        case "ToiletSearchController": // 화장실등록 주소검색
+            let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ToiletSearchController") as! ToiletSearchController
+            return controller
+        case "ToiletCreateController": // 화장실등록
+            let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ToiletCreateController") as! ToiletCreateController
             return controller
         default:
             let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController") as! MainController
