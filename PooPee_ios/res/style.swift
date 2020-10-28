@@ -341,9 +341,9 @@ class btn_like: UIButton {
     func setSelected(selected: Bool) {
         self.isSelected = selected
         if (self.isSelected) {
-            self.setImage(UIImage(named: "ic_heart_pressed")!, for: UIControl.State.normal)
+            self.setImage(UIImage(named: "ic_good_pressed")!, for: UIControl.State.normal)
         } else {
-            self.setImage(UIImage(named: "ic_heart_normal")!, for: UIControl.State.normal)
+            self.setImage(UIImage(named: "ic_good_normal")!, for: UIControl.State.normal)
         }
     }
 }
@@ -372,9 +372,9 @@ class bg_layout_like: UIView {
         _init()
     }
     func _init() {
-        self.layer.borderWidth = 1
-        self.layer.borderColor = colors.main_line.cgColor
-        self.layer.cornerRadius = 12
+        self.layer.borderWidth = 0.5
+        self.layer.borderColor = UIColor(hex: "#d3d6db")!.cgColor
+        self.layer.cornerRadius = 16
     }
 }
 

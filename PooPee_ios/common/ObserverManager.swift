@@ -22,6 +22,7 @@ class ObserverManager {
     
     static var mapView: MTMapView!
     static let imageMaker = UIImage(named: "ic_position")!.imageResize(sizeChange: CGSize(width: 14, height: 16))
+    static let imageMakerUp = UIImage(named: "ic_position_up")!.imageResize(sizeChange: CGSize(width: 14, height: 16))
     static let imageMe = UIImage(named: "ic_marker")!.imageResize(sizeChange: CGSize(width: 30, height: 30))
     static var my_position: MTMapPOIItem! = nil
     static var currentToilet: Toilet = Toilet()
@@ -44,16 +45,20 @@ class ObserverManager {
     }
     
     static func addPOIItem(toilet: Toilet) {
+        var image: UIImage! = imageMaker
+        if (toilet.toilet_id < 0) {
+            image = imageMakerUp
+        }
         let marker = MTMapPOIItem()
         marker.itemName = toilet.name
         marker.tag = toilet.toilet_id
         marker.mapPoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: toilet.latitude, longitude: toilet.longitude))
         marker.markerType = MTMapPOIItemMarkerType.customImage // 마커타입을 커스텀 마커로 지정.
-        marker.customImage = imageMaker // 마커 이미지.
+        marker.customImage = image // 마커 이미지.
         marker.markerSelectedType = MTMapPOIItemMarkerSelectedType.customImage // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
-        marker.customSelectedImage = imageMaker
+        marker.customSelectedImage = image
         
-        let imageOffset = Int32(imageMaker.size.height)
+        let imageOffset = Int32(image.size.height)
         marker.customImageAnchorPointOffset = MTMapImageOffset(offsetX: imageOffset, offsetY: imageOffset)
         mapView.add(marker)
     }

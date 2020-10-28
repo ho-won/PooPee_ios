@@ -52,6 +52,7 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     var mInterstitialAd: GADInterstitial!
     
     var mToilet: Toilet = Toilet()
+    var mToiletList: [Int : Toilet] = [Int : Toilet]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -281,6 +282,22 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
             dialog.setToilet(toilet: toilet)
             dialog.refresh()
             dialog.show(view: ObserverManager.root.view)
+        } else if (poiItem.tag < 0) {
+            if let toilet = mToiletList[poiItem.tag] {
+                let dialog = ToiletDialog(onDetail: { it in
+                    self.mToilet = it
+                    if (self.mInterstitialAd.isReady) {
+                        self.mInterstitialAd.present(fromRootViewController: self)
+                    } else {
+                        let controller = ObserverManager.getController(name: "ToiletController")
+                        controller.segueData.putExtra(key: ToiletController.TOILET, data: self.mToilet)
+                        ObserverManager.root.startPresent(controller: controller)
+                    }
+                })
+                dialog.setToilet(toilet: toilet)
+                dialog.refresh()
+                dialog.show(view: ObserverManager.root.view)
+            }
         }
         return false
     }
@@ -310,6 +327,8 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         for toilet in toiletList {
             ObserverManager.addPOIItem(toilet: toilet)
         }
+        taskToiletList(mLastLatitude, mLastLongitude)
+        
         if (SharedManager.instance.getLatitude() > 0) {
             ObserverManager.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
         }
@@ -323,6 +342,50 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         edt_search.resignFirstResponder()
         tl_search.setVisibility(gone: true, dimen: 0, attribute: .height)
         setMyPosition(isHidden: true)
+    }
+    
+    /**
+     * [GET] 화장실목록
+     */
+    func taskToiletList(_ latitude: Double, _ longitude: Double) {
+        var params: Parameters = Parameters()
+        params.put("latitude", latitude)
+        params.put("longitude", longitude)
+        
+        BaseTask().request(url: NetDefine.TOILET_LIST, method: .get, params: params
+            , onSuccess: { it in
+                if (it.getInt("rst_code") == 0) {
+                    let jsonArray = it.getJSONArray("toilets")
+                    self.mToiletList = [Int:Toilet]()
+
+                    for i in 0 ..< jsonArray.count {
+                        let jsonObject = jsonArray.getJSONObject(i)
+                        let toilet = Toilet()
+                        toilet.toilet_id = jsonObject.getInt("toilet_id")
+                        toilet.member_id = jsonObject.getString("member_id")
+                        toilet.type = "유저"
+                        toilet.m_name = jsonObject.getString("m_name")
+                        toilet.name = jsonObject.getString("name")
+                        toilet.content = jsonObject.getString("content")
+                        toilet.address_new = jsonObject.getString("address_new")
+                        toilet.address_old = jsonObject.getString("address_old")
+                        if (jsonObject.getInt("unisex") == 1) {
+                            toilet.unisex = "Y"
+                        } else {
+                            toilet.unisex = "N"
+                        }
+                        toilet.m_poo = jsonObject.getString("man")
+                        toilet.w_poo = jsonObject.getString("woman")
+                        toilet.latitude = jsonObject.getDouble("latitude")
+                        toilet.longitude = jsonObject.getDouble("longitude")
+                        self.mToiletList[toilet.toilet_id] = toilet
+                        ObserverManager.addPOIItem(toilet: toilet)
+                    }
+                }
+        }
+            , onFailed: { statusCode in
+                
+        })
     }
 
     /**

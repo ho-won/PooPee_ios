@@ -149,6 +149,8 @@
 		B6B589FD2539558A00027DC5 /* ToiletCreateDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6B589FC2539558A00027DC5 /* ToiletCreateDialog.xib */; };
 		B6B58A022539559D00027DC5 /* ToiletUpdateDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B58A012539559D00027DC5 /* ToiletUpdateDialog.swift */; };
 		B6B58A07253955B000027DC5 /* ToiletUpdateDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6B58A06253955B000027DC5 /* ToiletUpdateDialog.xib */; };
+		B6F8651225492DD4008F80FA /* ToiletReportDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F8651125492DD4008F80FA /* ToiletReportDialog.swift */; };
+		B6F8651725492DDE008F80FA /* ToiletReportDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6F8651625492DDE008F80FA /* ToiletReportDialog.xib */; };
 		C1977938AA4B01B2F749455C /* Pods_PooPee_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5716735CC53F207E9E141340 /* Pods_PooPee_iosTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -361,6 +363,8 @@
 		B6B589FC2539558A00027DC5 /* ToiletCreateDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToiletCreateDialog.xib; sourceTree = "<group>"; };
 		B6B58A012539559D00027DC5 /* ToiletUpdateDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToiletUpdateDialog.swift; sourceTree = "<group>"; };
 		B6B58A06253955B000027DC5 /* ToiletUpdateDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToiletUpdateDialog.xib; sourceTree = "<group>"; };
+		B6F8651125492DD4008F80FA /* ToiletReportDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToiletReportDialog.swift; sourceTree = "<group>"; };
+		B6F8651625492DDE008F80FA /* ToiletReportDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToiletReportDialog.xib; sourceTree = "<group>"; };
 		C759BD0A3E536775278B9BA3 /* Pods-PooPee_iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PooPee_iosUITests.debug.xcconfig"; path = "Target Support Files/Pods-PooPee_iosUITests/Pods-PooPee_iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CFEBFBCDA7812FEBDF5A1C45 /* Pods_PooPee_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PooPee_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E09BD614A8857D50B0D82447 /* Pods-PooPee_iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PooPee_iosUITests.release.xcconfig"; path = "Target Support Files/Pods-PooPee_iosUITests/Pods-PooPee_iosUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -578,6 +582,8 @@
 				B6450CF92366AB7800106010 /* ToiletHeaderCell.xib */,
 				B6B58A012539559D00027DC5 /* ToiletUpdateDialog.swift */,
 				B6B58A06253955B000027DC5 /* ToiletUpdateDialog.xib */,
+				B6F8651125492DD4008F80FA /* ToiletReportDialog.swift */,
+				B6F8651625492DDE008F80FA /* ToiletReportDialog.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1026,6 +1032,7 @@
 				AA222A68233DD9CC00D9354A /* daum_copyright.png in Resources */,
 				B6443CAE2458058300200A7A /* GoogleService-Info.plist in Resources */,
 				AAC0469F2331F4BF00D5D5F6 /* Gallery.storyboard in Resources */,
+				B6F8651725492DDE008F80FA /* ToiletReportDialog.xib in Resources */,
 				AA222A6D233DD9CC00D9354A /* point_sprite.png in Resources */,
 				B6461A0F23726839005E087C /* CommentCreateDialog.xib in Resources */,
 				AAC046B12331F4BF00D5D5F6 /* BasicDialog.xib in Resources */,
@@ -1229,6 +1236,7 @@
 				AACEC564234C6B02009087BD /* ToiletDialog.swift in Sources */,
 				B62354D623627897004F615F /* TermsController.swift in Sources */,
 				AAC046BD2331F4BF00D5D5F6 /* BaseController.swift in Sources */,
+				B6F8651225492DD4008F80FA /* ToiletReportDialog.swift in Sources */,
 				AABC56C22334BD51008E61DE /* KaKaoKeyword.swift in Sources */,
 				AAE6D2BD234B006400DEC86C /* NoticeController.swift in Sources */,
 				B6450CF52366834F00106010 /* ToiletCommentCell.swift in Sources */,
@@ -1438,7 +1446,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 2QRKV87SPM;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1458,7 +1466,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework/Resources",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -1494,7 +1502,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 2QRKV87SPM;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1513,7 +1521,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework/Resources",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
