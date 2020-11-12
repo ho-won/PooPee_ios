@@ -121,6 +121,7 @@ class ToiletSearchController: BaseController {
     
     override func onControllerResult(requestCode: Int, data: SegueData) {
         if (requestCode == ToiletSearchController.RESULT_CREATE) {
+            getParentController().view.makeToast(message: "toilet_create_text_13".localized)
             finish()
         }
     }

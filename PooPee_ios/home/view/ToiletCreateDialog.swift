@@ -173,6 +173,7 @@ class ToiletCreateDialog: BaseDialog {
      * [POST] 화장실추가
      */
     func taskCreateToilet(_ address_new: String, _ address_old: String) {
+        ObserverManager.root.showLoading()
         var params: Parameters = Parameters()
         params.put("member_id", SharedManager.instance.getMemberId())
         params.put("name", edt_title.text!) // 화장실명
@@ -194,17 +195,13 @@ class ToiletCreateDialog: BaseDialog {
         BaseTask().request(url: NetDefine.TOILET_CREATE, method: .post, params: params
             , onSuccess: { response in
                 if (response.getInt("rst_code") == 0) {
-                    ObserverManager.root.view.makeToast(message: "toilet_create_text_13".localized)
-                    DispatchQueue.main.asyncAfter(
-                        deadline: .now() + 1,
-                        execute: {
-                            self.onToiletCreate()
-                            self.dismiss()
-                        })
+                    self.onToiletCreate()
+                    self.dismiss()
                 }
+                ObserverManager.root.hideLoading()
         }
             , onFailed: { statusCode in
-                
+                ObserverManager.root.hideLoading()
         })
     }
     
