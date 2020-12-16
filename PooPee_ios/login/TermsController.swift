@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebKit
 
 class TermsController: BaseController {
     static let ACTION_TERMS_01 = "ACTION_TERMS_01" // 개인정보 처리방침
@@ -14,7 +15,7 @@ class TermsController: BaseController {
     static let ACTION_TERMS_03 = "ACTION_TERMS_03" // 위치정보기반 서비스 이용약관
     
     @IBOutlet var root_view: UIView!
-    @IBOutlet var web_view: UIWebView!
+    @IBOutlet var web_view: WKWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,11 +32,11 @@ class TermsController: BaseController {
         
         LogManager.e(action)
         if (action == TermsController.ACTION_TERMS_01) {
-            web_view.loadRequest(URLRequest(url: URL(string: NetDefine.BASE_APP + NetDefine.TERMS_01)!))
+            web_view.load(URLRequest(url: URL(string: NetDefine.BASE_APP + NetDefine.TERMS_01)!))
         } else if (action == TermsController.ACTION_TERMS_02) {
-            web_view.loadRequest(URLRequest(url: URL(string: NetDefine.BASE_APP + NetDefine.TERMS_02)!))
+            web_view.load(URLRequest(url: URL(string: NetDefine.BASE_APP + NetDefine.TERMS_02)!))
         } else if (action == TermsController.ACTION_TERMS_03) {
-            web_view.loadRequest(URLRequest(url: URL(string: NetDefine.BASE_APP + NetDefine.TERMS_03)!))
+            web_view.load(URLRequest(url: URL(string: NetDefine.BASE_APP + NetDefine.TERMS_03)!))
         }
     }
     

@@ -54,14 +54,14 @@ class PopupDialog: BaseDialog {
             let array = imageName.split(separator: ".")
             imageName = array[0] + "_en." + array[1]
         }
-        iv_popup.kf.setImage(with: URL(string: NetDefine.BASE_APP + imageName)) { result in
+        iv_popup.kf.setImage(with: URL(string: NetDefine.BASE_APP + imageName), completionHandler:  { result in
             switch result {
             case .success(let value):
                 self.iv_popup_height.constant = value.image.size.height / (value.image.size.width / self.iv_popup.frame.width)
             case .failure(let error):
                 print("Error: \(error)")
             }
-        }
+        })
     }
     
     func refresh() {

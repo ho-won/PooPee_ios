@@ -49,12 +49,13 @@ class PermissionManager {
                 case .notDetermined:
                     // won't happen but still
                     break
-                @unknown default: break
-                    
+                default:
+                    break
                 }
             }
             break
-        @unknown default: break
+        default:
+            break
         }
     }
     
