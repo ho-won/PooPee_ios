@@ -10,7 +10,19 @@
 #endif
 #endif
 
-#import "FIRCoreDiagnostics.h"
+#import "firebasecore.nanopb.h"
+#import "GDTCORAssert.h"
+#import "GDTCORDirectorySizeTracker.h"
+#import "GDTCORLifecycle.h"
+#import "GDTCORPlatform.h"
+#import "GDTCORReachability.h"
+#import "GDTCORRegistrar.h"
+#import "GDTCORStorageEventSelector.h"
+#import "GDTCORStorageProtocol.h"
+#import "GDTCORUploader.h"
+#import "GoogleDataTransportInternal.h"
+#import "FIRCoreDiagnosticsData.h"
+#import "FIRCoreDiagnosticsInterop.h"
 
 FOUNDATION_EXPORT double FirebaseCoreDiagnosticsVersionNumber;
 FOUNDATION_EXPORT const unsigned char FirebaseCoreDiagnosticsVersionString[];

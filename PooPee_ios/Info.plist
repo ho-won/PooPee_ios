@@ -33,6 +33,15 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-2933424745841582~3156554647</string>
+	<key>GADIsAdManagerApp</key>
+	<true/>
+	<key>SKAdNetworkItems</key>
+	<array>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>cstr6suwn9.skadnetwork</string>
+		</dict>
+	</array>
 	<key>KAKAO_APP_KEY</key>
 	<string>53565fe7d8355fff626939459a32e7d0</string>
 	<key>LSApplicationQueriesSchemes</key>
