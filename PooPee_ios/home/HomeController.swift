@@ -12,7 +12,7 @@ import CoreLocation
 import Lottie
 import GoogleMobileAds
 
-class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate, GADInterstitialDelegate {
+class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate, GADFullScreenContentDelegate {
     
     @IBOutlet var map_view: UIView!
     @IBOutlet var lottie_my_position: AnimationView!
@@ -49,7 +49,7 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     var mLastLatitude: Double = 0 // 마지막 중심 latitude
     var mLastLongitude: Double = 0 // 마지막 중심 longitude
     
-    var mInterstitialAd: GADInterstitial!
+    var mInterstitialAd: GADInterstitialAd?
     
     var mToilet: Toilet = Toilet()
     var mToiletList: [Int : Toilet] = [Int : Toilet]()
@@ -83,9 +83,18 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         lottie_my_position.isUserInteractionEnabled = false
         setMyPosition(isHidden: true)
         
-        mInterstitialAd = GADInterstitial(adUnitID: "interstitial_ad_unit_id".localized)
-        mInterstitialAd.load(GADRequest())
-        mInterstitialAd.delegate = self
+        let request = GADRequest()
+        GADInterstitialAd.load(
+            withAdUnitID: "interstitial_ad_unit_id".localized,
+            request: request,
+            completionHandler: { [self] ad, error in
+                if let error = error {
+                    print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+                    return
+                }
+                mInterstitialAd = ad
+                mInterstitialAd?.fullScreenContentDelegate = self
+            })
         
         _init()
         setListener()
@@ -217,10 +226,20 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         }
     }
     
-    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         let controller = ObserverManager.getController(name: "ToiletController")
         controller.segueData.putExtra(key: ToiletController.TOILET, data: self.mToilet)
         ObserverManager.root.startPresent(controller: controller)
+        
+        mInterstitialAd = nil
+    }
+    
+    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+        let controller = ObserverManager.getController(name: "ToiletController")
+        controller.segueData.putExtra(key: ToiletController.TOILET, data: self.mToilet)
+        ObserverManager.root.startPresent(controller: controller)
+        
+        mInterstitialAd = nil
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -271,8 +290,8 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
             let toilet = SQLiteManager.instance.getToilet(id: poiItem.tag)
             let dialog = ToiletDialog(onDetail: { it in
                 self.mToilet = it
-                if (self.mInterstitialAd.isReady) {
-                    self.mInterstitialAd.present(fromRootViewController: self)
+                if (self.mInterstitialAd != nil) {
+                    self.mInterstitialAd?.present(fromRootViewController: self)
                 } else {
                     let controller = ObserverManager.getController(name: "ToiletController")
                     controller.segueData.putExtra(key: ToiletController.TOILET, data: self.mToilet)
@@ -286,8 +305,8 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
             if let toilet = mToiletList[poiItem.tag] {
                 let dialog = ToiletDialog(onDetail: { it in
                     self.mToilet = it
-                    if (self.mInterstitialAd.isReady) {
-                        self.mInterstitialAd.present(fromRootViewController: self)
+                    if (self.mInterstitialAd != nil) {
+                        self.mInterstitialAd?.present(fromRootViewController: self)
                     } else {
                         let controller = ObserverManager.getController(name: "ToiletController")
                         controller.segueData.putExtra(key: ToiletController.TOILET, data: self.mToilet)
