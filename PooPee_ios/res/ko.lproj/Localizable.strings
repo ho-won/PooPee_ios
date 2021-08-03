@@ -44,6 +44,7 @@
 "close" = "닫기";
 "copy" = "복사";
 "prev" = "이전";
+"reivew" = "리뷰 작성하기";
 
 // dialog
 "dialog_assign_new_version_update" = "새로운 업데이트가 있습니다. 원활한 사용을 위해서 업데이트를 추천합니다.\n업데이트 하시겠습니까?";

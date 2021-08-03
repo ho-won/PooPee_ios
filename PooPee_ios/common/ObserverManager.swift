@@ -92,6 +92,15 @@ class ObserverManager {
         }
     }
     
+    /**
+     * 앱의 스토어로 이동.
+     */
+    static func reviewInPlayMarket() {
+        if let url = URL(string: "itms-apps://itunes.apple.com/app/id\(ObserverManager.APPLE_ID)?action=write-review"), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: {_ in exit(0)})
+        }
+    }
+    
     static func getController(name: String) -> BaseController {
         switch name {
         // Gallery.storyboard

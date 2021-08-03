@@ -28,6 +28,7 @@ class SharedManager {
     let LATITUDE = "LATITUDE" // latitude
     let LONGITUDE = "LONGITUDE" // longitude
     let PUSH = "PUSH" // 푸시알림
+    let REVIEW_COUNT = "REVIEW_COUNT" // 리뷰팝업 조건
     
     private init() {
         
@@ -175,6 +176,18 @@ class SharedManager {
     
     func setPush(value: Bool) {
         UserDefaults.standard.set(value, forKey: PUSH)
+    }
+    
+    func getReviewCount() -> Int {
+        if (UserDefaults.standard.object(forKey: REVIEW_COUNT) != nil) {
+            return UserDefaults.standard.integer(forKey: REVIEW_COUNT)
+        } else {
+            return 0
+        }
+    }
+    
+    func setReviewCount(value: Int) {
+        UserDefaults.standard.set(value, forKey: REVIEW_COUNT)
     }
     
 }

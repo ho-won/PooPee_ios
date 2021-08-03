@@ -12,6 +12,7 @@ import MessageUI
 
 class ToiletController: BaseController, MFMessageComposeViewControllerDelegate {
     static let TOILET = "toilet"
+    static let REVIEW_COUNT = 3
     
     @IBOutlet var table_view: UITableView!
     
@@ -54,6 +55,10 @@ class ToiletController: BaseController, MFMessageComposeViewControllerDelegate {
         
         table_view.dataSource = self
         table_view.delegate = self
+        
+        if (SharedManager.instance.getReviewCount() < ToiletController.REVIEW_COUNT) {
+            SharedManager.instance.setReviewCount(value: SharedManager.instance.getReviewCount() + 1)
+        }
     }
     
     func refresh() {
@@ -208,7 +213,13 @@ class ToiletController: BaseController, MFMessageComposeViewControllerDelegate {
     }
     
     @IBAction func onBackPressed(_ sender: Any) {
-        finish()
+        if (SharedManager.instance.getReviewCount() == ToiletController.REVIEW_COUNT) {
+            SharedManager.instance.setReviewCount(value: SharedManager.instance.getReviewCount() + 1)
+            let dialog = ReviewDialog()
+            dialog.show(view: ObserverManager.root.view)
+        } else {
+            finish()
+        }
     }
     
 }
