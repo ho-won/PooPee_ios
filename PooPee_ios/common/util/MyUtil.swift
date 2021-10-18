@@ -6,6 +6,7 @@
 //  Copyright © 2018년 EMEYE. All rights reserved.
 //
 import UIKit
+import StoreKit
 
 class MyUtil {
     
@@ -121,6 +122,13 @@ class MyUtil {
                 completionHandler(false)
             }
         })
+    }
+    
+    /**
+     * In-App Review
+     */
+    public static func startInAppReview() {
+        SKStoreReviewController.requestReview()
     }
 
 }

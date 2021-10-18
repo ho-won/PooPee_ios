@@ -153,6 +153,11 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
             }
             ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: mLastLatitude, longitude: mLastLongitude)), animated: false)
         }
+        
+        if (SharedManager.instance.getReviewCount() == ToiletController.REVIEW_COUNT) {
+            SharedManager.instance.setReviewCount(value: SharedManager.instance.getReviewCount() + 1)
+            MyUtil.startInAppReview()
+        }
     }
     
     func setListener() {

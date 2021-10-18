@@ -213,13 +213,7 @@ class ToiletController: BaseController, MFMessageComposeViewControllerDelegate {
     }
     
     @IBAction func onBackPressed(_ sender: Any) {
-        if (SharedManager.instance.getReviewCount() == ToiletController.REVIEW_COUNT) {
-            SharedManager.instance.setReviewCount(value: SharedManager.instance.getReviewCount() + 1)
-            let dialog = ReviewDialog()
-            dialog.show(view: ObserverManager.root.view)
-        } else {
-            finish()
-        }
+        finish()
     }
     
 }
