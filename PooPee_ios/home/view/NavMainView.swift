@@ -29,6 +29,9 @@ class NavMainView: UIView, MFMailComposeViewControllerDelegate {
     @IBOutlet var layout_request: UIView!
     @IBOutlet var tv_request: UILabel!
     
+    @IBOutlet var layout_app_install: UIView!
+    @IBOutlet var tv_app_install: UILabel!
+    
     @IBOutlet var layout_setting: UIView!
     @IBOutlet var tv_setting: UILabel!
     
@@ -60,6 +63,7 @@ class NavMainView: UIView, MFMailComposeViewControllerDelegate {
         tv_notice.text = "nav_text_02".localized
         tv_request.text = "nav_text_03".localized
         tv_setting.text = "nav_text_04".localized
+        tv_app_install.text = "nav_text_08".localized
         
         refresh()
         setListener()
@@ -113,6 +117,9 @@ class NavMainView: UIView, MFMailComposeViewControllerDelegate {
         }
         layout_request.setOnClickListener {
             self.sendEmail()
+        }
+        layout_app_install.setOnClickListener {
+            MyUtil.shareText(NetDefine.BASE_APP + NetDefine.APP_INSTALL)
         }
         layout_setting.setOnClickListener {
             let controller = ObserverManager.getController(name: "SettingController")

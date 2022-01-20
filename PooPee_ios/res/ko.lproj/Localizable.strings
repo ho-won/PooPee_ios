@@ -11,12 +11,12 @@
 
 "admob_app_id" = "ca-app-pub-2933424745841582~3156554647";
 
-//"banner_ad_unit_id" = "ca-app-pub-2933424745841582/9578971692";
-//"interstitial_ad_unit_id" = "ca-app-pub-2933424745841582/5044545873";
+"banner_ad_unit_id" = "ca-app-pub-2933424745841582/9578971692";
+"interstitial_ad_unit_id" = "ca-app-pub-2933424745841582/5044545873";
 
 // test
-"banner_ad_unit_id" = "ca-app-pub-3940256099942544/6300978111";
-"interstitial_ad_unit_id" = "ca-app-pub-3940256099942544/1033173712";
+//"banner_ad_unit_id" = "ca-app-pub-3940256099942544/6300978111";
+//"interstitial_ad_unit_id" = "ca-app-pub-3940256099942544/1033173712";
 
 // word
 "yes" = "예";
@@ -89,6 +89,7 @@
 "nav_text_05" = "PooPee 문의사항";
 "nav_text_06" = "로그인하기";
 "nav_text_07" = "화장실등록";
+"nav_text_08" = "공유하기";
 
 // home
 "home_text_01" = "장소,주소 검색";

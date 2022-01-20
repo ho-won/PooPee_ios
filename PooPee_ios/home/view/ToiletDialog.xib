@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -64,7 +65,7 @@
                                     </constraints>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstItem="57Z-i0-yDq" firstAttribute="centerY" secondItem="7GH-iv-6p6" secondAttribute="centerY" id="EV9-UJ-7Kl"/>
                                 <constraint firstItem="57Z-i0-yDq" firstAttribute="centerX" secondItem="7GH-iv-6p6" secondAttribute="centerX" id="ROz-6e-63r"/>
@@ -121,7 +122,7 @@
                                     </constraints>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstItem="mHg-Od-1Rh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XAk-rl-1f0" secondAttribute="leading" constant="10" id="OEY-o5-uvv"/>
                                 <constraint firstItem="mHg-Od-1Rh" firstAttribute="centerX" secondItem="XAk-rl-1f0" secondAttribute="centerX" id="QiU-Ru-EWv"/>
@@ -167,7 +168,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="qAm-Y6-ZnU" secondAttribute="bottom" id="1up-bi-2wf"/>
                                         <constraint firstItem="qAm-Y6-ZnU" firstAttribute="top" secondItem="cDx-u8-G5v" secondAttribute="top" id="JX1-xg-azD"/>
@@ -211,7 +212,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="AXH-C0-jn1" secondAttribute="bottom" id="2Ke-pD-Isv"/>
                                         <constraint firstItem="aoF-yO-RUE" firstAttribute="leading" secondItem="SCN-3c-3jg" secondAttribute="trailing" constant="6" id="5EX-AP-pR8"/>
@@ -270,7 +271,7 @@
                                     </state>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstItem="HNI-fi-4cV" firstAttribute="top" secondItem="vAd-0H-i9I" secondAttribute="top" id="2uK-PF-91e"/>
                                 <constraint firstAttribute="bottom" secondItem="HNI-fi-4cV" secondAttribute="bottom" id="F03-Ws-34o"/>
@@ -298,6 +299,7 @@
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="P4A-YY-4po"/>
             <constraints>
                 <constraint firstItem="P4A-YY-4po" firstAttribute="trailing" secondItem="UEi-dm-NSy" secondAttribute="trailing" constant="20" id="Ha3-SC-do5"/>
                 <constraint firstItem="2Xs-sG-QGp" firstAttribute="top" secondItem="UEi-dm-NSy" secondAttribute="bottom" constant="8" id="LeT-hF-Sep"/>
@@ -306,12 +308,14 @@
                 <constraint firstItem="P4A-YY-4po" firstAttribute="trailing" secondItem="2Xs-sG-QGp" secondAttribute="trailing" id="mai-lV-US2"/>
                 <constraint firstItem="UEi-dm-NSy" firstAttribute="leading" secondItem="P4A-YY-4po" secondAttribute="leading" constant="20" id="u3I-EJ-It8"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="P4A-YY-4po"/>
             <point key="canvasLocation" x="131.8840579710145" y="154.01785714285714"/>
         </view>
     </objects>
     <resources>
         <image name="ic_navigation" width="40" height="40"/>
         <image name="ic_share" width="40" height="40"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

@@ -14,6 +14,7 @@ struct NetDefine {
     static let BASE_APP = ObserverManager.isTestServer() ? "http://poopee.ho1.co.kr/" : "http://poopee.ho1.co.kr/"
     
     static let TEST_API = "etcs/test" // test
+    static let APP_INSTALL = "etcs/appInstall" // test
     static let DB_CHECK = "etcs/dbCheck" // [GET] toilet db 버전체크
     static let SERVER_CHECK = "etcs/serverCheck" // [GET] 서버상태체크
     static let LOGIN = "members/login" // [POST] 로그인

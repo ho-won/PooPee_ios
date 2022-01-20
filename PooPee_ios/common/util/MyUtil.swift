@@ -130,6 +130,15 @@ class MyUtil {
     public static func startInAppReview() {
         SKStoreReviewController.requestReview()
     }
+    
+    public static func shareText(_ text: String) {
+        var activityItems = [String]()
+        activityItems.append(text)
+        
+        let activityControlle = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        activityControlle.popoverPresentationController?.sourceView = ObserverManager.root.view
+        ObserverManager.root.present(activityControlle, animated: true, completion: nil)
+    }
 
 }
 
