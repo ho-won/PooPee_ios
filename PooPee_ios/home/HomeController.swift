@@ -253,12 +253,18 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         let oldLocation: CLLocation = CLLocation(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
         let distance = newLocation.distance(from: oldLocation)
         
-        if (!mIsMinTime || distance < 5) {
+        // 업데이트 거리기준 추가
+        if (distance < 5) {
             return
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.mIsMinTime = true
-        }
+        
+        // 업데이트 시간기준 추가
+        // if (!mIsMinTime) {
+        //     return
+        // }
+        // DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        //     self.mIsMinTime = true
+        // }
         
         SharedManager.instance.setLatitude(value: locValue.latitude)
         SharedManager.instance.setLongitude(value: locValue.longitude)

@@ -17,11 +17,6 @@ public class BaseController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        if (NSStringFromClass(ObserverManager.root.classForCoder) != NSStringFromClass(MainController().classForCoder)) {
-            ObserverManager.preRoot = ObserverManager.root
-        } else {
-            ObserverManager.preRoot = MainController()
-        }
         ObserverManager.root = self
         
         let notificationCenter = NotificationCenter.default
@@ -201,8 +196,6 @@ public class BaseController: UIViewController {
      * 컨트롤러 종료
      */
     public func finish() {
-        ObserverManager.preRoot = ObserverManager.root
-        
         let transition: CATransition = CATransition()
         transition.duration = 0.25
         transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
@@ -216,8 +209,6 @@ public class BaseController: UIViewController {
      * 컨트롤러 종료
      */
     public func finishFromRight() {
-        ObserverManager.preRoot = ObserverManager.root
-        
         let transition: CATransition = CATransition()
         transition.duration = 0.25
         transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)

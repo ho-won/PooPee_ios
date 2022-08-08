@@ -16,7 +16,6 @@ class ObserverManager {
     static var isForeground = true // foreground background 체크
     
     static var root: BaseController! = MainController() // 현재 Controller
-    static var preRoot: BaseController! = MainController() // 직전 Controller
     
     static let DISTANCE: Double = 0.02
     

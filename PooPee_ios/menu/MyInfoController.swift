@@ -138,7 +138,7 @@ class MyInfoController: BaseController {
                 SharedManager.instance.setMemberPassword(value: pw)
                 SharedManager.instance.setMemberName(value: name)
                 SharedManager.instance.setMemberGender(value: gender)
-                ObserverManager.preRoot.view.makeToast(message: "toast_update_complete".localized)
+                self.getParentController().view.makeToast(message: "toast_update_complete".localized)
                 self.finish()
             }
             self.hideLoading()
