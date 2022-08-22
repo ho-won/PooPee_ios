@@ -21,7 +21,7 @@ class AdView: GADBannerView {
     }
     
     func _init() {
-        adSize = kGADAdSizeBanner
+        adSize = GADAdSizeBanner
         adUnitID = "banner_ad_unit_id".localized
         rootViewController = ObserverManager.root
         load(GADRequest())

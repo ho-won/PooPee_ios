@@ -118,7 +118,7 @@ class ToiletHeaderCell: UITableViewCell {
         
         tv_comment.text = "home_text_03".localized
         
-        ad_view.adSize = kGADAdSizeBanner
+        ad_view.adSize = GADAdSizeBanner
         ad_view.adUnitID = "banner_ad_unit_id".localized
         ad_view.rootViewController = ObserverManager.root
         ad_view.load(GADRequest())
