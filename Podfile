@@ -24,5 +24,9 @@ target 'PooPee_ios' do
   pod 'Google-Mobile-Ads-SDK'
   pod 'Firebase/Analytics'
   pod 'Firebase/Crashlytics'
-
+  pod 'KakaoSDKCommon'
+  pod 'KakaoSDKShare'
+  pod 'KakaoSDKTemplate'
+  pod 'KakaoSDKNavi'
+  
 end

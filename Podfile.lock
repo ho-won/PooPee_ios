@@ -96,6 +96,20 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.5.2):
     - GoogleUtilities/Logger
+  - KakaoSDKCommon (2.11.3):
+    - KakaoSDKCommon/Common (= 2.11.3)
+    - KakaoSDKCommon/Network (= 2.11.3)
+  - KakaoSDKCommon/Common (2.11.3)
+  - KakaoSDKCommon/Network (2.11.3):
+    - Alamofire (~> 5.1)
+    - KakaoSDKCommon/Common (= 2.11.3)
+  - KakaoSDKNavi (2.11.3):
+    - KakaoSDKCommon/Common (= 2.11.3)
+  - KakaoSDKShare (2.11.3):
+    - KakaoSDKCommon (= 2.11.3)
+    - KakaoSDKTemplate (= 2.11.3)
+  - KakaoSDKTemplate (2.11.3):
+    - KakaoSDKCommon/Common (= 2.11.3)
   - Kingfisher (7.1.1)
   - lottie-ios (3.2.3)
   - nanopb (2.30908.0):
@@ -110,6 +124,10 @@ DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Crashlytics
   - Google-Mobile-Ads-SDK
+  - KakaoSDKCommon
+  - KakaoSDKNavi
+  - KakaoSDKShare
+  - KakaoSDKTemplate
   - Kingfisher
   - lottie-ios
 
@@ -127,6 +145,10 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleUserMessagingPlatform
     - GoogleUtilities
+    - KakaoSDKCommon
+    - KakaoSDKNavi
+    - KakaoSDKShare
+    - KakaoSDKTemplate
     - Kingfisher
     - lottie-ios
     - nanopb
@@ -145,11 +167,15 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
   GoogleUserMessagingPlatform: ab890ce5f6620f293a21b6bdd82e416a2c73aeca
   GoogleUtilities: 8de2a97a17e15b6b98e38e8770e2d129a57c0040
+  KakaoSDKCommon: b4235203f67a5b6ee2df75eaf9bbc863c6d92e09
+  KakaoSDKNavi: 5168499579e915cf87c5f715b8de3c0706e310a3
+  KakaoSDKShare: 1a43689303e049a9b61a10e079ddb66e6e4a9806
+  KakaoSDKTemplate: 295e57cf2826bc2cbdaf2c37e1ee62e69ea58d74
   Kingfisher: f738f9c4a3415823b8e2985d10aa2d6a9f37bc4d
   lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
 
-PODFILE CHECKSUM: fbd5530e89321fd0ac24e6b950e0e0591c2b13f5
+PODFILE CHECKSUM: 04b5c9a41d8a2cebec07f7b30d936501de1ff372
 
 COCOAPODS: 1.11.3

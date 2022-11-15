@@ -10,8 +10,5 @@
 #define Header_h
 
 #import <DaumMap/MTMapView.h>
-#import <KakaoNavi/KakaoNavi.h>
-#import <KakaoLink/KakaoLink.h>
-#import <KakaoMessageTemplate/KakaoMessageTemplate.h>
 
 #endif /* Header_h */
