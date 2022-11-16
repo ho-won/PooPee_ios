@@ -27,6 +27,8 @@ class SettingController: BaseController {
     @IBOutlet var tv_terms_02: UILabel!
     @IBOutlet var layout_terms_03: UIView!
     @IBOutlet var tv_terms_03: UILabel!
+    @IBOutlet var layout_withdraw: UIView!
+    @IBOutlet var tv_withdraw: UILabel!
     
     
     override func viewDidLoad() {
@@ -40,6 +42,7 @@ class SettingController: BaseController {
         tv_terms_01.text = "menu_setting_04".localized
         tv_terms_02.text = "menu_setting_05".localized
         tv_terms_03.text = "menu_setting_06".localized
+        tv_withdraw.text = "menu_setting_07".localized
         
         _init()
         setListener()
@@ -69,11 +72,12 @@ class SettingController: BaseController {
             } else {
                 iv_login.image = UIImage(named: "ic_woman_profile")
             }
+            layout_withdraw.setVisibility(gone: false, dimen: 52, attribute: .height)
         } else {
             tv_login.text = "menu_setting_01".localized
             tv_logout.isHidden = true
-
             iv_login.image = UIImage(named: "ic_profile")
+            layout_withdraw.setVisibility(gone: true, dimen: 0, attribute: .height)
         }
         switch_push.isOn = SharedManager.instance.isPush()
     }
@@ -106,6 +110,41 @@ class SettingController: BaseController {
             controller.segueData.action = TermsController.ACTION_TERMS_03
             ObserverManager.root.startPresent(controller: controller)
         }
+        layout_withdraw.setOnClickListener {
+            let dialog = BasicDialog(
+                onLeftButton: {
+                    self.taskWithdraw()
+            },
+                onRightButton: {
+                    
+            })
+            dialog.setTextContent("menu_setting_08".localized)
+            dialog.setBtnLeft("confirm".localized)
+            dialog.setBtnRight("cancel".localized)
+            dialog.show(view: ObserverManager.root.view)
+        }
+    }
+    
+    /**
+     * [DELETE] 댓글삭제
+     */
+    func taskWithdraw() {
+        showLoading()
+        var params: Parameters = Parameters()
+        params.put("member_id", SharedManager.instance.getMemberId())
+        
+        BaseTask().request(url: NetDefine.USER_DELETE, method: .delete, params: params
+            , onSuccess: { it in
+                if (it.getInt("rst_code") == 0) {
+                    ObserverManager.logout()
+                    self.view.makeToast(message: "toast_withdraw".localized)
+                    self.refresh()
+                }
+                self.hideLoading()
+        }
+            , onFailed: { statusCode in
+                self.hideLoading()
+        })
     }
     
     @IBAction func onBackPressed(_ sender: Any) {

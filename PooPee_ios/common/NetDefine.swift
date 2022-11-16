@@ -20,6 +20,7 @@ struct NetDefine {
     static let LOGIN = "members/login" // [POST] 로그인
     static let JOIN = "members/join" // [POST] 회원가입
     static let USER_UPDATE = "members/updateUser" // [PUT] 회원정보수정
+    static let USER_DELETE = "members/deleteUser" // [DELETE] 회원탈퇴
     static let OVER_LAP = "members/getOverlap" // [GET] 아이디 중복체크
     static let NOTICE_LIST = "notices/getNoticeList" // [GET] 공지사항목록
     static let TOILET_INFO = "toilets/getToiletInfo" // [GET] 화장실 정보

@@ -11,12 +11,12 @@
 
 "admob_app_id" = "ca-app-pub-2933424745841582~3156554647";
 
-//"banner_ad_unit_id" = "ca-app-pub-2933424745841582/9578971692";
-//"interstitial_ad_unit_id" = "ca-app-pub-2933424745841582/5044545873";
+"banner_ad_unit_id" = "ca-app-pub-2933424745841582/9578971692";
+"interstitial_ad_unit_id" = "ca-app-pub-2933424745841582/5044545873";
 
 // test
-"banner_ad_unit_id" = "ca-app-pub-3940256099942544/6300978111";
-"interstitial_ad_unit_id" = "ca-app-pub-3940256099942544/1033173712";
+//"banner_ad_unit_id" = "ca-app-pub-3940256099942544/6300978111";
+//"interstitial_ad_unit_id" = "ca-app-pub-3940256099942544/1033173712";
 
 // word
 "yes" = "yes";
@@ -74,6 +74,7 @@
 "toast_terms_check" = "Agree to all terms";
 "toast_send_complete" = "Send is complete";
 "toast_please_permission" = "This is a task that requires permission";
+"toast_withdraw" = "Withdraw completed";
 
 // gallery
 "gallery_select_dir" = "Select folder";
@@ -144,6 +145,8 @@
 "menu_setting_04" = "Privacy Policy";
 "menu_setting_05" = "Terms of Service";
 "menu_setting_06" = "Terms of Service for Location-Based Services";
+"menu_setting_07" = "withdraw";
+"menu_setting_08" = "Would you like to withdraw?";
 
 // toilet
 "toilet_option_01" = "Man";

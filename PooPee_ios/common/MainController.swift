@@ -154,12 +154,12 @@ class MainController: BaseController {
                     SharedManager.instance.setNoticeImage(value: response.getString("notice_image"))
                     self.onVersionCheck(response: response); // 버전체크
                 } else {
-                    self.view.makeToast(message: "toast_checking_service")
+                    self.view.makeToast(message: "toast_checking_service".localized)
                     self.finish()
                 }
         }
             , onFailed: { statusCode in
-                self.view.makeToast(message: "toast_checking_service")
+                self.view.makeToast(message: "toast_checking_service".localized)
                 self.finish()
         })
     }
