@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // override point for customization after application launch.
-        KakaoSDK.initSDK(appKey: "$53565fe7d8355fff626939459a32e7d0")
+        KakaoSDK.initSDK(appKey: "53565fe7d8355fff626939459a32e7d0")
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         FirebaseApp.configure()
         return true

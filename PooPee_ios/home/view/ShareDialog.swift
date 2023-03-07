@@ -101,27 +101,23 @@ class ShareDialog: BaseDialog, MFMessageComposeViewControllerDelegate {
                     """
                     {
                         "object_type": "location",
-                        "address_title": "카카오 판교오피스 카페톡",
-                        "address": "경기 성남시 분당구 판교역로 235 에이치스퀘어 N동 8층",
+                        "address_title": "\(self.mToilet.name)",
+                        "address": "\(self.mAddressText)",
                         "content": {
-                            "description": "이번 주는 체리블라썸라떼 1+1",
-                            "image_url": "https://mud-kage.kakao.com/dn/bSbH9w/btqgegaEDfW/vD9KKV0hEintg6bZT4v4WK/kakaolink40_original.png",
+                            "image_url": "http://poopee.ho1.co.kr/image/banner.png",
+                            "image_width": 1024,
+                            "image_height": 500,
                             "link": {
-                                "mobile_web_url": "https://developers.kakao.com",
-                                "web_url": "https://developers.com"
+                                "mobile_web_url": "http://poopee.ho1.co.kr/etcs/app_install",
+                                "web_url": "http://poopee.ho1.co.kr/etcs/app_install"
                             },
-                            "title": "신메뉴 출시❤️ 체리블라썸라떼"
+                            "title": "[PooPee]\\n내 현재 위치 입니다!\\n\(self.mAddressText)"
                         },
-                        "social": {
-                            "comment_count": 45,
-                            "like_count": 286,
-                            "shared_count": 845
-                        }
                     }
                     """.data(using: .utf8)!
                 
                 var safariViewController : SFSafariViewController? // to keep instance
-                guard let templatable = try? SdkJSONDecoder.custom.decode(FeedTemplate.self, from: locationTemplateJsonStringData) else {
+                guard let templatable = try? SdkJSONDecoder.custom.decode(LocationTemplate.self, from: locationTemplateJsonStringData) else {
                     return
                 }
                 
@@ -155,40 +151,11 @@ class ShareDialog: BaseDialog, MFMessageComposeViewControllerDelegate {
                         }
                     }
                 }
-                
-                //                let template = KMTLocationTemplate { (templateBuilder) in
-                //                    templateBuilder.address = self.mAddressText
-                //                    templateBuilder.addressTitle = self.mToilet.name
-                //                    templateBuilder.buttonTitle = "home_text_15".localized
-                //
-                //                    templateBuilder.content = KMTContentObject { (contentBuilder) in
-                //                        contentBuilder.title = "home_text_14".localized + self.mAddressText
-                //                        contentBuilder.imageWidth = 1024
-                //                        contentBuilder.imageHeight = 500
-                //                        contentBuilder.imageURL = URL.init(string: "http://poopee.ho1.co.kr/image/banner.png")!
-                //                        contentBuilder.link = KMTLinkObject { (linkBuilder) in }
-                //                    }
-                //                }
-                //
-                //                KLKTalkLinkCenter.shared().sendDefault(with: template, success: { (warningMsg, argumentMsg) in }, failure: { (error) in })
             }
         }
         layout_02.setOnClickListener {
             if (self.mAction == ShareDialog.ACTION_NAVI) {
-//                let destination = NaviLocation(name: self.mAddressText, x: String(self.mToilet.longitude), y: String(self.mToilet.latitude))
-//                let option = NaviOption(coordType: .WGS84)
-//                
-//                guard let navigateUrl = NaviApi.shared.shareUrl(destination: destination, option: option) else {
-//                    return
-//                }
-//                
-//                if UIApplication.shared.canOpenURL(navigateUrl) {
-//                    UIApplication.shared.open(navigateUrl, options: [:], completionHandler: nil)
-//                } else {
-//                    UIApplication.shared.open(NaviApi.webNaviInstallUrl, options: [:], completionHandler: nil)
-//                }
-                
-                let destination = NaviLocation(name: "카카오판교오피스", x: "127.108640", y: "37.402111")
+                let destination = NaviLocation(name: self.mAddressText, x:  "\(self.mToilet.longitude)", y: "\(self.mToilet.latitude)")
                 let option = NaviOption(coordType: .WGS84)
                 guard let shareUrl = NaviApi.shared.shareUrl(destination: destination, option: option) else {
                     return
@@ -199,15 +166,6 @@ class ShareDialog: BaseDialog, MFMessageComposeViewControllerDelegate {
                 else {
                     UIApplication.shared.open(NaviApi.webNaviInstallUrl, options: [:], completionHandler: nil)
                 }
-                
-                //                let destination = KNVLocation(name: self.mAddressText, x: NSNumber(value: self.mToilet.longitude), y: NSNumber(value: self.mToilet.latitude))
-                //                let options = KNVOptions()
-                //                options.routeInfo = true
-                //                options.coordType = .WGS84
-                //                let params = KNVParams(destination: destination, options: options)
-                //                KNVNaviLauncher.shared().navigate(with: params) { (error) in
-                //
-                //                }
             } else if (self.mAction == ShareDialog.ACTION_SHARE) {
                 let messageController = MFMessageComposeViewController()
                 messageController.messageComposeDelegate = self
