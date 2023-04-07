@@ -15,7 +15,7 @@ import GoogleMobileAds
 class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate, GADFullScreenContentDelegate {
     
     @IBOutlet var map_view: UIView!
-    @IBOutlet var lottie_my_position: AnimationView!
+    @IBOutlet var lottie_my_position: LottieAnimationView!
     
     @IBOutlet var btn_menu: UIButton!
     @IBOutlet var btn_menu_marginTop: NSLayoutConstraint!
@@ -76,7 +76,7 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         view.addSubview(mHoSlideMenu)
         
         
-        let animation = Animation.named("btn_me")
+        let animation = LottieAnimation.named("btn_me")
         lottie_my_position.animation = animation
         lottie_my_position.contentMode = .scaleAspectFit
         lottie_my_position.loopMode = .loop
