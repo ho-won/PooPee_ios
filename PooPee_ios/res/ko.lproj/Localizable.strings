@@ -110,7 +110,7 @@
 "home_text_15" = "앱실행";
 "home_text_16" = "내비게이션연결";
 "home_text_17" = "위치공유";
-"home_text_18" = "T map";
+"home_text_18" = "TMAP";
 "home_text_19" = "카카오내비";
 "home_text_20" = "카카오톡";
 "home_text_21" = "문자전송";
@@ -118,6 +118,7 @@
 "home_text_23" = "해당 주소로 화장실 위치를 공유합니다";
 "home_text_24" = "문의하기/건의사항";
 "home_text_25" = "내용을 입력해주세요";
+"home_text_26" = "네이버 지도";
 
 // login
 "login_01" = "로그인을 해주세요";

@@ -26,12 +26,18 @@ class ShareDialog: BaseDialog, MFMessageComposeViewControllerDelegate {
     @IBOutlet var tv_content: UILabel!
     
     @IBOutlet var layout_01: UIView!
+    @IBOutlet var layout_01_width: NSLayoutConstraint!
     @IBOutlet var iv_01: UIImageView!
     @IBOutlet var tv_01: UILabel!
     
     @IBOutlet var layout_02: UIView!
+    @IBOutlet var layout_02_width: NSLayoutConstraint!
     @IBOutlet var iv_02: UIImageView!
     @IBOutlet var tv_02: UILabel!
+    
+    @IBOutlet var layout_03: UIView!
+    @IBOutlet var iv_03: UIImageView!
+    @IBOutlet var tv_03: UILabel!
     
     var mAction: String = ACTION_NAVI
     var mToilet: Toilet = Toilet()
@@ -69,13 +75,23 @@ class ShareDialog: BaseDialog, MFMessageComposeViewControllerDelegate {
     
     func refresh() {
         if (mAction == ShareDialog.ACTION_NAVI) {
+            layout_01_width.setMultiplier(multiplier: 0.333)
+            layout_02_width.setMultiplier(multiplier: 0.333)
+            layout_03.isHidden = false
+            
             tv_title.text = "home_text_16".localized
             tv_content.text = "home_text_22".localized
-            tv_01.text = "home_text_18".localized
-            tv_02.text = "home_text_19".localized
-            iv_01.image = UIImage(named: "ic_tmap")
-            iv_02.image = UIImage(named: "ic_kakaonavi")
+            tv_01.text = "home_text_19".localized
+            tv_02.text = "home_text_18".localized
+            tv_03.text = "home_text_26".localized
+            iv_01.image = UIImage(named: "ic_kakaonavi")
+            iv_02.image = UIImage(named: "ic_tmap")
+            iv_03.image = UIImage(named: "ic_navermap")
         } else if (mAction == ShareDialog.ACTION_SHARE) {
+            layout_01_width.setMultiplier(multiplier: 0.5)
+            layout_02_width.setMultiplier(multiplier: 0.5)
+            layout_03.isHidden = true
+            
             tv_title.text = "home_text_17".localized
             tv_content.text = "home_text_23".localized
             tv_01.text = "home_text_20".localized
@@ -95,7 +111,17 @@ class ShareDialog: BaseDialog, MFMessageComposeViewControllerDelegate {
     func setListener() {
         layout_01.setOnClickListener {
             if (self.mAction == ShareDialog.ACTION_NAVI) {
-                UIApplication.shared.open(URL(string: "https://apis.openapi.sk.com/tmap/app/routes?appKey=\(NetDefine.TMAP_API_KEY)&name=\(self.mAddressText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&lon=\(self.mToilet.longitude)&lat=\(self.mToilet.latitude)")!, options: [:], completionHandler: nil)
+                let destination = NaviLocation(name: self.mAddressText, x:  "\(self.mToilet.longitude)", y: "\(self.mToilet.latitude)")
+                let option = NaviOption(coordType: .WGS84)
+                guard let shareUrl = NaviApi.shared.shareUrl(destination: destination, option: option) else {
+                    return
+                }
+                if UIApplication.shared.canOpenURL(shareUrl) {
+                    UIApplication.shared.open(shareUrl, options: [:], completionHandler: nil)
+                }
+                else {
+                    UIApplication.shared.open(NaviApi.webNaviInstallUrl, options: [:], completionHandler: nil)
+                }
             } else if (self.mAction == ShareDialog.ACTION_SHARE) {
                 let locationTemplateJsonStringData =
                     """
@@ -155,22 +181,26 @@ class ShareDialog: BaseDialog, MFMessageComposeViewControllerDelegate {
         }
         layout_02.setOnClickListener {
             if (self.mAction == ShareDialog.ACTION_NAVI) {
-                let destination = NaviLocation(name: self.mAddressText, x:  "\(self.mToilet.longitude)", y: "\(self.mToilet.latitude)")
-                let option = NaviOption(coordType: .WGS84)
-                guard let shareUrl = NaviApi.shared.shareUrl(destination: destination, option: option) else {
-                    return
-                }
-                if UIApplication.shared.canOpenURL(shareUrl) {
-                    UIApplication.shared.open(shareUrl, options: [:], completionHandler: nil)
-                }
-                else {
-                    UIApplication.shared.open(NaviApi.webNaviInstallUrl, options: [:], completionHandler: nil)
-                }
+                UIApplication.shared.open(URL(string: "https://apis.openapi.sk.com/tmap/app/routes?appKey=\(NetDefine.TMAP_API_KEY)&name=\(self.mAddressText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&lon=\(self.mToilet.longitude)&lat=\(self.mToilet.latitude)")!, options: [:], completionHandler: nil)
             } else if (self.mAction == ShareDialog.ACTION_SHARE) {
                 let messageController = MFMessageComposeViewController()
                 messageController.messageComposeDelegate = self
                 messageController.body = "home_text_14".localized + self.mAddressText
                 ObserverManager.root.present(messageController, animated: true, completion: nil)
+            }
+        }
+        layout_03.setOnClickListener {
+            if (self.mAction == ShareDialog.ACTION_NAVI) {
+                let url = URL(string: "nmap://navigation?dlat=\(self.mToilet.latitude)&dlng=\(self.mToilet.longitude)&dname=\(self.mAddressText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&appname=kr.co.ho1.poopee")!
+                let appStoreURL = URL(string: "http://itunes.apple.com/app/id311867728?mt=8")!
+
+                if UIApplication.shared.canOpenURL(url) {
+                  UIApplication.shared.open(url)
+                } else {
+                  UIApplication.shared.open(appStoreURL)
+                }
+            } else if (self.mAction == ShareDialog.ACTION_SHARE) {
+                
             }
         }
         btn_close.setOnClickListener {
