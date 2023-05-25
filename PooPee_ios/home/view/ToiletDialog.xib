@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -33,7 +33,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UEi-dm-NSy">
-                    <rect key="frame" x="20" y="678" width="374" height="36"/>
+                    <rect key="frame" x="20" y="640" width="374" height="36"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7GH-iv-6p6" customClass="btn_navi" customModule="PooPee_ios" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="187" height="36"/>
@@ -147,7 +147,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Xs-sG-QGp" customClass="bg_search_layout" customModule="PooPee_ios" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="722" width="414" height="140"/>
+                    <rect key="frame" x="0.0" y="684" width="414" height="178"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nqE-WG-F4B">
                             <rect key="frame" x="20" y="16" width="374" height="63.5"/>
@@ -252,10 +252,10 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vAd-0H-i9I">
-                            <rect key="frame" x="0.0" y="96" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="96" width="414" height="32"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nSh-ra-Aoi">
-                                    <rect key="frame" x="0.0" y="0.0" width="39" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="39" height="32"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                     <state key="normal" title="-">
@@ -263,7 +263,7 @@
                                     </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HNI-fi-4cV">
-                                    <rect key="frame" x="375" y="0.0" width="39" height="44"/>
+                                    <rect key="frame" x="375" y="0.0" width="39" height="32"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                     <state key="normal" title="-">
@@ -277,9 +277,16 @@
                                 <constraint firstAttribute="bottom" secondItem="HNI-fi-4cV" secondAttribute="bottom" id="F03-Ws-34o"/>
                                 <constraint firstItem="nSh-ra-Aoi" firstAttribute="top" secondItem="vAd-0H-i9I" secondAttribute="top" id="ffQ-JM-JtP"/>
                                 <constraint firstAttribute="bottom" secondItem="nSh-ra-Aoi" secondAttribute="bottom" id="haR-V4-rNe"/>
-                                <constraint firstAttribute="height" constant="44" id="rhs-zt-ssN"/>
+                                <constraint firstAttribute="height" constant="32" id="rhs-zt-ssN"/>
                                 <constraint firstAttribute="trailing" secondItem="HNI-fi-4cV" secondAttribute="trailing" id="sK9-CM-Hfa"/>
                                 <constraint firstItem="nSh-ra-Aoi" firstAttribute="leading" secondItem="vAd-0H-i9I" secondAttribute="leading" id="tP6-eO-I3F"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6HJ-w0-Tzq" customClass="AdView" customModule="PooPee_ios" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="128" width="414" height="50"/>
+                            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="SGO-r9-G6D"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -289,12 +296,18 @@
                         <constraint firstItem="nqE-WG-F4B" firstAttribute="leading" secondItem="2Xs-sG-QGp" secondAttribute="leading" constant="20" id="1TS-LU-RbO"/>
                         <constraint firstItem="vAd-0H-i9I" firstAttribute="top" secondItem="K2u-tw-sNO" secondAttribute="bottom" id="5G7-Dw-jwp"/>
                         <constraint firstAttribute="trailing" secondItem="K2u-tw-sNO" secondAttribute="trailing" id="An3-Vc-iac"/>
+                        <constraint firstItem="6HJ-w0-Tzq" firstAttribute="leading" secondItem="2Xs-sG-QGp" secondAttribute="leading" id="BAp-9z-z1B"/>
+                        <constraint firstAttribute="bottom" secondItem="6HJ-w0-Tzq" secondAttribute="bottom" id="GXh-Gc-yL7"/>
                         <constraint firstAttribute="trailing" secondItem="vAd-0H-i9I" secondAttribute="trailing" id="JTt-GB-sRW"/>
                         <constraint firstItem="vAd-0H-i9I" firstAttribute="leading" secondItem="2Xs-sG-QGp" secondAttribute="leading" id="N2j-oW-mZN"/>
-                        <constraint firstAttribute="bottom" secondItem="vAd-0H-i9I" secondAttribute="bottom" id="dg5-Uo-XcW"/>
+                        <constraint firstItem="6HJ-w0-Tzq" firstAttribute="leading" secondItem="2Xs-sG-QGp" secondAttribute="leading" id="V3v-Af-9YG"/>
+                        <constraint firstAttribute="trailing" secondItem="6HJ-w0-Tzq" secondAttribute="trailing" id="WEX-C0-bXC"/>
+                        <constraint firstItem="6HJ-w0-Tzq" firstAttribute="top" secondItem="vAd-0H-i9I" secondAttribute="bottom" id="dg5-Uo-XcW"/>
                         <constraint firstItem="K2u-tw-sNO" firstAttribute="leading" secondItem="2Xs-sG-QGp" secondAttribute="leading" id="hR2-AQ-FXf"/>
                         <constraint firstItem="vAd-0H-i9I" firstAttribute="leading" secondItem="2Xs-sG-QGp" secondAttribute="leading" id="jzS-pt-rWr"/>
+                        <constraint firstAttribute="bottom" secondItem="6HJ-w0-Tzq" secondAttribute="bottom" id="pRs-ab-kmc"/>
                         <constraint firstItem="K2u-tw-sNO" firstAttribute="top" secondItem="nqE-WG-F4B" secondAttribute="bottom" constant="16" id="sFx-9n-K2O"/>
+                        <constraint firstAttribute="trailing" secondItem="6HJ-w0-Tzq" secondAttribute="trailing" id="tNw-Kh-eya"/>
                         <constraint firstAttribute="trailing" secondItem="nqE-WG-F4B" secondAttribute="trailing" constant="20" id="xlA-JT-2hp"/>
                     </constraints>
                 </view>

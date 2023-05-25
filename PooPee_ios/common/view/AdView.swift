@@ -21,6 +21,7 @@ class AdView: GADBannerView {
     }
     
     func _init() {
+        self.backgroundColor = .white
         adSize = GADAdSizeBanner
         adUnitID = "banner_ad_unit_id".localized
         rootViewController = ObserverManager.root

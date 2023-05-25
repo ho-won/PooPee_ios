@@ -776,6 +776,9 @@
             <point key="canvasLocation" x="2796" y="2435.5322338830588"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="Bfj-Iy-sIl"/>
+    </designables>
     <resources>
         <image name="btn_menu" width="72" height="72"/>
         <image name="ic_delete" width="72" height="72"/>
