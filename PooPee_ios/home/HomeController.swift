@@ -127,6 +127,7 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
             mLocationManager.desiredAccuracy = kCLLocationAccuracyBest
             mLocationManager.requestAlwaysAuthorization()
             mLocationManager.startUpdatingLocation()
+            mLocationManager.startUpdatingHeading()
         }
         
         ObserverManager.mapView = MTMapView(frame: map_view.bounds)
@@ -245,6 +246,14 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         ObserverManager.root.startPresent(controller: controller)
         
         mInterstitialAd = nil
+    }
+    
+    // Implement the location manager delegate method to receive heading updates
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        if (ObserverManager.my_position != nil) {
+            let azimuth = newHeading.trueHeading
+            ObserverManager.my_position.rotation = Float(azimuth)
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -475,4 +484,11 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
         setKakaoLocal(kaKoKeyword: mKeywordList[position])
     }
     
+}
+
+
+extension CGFloat {
+    func toRadians() -> CGFloat {
+        return self * CGFloat.pi / 180.0
+    }
 }
