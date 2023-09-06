@@ -250,9 +250,10 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     
     // Implement the location manager delegate method to receive heading updates
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        let azimuth = newHeading.trueHeading
+        ObserverManager.my_position_rotation = Float(azimuth)
         if (ObserverManager.my_position != nil) {
-            let azimuth = newHeading.trueHeading
-            ObserverManager.my_position.rotation = Float(azimuth)
+            ObserverManager.my_position.rotation = ObserverManager.my_position_rotation
         }
     }
     

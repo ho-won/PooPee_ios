@@ -24,6 +24,7 @@ class ObserverManager {
     static let imageMakerUp = UIImage(named: "ic_position_up")!.imageResize(sizeChange: CGSize(width: 14, height: 16))
     static let imageMe = UIImage(named: "ic_marker")!.imageResize(sizeChange: CGSize(width: 30, height: 30))
     static var my_position: MTMapPOIItem! = nil
+    static var my_position_rotation: Float = 0
     static var currentToilet: Toilet = Toilet()
     
     static func isTestServer() -> Bool {
@@ -79,6 +80,7 @@ class ObserverManager {
         let imageOffset = Int32(imageMe.size.height)
         my_position.customImageAnchorPointOffset = MTMapImageOffset(offsetX: imageOffset, offsetY: imageOffset)
         mapView.add(my_position)
+        my_position.rotation = my_position_rotation
     }
     
     /**
