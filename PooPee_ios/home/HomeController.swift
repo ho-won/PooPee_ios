@@ -121,6 +121,14 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     func refresh() {
         mIsRefresh = true
         mNavMainView.refresh()
+        
+        ObserverManager.mapView = MTMapView(frame: map_view.bounds)
+        ObserverManager.mapView.setZoomLevel(3, animated: true)
+        
+        ObserverManager.mapView.delegate = self
+        ObserverManager.mapView.baseMapType = .standard
+        map_view.addSubview(ObserverManager.mapView)
+        
         if (CLLocationManager.locationServicesEnabled()) {
             mLocationManager = CLLocationManager()
             mLocationManager.delegate = self
@@ -129,13 +137,6 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
             mLocationManager.startUpdatingLocation()
             mLocationManager.startUpdatingHeading()
         }
-        
-        ObserverManager.mapView = MTMapView(frame: map_view.bounds)
-        ObserverManager.mapView.setZoomLevel(3, animated: true)
-        
-        ObserverManager.mapView.delegate = self
-        ObserverManager.mapView.baseMapType = .standard
-        map_view.addSubview(ObserverManager.mapView)
         
         // 현재위치기준으로 중심점 변경
         if (mIsFirstOnCreate) {
@@ -250,9 +251,11 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     // Implement the location manager delegate method to receive heading updates
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         let azimuth = newHeading.trueHeading
-        ObserverManager.my_position_rotation = Float(azimuth)
-        if (ObserverManager.my_position != nil) {
-            ObserverManager.my_position.rotation = ObserverManager.my_position_rotation
+        UIView.animate(withDuration: 0.3) {
+            ObserverManager.my_position_rotation = Float(azimuth)
+            if (ObserverManager.my_position != nil) {
+                ObserverManager.my_position.rotation = ObserverManager.my_position_rotation
+            }
         }
     }
     
@@ -484,11 +487,4 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
         setKakaoLocal(kaKoKeyword: mKeywordList[position])
     }
     
-}
-
-
-extension CGFloat {
-    func toRadians() -> CGFloat {
-        return self * CGFloat.pi / 180.0
-    }
 }
