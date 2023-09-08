@@ -1,0 +1,12 @@
+/* 
+  InfoPlist.strings
+  PooPee_ios
+
+  Created by ho1 on 2023/09/08.
+  Copyright © 2023 ho1. All rights reserved.
+*/
+
+"NSUserTrackingUsageDescription" = "This identifier will be used to deliver personalized ads to you";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Find a restroom near your current location";
+"NSLocationAlwaysUsageDescription" = "Find a restroom near your current location";
+"NSLocationWhenInUseUsageDescription" = "Find a restroom near your current location";

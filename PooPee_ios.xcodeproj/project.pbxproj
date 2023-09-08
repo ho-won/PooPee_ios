@@ -39,6 +39,7 @@
 		AA222A76233DD9CC00D9354A /* daum_th_line.png in Resources */ = {isa = PBXBuildFile; fileRef = AA222A59233DD9CC00D9354A /* daum_th_line.png */; };
 		AA222A77233DD9CC00D9354A /* map_pin_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = AA222A5A233DD9CC00D9354A /* map_pin_shadow.png */; };
 		AA222A78233DD9CC00D9354A /* DaumMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA222A5B233DD9CC00D9354A /* DaumMap.framework */; };
+		AA5E04E72AAB105100B053F8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA5E04E92AAB105100B053F8 /* InfoPlist.strings */; };
 		AABC56BC2334965F008E61DE /* DBVersionTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABC56BB2334965F008E61DE /* DBVersionTask.swift */; };
 		AABC56C02334BD44008E61DE /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABC56BF2334BD44008E61DE /* Comment.swift */; };
 		AABC56C22334BD51008E61DE /* KaKaoKeyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABC56C12334BD51008E61DE /* KaKaoKeyword.swift */; };
@@ -243,6 +244,8 @@
 		AA222A59233DD9CC00D9354A /* daum_th_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = daum_th_line.png; sourceTree = "<group>"; };
 		AA222A5A233DD9CC00D9354A /* map_pin_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_pin_shadow.png; sourceTree = "<group>"; };
 		AA222A5B233DD9CC00D9354A /* DaumMap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DaumMap.framework; sourceTree = "<group>"; };
+		AA5E04E82AAB105100B053F8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AA5E04EA2AAB105500B053F8 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AABC56BB2334965F008E61DE /* DBVersionTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBVersionTask.swift; sourceTree = "<group>"; };
 		AABC56BF2334BD44008E61DE /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		AABC56C12334BD51008E61DE /* KaKaoKeyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaKaoKeyword.swift; sourceTree = "<group>"; };
@@ -665,6 +668,7 @@
 				AAC046622331F4BE00D5D5F6 /* color.swift */,
 				AAC046632331F4BE00D5D5F6 /* dimen.swift */,
 				AAC046612331F4BE00D5D5F6 /* style.swift */,
+				AA5E04E92AAB105100B053F8 /* InfoPlist.strings */,
 			);
 			path = res;
 			sourceTree = "<group>";
@@ -1017,6 +1021,7 @@
 				AA222A6E233DD9CC00D9354A /* map_pinup_custom.png in Resources */,
 				B6450CFA2366AB7800106010 /* ToiletHeaderCell.xib in Resources */,
 				AA222A65233DD9CC00D9354A /* th_line.png in Resources */,
+				AA5E04E72AAB105100B053F8 /* InfoPlist.strings in Resources */,
 				AAE6D2BA234AF1BB00DEC86C /* Login.storyboard in Resources */,
 				AAE6D2AF234AD00200DEC86C /* NavMainView.xib in Resources */,
 				AA222A68233DD9CC00D9354A /* daum_copyright.png in Resources */,
@@ -1282,6 +1287,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		AA5E04E92AAB105100B053F8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA5E04E82AAB105100B053F8 /* en */,
+				AA5E04EA2AAB105500B053F8 /* ko */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		AAC046332331F36100D5D5F6 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1438,7 +1452,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_TEAM = 2QRKV87SPM;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1494,7 +1508,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_TEAM = 2QRKV87SPM;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

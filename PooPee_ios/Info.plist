@@ -55,11 +55,11 @@
 		<true/>
 	</dict>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>현재위치 주변의 화장실을 찾습니다</string>
+	<string>NSLocationAlwaysAndWhenInUseUsageDescription</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>현재위치 주변의 화장실을 찾습니다</string>
+	<string>NSLocationAlwaysUsageDescription</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>현재위치 주변의 화장실을 찾습니다</string>
+	<string>NSLocationWhenInUseUsageDescription</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
@@ -287,6 +287,6 @@
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>This identifier will be used to deliver personalized ads to you.</string>
+	<string>NSUserTrackingUsageDescription</string>
 </dict>
 </plist>
