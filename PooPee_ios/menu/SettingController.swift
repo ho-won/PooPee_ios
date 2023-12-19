@@ -30,6 +30,8 @@ class SettingController: BaseController {
     @IBOutlet var layout_withdraw: UIView!
     @IBOutlet var tv_withdraw: UILabel!
     
+    @IBOutlet var ad_view: AdView!
+    @IBOutlet var ad_view_height: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +45,8 @@ class SettingController: BaseController {
         tv_terms_02.text = "menu_setting_05".localized
         tv_terms_03.text = "menu_setting_06".localized
         tv_withdraw.text = "menu_setting_07".localized
+        
+        ad_view.loadBannerAd()
         
         _init()
         setListener()

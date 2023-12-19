@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CxM-79-FU6">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NGp-Nf-Nb0">
                                         <rect key="frame" x="331" y="0.0" width="44" height="44"/>
@@ -32,7 +32,7 @@
                                         </connections>
                                     </button>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y5a-Hn-Nxo">
-                                        <rect key="frame" x="0.0" y="44" width="375" height="573"/>
+                                        <rect key="frame" x="0.0" y="44" width="375" height="603"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DFn-Ev-sJK">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="390.5"/>
@@ -192,11 +192,14 @@
                                         </constraints>
                                     </scrollView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I6z-qz-oEP" userLabel="layout_ad">
-                                        <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="647" width="375" height="0.0"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LXM-2A-mxw" customClass="AdView" customModule="PooPee_ios" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" id="dxh-zL-bar"/>
+                                                </constraints>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -204,7 +207,6 @@
                                             <constraint firstItem="LXM-2A-mxw" firstAttribute="leading" secondItem="I6z-qz-oEP" secondAttribute="leading" constant="0.10000000000000001" id="L6P-KT-eQH"/>
                                             <constraint firstItem="LXM-2A-mxw" firstAttribute="top" secondItem="I6z-qz-oEP" secondAttribute="top" constant="0.10000000000000001" id="VJW-Yg-nFG"/>
                                             <constraint firstAttribute="bottom" secondItem="LXM-2A-mxw" secondAttribute="bottom" constant="0.10000000000000001" id="h85-Lt-2rB"/>
-                                            <constraint firstAttribute="height" constant="50" id="sqh-Ml-FMd"/>
                                             <constraint firstAttribute="trailing" secondItem="LXM-2A-mxw" secondAttribute="trailing" constant="0.10000000000000001" id="tAw-Rg-KTn"/>
                                         </constraints>
                                     </view>
@@ -232,6 +234,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="ad_view" destination="LXM-2A-mxw" id="pYe-Rg-MJ2"/>
+                        <outlet property="ad_view_height" destination="dxh-zL-bar" id="msU-dY-1Zi"/>
                         <outlet property="btn_close" destination="NGp-Nf-Nb0" id="UwX-92-MHn"/>
                         <outlet property="btn_login" destination="nKz-by-f2o" id="hCq-Jb-KBO"/>
                         <outlet property="edt_password" destination="vCb-M6-t6c" id="NeG-jZ-sKf"/>
@@ -254,10 +258,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xg9-NI-GEa">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ra-rM-tHl">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="569"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mSd-UU-4Kh">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="566.5"/>
@@ -557,7 +561,7 @@
                                         </constraints>
                                     </scrollView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2pa-vk-g2N">
-                                        <rect key="frame" x="0.0" y="569" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="599" width="375" height="48"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iYJ-rj-Y3E">
                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="48"/>
@@ -622,11 +626,14 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kw5-vM-A27" userLabel="layout_ad">
-                                        <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="647" width="375" height="0.0"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Osr-Py-Mqp" customClass="AdView" customModule="PooPee_ios" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" id="Wbh-58-dUv"/>
+                                                </constraints>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -635,7 +642,6 @@
                                             <constraint firstItem="Osr-Py-Mqp" firstAttribute="leading" secondItem="Kw5-vM-A27" secondAttribute="leading" constant="0.10000000000000001" id="gH5-La-7JM"/>
                                             <constraint firstAttribute="trailing" secondItem="Osr-Py-Mqp" secondAttribute="trailing" constant="0.10000000000000001" id="iS3-ij-jFU"/>
                                             <constraint firstAttribute="bottom" secondItem="Osr-Py-Mqp" secondAttribute="bottom" constant="0.10000000000000001" id="sRu-tV-AS7"/>
-                                            <constraint firstAttribute="height" constant="50" id="zqv-Db-h3b"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -664,6 +670,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="ad_view" destination="Osr-Py-Mqp" id="EdO-Bo-cqF"/>
+                        <outlet property="ad_view_height" destination="Wbh-58-dUv" id="Cmc-DN-TZU"/>
                         <outlet property="cb_terms_01" destination="MK6-Zr-gZ7" id="B4f-em-T0z"/>
                         <outlet property="cb_terms_02" destination="kIQ-aB-5u6" id="RE5-B4-cVa"/>
                         <outlet property="cb_terms_03" destination="Fk8-ui-Pff" id="cbh-9a-zgf"/>
@@ -703,7 +711,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VMT-4m-Gq6">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="We1-wv-PjD" userLabel="toolbar">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -739,7 +747,7 @@
                                         </constraints>
                                     </view>
                                     <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ta4-Ad-PcW">
-                                        <rect key="frame" x="0.0" y="44" width="375" height="573"/>
+                                        <rect key="frame" x="0.0" y="44" width="375" height="603"/>
                                         <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <wkWebViewConfiguration key="configuration">
                                             <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -747,11 +755,14 @@
                                         </wkWebViewConfiguration>
                                     </wkWebView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F9B-rP-Aed" userLabel="layout_ad">
-                                        <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="647" width="375" height="0.0"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QSd-gJ-KcI" customClass="AdView" customModule="PooPee_ios" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" id="Soz-rP-6nh"/>
+                                                </constraints>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -759,7 +770,6 @@
                                             <constraint firstAttribute="bottom" secondItem="QSd-gJ-KcI" secondAttribute="bottom" constant="0.10000000000000001" id="9dP-iT-7cR"/>
                                             <constraint firstItem="QSd-gJ-KcI" firstAttribute="top" secondItem="F9B-rP-Aed" secondAttribute="top" constant="0.10000000000000001" id="BkX-OX-4wO"/>
                                             <constraint firstAttribute="trailing" secondItem="QSd-gJ-KcI" secondAttribute="trailing" constant="0.10000000000000001" id="Ewl-5w-4nY"/>
-                                            <constraint firstAttribute="height" constant="50" id="PpD-kf-D8H"/>
                                             <constraint firstItem="QSd-gJ-KcI" firstAttribute="leading" secondItem="F9B-rP-Aed" secondAttribute="leading" constant="0.10000000000000001" id="TuQ-z4-ZTL"/>
                                         </constraints>
                                     </view>
@@ -789,6 +799,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="ad_view" destination="QSd-gJ-KcI" id="QzT-oH-8Vt"/>
+                        <outlet property="ad_view_height" destination="Soz-rP-6nh" id="VlW-rZ-VDe"/>
                         <outlet property="root_view" destination="VMT-4m-Gq6" id="wtg-Qb-XRC"/>
                         <outlet property="web_view" destination="Ta4-Ad-PcW" id="sjp-K5-hai"/>
                     </connections>

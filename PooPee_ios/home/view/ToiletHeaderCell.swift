@@ -78,11 +78,12 @@ class ToiletHeaderCell: UITableViewCell {
     @IBOutlet var tv_open_time_title: UILabel!
     @IBOutlet var tv_open_time: UILabel!
     
-    @IBOutlet var ad_view: GADBannerView!
-    
     @IBOutlet var tv_comment: UILabel!
     @IBOutlet var tv_comment_count: UILabel!
     @IBOutlet var btn_comment: UIButton!
+    
+    @IBOutlet var ad_view: AdView!
+    @IBOutlet var ad_view_height: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -118,11 +119,7 @@ class ToiletHeaderCell: UITableViewCell {
         
         tv_comment.text = "home_text_03".localized
         
-        ad_view.adSize = GADAdSizeBanner
-        ad_view.adUnitID = "banner_ad_unit_id".localized
-        ad_view.rootViewController = ObserverManager.root
-        ad_view.load(GADRequest())
-
+        ad_view.loadBannerAd()
         
         ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: ObserverManager.currentToilet.latitude, longitude: ObserverManager.currentToilet.longitude)), animated: true)
         ObserverManager.addPOIItem(toilet: ObserverManager.currentToilet)

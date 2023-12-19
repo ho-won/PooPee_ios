@@ -22,6 +22,9 @@ class ToiletSearchController: BaseController {
     @IBOutlet var layout_no_list: UIView!
     @IBOutlet var tv_no_list: UILabel!
     @IBOutlet var btn_bottom: UIButton!
+    
+    @IBOutlet var ad_view: AdView!
+    @IBOutlet var ad_view_height: NSLayoutConstraint!
 
     private var mKeywordList: [KaKaoKeyword] = []
     
@@ -39,6 +42,8 @@ class ToiletSearchController: BaseController {
         tv_no_list.text = "toilet_create_text_01".localized
         
         btn_bottom.setTitle("toilet_create_text_02".localized, for: .normal)
+        
+        ad_view.loadBannerAd()
         
         _init()
         setListener()

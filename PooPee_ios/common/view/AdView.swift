@@ -22,10 +22,16 @@ class AdView: GADBannerView {
     
     func _init() {
         self.backgroundColor = .white
-        adSize = GADAdSizeBanner
-        adUnitID = "banner_ad_unit_id".localized
+        self.adUnitID = "banner_ad_unit_id".localized
         rootViewController = ObserverManager.root
-        load(GADRequest())
     }
     
+    func loadBannerAd() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.adSize = GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth(MyUtil.screenWidth)
+            self.load(GADRequest())
+            self.setVisibility(gone: false, dimen: self.adSize.size.height, attribute: .height)
+        }
+    }
+
 }

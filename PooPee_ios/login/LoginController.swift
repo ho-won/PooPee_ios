@@ -20,6 +20,9 @@ class LoginController: BaseController {
     @IBOutlet var tv_join: UILabel!
     @IBOutlet var btn_login: bg_login!
     
+    @IBOutlet var ad_view: AdView!
+    @IBOutlet var ad_view_height: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewResizerOnKeyboardShown()
@@ -35,6 +38,8 @@ class LoginController: BaseController {
         
         tv_join.text = "login_04".localized
         btn_login.setTitle("login".localized, for: .normal)
+        
+        ad_view.loadBannerAd()
         
         _init()
         setListener()

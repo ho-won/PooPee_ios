@@ -23,6 +23,9 @@ class ToiletCreateController: BaseController, CLLocationManagerDelegate {
     @IBOutlet var btn_my_position: UIButton!
     @IBOutlet var btn_bottom: UIButton!
     
+    @IBOutlet var ad_view: AdView!
+    @IBOutlet var ad_view_height: NSLayoutConstraint!
+    
     var mLocationManager = CLLocationManager()
     
     var mKeyword: KaKaoKeyword? = nil
@@ -36,6 +39,8 @@ class ToiletCreateController: BaseController, CLLocationManagerDelegate {
         tv_toolbar_title.setTitle("toilet_create_text_03".localized, for: .normal)
         tv_ex.text = "toilet_create_text_04".localized
         btn_bottom.setTitle("toilet_create_text_05".localized, for: .normal)
+        
+        ad_view.loadBannerAd()
         
         _init()
         setListener()

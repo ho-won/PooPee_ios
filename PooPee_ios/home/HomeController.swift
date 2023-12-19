@@ -31,32 +31,37 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     @IBOutlet var btn_search_delete: UIButton!
     @IBOutlet var tl_search: UITableView!
     
-    var mNavMainView = NavMainView()
-    var mHoSlideMenu = HoSlideMenu()
+    @IBOutlet var ad_view: AdView!
+    @IBOutlet var ad_view_height: NSLayoutConstraint!
     
-    var mLocationManager = CLLocationManager()
+    var navMainView = NavMainView()
+    var hoSlideMenu = HoSlideMenu()
     
-    var mIsKeyboardShow = false
+    var locationManager = CLLocationManager()
     
-    var mKeywordList: [KaKaoKeyword] = []
+    var isKeyboardShow = false
     
-    var mIsMyPositionMove = true // 내위치기준으로 맵중심이동여부
-    var mIsFirstOnCreate = true // onCreate 체크 (내위치기준으로 맵중심을 이동할지 확인하기위해)
-    var mIsMinTime = true // 3초 단위로 내 위치 체크
+    var keywordList: [KaKaoKeyword] = []
+    
+    var isMyPositionMove = true // 내위치기준으로 맵중심이동여부
+    var isFirstOnCreate = true // onCreate 체크 (내위치기준으로 맵중심을 이동할지 확인하기위해)
+    var isMinTime = true // 3초 단위로 내 위치 체크
     
     // finishedMapMoveAnimation 가 두번불리는현상때문에 중복방지용
-    var mIsRefresh = false // 처음 로딩인지 체크
-    var mLastLatitude: Double = 0 // 마지막 중심 latitude
-    var mLastLongitude: Double = 0 // 마지막 중심 longitude
+    var isRefresh = false // 처음 로딩인지 체크
+    var lastLatitude: Double = 0 // 마지막 중심 latitude
+    var lastLongitude: Double = 0 // 마지막 중심 longitude
     
-    var mInterstitialAd: GADInterstitialAd?
+    var interstitialAd: GADInterstitialAd?
     
-    var mToilet: Toilet = Toilet()
-    var mToiletList: [Int : Toilet] = [Int : Toilet]()
+    var toilet: Toilet = Toilet()
+    var toiletList: [Int : Toilet] = [Int : Toilet]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewResizerOnKeyboardShown()
+        
+        LogManager.e(MyUtil.screenWidth)
         
         let toolbarMarginTop = UIApplication.shared.statusBarFrame.height + 12
         btn_menu_marginTop.constant = toolbarMarginTop
@@ -72,8 +77,8 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         tl_search.dataSource = self
         tl_search.delegate = self
         
-        mHoSlideMenu.setMenuView(mNavMainView, dimen.home_menu_width, true)
-        view.addSubview(mHoSlideMenu)
+        hoSlideMenu.setMenuView(navMainView, dimen.home_menu_width, true)
+        view.addSubview(hoSlideMenu)
         
         
         let animation = LottieAnimation.named("btn_me")
@@ -92,9 +97,11 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
                     print("Failed to load interstitial ad with error: \(error.localizedDescription)")
                     return
                 }
-                mInterstitialAd = ad
-                mInterstitialAd?.fullScreenContentDelegate = self
+                interstitialAd = ad
+                interstitialAd?.fullScreenContentDelegate = self
             })
+        
+        ad_view.loadBannerAd()
         
         _init()
         setListener()
@@ -119,8 +126,8 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     }
     
     func refresh() {
-        mIsRefresh = true
-        mNavMainView.refresh()
+        isRefresh = true
+        navMainView.refresh()
         
         ObserverManager.mapView = MTMapView(frame: map_view.bounds)
         ObserverManager.mapView.setZoomLevel(3, animated: true)
@@ -130,17 +137,17 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         map_view.addSubview(ObserverManager.mapView)
         
         if (CLLocationManager.locationServicesEnabled()) {
-            mLocationManager = CLLocationManager()
-            mLocationManager.delegate = self
-            mLocationManager.desiredAccuracy = kCLLocationAccuracyBest
-            mLocationManager.requestAlwaysAuthorization()
-            mLocationManager.startUpdatingLocation()
-            mLocationManager.startUpdatingHeading()
+            locationManager = CLLocationManager()
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestAlwaysAuthorization()
+            locationManager.startUpdatingLocation()
+            //mLocationManager.startUpdatingHeading()
         }
         
         // 현재위치기준으로 중심점 변경
-        if (mIsFirstOnCreate) {
-            mIsFirstOnCreate = false
+        if (isFirstOnCreate) {
+            isFirstOnCreate = false
             DispatchQueue.main.async {
                 if (SharedManager.instance.getLatitude() > 0) {
                     ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: false)
@@ -149,11 +156,11 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
                 }
             }
         } else {
-            if (mLastLatitude == 0) {
-                mLastLatitude = ObserverManager.mapView.mapCenterPoint.mapPointGeo().latitude
-                mLastLongitude = ObserverManager.mapView.mapCenterPoint.mapPointGeo().longitude
+            if (lastLatitude == 0) {
+                lastLatitude = ObserverManager.mapView.mapCenterPoint.mapPointGeo().latitude
+                lastLongitude = ObserverManager.mapView.mapCenterPoint.mapPointGeo().longitude
             }
-            ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: mLastLatitude, longitude: mLastLongitude)), animated: false)
+            ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: lastLatitude, longitude: lastLongitude)), animated: false)
         }
         
         if (SharedManager.instance.getReviewCount() == ToiletController.REVIEW_COUNT) {
@@ -184,20 +191,20 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         }
         layout_my_position.setOnClickListener {
             if (SharedManager.instance.getLatitude() > 0) {
-                self.mIsMyPositionMove = true
+                self.isMyPositionMove = true
                 ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: false)
                 ObserverManager.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
                 self.setMyPosition(isHidden: false)
             }
         }
         btn_menu.setOnClickListener {
-            self.mHoSlideMenu.showMenu()
+            self.hoSlideMenu.showMenu()
         }
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if (mKeywordList.count > 0) {
-            setKakaoLocal(kaKoKeyword: mKeywordList[0])
+        if (keywordList.count > 0) {
+            setKakaoLocal(kaKoKeyword: keywordList[0])
         }
         return true
     }
@@ -212,7 +219,7 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
                                      y: self.view.frame.origin.y,
                                      width: self.view.frame.width,
                                      height: window.origin.y + window.height - keyboardSize.height)
-            mIsKeyboardShow = true
+            isKeyboardShow = true
             layout_bottom_bg.isHidden = false
         }
     }
@@ -227,37 +234,36 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
                                      y: self.view.frame.origin.y,
                                      width: self.view.frame.width,
                                      height: viewHeight + keyboardSize.height)
-            mIsKeyboardShow = false
+            isKeyboardShow = false
             layout_bottom_bg.isHidden = true
         }
     }
     
     func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         let controller = ObserverManager.getController(name: "ToiletController")
-        controller.segueData.putExtra(key: ToiletController.TOILET, data: self.mToilet)
+        controller.segueData.putExtra(key: ToiletController.TOILET, data: self.toilet)
         ObserverManager.root.startPresent(controller: controller)
         
-        mInterstitialAd = nil
+        interstitialAd = nil
     }
     
     func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
         let controller = ObserverManager.getController(name: "ToiletController")
-        controller.segueData.putExtra(key: ToiletController.TOILET, data: self.mToilet)
+        controller.segueData.putExtra(key: ToiletController.TOILET, data: self.toilet)
         ObserverManager.root.startPresent(controller: controller)
         
-        mInterstitialAd = nil
+        interstitialAd = nil
     }
     
-    // Implement the location manager delegate method to receive heading updates
-    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        let azimuth = newHeading.trueHeading
-        UIView.animate(withDuration: 0.3) {
-            ObserverManager.my_position_rotation = Float(azimuth)
-            if (ObserverManager.my_position != nil) {
-                ObserverManager.my_position.rotation = ObserverManager.my_position_rotation
-            }
-        }
-    }
+//    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+//        let azimuth = newHeading.trueHeading
+//        UIView.animate(withDuration: 0.3) {
+//            ObserverManager.my_position_rotation = Float(azimuth)
+//            if (ObserverManager.my_position != nil) {
+//                ObserverManager.my_position.rotation = ObserverManager.my_position_rotation
+//            }
+//        }
+//    }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
@@ -282,27 +288,27 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         SharedManager.instance.setLongitude(value: locValue.longitude)
         
         if (NSStringFromClass(ObserverManager.root.classForCoder) == NSStringFromClass(HomeController().classForCoder)
-            && (mIsMyPositionMove && SharedManager.instance.getLatitude() > 0)) {
+            && (isMyPositionMove && SharedManager.instance.getLatitude() > 0)) {
             ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: false)
             ObserverManager.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
             self.setMyPosition(isHidden: false)
-            mIsMinTime = false
+            isMinTime = false
         }
     }
     
     func mapView(_ mapView: MTMapView!, finishedMapMoveAnimation mapCenterPoint: MTMapPoint!) {
         if (NSStringFromClass(ObserverManager.root.classForCoder) == NSStringFromClass(HomeController().classForCoder)) {
-            if (mIsRefresh) {
-                mIsRefresh = false
+            if (isRefresh) {
+                isRefresh = false
                 setToliets(latitude: mapCenterPoint.mapPointGeo().latitude, longitude: mapCenterPoint.mapPointGeo().longitude)
-            } else if (mLastLatitude != mapCenterPoint.mapPointGeo().latitude || mLastLongitude != mapCenterPoint.mapPointGeo().longitude) {
+            } else if (lastLatitude != mapCenterPoint.mapPointGeo().latitude || lastLongitude != mapCenterPoint.mapPointGeo().longitude) {
                 setToliets(latitude: mapCenterPoint.mapPointGeo().latitude, longitude: mapCenterPoint.mapPointGeo().longitude)
             }
         }
     }
     
     func mapView(_ mapView: MTMapView!, centerPointMovedTo mapCenterPoint: MTMapPoint!) {
-        mIsMyPositionMove = false
+        isMyPositionMove = false
         setMyPosition(isHidden: true)
     }
     
@@ -312,12 +318,12 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
             
             let toilet = SQLiteManager.instance.getToilet(id: poiItem.tag)
             let dialog = ToiletDialog(onDetail: { it in
-                self.mToilet = it
-                if (self.mInterstitialAd != nil) {
-                    self.mInterstitialAd?.present(fromRootViewController: self)
+                self.toilet = it
+                if (self.interstitialAd != nil) {
+                    self.interstitialAd?.present(fromRootViewController: self)
                 } else {
                     let controller = ObserverManager.getController(name: "ToiletController")
-                    controller.segueData.putExtra(key: ToiletController.TOILET, data: self.mToilet)
+                    controller.segueData.putExtra(key: ToiletController.TOILET, data: self.toilet)
                     ObserverManager.root.startPresent(controller: controller)
                 }
             })
@@ -325,14 +331,14 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
             dialog.refresh()
             dialog.show(view: ObserverManager.root.view)
         } else if (poiItem.tag < 0) {
-            if let toilet = mToiletList[poiItem.tag] {
+            if let toilet = toiletList[poiItem.tag] {
                 let dialog = ToiletDialog(onDetail: { it in
-                    self.mToilet = it
-                    if (self.mInterstitialAd != nil) {
-                        self.mInterstitialAd?.present(fromRootViewController: self)
+                    self.toilet = it
+                    if (self.interstitialAd != nil) {
+                        self.interstitialAd?.present(fromRootViewController: self)
                     } else {
                         let controller = ObserverManager.getController(name: "ToiletController")
-                        controller.segueData.putExtra(key: ToiletController.TOILET, data: self.mToilet)
+                        controller.segueData.putExtra(key: ToiletController.TOILET, data: self.toilet)
                         ObserverManager.root.startPresent(controller: controller)
                     }
                 })
@@ -361,15 +367,15 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     }
     
     func setToliets(latitude: Double, longitude: Double) {
-        mLastLatitude = latitude
-        mLastLongitude = longitude
+        lastLatitude = latitude
+        lastLongitude = longitude
 
         ObserverManager.mapView.removeAllPOIItems()
-        let toiletList = SQLiteManager.instance.getToiletList(latitude: mLastLatitude, longitude: mLastLongitude)
+        let toiletList = SQLiteManager.instance.getToiletList(latitude: lastLatitude, longitude: lastLongitude)
         for toilet in toiletList {
             ObserverManager.addPOIItem(toilet: toilet)
         }
-        taskToiletList(mLastLatitude, mLastLongitude)
+        taskToiletList(lastLatitude, lastLongitude)
         
         if (SharedManager.instance.getLatitude() > 0) {
             ObserverManager.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
@@ -377,7 +383,7 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     }
     
     func setKakaoLocal(kaKoKeyword: KaKaoKeyword) {
-        mIsMyPositionMove = false
+        isMyPositionMove = false
         edt_search.text = kaKoKeyword.place_name
 
         ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: kaKoKeyword.latitude, longitude: kaKoKeyword.longitude)), animated: true)
@@ -398,7 +404,7 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
             , onSuccess: { it in
                 if (it.getInt("rst_code") == 0) {
                     let jsonArray = it.getJSONArray("toilets")
-                    self.mToiletList = [Int:Toilet]()
+                    self.toiletList = [Int:Toilet]()
 
                     for i in 0 ..< jsonArray.count {
                         let jsonObject = jsonArray.getJSONObject(i)
@@ -420,7 +426,7 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
                         toilet.w_poo = jsonObject.getString("woman")
                         toilet.latitude = jsonObject.getDouble("latitude")
                         toilet.longitude = jsonObject.getDouble("longitude")
-                        self.mToiletList[toilet.toilet_id] = toilet
+                        self.toiletList[toilet.toilet_id] = toilet
                         ObserverManager.addPOIItem(toilet: toilet)
                     }
                 }
@@ -443,7 +449,7 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         
         BaseTask().request(url: NetDefine.KAKAO_LOCAL_SEARCH, method: .post, params: params, headers: headers, fullUrl: true
             , onSuccess: { response in
-                self.mKeywordList = []
+                self.keywordList = []
                 let jsonArray = response.getJSONArray("documents")
 
                 for i in 0 ..< jsonArray.count {
@@ -454,7 +460,7 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
                     keyword.latitude = jsonObject.getDouble("y")
                     keyword.longitude = jsonObject.getDouble("x")
 
-                    self.mKeywordList.append(keyword)
+                    self.keywordList.append(keyword)
                 }
 
                 self.tl_search.reloadData()
@@ -469,22 +475,22 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
 extension HomeController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mKeywordList.count
+        return keywordList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "KakaoKeywordCell")! as! KakaoKeywordCell
         let position = indexPath.row
         
-        cell.tv_title.text = mKeywordList[position].place_name
-        cell.tv_sub.text = mKeywordList[position].address_name
+        cell.tv_title.text = keywordList[position].place_name
+        cell.tv_sub.text = keywordList[position].address_name
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let position = indexPath.row
-        setKakaoLocal(kaKoKeyword: mKeywordList[position])
+        setKakaoLocal(kaKoKeyword: keywordList[position])
     }
     
 }

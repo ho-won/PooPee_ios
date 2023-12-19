@@ -16,6 +16,9 @@ class NoticeController: BaseController {
     
     @IBOutlet var table_view: UITableView!
     
+    @IBOutlet var ad_view: AdView!
+    @IBOutlet var ad_view_height: NSLayoutConstraint!
+    
     var mNoticeList: [Notice] = []
     
     override func viewDidLoad() {
@@ -27,6 +30,8 @@ class NoticeController: BaseController {
         table_view.register(UINib(nibName: "NoticeCell", bundle: nil), forCellReuseIdentifier: "NoticeCell")
         table_view.dataSource = self
         table_view.delegate = self
+        
+        ad_view.loadBannerAd()
         
         _init()
         setListener()

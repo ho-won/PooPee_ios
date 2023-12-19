@@ -17,11 +17,16 @@ class TermsController: BaseController {
     @IBOutlet var root_view: UIView!
     @IBOutlet var web_view: WKWebView!
     
+    @IBOutlet var ad_view: AdView!
+    @IBOutlet var ad_view_height: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setStatusColor(color: colors.main_content_background)
         
         web_view.scrollView.bounces = false
+        
+        ad_view.loadBannerAd()
         
         _init()
         setListener()

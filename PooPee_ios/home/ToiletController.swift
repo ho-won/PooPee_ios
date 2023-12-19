@@ -59,6 +59,10 @@ class ToiletController: BaseController, MFMessageComposeViewControllerDelegate {
         if (SharedManager.instance.getReviewCount() < ToiletController.REVIEW_COUNT) {
             SharedManager.instance.setReviewCount(value: SharedManager.instance.getReviewCount() + 1)
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.table_view.reloadData()
+        }
     }
     
     func refresh() {

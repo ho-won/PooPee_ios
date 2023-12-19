@@ -24,6 +24,9 @@ class MyInfoController: BaseController {
     @IBOutlet var iv_password_ex: UIImageView!
     @IBOutlet var tv_password_ex: UILabel!
     
+    @IBOutlet var ad_view: AdView!
+    @IBOutlet var ad_view_height: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setStatusColor(color: colors.main_content_background)
@@ -41,6 +44,8 @@ class MyInfoController: BaseController {
         edt_password_confirm.setHint(hint: "login_06".localized, color: UIColor(hex: "#d0d2d5")!)
         iv_password_ex.image = UIImage(named: "ic_alret")
         tv_password_ex.text = "login_14".localized
+        
+        ad_view.loadBannerAd()
         
         _init()
         setListener()

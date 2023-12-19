@@ -29,6 +29,9 @@ class ToiletDialog: BaseDialog {
     @IBOutlet var layout_share: btn_share!
     @IBOutlet var tv_share: UILabel!
     
+    @IBOutlet var ad_view: AdView!
+    @IBOutlet var ad_view_height: NSLayoutConstraint!
+    
     var onDetail: (_ it: Toilet)->()
     
     var mToilet: Toilet = Toilet()
@@ -63,6 +66,8 @@ class ToiletDialog: BaseDialog {
         
         btn_detail.setTitle("home_text_02".localized, for: .normal)
         btn_close.setTitle("close".localized, for: .normal)
+        
+        ad_view.loadBannerAd()
         
         _init()
         setListener()

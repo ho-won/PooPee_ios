@@ -40,6 +40,9 @@ class JoinController: BaseController {
     @IBOutlet var tv_join: UILabel!
     @IBOutlet var iv_join: UIImageView!
     
+    @IBOutlet var ad_view: AdView!
+    @IBOutlet var ad_view_height: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setStatusColor(color: colors.main_content_background)
@@ -71,6 +74,8 @@ class JoinController: BaseController {
         
         tv_back.text = "prev".localized
         tv_join.text = "complete".localized
+        
+        ad_view.loadBannerAd()
         
         _init()
         setListener()
