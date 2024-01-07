@@ -954,26 +954,7 @@
                                     <constraint firstAttribute="bottom" secondItem="7cC-HF-1Oq" secondAttribute="bottom" constant="16" id="qQL-n8-qwh"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i7e-ga-dFv" userLabel="layout_ad">
-                                <rect key="frame" x="0.0" y="625.5" width="316" height="0.0"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="VIF-5x-ghW" customClass="AdView" customModule="PooPee_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="316" height="0.0"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" id="caj-Qw-hvf"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="VIF-5x-ghW" secondAttribute="trailing" constant="0.01" id="64S-5e-tYB"/>
-                                    <constraint firstItem="VIF-5x-ghW" firstAttribute="top" secondItem="i7e-ga-dFv" secondAttribute="top" constant="0.01" id="eNt-HO-eSS"/>
-                                    <constraint firstItem="VIF-5x-ghW" firstAttribute="leading" secondItem="i7e-ga-dFv" secondAttribute="leading" constant="0.01" id="fuo-FB-gKg"/>
-                                    <constraint firstAttribute="bottom" secondItem="VIF-5x-ghW" secondAttribute="bottom" constant="0.01" id="tFh-to-4zQ"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tax-ww-9Ip">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tax-ww-9Ip" userLabel="layout_comment">
                                 <rect key="frame" x="0.0" y="625.5" width="316" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KMx-Bt-tGn">
@@ -1024,9 +1005,8 @@
                             <constraint firstItem="VBl-Tu-YXP" firstAttribute="top" secondItem="1EN-dV-LA4" secondAttribute="top" id="87O-cB-hwL"/>
                             <constraint firstItem="oLb-lt-pah" firstAttribute="top" secondItem="kwj-rN-T1s" secondAttribute="bottom" id="8Fg-OQ-Zaj"/>
                             <constraint firstItem="9zM-Ph-Wld" firstAttribute="leading" secondItem="1EN-dV-LA4" secondAttribute="leading" id="8iv-He-CuA"/>
-                            <constraint firstItem="i7e-ga-dFv" firstAttribute="top" secondItem="9zM-Ph-Wld" secondAttribute="bottom" id="AUN-hN-Kv7"/>
+                            <constraint firstItem="tax-ww-9Ip" firstAttribute="top" secondItem="9zM-Ph-Wld" secondAttribute="bottom" id="AUN-hN-Kv7"/>
                             <constraint firstAttribute="trailing" secondItem="EGT-Pi-QDj" secondAttribute="trailing" id="C7R-JO-iwx"/>
-                            <constraint firstItem="tax-ww-9Ip" firstAttribute="top" secondItem="i7e-ga-dFv" secondAttribute="bottom" id="FEM-OX-Mcc"/>
                             <constraint firstAttribute="trailing" secondItem="ZZt-sW-Jtw" secondAttribute="trailing" id="Gjx-gY-iYs"/>
                             <constraint firstAttribute="trailing" secondItem="uhB-f0-nAh" secondAttribute="trailing" constant="16" id="Hh9-Tm-HY4"/>
                             <constraint firstAttribute="trailing" secondItem="kwj-rN-T1s" secondAttribute="trailing" id="LjN-HN-Qpz"/>
@@ -1040,12 +1020,10 @@
                             <constraint firstItem="L7j-bM-Fse" firstAttribute="leading" secondItem="1EN-dV-LA4" secondAttribute="leading" id="Uz2-Fc-QdS"/>
                             <constraint firstItem="ZZt-sW-Jtw" firstAttribute="top" secondItem="VBl-Tu-YXP" secondAttribute="bottom" id="Wb5-oB-Whz"/>
                             <constraint firstAttribute="trailing" secondItem="oLb-lt-pah" secondAttribute="trailing" id="a0A-f9-CJT"/>
-                            <constraint firstItem="i7e-ga-dFv" firstAttribute="leading" secondItem="1EN-dV-LA4" secondAttribute="leading" id="bvX-oD-h2a"/>
                             <constraint firstItem="9zM-Ph-Wld" firstAttribute="top" secondItem="M3I-Q2-cmy" secondAttribute="bottom" id="civ-7P-bQZ"/>
                             <constraint firstItem="uhB-f0-nAh" firstAttribute="leading" secondItem="1EN-dV-LA4" secondAttribute="leading" constant="16" id="fnO-nv-XtW"/>
                             <constraint firstItem="VBl-Tu-YXP" firstAttribute="leading" secondItem="1EN-dV-LA4" secondAttribute="leading" id="hes-98-zpB"/>
                             <constraint firstItem="M3I-Q2-cmy" firstAttribute="top" secondItem="oLb-lt-pah" secondAttribute="bottom" id="jyr-FE-ZLs"/>
-                            <constraint firstAttribute="trailing" secondItem="i7e-ga-dFv" secondAttribute="trailing" id="khy-Ct-foC"/>
                             <constraint firstAttribute="trailing" secondItem="9zM-Ph-Wld" secondAttribute="trailing" id="lSQ-qH-YpQ"/>
                             <constraint firstAttribute="trailing" secondItem="VBl-Tu-YXP" secondAttribute="trailing" id="uDh-VM-636"/>
                             <constraint firstItem="L7j-bM-Fse" firstAttribute="top" secondItem="ZZt-sW-Jtw" secondAttribute="bottom" constant="14" id="vuF-2b-boP"/>
@@ -1063,8 +1041,6 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="ZL9-aO-T7V"/>
             <connections>
-                <outlet property="ad_view" destination="VIF-5x-ghW" id="55A-Da-fEi"/>
-                <outlet property="ad_view_height" destination="caj-Qw-hvf" id="76Y-Re-fXJ"/>
                 <outlet property="btn_comment" destination="4CI-ak-EyP" id="YdN-9k-bdl"/>
                 <outlet property="cb_like" destination="kd7-uz-mSH" id="zlZ-WZ-FSz"/>
                 <outlet property="cb_option_01" destination="9OQ-uV-Mei" id="EmI-qH-3gI"/>

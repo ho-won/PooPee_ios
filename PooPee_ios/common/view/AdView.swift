@@ -27,7 +27,7 @@ class AdView: GADBannerView {
     }
     
     func loadBannerAd() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.adSize = GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth(MyUtil.screenWidth)
             self.load(GADRequest())
             self.setVisibility(gone: false, dimen: self.adSize.size.height, attribute: .height)

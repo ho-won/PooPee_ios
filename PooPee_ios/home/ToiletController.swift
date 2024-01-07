@@ -19,6 +19,9 @@ class ToiletController: BaseController, MFMessageComposeViewControllerDelegate {
     @IBOutlet var layout_sms: bg_sms!
     @IBOutlet var tv_sms: UILabel!
     
+    @IBOutlet var ad_view: AdView!
+    @IBOutlet var ad_view_height: NSLayoutConstraint!
+    
     private var mToilet: Toilet = Toilet()
     private var mCommentList: [Comment] = []
     
@@ -31,6 +34,8 @@ class ToiletController: BaseController, MFMessageComposeViewControllerDelegate {
         table_view.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 72, right: 0)
         
         tv_sms.text = "home_text_13".localized
+        
+        ad_view.loadBannerAd()
         
         _init()
         setListener()

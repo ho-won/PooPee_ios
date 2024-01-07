@@ -349,6 +349,25 @@
                                             <constraint firstAttribute="trailing" secondItem="ear-kZ-iqr" secondAttribute="trailing" constant="12" id="wTM-9P-Gbg"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ajx-1c-9ax">
+                                        <rect key="frame" x="0.0" y="716" width="414" height="0.0"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s6b-kt-WOQ" customClass="AdView" customModule="PooPee_ios" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
+                                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" id="HZr-5q-r5c"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="s6b-kt-WOQ" secondAttribute="bottom" id="PkX-d0-x1d"/>
+                                            <constraint firstItem="s6b-kt-WOQ" firstAttribute="leading" secondItem="Ajx-1c-9ax" secondAttribute="leading" id="R8s-RI-QWQ"/>
+                                            <constraint firstItem="s6b-kt-WOQ" firstAttribute="top" secondItem="Ajx-1c-9ax" secondAttribute="top" id="Rkb-Lg-aaR"/>
+                                            <constraint firstAttribute="trailing" secondItem="s6b-kt-WOQ" secondAttribute="trailing" id="Ww4-od-ifW"/>
+                                        </constraints>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHV-3G-nOz">
                                         <rect key="frame" x="12" y="12" width="36" height="36"/>
                                         <constraints>
@@ -363,13 +382,16 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="9qB-f3-jwZ" secondAttribute="bottom" constant="16" id="5xg-mm-MFG"/>
+                                    <constraint firstItem="Ajx-1c-9ax" firstAttribute="top" secondItem="9qB-f3-jwZ" secondAttribute="bottom" constant="16" id="5xg-mm-MFG"/>
                                     <constraint firstAttribute="trailing" secondItem="9qB-f3-jwZ" secondAttribute="trailing" constant="16" id="65p-bM-L5H"/>
                                     <constraint firstItem="SnK-SM-y08" firstAttribute="top" secondItem="QDM-Ef-5qk" secondAttribute="top" id="Bms-7m-ekU"/>
                                     <constraint firstItem="SnK-SM-y08" firstAttribute="leading" secondItem="QDM-Ef-5qk" secondAttribute="leading" id="EGo-gq-PJu"/>
-                                    <constraint firstAttribute="bottom" secondItem="SnK-SM-y08" secondAttribute="bottom" id="ML6-wI-asf"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ajx-1c-9ax" secondAttribute="bottom" id="EPq-sM-DnZ"/>
+                                    <constraint firstItem="Ajx-1c-9ax" firstAttribute="top" secondItem="SnK-SM-y08" secondAttribute="bottom" id="ML6-wI-asf"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ajx-1c-9ax" secondAttribute="trailing" id="ZcQ-3v-Cdu"/>
                                     <constraint firstItem="KHV-3G-nOz" firstAttribute="top" secondItem="QDM-Ef-5qk" secondAttribute="top" constant="12" id="bO1-XT-eMh"/>
                                     <constraint firstAttribute="trailing" secondItem="SnK-SM-y08" secondAttribute="trailing" id="cm9-D7-BNt"/>
+                                    <constraint firstItem="Ajx-1c-9ax" firstAttribute="leading" secondItem="QDM-Ef-5qk" secondAttribute="leading" id="dsX-hu-YWo"/>
                                     <constraint firstItem="KHV-3G-nOz" firstAttribute="leading" secondItem="QDM-Ef-5qk" secondAttribute="leading" constant="12" id="hns-k0-ywc"/>
                                 </constraints>
                             </view>
@@ -384,6 +406,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="ad_view" destination="s6b-kt-WOQ" id="Uan-Ge-W4w"/>
+                        <outlet property="ad_view_height" destination="HZr-5q-r5c" id="WOq-ra-T7S"/>
                         <outlet property="layout_sms" destination="9qB-f3-jwZ" id="jk2-pL-Lw1"/>
                         <outlet property="table_view" destination="SnK-SM-y08" id="Pqf-Gw-AzU"/>
                         <outlet property="tv_sms" destination="ear-kZ-iqr" id="v7v-ZX-KdN"/>
@@ -391,7 +415,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uNH-ow-lao" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="669.60000000000002" y="2435.5322338830588"/>
+            <point key="canvasLocation" x="669.56521739130437" y="2435.054347826087"/>
         </scene>
         <!--Toilet Search Controller-->
         <scene sceneID="VdK-DO-hZB">
