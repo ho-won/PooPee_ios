@@ -119,6 +119,8 @@
 "home_text_24" = "Inquiries/Suggestions";
 "home_text_25" = "Please enter your details";
 "home_text_26" = "Naver Map";
+"home_text_27" = "Once the report is completed, it will be reviewed and processed within 24 hours.";
+"home_text_28" = "Maps";
 
 // login
 "login_01" = "Please login";

@@ -14,6 +14,7 @@ class CommentReportDialog: BaseDialog {
     @IBOutlet weak var layout_dialog: UIView!
     
     @IBOutlet var tv_title: UILabel!
+    @IBOutlet var tv_title_sub: UILabel!
     @IBOutlet var edt_content: edt_commnet!
     @IBOutlet var btn_close: UIButton!
     @IBOutlet var btn_report: UIButton!
@@ -43,6 +44,7 @@ class CommentReportDialog: BaseDialog {
         layout_dialog.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(layout_dialog_tap(recognizer:))))
         
         tv_title.text = "home_text_12".localized
+        tv_title_sub.text = "home_text_27".localized
         
         edt_content.becomeFirstResponder()
         edt_content.setHint(hint: "home_text_07".localized)
