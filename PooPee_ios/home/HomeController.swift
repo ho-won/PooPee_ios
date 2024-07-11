@@ -11,10 +11,12 @@ import Alamofire
 import CoreLocation
 import Lottie
 import GoogleMobileAds
+import KakaoMapsSDK
 
-class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate, GADFullScreenContentDelegate {
+class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelegate, CLLocationManagerDelegate, UITextFieldDelegate, GADFullScreenContentDelegate {
     
-    @IBOutlet var map_view: UIView!
+    @IBOutlet var map_view: KMViewContainer!
+    
     @IBOutlet var lottie_my_position: LottieAnimationView!
     
     @IBOutlet var btn_menu: UIButton!
@@ -57,11 +59,28 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     var toilet: Toilet = Toilet()
     var toiletList: [Int : Toilet] = [Int : Toilet]()
     
+    var kakaoMap: KakaoMap?
+    var mapController: KMController?
+    var _observerAdded: Bool = false
+    var _auth: Bool = false
+    var _appear: Bool = false
+    var my_position: Poi! = nil
+    var my_position_rotation: Float = 0
+    
+    deinit {
+        mapController?.pauseEngine()
+        mapController?.resetEngine()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewResizerOnKeyboardShown()
         
         LogManager.e(MyUtil.screenWidth)
+        
+        mapController = KMController(viewContainer: map_view!)
+        mapController?.delegate = self
+        mapController?.prepareEngine()
         
         let toolbarMarginTop = UIApplication.shared.statusBarFrame.height + 12
         btn_menu_marginTop.constant = toolbarMarginTop
@@ -108,17 +127,27 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     }
     
     override public func viewDidAppear(_ animated: Bool) {
+        addObservers()
+        _appear = true
+        
+        if mapController?.isEngineActive == false {
+            mapController?.activateEngine()
+        }
         if (!isViewDidAppear) {
             isViewDidAppear = true
             refresh()
         }
     }
     
-    override public func viewDidDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
+        _appear = false
+        mapController?.pauseEngine()  //렌더링 중지.
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
         isViewDidAppear = false
-        for subview in map_view.subviews {
-            subview.removeFromSuperview()
-        }
+        removeObservers()
+        //mapController?.resetEngine()     //엔진 정지. 추가되었던 ViewBase들이 삭제된다.
     }
     
     func _init() {
@@ -129,13 +158,6 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         isRefresh = true
         navMainView.refresh()
         
-        ObserverManager.mapView = MTMapView(frame: map_view.bounds)
-        ObserverManager.mapView.setZoomLevel(3, animated: true)
-        
-        ObserverManager.mapView.delegate = self
-        ObserverManager.mapView.baseMapType = .standard
-        map_view.addSubview(ObserverManager.mapView)
-        
         if (CLLocationManager.locationServicesEnabled()) {
             locationManager = CLLocationManager()
             locationManager.delegate = self
@@ -143,24 +165,6 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
             locationManager.requestAlwaysAuthorization()
             locationManager.startUpdatingLocation()
             //mLocationManager.startUpdatingHeading()
-        }
-        
-        // 현재위치기준으로 중심점 변경
-        if (isFirstOnCreate) {
-            isFirstOnCreate = false
-            DispatchQueue.main.async {
-                if (SharedManager.instance.getLatitude() > 0) {
-                    ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: false)
-                    ObserverManager.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
-                    self.setMyPosition(isHidden: false)
-                }
-            }
-        } else {
-            if (lastLatitude == 0) {
-                lastLatitude = ObserverManager.mapView.mapCenterPoint.mapPointGeo().latitude
-                lastLongitude = ObserverManager.mapView.mapCenterPoint.mapPointGeo().longitude
-            }
-            ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: lastLatitude, longitude: lastLongitude)), animated: false)
         }
         
         if (SharedManager.instance.getReviewCount() == ToiletController.REVIEW_COUNT) {
@@ -190,11 +194,13 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
             }
         }
         layout_my_position.setOnClickListener {
-            if (SharedManager.instance.getLatitude() > 0) {
-                self.isMyPositionMove = true
-                ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: false)
-                ObserverManager.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
-                self.setMyPosition(isHidden: false)
+            if (self.kakaoMap != nil) {
+                if (SharedManager.instance.getLatitude() > 0) {
+                    self.isMyPositionMove = true
+                    self.kakaoMap!.moveCamera(CameraUpdate.make(target: MapPoint(longitude: SharedManager.instance.getLongitude(), latitude: SharedManager.instance.getLatitude()), zoomLevel: ObserverManager.BASE_ZOOM_LEVEL, rotation: 0, tilt: 0, mapView: self.kakaoMap!))
+                    self.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
+                    self.setMyPosition(isHidden: false)
+                }
             }
         }
         btn_menu.setOnClickListener {
@@ -255,15 +261,15 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         interstitialAd = nil
     }
     
-//    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-//        let azimuth = newHeading.trueHeading
-//        UIView.animate(withDuration: 0.3) {
-//            ObserverManager.my_position_rotation = Float(azimuth)
-//            if (ObserverManager.my_position != nil) {
-//                ObserverManager.my_position.rotation = ObserverManager.my_position_rotation
-//            }
-//        }
-//    }
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        let azimuth = newHeading.trueHeading
+        UIView.animate(withDuration: 0.3) {
+            self.my_position_rotation = Float(azimuth)
+            if (self.my_position != nil) {
+                self.my_position.rotateAt(Double(self.my_position_rotation), duration: 0)
+            }
+        }
+    }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
@@ -287,36 +293,46 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
         SharedManager.instance.setLatitude(value: locValue.latitude)
         SharedManager.instance.setLongitude(value: locValue.longitude)
         
-        if (NSStringFromClass(ObserverManager.root.classForCoder) == NSStringFromClass(HomeController().classForCoder)
-            && (isMyPositionMove && SharedManager.instance.getLatitude() > 0)) {
-            ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())), animated: false)
-            ObserverManager.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
-            self.setMyPosition(isHidden: false)
-            isMinTime = false
-        }
-    }
-    
-    func mapView(_ mapView: MTMapView!, finishedMapMoveAnimation mapCenterPoint: MTMapPoint!) {
-        if (NSStringFromClass(ObserverManager.root.classForCoder) == NSStringFromClass(HomeController().classForCoder)) {
-            if (isRefresh) {
-                isRefresh = false
-                setToliets(latitude: mapCenterPoint.mapPointGeo().latitude, longitude: mapCenterPoint.mapPointGeo().longitude)
-            } else if (lastLatitude != mapCenterPoint.mapPointGeo().latitude || lastLongitude != mapCenterPoint.mapPointGeo().longitude) {
-                setToliets(latitude: mapCenterPoint.mapPointGeo().latitude, longitude: mapCenterPoint.mapPointGeo().longitude)
+        if (kakaoMap != nil) {
+            if (NSStringFromClass(ObserverManager.root.classForCoder) == NSStringFromClass(HomeController().classForCoder)
+                && (isMyPositionMove && SharedManager.instance.getLatitude() > 0)) {
+                kakaoMap!.moveCamera(CameraUpdate.make(cameraPosition: CameraPosition(target: MapPoint(longitude: SharedManager.instance.getLongitude(), latitude: SharedManager.instance.getLatitude()), height: 0, rotation: 0, tilt: 0)))
+                self.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
+                self.setMyPosition(isHidden: false)
+                isMinTime = false
             }
         }
     }
     
-    func mapView(_ mapView: MTMapView!, centerPointMovedTo mapCenterPoint: MTMapPoint!) {
+    func cameraWillMove(kakaoMap: KakaoMap, by: MoveBy) {
         isMyPositionMove = false
         setMyPosition(isHidden: true)
     }
     
-    func mapView(_ mapView: MTMapView!, selectedPOIItem poiItem: MTMapPOIItem!) -> Bool {
-        if (poiItem.tag > 0) {
+    func cameraDidStopped(kakaoMap: KakaoMap, by: MoveBy) {
+        let position = kakaoMap.getPosition(CGPoint(x: map_view.frame.width * 0.5, y: map_view.frame.height * 0.5))
+        if (isRefresh) {
+            isRefresh = false
+            setToliets(latitude: position.wgsCoord.latitude, longitude: position.wgsCoord.longitude)
+        } else if (lastLatitude != position.wgsCoord.latitude || lastLongitude != position.wgsCoord.longitude) {
+            setToliets(latitude: position.wgsCoord.latitude, longitude: position.wgsCoord.longitude)
+        }
+        if (String(format: "%.3f", position.wgsCoord.latitude) == String(format: "%.3f", SharedManager.instance.getLatitude()) && String(format: "%.3f", position.wgsCoord.longitude) == String(format: "%.3f", SharedManager.instance.getLongitude())) {
+            setMyPosition(isHidden: false)
+        } else {
+            setMyPosition(isHidden: true)
+        }
+    }
+    
+    func poiDidTapped(kakaoMap: KakaoMap, layerID: String, poiID: String, position: MapPoint) {
+        LogManager.e(poiID)
+        if (layerID != "toilet") {
+            return
+        }
+        if (Int(poiID)! > 0) {
             tl_search.setVisibility(gone: true, dimen: 0, attribute: .height)
             
-            let toilet = SQLiteManager.instance.getToilet(id: poiItem.tag)
+            let toilet = SQLiteManager.instance.getToilet(id: Int(poiID)!)
             let dialog = ToiletDialog(onDetail: { it in
                 self.toilet = it
                 if (self.interstitialAd != nil) {
@@ -330,8 +346,8 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
             dialog.setToilet(toilet: toilet)
             dialog.refresh()
             dialog.show(view: ObserverManager.root.view)
-        } else if (poiItem.tag < 0) {
-            if let toilet = toiletList[poiItem.tag] {
+        } else if (Int(poiID)! < 0) {
+            if let toilet = toiletList[Int(poiID)!] {
                 let dialog = ToiletDialog(onDetail: { it in
                     self.toilet = it
                     if (self.interstitialAd != nil) {
@@ -347,7 +363,6 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
                 dialog.show(view: ObserverManager.root.view)
             }
         }
-        return false
     }
     
     func checkPopup() {
@@ -367,29 +382,199 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
     }
     
     func setToliets(latitude: Double, longitude: Double) {
-        lastLatitude = latitude
-        lastLongitude = longitude
+        if (kakaoMap != nil) {
+            lastLatitude = latitude
+            lastLongitude = longitude
 
-        ObserverManager.mapView.removeAllPOIItems()
-        let toiletList = SQLiteManager.instance.getToiletList(latitude: lastLatitude, longitude: lastLongitude)
-        for toilet in toiletList {
-            ObserverManager.addPOIItem(toilet: toilet)
-        }
-        taskToiletList(lastLatitude, lastLongitude)
-        
-        if (SharedManager.instance.getLatitude() > 0) {
-            ObserverManager.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
+            for poi in kakaoMap!.getLabelManager().getLabelLayer(layerID: "toilet")!.getAllPois()! {
+                kakaoMap!.getLabelManager().getLabelLayer(layerID: "toilet")?.removePoi(poiID: poi.itemID)
+            }
+            let toiletList = SQLiteManager.instance.getToiletList(latitude: lastLatitude, longitude: lastLongitude)
+            for toilet in toiletList {
+                addPOIItem(toilet: toilet)
+            }
+            taskToiletList(lastLatitude, lastLongitude)
+            
+            if (SharedManager.instance.getLatitude() > 0) {
+                self.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
+            }
         }
     }
     
     func setKakaoLocal(kaKoKeyword: KaKaoKeyword) {
         isMyPositionMove = false
         edt_search.text = kaKoKeyword.place_name
-
-        ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: kaKoKeyword.latitude, longitude: kaKoKeyword.longitude)), animated: true)
+        kakaoMap!.moveCamera(CameraUpdate.make(target: MapPoint(longitude: kaKoKeyword.longitude, latitude: kaKoKeyword.latitude), zoomLevel: ObserverManager.BASE_ZOOM_LEVEL, rotation: 0, tilt: 0, mapView: self.kakaoMap!))
         edt_search.resignFirstResponder()
         tl_search.setVisibility(gone: true, dimen: 0, attribute: .height)
         setMyPosition(isHidden: true)
+    }
+    
+    func addPOIItem(toilet: Toilet) {
+        if (kakaoMap != nil) {
+            if (toilet.toilet_id < 0) {
+                let image = UIImage(named: "ic_position_up")!.imageResize(sizeChange: CGSize(width: 14, height: 16))
+                
+                let iconStyle = PoiIconStyle(symbol: image, anchorPoint: CGPoint(x: 0.5, y: 1))
+                let perLevelStyle = PerLevelPoiStyle(iconStyle: iconStyle, level: 0)
+                let poiStyle = PoiStyle(styleID: "toilet_up", styles: [perLevelStyle])
+                kakaoMap!.getLabelManager().addPoiStyle(poiStyle)
+                
+                let poiOption = PoiOptions(styleID: "toilet_up", poiID: String(toilet.toilet_id))
+                poiOption.rank = 0
+                poiOption.clickable = true
+                let poi = kakaoMap!.getLabelManager().getLabelLayer(layerID: "toilet")?.addPoi(option: poiOption, at: MapPoint(longitude: toilet.longitude, latitude: toilet.latitude))
+                poi?.show()
+            } else {
+                let image = UIImage(named: "ic_position")!.imageResize(sizeChange: CGSize(width: 14, height: 16))
+                
+                let iconStyle = PoiIconStyle(symbol: image, anchorPoint: CGPoint(x: 0.5, y: 1))
+                let perLevelStyle = PerLevelPoiStyle(iconStyle: iconStyle, level: 0)
+                let poiStyle = PoiStyle(styleID: "toilet", styles: [perLevelStyle])
+                kakaoMap!.getLabelManager().addPoiStyle(poiStyle)
+                
+                let poiOption = PoiOptions(styleID: "toilet", poiID: String(toilet.toilet_id))
+                poiOption.rank = 0
+                poiOption.clickable = true
+                let poi = kakaoMap!.getLabelManager().getLabelLayer(layerID: "toilet")?.addPoi(option: poiOption, at: MapPoint(longitude: toilet.longitude, latitude: toilet.latitude))
+                poi?.show()
+            }
+        }
+    }
+    
+    func addMyPosition(latitude: Double, longitude: Double) {
+        if (kakaoMap != nil) {
+            let imageMe = UIImage(named: "ic_marker")!.imageResize(sizeChange: CGSize(width: 30, height: 30))
+            if (my_position != nil) {
+                kakaoMap!.getLabelManager().getLabelLayer(layerID: "toilet")?.removePoi(poiID: my_position.itemID)
+            }
+            
+            let iconStyle = PoiIconStyle(symbol: imageMe, anchorPoint: CGPoint(x: 0.5, y: 0.5))
+            let perLevelStyle = PerLevelPoiStyle(iconStyle: iconStyle, level: 0)
+            let poiStyle = PoiStyle(styleID: "my_position", styles: [perLevelStyle])
+            kakaoMap!.getLabelManager().addPoiStyle(poiStyle)
+            
+            let poiOption = PoiOptions(styleID: "my_position", poiID: "-1")
+            poiOption.rank = 0
+            poiOption.clickable = true
+            my_position = kakaoMap!.getLabelManager().getLabelLayer(layerID: "toilet")?.addPoi(option: poiOption, at: MapPoint(longitude: longitude, latitude: latitude))
+            my_position.show()
+            LogManager.e("center_me : \(latitude) : \(longitude) : ")
+        }
+    }
+    
+    // 인증 실패시 호출.
+    func authenticationFailed(_ errorCode: Int, desc: String) {
+        print("error code: \(errorCode)")
+        print("desc: \(desc)")
+        _auth = false
+        switch errorCode {
+        case 400:
+            LogManager.e("지도 종료(API인증 파라미터 오류)")
+            break;
+        case 401:
+            LogManager.e("지도 종료(API인증 키 오류)")
+            break;
+        case 403:
+            LogManager.e("지도 종료(API인증 권한 오류)")
+            break;
+        case 429:
+            LogManager.e("지도 종료(API 사용쿼터 초과)")
+            break;
+        case 499:
+            LogManager.e("지도 종료(네트워크 오류) 5초 후 재시도..")
+            
+            // 인증 실패 delegate 호출 이후 5초뒤에 재인증 시도..
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                print("retry auth...")
+                
+                self.mapController?.prepareEngine()
+            }
+            break;
+        default:
+            break;
+        }
+    }
+    
+    func addViews() {
+        //여기에서 그릴 View(KakaoMap, Roadview)들을 추가한다.
+        var defaultPosition = MapPoint(longitude: 127.108678, latitude: 37.402001)
+        if (SharedManager.instance.getLatitude() > 0) {
+            defaultPosition = MapPoint(longitude: SharedManager.instance.getLongitude(), latitude: SharedManager.instance.getLatitude())
+        }
+        //지도(KakaoMap)를 그리기 위한 viewInfo를 생성
+        let mapviewInfo: MapviewInfo = MapviewInfo(viewName: "mapview", viewInfoName: "map", defaultPosition: defaultPosition, defaultLevel: ObserverManager.BASE_ZOOM_LEVEL)
+        
+        //KakaoMap 추가.
+        mapController?.addView(mapviewInfo)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            self.kakaoMap = self.mapController?.getView("mapview") as? KakaoMap
+            self.kakaoMap!.eventDelegate = self
+            
+            let _ = self.kakaoMap!.getLabelManager().addLabelLayer(option: LabelLayerOptions(layerID: "toilet", competitionType: .none, competitionUnit: .poi, orderType: .rank, zOrder: 10001))
+            
+            // 현재위치기준으로 중심점 변경
+            if (self.isFirstOnCreate) {
+                self.isFirstOnCreate = false
+                DispatchQueue.main.async {
+                    if (SharedManager.instance.getLatitude() > 0) {
+                        self.kakaoMap!.moveCamera(CameraUpdate.make(target: MapPoint(longitude: SharedManager.instance.getLongitude(), latitude: SharedManager.instance.getLatitude()), zoomLevel: ObserverManager.BASE_ZOOM_LEVEL, rotation: 0, tilt: 0, mapView: self.kakaoMap!))
+                        self.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
+                        self.setMyPosition(isHidden: false)
+                    }
+                }
+            } else {
+                let position = self.kakaoMap!.getPosition(CGPoint(x: self.map_view.frame.width * 0.5, y: self.map_view.frame.height * 0.5))
+                if (self.lastLatitude == 0) {
+                    self.lastLatitude = position.wgsCoord.latitude
+                    self.lastLongitude = position.wgsCoord.longitude
+                }
+                self.kakaoMap!.moveCamera(CameraUpdate.make(target: MapPoint(longitude: self.lastLongitude, latitude: self.lastLatitude), zoomLevel: ObserverManager.BASE_ZOOM_LEVEL, rotation: 0, tilt: 0, mapView: self.kakaoMap!))
+            }
+        })
+    }
+
+    //addView 성공 이벤트 delegate. 추가적으로 수행할 작업을 진행한다.
+    func addViewSucceeded(_ viewName: String, viewInfoName: String) {
+        print("OK") //추가 성공. 성공시 추가적으로 수행할 작업을 진행한다.
+    }
+    
+    //addView 실패 이벤트 delegate. 실패에 대한 오류 처리를 진행한다.
+    func addViewFailed(_ viewName: String, viewInfoName: String) {
+        print("Failed")
+    }
+    
+    //Container 뷰가 리사이즈 되었을때 호출된다. 변경된 크기에 맞게 ViewBase들의 크기를 조절할 필요가 있는 경우 여기에서 수행한다.
+    func containerDidResized(_ size: CGSize) {
+        let mapView: KakaoMap? = mapController?.getView("mapview") as? KakaoMap
+        mapView?.viewRect = CGRect(origin: CGPoint(x: 0.0, y: 0.0), size: size)   //지도뷰의 크기를 리사이즈된 크기로 지정한다.
+    }
+    
+    func viewWillDestroyed(_ view: ViewBase) {
+        
+    }
+    
+    func addObservers(){
+        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+    
+        _observerAdded = true
+    }
+     
+    func removeObservers(){
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
+
+        _observerAdded = false
+    }
+
+    @objc func willResignActive(){
+        mapController?.pauseEngine()
+    }
+
+    @objc func didBecomeActive(){
+        mapController?.activateEngine()
     }
     
     /**
@@ -427,7 +612,7 @@ class HomeController: BaseController, MTMapViewDelegate, CLLocationManagerDelega
                         toilet.latitude = jsonObject.getDouble("latitude")
                         toilet.longitude = jsonObject.getDouble("longitude")
                         self.toiletList[toilet.toilet_id] = toilet
-                        ObserverManager.addPOIItem(toilet: toilet)
+                        self.addPOIItem(toilet: toilet)
                     }
                 }
         }

@@ -8,11 +8,12 @@
 
 import UIKit
 import GoogleMobileAds
+import KakaoMapsSDK
 
-class ToiletHeaderCell: UITableViewCell {
+class ToiletHeaderCell: UITableViewCell, MapControllerDelegate {
     @IBOutlet var root_view: UIView!
     
-    @IBOutlet var map_view: UIView!
+    @IBOutlet var map_view: KMViewContainer!
     @IBOutlet var map_view_click: UIView!
     
     @IBOutlet var tv_toilet_name: MyLabel!
@@ -82,14 +83,20 @@ class ToiletHeaderCell: UITableViewCell {
     @IBOutlet var tv_comment_count: UILabel!
     @IBOutlet var btn_comment: UIButton!
     
+    var kakaoMap: KakaoMap?
+    var mapController: KMController?
+    var _observerAdded: Bool = false
+    var _auth: Bool = false
+    var _appear: Bool = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        ObserverManager.mapView = MTMapView(frame: map_view.bounds)
-        ObserverManager.mapView.setZoomLevel(2, animated: true)
-        
-        ObserverManager.mapView.baseMapType = .standard
-        map_view.addSubview(ObserverManager.mapView)
+//        kakaoMap = MTMapView(frame: map_view.bounds)
+//        kakaoMap.setZoomLevel(2, animated: true)
+//        
+//        kakaoMap.baseMapType = .standard
+//        map_view.addSubview(kakaoMap)
         
         tv_like.text = "0"
         tv_report.text = "toilet_btn_01".localized
@@ -116,14 +123,113 @@ class ToiletHeaderCell: UITableViewCell {
         
         tv_comment.text = "home_text_03".localized
         
-        ObserverManager.mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: ObserverManager.currentToilet.latitude, longitude: ObserverManager.currentToilet.longitude)), animated: true)
-        ObserverManager.addPOIItem(toilet: ObserverManager.currentToilet)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.mapController = KMController(viewContainer: self.map_view)
+            self.mapController?.delegate = self
+            self.mapController?.prepareEngine()
+            self.mapController?.activateEngine()
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
+    }
+    
+    func addPOIItem(toilet: Toilet) {
+        if (kakaoMap != nil) {
+            if (toilet.toilet_id < 0) {
+                let image = UIImage(named: "ic_position_up")!.imageResize(sizeChange: CGSize(width: 14, height: 16))
+                
+                let iconStyle = PoiIconStyle(symbol: image, anchorPoint: CGPoint(x: 0.5, y: 1))
+                let perLevelStyle = PerLevelPoiStyle(iconStyle: iconStyle, level: 0)
+                let poiStyle = PoiStyle(styleID: "toilet_up", styles: [perLevelStyle])
+                kakaoMap!.getLabelManager().addPoiStyle(poiStyle)
+                
+                let poiOption = PoiOptions(styleID: "toilet_up", poiID: String(toilet.toilet_id))
+                poiOption.rank = 0
+                poiOption.clickable = true
+                let poi = kakaoMap!.getLabelManager().getLabelLayer(layerID: "toilet")?.addPoi(option: poiOption, at: MapPoint(longitude: toilet.longitude, latitude: toilet.latitude))
+                poi?.show()
+            } else {
+                let image = UIImage(named: "ic_position")!.imageResize(sizeChange: CGSize(width: 14, height: 16))
+                
+                let iconStyle = PoiIconStyle(symbol: image, anchorPoint: CGPoint(x: 0.5, y: 1))
+                let perLevelStyle = PerLevelPoiStyle(iconStyle: iconStyle, level: 0)
+                let poiStyle = PoiStyle(styleID: "toilet", styles: [perLevelStyle])
+                kakaoMap!.getLabelManager().addPoiStyle(poiStyle)
+                
+                let poiOption = PoiOptions(styleID: "toilet", poiID: String(toilet.toilet_id))
+                poiOption.rank = 0
+                poiOption.clickable = true
+                let poi = kakaoMap!.getLabelManager().getLabelLayer(layerID: "toilet")?.addPoi(option: poiOption, at: MapPoint(longitude: toilet.longitude, latitude: toilet.latitude))
+                poi?.show()
+            }
+        }
+    }
+    
+    // 인증 실패시 호출.
+    func authenticationFailed(_ errorCode: Int, desc: String) {
+        print("error code: \(errorCode)")
+        print("desc: \(desc)")
+        _auth = false
+        switch errorCode {
+        case 400:
+            LogManager.e("지도 종료(API인증 파라미터 오류)")
+            break;
+        case 401:
+            LogManager.e("지도 종료(API인증 키 오류)")
+            break;
+        case 403:
+            LogManager.e("지도 종료(API인증 권한 오류)")
+            break;
+        case 429:
+            LogManager.e("지도 종료(API 사용쿼터 초과)")
+            break;
+        case 499:
+            LogManager.e("지도 종료(네트워크 오류) 5초 후 재시도..")
+            
+            // 인증 실패 delegate 호출 이후 5초뒤에 재인증 시도..
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                print("retry auth...")
+                
+                self.mapController?.prepareEngine()
+            }
+            break;
+        default:
+            break;
+        }
+    }
+    
+    func addViews() {
+        let defaultPosition = MapPoint(longitude: ObserverManager.currentToilet.longitude, latitude: ObserverManager.currentToilet.latitude)
+        let mapviewInfo: MapviewInfo = MapviewInfo(viewName: "mapview", viewInfoName: "map", defaultPosition: defaultPosition, defaultLevel: ObserverManager.BASE_ZOOM_LEVEL)
+        
+        //KakaoMap 추가.
+        mapController?.addView(mapviewInfo)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            self.kakaoMap = self.mapController?.getView("mapview") as? KakaoMap
+            let _ = self.kakaoMap!.getLabelManager().addLabelLayer(option: LabelLayerOptions(layerID: "toilet", competitionType: .none, competitionUnit: .poi, orderType: .rank, zOrder: 10001))
+            self.addPOIItem(toilet: ObserverManager.currentToilet)
+        })
+    }
+
+    //addView 성공 이벤트 delegate. 추가적으로 수행할 작업을 진행한다.
+    func addViewSucceeded(_ viewName: String, viewInfoName: String) {
+        print("OK") //추가 성공. 성공시 추가적으로 수행할 작업을 진행한다.
+    }
+    
+    //addView 실패 이벤트 delegate. 실패에 대한 오류 처리를 진행한다.
+    func addViewFailed(_ viewName: String, viewInfoName: String) {
+        print("Failed")
+    }
+    
+    //Container 뷰가 리사이즈 되었을때 호출된다. 변경된 크기에 맞게 ViewBase들의 크기를 조절할 필요가 있는 경우 여기에서 수행한다.
+    func containerDidResized(_ size: CGSize) {
+        let mapView: KakaoMap? = mapController?.getView("mapview") as? KakaoMap
+        mapView?.viewRect = CGRect(origin: CGPoint(x: 0.0, y: 0.0), size: size)   //지도뷰의 크기를 리사이즈된 크기로 지정한다.
     }
     
 }

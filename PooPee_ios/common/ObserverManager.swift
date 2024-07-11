@@ -8,8 +8,10 @@
 
 import Foundation
 import UIKit
+import KakaoMapsSDK
 
 class ObserverManager {
+    static let BASE_ZOOM_LEVEL = 14
     static let APPLE_ID = "1501449207"
     static let testServer = false // 테스트용인지 체크
     static let isShowLog = true // Log 노출여부 체크
@@ -19,12 +21,6 @@ class ObserverManager {
     
     static let DISTANCE: Double = 0.02
     
-    static var mapView: MTMapView!
-    static let imageMaker = UIImage(named: "ic_position")!.imageResize(sizeChange: CGSize(width: 14, height: 16))
-    static let imageMakerUp = UIImage(named: "ic_position_up")!.imageResize(sizeChange: CGSize(width: 14, height: 16))
-    static let imageMe = UIImage(named: "ic_marker")!.imageResize(sizeChange: CGSize(width: 30, height: 30))
-    static var my_position: MTMapPOIItem! = nil
-    static var my_position_rotation: Float = 0
     static var currentToilet: Toilet = Toilet()
     
     static func isTestServer() -> Bool {
@@ -42,45 +38,6 @@ class ObserverManager {
         SharedManager.instance.setMemberPassword(value: "")
         SharedManager.instance.setMemberName(value: "")
         SharedManager.instance.setMemberGender(value: "1")
-    }
-    
-    static func addPOIItem(toilet: Toilet) {
-        var image: UIImage! = imageMaker
-        if (toilet.toilet_id < 0) {
-            image = imageMakerUp
-        }
-        let marker = MTMapPOIItem()
-        marker.itemName = toilet.name
-        marker.tag = toilet.toilet_id
-        marker.mapPoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: toilet.latitude, longitude: toilet.longitude))
-        marker.markerType = MTMapPOIItemMarkerType.customImage // 마커타입을 커스텀 마커로 지정.
-        marker.customImage = image // 마커 이미지.
-        marker.markerSelectedType = MTMapPOIItemMarkerSelectedType.customImage // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
-        marker.customSelectedImage = image
-        
-        let imageOffset = Int32(image.size.height)
-        marker.customImageAnchorPointOffset = MTMapImageOffset(offsetX: imageOffset, offsetY: imageOffset)
-        mapView.add(marker)
-    }
-    
-    static func addMyPosition(latitude: Double, longitude: Double) {
-        if (my_position != nil) {
-            mapView.remove(my_position)
-        }
-        
-        my_position = MTMapPOIItem()
-        my_position.itemName = "내위치"
-        my_position.tag = -1
-        my_position.mapPoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: latitude, longitude: longitude))
-        my_position.markerType = MTMapPOIItemMarkerType.customImage // 마커타입을 커스텀 마커로 지정.
-        my_position.customImage = imageMe // 마커 이미지.
-        my_position.markerSelectedType = MTMapPOIItemMarkerSelectedType.customImage // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
-        my_position.customSelectedImage = imageMe
-        
-        let imageOffset = Int32(imageMe.size.height)
-        my_position.customImageAnchorPointOffset = MTMapImageOffset(offsetX: imageOffset, offsetY: imageOffset)
-        mapView.add(my_position)
-        my_position.rotation = my_position_rotation
     }
     
     /**

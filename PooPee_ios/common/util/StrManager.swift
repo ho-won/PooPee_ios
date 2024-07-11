@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class StrManager {
     private static let SEC = 60

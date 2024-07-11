@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -24,7 +24,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VBl-Tu-YXP" userLabel="layout_map">
                                 <rect key="frame" x="0.0" y="0.0" width="316" height="120"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cP5-LV-TaN">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cP5-LV-TaN" customClass="KMViewContainer">
                                         <rect key="frame" x="0.0" y="0.0" width="316" height="120"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
@@ -1061,7 +1061,7 @@
                 <outlet property="layout_like" destination="eQg-7C-sd2" id="V5W-Kt-3V0"/>
                 <outlet property="layout_report" destination="chv-ZB-Zuf" id="hpU-e3-LMF"/>
                 <outlet property="layout_update" destination="fVQ-qh-YSB" id="c71-Dz-lNF"/>
-                <outlet property="map_view" destination="cP5-LV-TaN" id="Akx-ij-D7L"/>
+                <outlet property="map_view" destination="cP5-LV-TaN" id="4iE-i2-nY7"/>
                 <outlet property="map_view_click" destination="Pa7-q8-ARd" id="fuH-Em-arC"/>
                 <outlet property="root_view" destination="1EN-dV-LA4" id="gFS-NH-IFW"/>
                 <outlet property="tv_address" destination="rBu-eI-Ciq" id="23b-56-vos"/>

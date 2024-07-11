@@ -28,5 +28,6 @@ target 'PooPee_ios' do
   pod 'KakaoSDKShare'
   pod 'KakaoSDKTemplate'
   pod 'KakaoSDKNavi'
+  pod 'KakaoMapsSDK', '2.10.4'
   
 end
