@@ -168,24 +168,21 @@ class ToiletCreateController: BaseController, MapControllerDelegate, CLLocationM
         }
         let mapviewInfo: MapviewInfo = MapviewInfo(viewName: "mapview", viewInfoName: "map", defaultPosition: defaultPosition, defaultLevel: ObserverManager.BASE_ZOOM_LEVEL)
         
-        //KakaoMap 추가.
         mapController?.addView(mapviewInfo)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-            self.kakaoMap = self.mapController?.getView("mapview") as? KakaoMap
-            if (self.mKeyword != nil) {
-                // 카카오검색기준으로 중심점변경
-                self.kakaoMap!.moveCamera(CameraUpdate.make(target: MapPoint(longitude: self.mKeyword!.longitude, latitude: self.mKeyword!.latitude), zoomLevel: ObserverManager.BASE_ZOOM_LEVEL, rotation: 0, tilt: 0, mapView: self.kakaoMap!))
-            } else if (SharedManager.instance.getLatitude() > 0) {
-                // 현재위치기준으로 중심점변경
-                self.kakaoMap!.moveCamera(CameraUpdate.make(target: MapPoint(longitude: SharedManager.instance.getLongitude(), latitude: SharedManager.instance.getLatitude()), zoomLevel: ObserverManager.BASE_ZOOM_LEVEL, rotation: 0, tilt: 0, mapView: self.kakaoMap!))
-            }
-        })
     }
 
     //addView 성공 이벤트 delegate. 추가적으로 수행할 작업을 진행한다.
     func addViewSucceeded(_ viewName: String, viewInfoName: String) {
-        print("OK") //추가 성공. 성공시 추가적으로 수행할 작업을 진행한다.
+        self.kakaoMap = self.mapController?.getView("mapview") as? KakaoMap
+        if (kakaoMap != nil) {
+            if (mKeyword != nil) {
+                // 카카오검색기준으로 중심점변경
+                kakaoMap!.moveCamera(CameraUpdate.make(target: MapPoint(longitude: mKeyword!.longitude, latitude: mKeyword!.latitude), zoomLevel: ObserverManager.BASE_ZOOM_LEVEL, rotation: 0, tilt: 0, mapView: kakaoMap!))
+            } else if (SharedManager.instance.getLatitude() > 0) {
+                // 현재위치기준으로 중심점변경
+                kakaoMap!.moveCamera(CameraUpdate.make(target: MapPoint(longitude: SharedManager.instance.getLongitude(), latitude: SharedManager.instance.getLatitude()), zoomLevel: ObserverManager.BASE_ZOOM_LEVEL, rotation: 0, tilt: 0, mapView: kakaoMap!))
+            }
+        }
     }
     
     //addView 실패 이벤트 delegate. 실패에 대한 오류 처리를 진행한다.

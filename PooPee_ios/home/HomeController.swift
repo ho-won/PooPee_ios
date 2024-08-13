@@ -413,7 +413,7 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
     func addPOIItem(toilet: Toilet) {
         if (kakaoMap != nil) {
             if (toilet.toilet_id < 0) {
-                let image = UIImage(named: "ic_position_up")!.imageResize(sizeChange: CGSize(width: 14, height: 16))
+                let image = UIImage(named: "ic_position_up")!.imageResize(sizeChange: CGSize(width: 11.2, height: 12.8))
                 
                 let iconStyle = PoiIconStyle(symbol: image, anchorPoint: CGPoint(x: 0.5, y: 1))
                 let perLevelStyle = PerLevelPoiStyle(iconStyle: iconStyle, level: 0)
@@ -426,7 +426,7 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
                 let poi = kakaoMap!.getLabelManager().getLabelLayer(layerID: "toilet")?.addPoi(option: poiOption, at: MapPoint(longitude: toilet.longitude, latitude: toilet.latitude))
                 poi?.show()
             } else {
-                let image = UIImage(named: "ic_position")!.imageResize(sizeChange: CGSize(width: 14, height: 16))
+                let image = UIImage(named: "ic_position")!.imageResize(sizeChange: CGSize(width: 11.2, height: 12.8))
                 
                 let iconStyle = PoiIconStyle(symbol: image, anchorPoint: CGPoint(x: 0.5, y: 1))
                 let perLevelStyle = PerLevelPoiStyle(iconStyle: iconStyle, level: 0)
@@ -444,7 +444,7 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
     
     func addMyPosition(latitude: Double, longitude: Double) {
         if (kakaoMap != nil) {
-            let imageMe = UIImage(named: "ic_marker")!.imageResize(sizeChange: CGSize(width: 30, height: 30))
+            let imageMe = UIImage(named: "ic_marker")!.imageResize(sizeChange: CGSize(width: 24, height: 24))
             if (my_position != nil) {
                 kakaoMap!.getLabelManager().getLabelLayer(layerID: "toilet")?.removePoi(poiID: my_position.itemID)
             }
@@ -508,15 +508,21 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
         //KakaoMap 추가.
         mapController?.addView(mapviewInfo)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-            self.kakaoMap = self.mapController?.getView("mapview") as? KakaoMap
-            self.kakaoMap!.eventDelegate = self
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+        })
+    }
+
+    //addView 성공 이벤트 delegate. 추가적으로 수행할 작업을 진행한다.
+    func addViewSucceeded(_ viewName: String, viewInfoName: String) {
+        kakaoMap = mapController?.getView("mapview") as? KakaoMap
+        if (kakaoMap != nil) {
+            kakaoMap?.eventDelegate = self
             
-            let _ = self.kakaoMap!.getLabelManager().addLabelLayer(option: LabelLayerOptions(layerID: "toilet", competitionType: .none, competitionUnit: .poi, orderType: .rank, zOrder: 10001))
+            let _ = kakaoMap!.getLabelManager().addLabelLayer(option: LabelLayerOptions(layerID: "toilet", competitionType: .none, competitionUnit: .poi, orderType: .rank, zOrder: 10001))
             
             // 현재위치기준으로 중심점 변경
-            if (self.isFirstOnCreate) {
-                self.isFirstOnCreate = false
+            if (isFirstOnCreate) {
+                isFirstOnCreate = false
                 DispatchQueue.main.async {
                     if (SharedManager.instance.getLatitude() > 0) {
                         self.kakaoMap!.moveCamera(CameraUpdate.make(target: MapPoint(longitude: SharedManager.instance.getLongitude(), latitude: SharedManager.instance.getLatitude()), zoomLevel: ObserverManager.BASE_ZOOM_LEVEL, rotation: 0, tilt: 0, mapView: self.kakaoMap!))
@@ -525,19 +531,14 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
                     }
                 }
             } else {
-                let position = self.kakaoMap!.getPosition(CGPoint(x: self.map_view.frame.width * 0.5, y: self.map_view.frame.height * 0.5))
-                if (self.lastLatitude == 0) {
-                    self.lastLatitude = position.wgsCoord.latitude
-                    self.lastLongitude = position.wgsCoord.longitude
+                let position = kakaoMap!.getPosition(CGPoint(x: self.map_view.frame.width * 0.5, y: map_view.frame.height * 0.5))
+                if (lastLatitude == 0) {
+                    lastLatitude = position.wgsCoord.latitude
+                    lastLongitude = position.wgsCoord.longitude
                 }
-                self.kakaoMap!.moveCamera(CameraUpdate.make(target: MapPoint(longitude: self.lastLongitude, latitude: self.lastLatitude), zoomLevel: ObserverManager.BASE_ZOOM_LEVEL, rotation: 0, tilt: 0, mapView: self.kakaoMap!))
+                kakaoMap!.moveCamera(CameraUpdate.make(target: MapPoint(longitude: lastLongitude, latitude: lastLatitude), zoomLevel: ObserverManager.BASE_ZOOM_LEVEL, rotation: 0, tilt: 0, mapView: kakaoMap!))
             }
-        })
-    }
-
-    //addView 성공 이벤트 delegate. 추가적으로 수행할 작업을 진행한다.
-    func addViewSucceeded(_ viewName: String, viewInfoName: String) {
-        print("OK") //추가 성공. 성공시 추가적으로 수행할 작업을 진행한다.
+        }
     }
     
     //addView 실패 이벤트 delegate. 실패에 대한 오류 처리를 진행한다.

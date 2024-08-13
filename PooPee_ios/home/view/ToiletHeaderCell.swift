@@ -123,7 +123,7 @@ class ToiletHeaderCell: UITableViewCell, MapControllerDelegate {
         
         tv_comment.text = "home_text_03".localized
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.mapController = KMController(viewContainer: self.map_view)
             self.mapController?.delegate = self
             self.mapController?.prepareEngine()
@@ -206,19 +206,16 @@ class ToiletHeaderCell: UITableViewCell, MapControllerDelegate {
         let defaultPosition = MapPoint(longitude: ObserverManager.currentToilet.longitude, latitude: ObserverManager.currentToilet.latitude)
         let mapviewInfo: MapviewInfo = MapviewInfo(viewName: "mapview", viewInfoName: "map", defaultPosition: defaultPosition, defaultLevel: ObserverManager.BASE_ZOOM_LEVEL)
         
-        //KakaoMap 추가.
         mapController?.addView(mapviewInfo)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-            self.kakaoMap = self.mapController?.getView("mapview") as? KakaoMap
-            let _ = self.kakaoMap!.getLabelManager().addLabelLayer(option: LabelLayerOptions(layerID: "toilet", competitionType: .none, competitionUnit: .poi, orderType: .rank, zOrder: 10001))
-            self.addPOIItem(toilet: ObserverManager.currentToilet)
-        })
     }
 
     //addView 성공 이벤트 delegate. 추가적으로 수행할 작업을 진행한다.
     func addViewSucceeded(_ viewName: String, viewInfoName: String) {
-        print("OK") //추가 성공. 성공시 추가적으로 수행할 작업을 진행한다.
+        kakaoMap = mapController?.getView("mapview") as? KakaoMap
+        if (kakaoMap != nil) {
+            let _ = kakaoMap!.getLabelManager().addLabelLayer(option: LabelLayerOptions(layerID: "toilet", competitionType: .none, competitionUnit: .poi, orderType: .rank, zOrder: 10001))
+            addPOIItem(toilet: ObserverManager.currentToilet)
+        }
     }
     
     //addView 실패 이벤트 delegate. 실패에 대한 오류 처리를 진행한다.
