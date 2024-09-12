@@ -91,6 +91,7 @@
 "nav_text_06" = "Login";
 "nav_text_07" = "Toilet registration";
 "nav_text_08" = "Share";
+"nav_text_09" = "Donate";
 
 // home
 "home_text_01" = "Place, address search";
@@ -150,6 +151,10 @@
 "menu_setting_06" = "Terms of Service for Location-Based Services";
 "menu_setting_07" = "withdraw";
 "menu_setting_08" = "Would you like to withdraw?";
+
+"menu_donate_01" = "Was PooPee helpful to you?";
+"menu_donate_02" = "Your donations greatly help the developer\nin maintaining the service!";
+"menu_donate_03" = "Thank you for your donation. PooPee will strive to work even harder!!";
 
 // toilet
 "toilet_option_01" = "Man";

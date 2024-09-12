@@ -398,6 +398,70 @@ extension UILabel {
         }
     }
     
+    func xPositionOfSubstring(substring: String) -> CGFloat? {
+        // 전체 텍스트가 있는지 확인
+        guard let fullText = self.text else { return nil }
+
+        // 서브스트링의 range 찾기
+        guard let range = fullText.range(of: substring) else { return nil }
+
+        // NSRange로 변환
+        let nsRange = NSRange(range, in: fullText)
+
+        // UILabel의 attributedText를 기반으로 텍스트 속성 가져오기
+        let attributedText = self.attributedText ?? NSAttributedString(string: fullText)
+        
+        // UILabel의 크기와 속성을 기반으로 boundingRect 계산
+        let textStorage = NSTextStorage(attributedString: attributedText)
+        let textContainer = NSTextContainer(size: self.bounds.size)
+        let layoutManager = NSLayoutManager()
+        
+        layoutManager.addTextContainer(textContainer)
+        textStorage.addLayoutManager(layoutManager)
+        
+        // 레이아웃 매니저에서 글자의 범위에 대한 사각형을 구함
+        var glyphRange = NSRange(location: 0, length: 0)
+        layoutManager.characterRange(forGlyphRange: nsRange, actualGlyphRange: &glyphRange)
+        
+        var textBoundingRect = layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer)
+        
+        // UILabel의 origin을 기준으로 변환된 x 값을 반환
+        textBoundingRect.origin.x += self.frame.origin.x
+        
+        return textBoundingRect.origin.x
+    }
+    
+    func widthOfSubstring(substring: String) -> CGFloat? {
+        // 전체 텍스트가 있는지 확인
+        guard let fullText = self.text else { return nil }
+
+        // 서브스트링의 range 찾기
+        guard let range = fullText.range(of: substring) else { return nil }
+
+        // NSRange로 변환
+        let nsRange = NSRange(range, in: fullText)
+
+        // UILabel의 attributedText를 기반으로 텍스트 속성 가져오기
+        let attributedText = self.attributedText ?? NSAttributedString(string: fullText)
+        
+        // UILabel의 크기와 속성을 기반으로 boundingRect 계산
+        let textStorage = NSTextStorage(attributedString: attributedText)
+        let textContainer = NSTextContainer(size: self.bounds.size)
+        let layoutManager = NSLayoutManager()
+        
+        layoutManager.addTextContainer(textContainer)
+        textStorage.addLayoutManager(layoutManager)
+        
+        // 레이아웃 매니저에서 글자의 범위에 대한 사각형을 구함
+        var glyphRange = NSRange(location: 0, length: 0)
+        layoutManager.characterRange(forGlyphRange: nsRange, actualGlyphRange: &glyphRange)
+        
+        let textBoundingRect = layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer)
+
+        // 특정 단어의 width 반환
+        return textBoundingRect.width
+    }
+    
 }
 
 private var __maxLengths = [UITextField: Int]()

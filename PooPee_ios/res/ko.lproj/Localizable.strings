@@ -91,6 +91,7 @@
 "nav_text_06" = "로그인하기";
 "nav_text_07" = "화장실등록";
 "nav_text_08" = "공유하기";
+"nav_text_09" = "후원하기";
 
 // home
 "home_text_01" = "장소,주소 검색";
@@ -150,6 +151,10 @@
 "menu_setting_06" = "위치정보기반 서비스 이용약관";
 "menu_setting_07" = "회원탈퇴";
 "menu_setting_08" = "탈퇴하시겠습니까?";
+
+"menu_donate_01" = "PooPee가 도움이 되셨나요?";
+"menu_donate_02" = "후원을 해주시면 서비스를 유지하는 데\n개발자에게 큰 힘이 됩니다!";
+"menu_donate_03" = "후원해 주셔서 감사합니다.\n더 노력하는 PooPee가 되겠습니다!!";
 
 // toilet
 "toilet_option_01" = "남성용";

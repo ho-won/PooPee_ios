@@ -35,6 +35,9 @@ class NavMainView: UIView, MFMailComposeViewControllerDelegate {
     @IBOutlet var layout_setting: UIView!
     @IBOutlet var tv_setting: UILabel!
     
+    @IBOutlet var layout_donate: UIView!
+    @IBOutlet var tv_donate: UILabel!
+    
     @IBOutlet var btn_logout: UIButton!
     
     override init(frame: CGRect) {
@@ -64,6 +67,7 @@ class NavMainView: UIView, MFMailComposeViewControllerDelegate {
         tv_request.text = "nav_text_03".localized
         tv_setting.text = "nav_text_04".localized
         tv_app_install.text = "nav_text_08".localized
+        tv_donate.text = "nav_text_09".localized
         
         refresh()
         setListener()
@@ -123,6 +127,10 @@ class NavMainView: UIView, MFMailComposeViewControllerDelegate {
         }
         layout_setting.setOnClickListener {
             let controller = ObserverManager.getController(name: "SettingController")
+            ObserverManager.root.startPresent(controller: controller)
+        }
+        layout_donate.setOnClickListener {
+            let controller = ObserverManager.getController(name: "DonateController")
             ObserverManager.root.startPresent(controller: controller)
         }
         btn_logout.setOnClickListener {

@@ -90,6 +90,9 @@ class ObserverManager {
         case "SettingController": // 설정
             let controller = UIStoryboard(name: "Menu", bundle: nil).instantiateViewController(withIdentifier: "SettingController") as! SettingController
             return controller
+        case "DonateController": // 설정
+            let controller = UIStoryboard(name: "Menu", bundle: nil).instantiateViewController(withIdentifier: "DonateController") as! DonateController
+            return controller
             
         // Main.storyboard
         case "HomeController": // 홈
