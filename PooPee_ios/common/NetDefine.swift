@@ -11,7 +11,7 @@ import Foundation
 struct NetDefine {
     static let NETWORK_TIMEOUT = 30000;
     
-    static let BASE_APP = ObserverManager.isTestServer() ? "http://poopee.ho1.co.kr/" : "http://poopee.ho1.co.kr/"
+    static let BASE_APP = ObserverManager.isTestServer() ? "https://poopee.ho1.co.kr/" : "https://poopee.ho1.co.kr/"
     
     static let TEST_API = "etcs/test" // test
     static let APP_INSTALL = "etcs/appInstall" // test
