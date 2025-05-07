@@ -130,7 +130,7 @@ class SettingController: BaseController {
     }
     
     /**
-     * [DELETE] 댓글삭제
+     * [DELETE] 회원탈퇴
      */
     func taskWithdraw() {
         showLoading()

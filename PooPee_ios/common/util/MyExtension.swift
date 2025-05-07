@@ -121,12 +121,6 @@ extension UIView {
         }
         
         self.isHidden = gone
-        
-//        if (attribute == .width) {
-//            DispatchQueue.main.async {
-//                self.translatesAutoresizingMaskIntoConstraints = true
-//            }
-//        }
     }
     
     /**

@@ -12,8 +12,9 @@ import CoreLocation
 import Lottie
 import GoogleMobileAds
 import KakaoMapsSDK
+import SafariServices
 
-class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelegate, CLLocationManagerDelegate, UITextFieldDelegate, GADFullScreenContentDelegate {
+class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelegate, CLLocationManagerDelegate, UITextFieldDelegate {
     
     @IBOutlet var map_view: KMViewContainer!
     
@@ -55,6 +56,7 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
     var lastLongitude: Double = 0 // 마지막 중심 longitude
     
     var interstitialAd: GADInterstitialAd?
+    let adRemovalKey = "coupang_click_time"
     
     var toilet: Toilet = Toilet()
     var toiletList: [Int : Toilet] = [Int : Toilet]()
@@ -107,18 +109,7 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
         lottie_my_position.isUserInteractionEnabled = false
         setMyPosition(isHidden: true)
         
-        let request = GADRequest()
-        GADInterstitialAd.load(
-            withAdUnitID: "interstitial_ad_unit_id".localized,
-            request: request,
-            completionHandler: { [self] ad, error in
-                if let error = error {
-                    print("Failed to load interstitial ad with error: \(error.localizedDescription)")
-                    return
-                }
-                interstitialAd = ad
-                interstitialAd?.fullScreenContentDelegate = self
-            })
+        loadAdMobInterstitial()
         
         ad_view.loadBannerAd()
         
@@ -245,22 +236,6 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
         }
     }
     
-    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        let controller = ObserverManager.getController(name: "ToiletController")
-        controller.segueData.putExtra(key: ToiletController.TOILET, data: self.toilet)
-        ObserverManager.root.startPresent(controller: controller)
-        
-        interstitialAd = nil
-    }
-    
-    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
-        let controller = ObserverManager.getController(name: "ToiletController")
-        controller.segueData.putExtra(key: ToiletController.TOILET, data: self.toilet)
-        ObserverManager.root.startPresent(controller: controller)
-        
-        interstitialAd = nil
-    }
-    
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         let azimuth = newHeading.trueHeading
         UIView.animate(withDuration: 0.3) {
@@ -335,13 +310,18 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
             let toilet = SQLiteManager.instance.getToilet(id: Int(poiID)!)
             let dialog = ToiletDialog(onDetail: { it in
                 self.toilet = it
-                if (self.interstitialAd != nil) {
-                    self.interstitialAd?.present(fromRootViewController: self)
+                if (!self.isAdRemoved()) {
+                    self.showAdRemovalPopup() // 광고 제거 유도 팝업 띄우기
                 } else {
-                    let controller = ObserverManager.getController(name: "ToiletController")
-                    controller.segueData.putExtra(key: ToiletController.TOILET, data: self.toilet)
-                    ObserverManager.root.startPresent(controller: controller)
+                    self.openToiletDetail() // 광고 제거된 경우 바로 상세보기로 이동
                 }
+//                if (self.interstitialAd != nil) {
+//                    self.interstitialAd?.present(fromRootViewController: self)
+//                } else {
+//                    let controller = ObserverManager.getController(name: "ToiletController")
+//                    controller.segueData.putExtra(key: ToiletController.TOILET, data: self.toilet)
+//                    ObserverManager.root.startPresent(controller: controller)
+//                }
             })
             dialog.setToilet(toilet: toilet)
             dialog.refresh()
@@ -363,6 +343,63 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
                 dialog.show(view: ObserverManager.root.view)
             }
         }
+    }
+    
+    func showAdRemovalPopup() {
+        let dialog = BasicDialog(
+            onLeftButton: {
+                self.showAdMobInterstitial()
+        },
+            onRightButton: {
+                self.openCoupangAd()
+        })
+        dialog.setTextContent("home_text_29".localized)
+        dialog.setBtnLeft("home_text_30".localized)
+        dialog.setBtnRight("home_text_31".localized)
+        dialog.show(view: ObserverManager.root.view)
+    }
+
+    func loadAdMobInterstitial() {
+        let request = GADRequest()
+        GADInterstitialAd.load(withAdUnitID: "interstitial_ad_unit_id".localized, request: request) { ad, error in
+            if let error = error {
+                print("Failed to load interstitial ad: \(error)")
+                return
+            }
+            self.interstitialAd = ad
+        }
+    }
+
+    func showAdMobInterstitial() {
+        guard let interstitial = interstitialAd else {
+            openToiletDetail()
+            return
+        }
+
+        interstitialAd?.fullScreenContentDelegate = self
+        interstitialAd?.present(fromRootViewController: self)
+    }
+
+    func openToiletDetail() {
+        let controller = ObserverManager.getController(name: "ToiletController")
+        controller.segueData.putExtra(key: ToiletController.TOILET, data: self.toilet)
+        ObserverManager.root.startPresent(controller: controller)
+    }
+
+    func openCoupangAd() {
+        if let url = URL(string: "https://link.coupang.com/a/cspD9C") {
+            let safariVC = SFSafariViewController(url: url)
+            present(safariVC, animated: true)
+        }
+
+        // Save current timestamp to UserDefaults
+        UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: adRemovalKey)
+    }
+
+    func isAdRemoved() -> Bool {
+        let lastClick = UserDefaults.standard.double(forKey: adRemovalKey)
+        let now = Date().timeIntervalSince1970
+        return now < lastClick + 24 * 60 * 60
     }
     
     func checkPopup() {
@@ -658,7 +695,7 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
     
 }
 
-extension HomeController: UITableViewDelegate, UITableViewDataSource {
+extension HomeController: UITableViewDelegate, UITableViewDataSource, GADFullScreenContentDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return keywordList.count
@@ -677,6 +714,22 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let position = indexPath.row
         setKakaoLocal(kaKoKeyword: keywordList[position])
+    }
+    
+    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        let controller = ObserverManager.getController(name: "ToiletController")
+        controller.segueData.putExtra(key: ToiletController.TOILET, data: self.toilet)
+        ObserverManager.root.startPresent(controller: controller)
+        
+        interstitialAd = nil
+    }
+    
+    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+        let controller = ObserverManager.getController(name: "ToiletController")
+        controller.segueData.putExtra(key: ToiletController.TOILET, data: self.toilet)
+        ObserverManager.root.startPresent(controller: controller)
+        
+        interstitialAd = nil
     }
     
 }

@@ -9,8 +9,9 @@
 import UIKit
 import GoogleMobileAds
 import KakaoMapsSDK
+import WebKit
 
-class ToiletHeaderCell: UITableViewCell, MapControllerDelegate {
+class ToiletHeaderCell: UITableViewCell, MapControllerDelegate, WKNavigationDelegate, WKUIDelegate {
     @IBOutlet var root_view: UIView!
     
     @IBOutlet var map_view: KMViewContainer!
@@ -66,6 +67,8 @@ class ToiletHeaderCell: UITableViewCell, MapControllerDelegate {
     @IBOutlet var tv_w_d_poo: UILabel!
     @IBOutlet var tv_w_c_poo_title: UILabel!
     @IBOutlet var tv_w_c_poo: UILabel!
+    
+    @IBOutlet var web_view: WKWebView!
     
     @IBOutlet var tv_manager: UILabel!
     @IBOutlet var cb_tap_manager: cb_up_down!
@@ -123,12 +126,16 @@ class ToiletHeaderCell: UITableViewCell, MapControllerDelegate {
         
         tv_comment.text = "home_text_03".localized
         
+        cb_tap_address.setSelected(selected: true)
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.mapController = KMController(viewContainer: self.map_view)
             self.mapController?.delegate = self
             self.mapController?.prepareEngine()
             self.mapController?.activateEngine()
         }
+        
+        setCoupangAd()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -227,6 +234,60 @@ class ToiletHeaderCell: UITableViewCell, MapControllerDelegate {
     func containerDidResized(_ size: CGSize) {
         let mapView: KakaoMap? = mapController?.getView("mapview") as? KakaoMap
         mapView?.viewRect = CGRect(origin: CGPoint(x: 0.0, y: 0.0), size: size)   //지도뷰의 크기를 리사이즈된 크기로 지정한다.
+    }
+    
+    func setCoupangAd() {
+        web_view.navigationDelegate = self
+        web_view.uiDelegate = self
+        
+        // HTML 삽입
+        let htmlData = """
+                <html>
+                <head>
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <script src="https://ads-partners.coupang.com/g.js"></script>
+                </head>
+                <body style="margin:0;padding:0;display:flex;justify-content:center;align-items:center;">
+                    <script>
+                        new PartnersCoupang.G({
+                            "id": 846359,
+                            "template": "carousel",
+                            "trackingCode": "AF3689916",
+                            "width": "360",
+                            "height": "60",
+                            "tsource": ""
+                        });
+                    </script>
+                </body>
+                </html>
+                """
+        
+        web_view.loadHTMLString(htmlData, baseURL: nil)
+    }
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
+                 decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if let url = navigationAction.request.url,
+           navigationAction.navigationType == .linkActivated {
+            // 광고 클릭 시 외부 브라우저로 열기
+            UIApplication.shared.open(url)
+            decisionHandler(.cancel)
+            return
+        }
+        decisionHandler(.allow)
+    }
+    
+    func webView(_ webView: WKWebView,
+                 createWebViewWith configuration: WKWebViewConfiguration,
+                 for navigationAction: WKNavigationAction,
+                 windowFeatures: WKWindowFeatures) -> WKWebView? {
+        
+        if navigationAction.targetFrame == nil || !(navigationAction.targetFrame?.isMainFrame ?? false) {
+            if let url = navigationAction.request.url {
+                UIApplication.shared.open(url)
+            }
+        }
+        return nil
     }
     
 }

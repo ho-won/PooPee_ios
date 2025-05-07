@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1EN-dV-LA4">
-                        <rect key="frame" x="0.0" y="0.0" width="316" height="670"/>
+                        <rect key="frame" x="0.0" y="0.0" width="316" height="726"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VBl-Tu-YXP" userLabel="layout_map">
                                 <rect key="frame" x="0.0" y="0.0" width="316" height="120"/>
@@ -801,14 +801,30 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oLb-lt-pah" userLabel="line_01">
-                                <rect key="frame" x="0.0" y="504" width="316" height="4"/>
+                                <rect key="frame" x="0.0" y="504" width="316" height="60"/>
+                                <subviews>
+                                    <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sg3-bM-scM">
+                                        <rect key="frame" x="-22" y="0.0" width="360" height="60"/>
+                                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="360" id="con-4Q-13N"/>
+                                        </constraints>
+                                        <wkWebViewConfiguration key="configuration">
+                                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                            <wkPreferences key="preferences"/>
+                                        </wkWebViewConfiguration>
+                                    </wkWebView>
+                                </subviews>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="4" id="DJl-Fd-IQR"/>
+                                    <constraint firstAttribute="height" constant="60" id="DJl-Fd-IQR"/>
+                                    <constraint firstItem="sg3-bM-scM" firstAttribute="centerX" secondItem="oLb-lt-pah" secondAttribute="centerX" id="pvC-Qf-14T"/>
+                                    <constraint firstItem="sg3-bM-scM" firstAttribute="top" secondItem="oLb-lt-pah" secondAttribute="top" id="qhP-CF-8lz"/>
+                                    <constraint firstAttribute="bottom" secondItem="sg3-bM-scM" secondAttribute="bottom" id="tpk-qj-kt6"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M3I-Q2-cmy" userLabel="layout_manager">
-                                <rect key="frame" x="0.0" y="508" width="316" height="42"/>
+                                <rect key="frame" x="0.0" y="564" width="316" height="42"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dyz-4k-ES5">
                                         <rect key="frame" x="16" y="12" width="256" height="17"/>
@@ -835,7 +851,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9zM-Ph-Wld" userLabel="layout_detail_manager">
-                                <rect key="frame" x="0.0" y="550" width="316" height="75.5"/>
+                                <rect key="frame" x="0.0" y="606" width="316" height="75.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7cC-HF-1Oq">
                                         <rect key="frame" x="16" y="0.0" width="284" height="59.5"/>
@@ -955,7 +971,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tax-ww-9Ip" userLabel="layout_comment">
-                                <rect key="frame" x="0.0" y="625.5" width="316" height="44"/>
+                                <rect key="frame" x="0.0" y="681.5" width="316" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KMx-Bt-tGn">
                                         <rect key="frame" x="16" y="13.5" width="6.5" height="17"/>
@@ -990,7 +1006,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uhB-f0-nAh" customClass="main_line" customModule="PooPee_ios" customModuleProvider="target">
-                                <rect key="frame" x="16" y="669.5" width="284" height="0.5"/>
+                                <rect key="frame" x="16" y="725.5" width="284" height="0.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="HEq-jT-z2N"/>
@@ -1100,6 +1116,7 @@
                 <outlet property="tv_w_d_poo_title" destination="Ezg-Yh-WhM" id="Mls-Qq-l8C"/>
                 <outlet property="tv_w_poo" destination="VyL-iW-kCs" id="RAa-Cx-LgD"/>
                 <outlet property="tv_w_poo_title" destination="xPJ-wJ-iqr" id="zmP-GA-ku9"/>
+                <outlet property="web_view" destination="sg3-bM-scM" id="vVd-sw-X25"/>
             </connections>
             <point key="canvasLocation" x="128.98550724637681" y="184.48660714285714"/>
         </tableViewCell>
