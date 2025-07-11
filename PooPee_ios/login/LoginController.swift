@@ -95,12 +95,12 @@ class LoginController: BaseController {
         BaseTask().request(url: NetDefine.LOGIN, method: .post, params: params
             , onSuccess: { response in
                 if (response.getInt("rst_code") == 0) {
-                    SharedManager.instance.setLoginCheck(value: true)
-                    SharedManager.instance.setMemberId(value: response.getString("member_id"))
-                    SharedManager.instance.setMemberUsername(value: username)
-                    SharedManager.instance.setMemberPassword(value: password)
-                    SharedManager.instance.setMemberName(value: response.getString("name"))
-                    SharedManager.instance.setMemberGender(value: response.getString("gender"))
+                    SharedManager.isLoginCheck = true
+                    SharedManager.memberId = response.getString("member_id")
+                    SharedManager.memberUsername = username
+                    SharedManager.memberPassword = password
+                    SharedManager.memberName = response.getString("name")
+                    SharedManager.memberGender = response.getString("gender")
                     self.finish()
                 } else {
                     self.view.makeToast(message: "toast_login_fail".localized)

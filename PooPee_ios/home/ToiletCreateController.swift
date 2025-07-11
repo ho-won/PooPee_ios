@@ -80,8 +80,8 @@ class ToiletCreateController: BaseController, MapControllerDelegate, CLLocationM
     
     func setListener() {
         btn_my_position.setOnClickListener {
-            if (SharedManager.instance.getLatitude() > 0) {
-                self.kakaoMap!.moveCamera(CameraUpdate.make(target: MapPoint(longitude: SharedManager.instance.getLongitude(), latitude: SharedManager.instance.getLatitude()), zoomLevel: ObserverManager.BASE_ZOOM_LEVEL, rotation: 0, tilt: 0, mapView: self.kakaoMap!))
+            if (SharedManager.latitude > 0) {
+                self.kakaoMap!.moveCamera(CameraUpdate.make(target: MapPoint(longitude: SharedManager.longitude, latitude: SharedManager.latitude), zoomLevel: ObserverManager.BASE_ZOOM_LEVEL, rotation: 0, tilt: 0, mapView: self.kakaoMap!))
                 self.kakaoMap.moveCamera(CameraUpdate.make(zoomLevel: ObserverManager.BASE_ZOOM_LEVEL, mapView: self.kakaoMap))
             }
         }
@@ -101,8 +101,8 @@ class ToiletCreateController: BaseController, MapControllerDelegate, CLLocationM
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        SharedManager.instance.setLatitude(value: locValue.latitude)
-        SharedManager.instance.setLongitude(value: locValue.longitude)
+        SharedManager.latitude = locValue.latitude
+        SharedManager.longitude = locValue.longitude
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -163,8 +163,8 @@ class ToiletCreateController: BaseController, MapControllerDelegate, CLLocationM
     
     func addViews() {
         var defaultPosition = MapPoint(longitude: 127.108678, latitude: 37.402001)
-        if (SharedManager.instance.getLatitude() > 0) {
-            defaultPosition = MapPoint(longitude: SharedManager.instance.getLongitude(), latitude: SharedManager.instance.getLatitude())
+        if (SharedManager.latitude > 0) {
+            defaultPosition = MapPoint(longitude: SharedManager.longitude, latitude: SharedManager.latitude)
         }
         let mapviewInfo: MapviewInfo = MapviewInfo(viewName: "mapview", viewInfoName: "map", defaultPosition: defaultPosition, defaultLevel: ObserverManager.BASE_ZOOM_LEVEL)
         
@@ -178,9 +178,9 @@ class ToiletCreateController: BaseController, MapControllerDelegate, CLLocationM
             if (mKeyword != nil) {
                 // 카카오검색기준으로 중심점변경
                 kakaoMap!.moveCamera(CameraUpdate.make(target: MapPoint(longitude: mKeyword!.longitude, latitude: mKeyword!.latitude), zoomLevel: ObserverManager.BASE_ZOOM_LEVEL, rotation: 0, tilt: 0, mapView: kakaoMap!))
-            } else if (SharedManager.instance.getLatitude() > 0) {
+            } else if (SharedManager.latitude > 0) {
                 // 현재위치기준으로 중심점변경
-                kakaoMap!.moveCamera(CameraUpdate.make(target: MapPoint(longitude: SharedManager.instance.getLongitude(), latitude: SharedManager.instance.getLatitude()), zoomLevel: ObserverManager.BASE_ZOOM_LEVEL, rotation: 0, tilt: 0, mapView: kakaoMap!))
+                kakaoMap!.moveCamera(CameraUpdate.make(target: MapPoint(longitude: SharedManager.longitude, latitude: SharedManager.latitude), zoomLevel: ObserverManager.BASE_ZOOM_LEVEL, rotation: 0, tilt: 0, mapView: kakaoMap!))
             }
         }
     }

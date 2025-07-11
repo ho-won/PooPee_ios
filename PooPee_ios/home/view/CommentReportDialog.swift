@@ -94,7 +94,7 @@ class CommentReportDialog: BaseDialog {
      */
     func taskCommentReport() {
         var params: Parameters = Parameters()
-        params.put("member_id", SharedManager.instance.getMemberId())
+        params.put("member_id", SharedManager.memberId)
         params.put("comment_id", mComment.comment_id)
         params.put("content", edt_content.text!)
         

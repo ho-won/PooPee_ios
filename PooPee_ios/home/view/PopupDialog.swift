@@ -49,7 +49,7 @@ class PopupDialog: BaseDialog {
     }
     
     func _init() {
-        var imageName = SharedManager.instance.getNoticeImage()
+        var imageName = SharedManager.noticeImage
         if (Locale.current.languageCode != "ko") {
             let array = imageName.split(separator: ".")
             imageName = array[0] + "_en." + array[1]
@@ -70,8 +70,8 @@ class PopupDialog: BaseDialog {
     
     func setListener() {
         btn_show.setOnClickListener {
-            SharedManager.instance.setNoticeImage(value: "")
-            SharedManager.instance.setNoticeDate(value: StrManager.getCurrentDate())
+            SharedManager.noticeImage = ""
+            SharedManager.noticeDate = StrManager.getCurrentDate()
             self.dismiss()
         }
         btn_close.setOnClickListener {

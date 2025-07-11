@@ -19,7 +19,7 @@ class SQLiteManager {
     func getReadableDatabase() -> OpaquePointer! {
         let fileURL = try! FileManager.default
             .url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            .appendingPathComponent("toilets_v\(String(SharedManager.instance.getDbVer())).sqlite")
+            .appendingPathComponent("toilets_v\(String(SharedManager.dbVer)).sqlite")
         
         var db: OpaquePointer?
         if sqlite3_open(fileURL.path, &db) != SQLITE_OK {

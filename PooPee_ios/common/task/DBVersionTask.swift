@@ -32,7 +32,7 @@ class DBVersionTask {
                 if (response.getInt("rst_code") == 0) {
                     self.dbVer = response.getInt("db_ver")
                     
-                    if (SharedManager.instance.getDbVer() == self.dbVer) {
+                    if (SharedManager.dbVer == self.dbVer) {
                         self.onSuccess()
                     } else {
                         let fileName = response.getString("file_name")
@@ -67,7 +67,7 @@ class DBVersionTask {
                 }
         }
             , onSuccess: { data in
-                let oldDbVersion = SharedManager.instance.getDbVer()
+                let oldDbVersion = SharedManager.dbVer
                 let newDbVersion = self.dbVer
                 for i in oldDbVersion ..< newDbVersion {
                     do {
@@ -79,7 +79,7 @@ class DBVersionTask {
                     }
                 }
                 
-                SharedManager.instance.setDbVer(value: self.dbVer)
+                SharedManager.dbVer = self.dbVer
                 self.onSuccess()
         })
     }

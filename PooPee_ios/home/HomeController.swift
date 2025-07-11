@@ -55,9 +55,6 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
     var lastLatitude: Double = 0 // 마지막 중심 latitude
     var lastLongitude: Double = 0 // 마지막 중심 longitude
     
-    var interstitialAd: GADInterstitialAd?
-    let adRemovalKey = "coupang_click_time"
-    
     var toilet: Toilet = Toilet()
     var toiletList: [Int : Toilet] = [Int : Toilet]()
     
@@ -68,6 +65,12 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
     var _appear: Bool = false
     var my_position: Poi! = nil
     var my_position_rotation: Float = 0
+    
+    var interstitialAd: InterstitialAd? // 리워드
+    var rewardedAd: RewardedAd? // 리워드
+    var rewardEarned = false // 리워드 광고 시청 체크
+    var isRewardedAd = false
+    var rewardedInterstitialAd: RewardedInterstitialAd? // 보상형 전면광고
     
     deinit {
         mapController?.pauseEngine()
@@ -109,7 +112,11 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
         lottie_my_position.isUserInteractionEnabled = false
         setMyPosition(isHidden: true)
         
-        loadAdMobInterstitial()
+        Task {
+            await loadAdMobInterstitial()
+            await loadAdMobRewardedAd()
+            await loadAdMobRewardedInterstitialAd()
+        }
         
         ad_view.loadBannerAd()
         
@@ -134,7 +141,7 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
         _appear = false
         mapController?.pauseEngine()  //렌더링 중지.
     }
-
+    
     override func viewDidDisappear(_ animated: Bool) {
         isViewDidAppear = false
         removeObservers()
@@ -158,8 +165,8 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
             //mLocationManager.startUpdatingHeading()
         }
         
-        if (SharedManager.instance.getReviewCount() == ToiletController.REVIEW_COUNT) {
-            SharedManager.instance.setReviewCount(value: SharedManager.instance.getReviewCount() + 1)
+        if (SharedManager.reviewCount == ToiletController.REVIEW_COUNT) {
+            SharedManager.reviewCount = SharedManager.reviewCount + 1
             MyUtil.startInAppReview()
         }
     }
@@ -186,10 +193,10 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
         }
         layout_my_position.setOnClickListener {
             if (self.kakaoMap != nil) {
-                if (SharedManager.instance.getLatitude() > 0) {
+                if (SharedManager.latitude > 0) {
                     self.isMyPositionMove = true
-                    self.kakaoMap!.moveCamera(CameraUpdate.make(target: MapPoint(longitude: SharedManager.instance.getLongitude(), latitude: SharedManager.instance.getLatitude()), zoomLevel: ObserverManager.BASE_ZOOM_LEVEL, rotation: 0, tilt: 0, mapView: self.kakaoMap!))
-                    self.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
+                    self.kakaoMap!.moveCamera(CameraUpdate.make(target: MapPoint(longitude: SharedManager.longitude, latitude: SharedManager.latitude), zoomLevel: ObserverManager.BASE_ZOOM_LEVEL, rotation: 0, tilt: 0, mapView: self.kakaoMap!))
+                    self.addMyPosition(latitude: SharedManager.latitude, longitude: SharedManager.longitude)
                     self.setMyPosition(isHidden: false)
                 }
             }
@@ -198,7 +205,7 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
             self.hoSlideMenu.showMenu()
         }
     }
-
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if (keywordList.count > 0) {
             setKakaoLocal(kaKoKeyword: keywordList[0])
@@ -211,7 +218,7 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
             return
         }
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
-            let window = self.view.window?.frame {
+           let window = self.view.window?.frame {
             self.view.frame = CGRect(x: self.view.frame.origin.x,
                                      y: self.view.frame.origin.y,
                                      width: self.view.frame.width,
@@ -249,7 +256,7 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         let newLocation: CLLocation = CLLocation(latitude: locValue.latitude, longitude: locValue.longitude)
-        let oldLocation: CLLocation = CLLocation(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
+        let oldLocation: CLLocation = CLLocation(latitude: SharedManager.latitude, longitude: SharedManager.longitude)
         let distance = newLocation.distance(from: oldLocation)
         
         // 업데이트 거리기준 추가
@@ -265,14 +272,14 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
         //     self.mIsMinTime = true
         // }
         
-        SharedManager.instance.setLatitude(value: locValue.latitude)
-        SharedManager.instance.setLongitude(value: locValue.longitude)
+        SharedManager.latitude = locValue.latitude
+        SharedManager.longitude = locValue.longitude
         
         if (kakaoMap != nil) {
             if (NSStringFromClass(ObserverManager.root.classForCoder) == NSStringFromClass(HomeController().classForCoder)
-                && (isMyPositionMove && SharedManager.instance.getLatitude() > 0)) {
-                kakaoMap!.moveCamera(CameraUpdate.make(cameraPosition: CameraPosition(target: MapPoint(longitude: SharedManager.instance.getLongitude(), latitude: SharedManager.instance.getLatitude()), height: 0, rotation: 0, tilt: 0)))
-                self.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
+                && (isMyPositionMove && SharedManager.latitude > 0)) {
+                kakaoMap!.moveCamera(CameraUpdate.make(cameraPosition: CameraPosition(target: MapPoint(longitude: SharedManager.longitude, latitude: SharedManager.latitude), height: 0, rotation: 0, tilt: 0)))
+                self.addMyPosition(latitude: SharedManager.latitude, longitude: SharedManager.longitude)
                 self.setMyPosition(isHidden: false)
                 isMinTime = false
             }
@@ -292,7 +299,7 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
         } else if (lastLatitude != position.wgsCoord.latitude || lastLongitude != position.wgsCoord.longitude) {
             setToliets(latitude: position.wgsCoord.latitude, longitude: position.wgsCoord.longitude)
         }
-        if (String(format: "%.3f", position.wgsCoord.latitude) == String(format: "%.3f", SharedManager.instance.getLatitude()) && String(format: "%.3f", position.wgsCoord.longitude) == String(format: "%.3f", SharedManager.instance.getLongitude())) {
+        if (String(format: "%.3f", position.wgsCoord.latitude) == String(format: "%.3f", SharedManager.latitude) && String(format: "%.3f", position.wgsCoord.longitude) == String(format: "%.3f", SharedManager.longitude)) {
             setMyPosition(isHidden: false)
         } else {
             setMyPosition(isHidden: true)
@@ -315,13 +322,6 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
                 } else {
                     self.openToiletDetail() // 광고 제거된 경우 바로 상세보기로 이동
                 }
-//                if (self.interstitialAd != nil) {
-//                    self.interstitialAd?.present(fromRootViewController: self)
-//                } else {
-//                    let controller = ObserverManager.getController(name: "ToiletController")
-//                    controller.segueData.putExtra(key: ToiletController.TOILET, data: self.toilet)
-//                    ObserverManager.root.startPresent(controller: controller)
-//                }
             })
             dialog.setToilet(toilet: toilet)
             dialog.refresh()
@@ -330,12 +330,10 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
             if let toilet = toiletList[Int(poiID)!] {
                 let dialog = ToiletDialog(onDetail: { it in
                     self.toilet = it
-                    if (self.interstitialAd != nil) {
-                        self.interstitialAd?.present(fromRootViewController: self)
+                    if (!self.isAdRemoved()) {
+                        self.showAdRemovalPopup() // 광고 제거 유도 팝업 띄우기
                     } else {
-                        let controller = ObserverManager.getController(name: "ToiletController")
-                        controller.segueData.putExtra(key: ToiletController.TOILET, data: self.toilet)
-                        ObserverManager.root.startPresent(controller: controller)
+                        self.openToiletDetail() // 광고 제거된 경우 바로 상세보기로 이동
                     }
                 })
                 dialog.setToilet(toilet: toilet)
@@ -346,64 +344,90 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
     }
     
     func showAdRemovalPopup() {
-        let dialog = BasicDialog(
-            onLeftButton: {
-                self.showAdMobInterstitial()
-        },
-            onRightButton: {
-                self.openCoupangAd()
-        })
-        dialog.setTextContent("home_text_29".localized)
-        dialog.setBtnLeft("home_text_30".localized)
-        dialog.setBtnRight("home_text_31".localized)
-        dialog.show(view: ObserverManager.root.view)
-    }
-
-    func loadAdMobInterstitial() {
-        let request = GADRequest()
-        GADInterstitialAd.load(withAdUnitID: "interstitial_ad_unit_id".localized, request: request) { ad, error in
-            if let error = error {
-                print("Failed to load interstitial ad: \(error)")
-                return
-            }
-            self.interstitialAd = ad
+        if (SharedManager.rewardPopupCount == 0 || SharedManager.rewardPopupCount >= 5) {
+            SharedManager.rewardPopupCount = 1
+            let dialog = RewardDialog(
+                onRewardedAd: {
+                    self.showAdMobRewardedAd()
+                },
+                onRewardedInterstitialAd: {
+                    self.showAdMobInterstitial()
+                })
+            dialog.show(view: ObserverManager.root.view)
+        } else {
+            SharedManager.rewardPopupCount += 1
+            showAdMobInterstitial()
         }
     }
-
+    
+    func loadAdMobInterstitial() async {
+        do {
+            interstitialAd = try await InterstitialAd.load(with: "interstitial_ad_unit_id".localized, request: Request())
+            interstitialAd?.fullScreenContentDelegate = self
+        } catch {
+            print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+        }
+    }
+    
     func showAdMobInterstitial() {
-        guard let interstitial = interstitialAd else {
+        isRewardedAd = false
+        guard interstitialAd != nil else {
             openToiletDetail()
             return
         }
-
-        interstitialAd?.fullScreenContentDelegate = self
-        interstitialAd?.present(fromRootViewController: self)
+        interstitialAd?.present(from: self)
     }
-
+    
+    func loadAdMobRewardedAd() async {
+        do {
+            rewardedAd = try await RewardedAd.load(with: "rewarded_interstitial_id".localized, request: Request())
+            rewardedAd?.fullScreenContentDelegate = self
+        } catch {
+            print("Rewarded ad failed to load with error: \(error.localizedDescription)")
+        }
+    }
+    
+    func showAdMobRewardedAd() {
+        isRewardedAd = true
+        guard rewardedAd != nil else {
+            openToiletDetail()
+            return
+        }
+        rewardedAd?.present(from: self, userDidEarnRewardHandler: {
+            self.rewardEarned = true
+            SharedManager.rewardEarnedTime = Date().timeIntervalSince1970
+        })
+    }
+    
+    func loadAdMobRewardedInterstitialAd() async {
+        
+    }
+    
+    func showAdMobRewardedInterstitialAd() {
+        
+    }
+    
     func openToiletDetail() {
         let controller = ObserverManager.getController(name: "ToiletController")
         controller.segueData.putExtra(key: ToiletController.TOILET, data: self.toilet)
         ObserverManager.root.startPresent(controller: controller)
     }
-
+    
     func openCoupangAd() {
         if let url = URL(string: "https://link.coupang.com/a/cspD9C") {
-            let safariVC = SFSafariViewController(url: url)
-            present(safariVC, animated: true)
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
-
-        // Save current timestamp to UserDefaults
-        UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: adRemovalKey)
+        
+        SharedManager.rewardEarnedTime = Date().timeIntervalSince1970
     }
-
+    
     func isAdRemoved() -> Bool {
-        let lastClick = UserDefaults.standard.double(forKey: adRemovalKey)
         let now = Date().timeIntervalSince1970
-        return now < lastClick + 24 * 60 * 60
+        return now < SharedManager.rewardEarnedTime + 24 * 60 * 60
     }
     
     func checkPopup() {
-        if (SharedManager.instance.getNoticeImage().count > 0) {
+        if (SharedManager.noticeImage.count > 0) {
             let dialog = PopupDialog()
             dialog.show(view: ObserverManager.root.view)
         }
@@ -422,7 +446,7 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
         if (kakaoMap != nil) {
             lastLatitude = latitude
             lastLongitude = longitude
-
+            
             for poi in kakaoMap!.getLabelManager().getLabelLayer(layerID: "toilet")!.getAllPois()! {
                 kakaoMap!.getLabelManager().getLabelLayer(layerID: "toilet")?.removePoi(poiID: poi.itemID)
             }
@@ -432,8 +456,8 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
             }
             taskToiletList(lastLatitude, lastLongitude)
             
-            if (SharedManager.instance.getLatitude() > 0) {
-                self.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
+            if (SharedManager.latitude > 0) {
+                self.addMyPosition(latitude: SharedManager.latitude, longitude: SharedManager.longitude)
             }
         }
     }
@@ -536,8 +560,8 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
     func addViews() {
         //여기에서 그릴 View(KakaoMap, Roadview)들을 추가한다.
         var defaultPosition = MapPoint(longitude: 127.108678, latitude: 37.402001)
-        if (SharedManager.instance.getLatitude() > 0) {
-            defaultPosition = MapPoint(longitude: SharedManager.instance.getLongitude(), latitude: SharedManager.instance.getLatitude())
+        if (SharedManager.latitude > 0) {
+            defaultPosition = MapPoint(longitude: SharedManager.longitude, latitude: SharedManager.latitude)
         }
         //지도(KakaoMap)를 그리기 위한 viewInfo를 생성
         let mapviewInfo: MapviewInfo = MapviewInfo(viewName: "mapview", viewInfoName: "map", defaultPosition: defaultPosition, defaultLevel: ObserverManager.BASE_ZOOM_LEVEL)
@@ -548,7 +572,7 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
         })
     }
-
+    
     //addView 성공 이벤트 delegate. 추가적으로 수행할 작업을 진행한다.
     func addViewSucceeded(_ viewName: String, viewInfoName: String) {
         kakaoMap = mapController?.getView("mapview") as? KakaoMap
@@ -561,9 +585,9 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
             if (isFirstOnCreate) {
                 isFirstOnCreate = false
                 DispatchQueue.main.async {
-                    if (SharedManager.instance.getLatitude() > 0) {
-                        self.kakaoMap!.moveCamera(CameraUpdate.make(target: MapPoint(longitude: SharedManager.instance.getLongitude(), latitude: SharedManager.instance.getLatitude()), zoomLevel: ObserverManager.BASE_ZOOM_LEVEL, rotation: 0, tilt: 0, mapView: self.kakaoMap!))
-                        self.addMyPosition(latitude: SharedManager.instance.getLatitude(), longitude: SharedManager.instance.getLongitude())
+                    if (SharedManager.latitude > 0) {
+                        self.kakaoMap!.moveCamera(CameraUpdate.make(target: MapPoint(longitude: SharedManager.longitude, latitude: SharedManager.latitude), zoomLevel: ObserverManager.BASE_ZOOM_LEVEL, rotation: 0, tilt: 0, mapView: self.kakaoMap!))
+                        self.addMyPosition(latitude: SharedManager.latitude, longitude: SharedManager.longitude)
                         self.setMyPosition(isHidden: false)
                     }
                 }
@@ -596,21 +620,21 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
     func addObservers(){
         NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
-    
+        
         _observerAdded = true
     }
-     
+    
     func removeObservers(){
         NotificationCenter.default.removeObserver(self, name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
-
+        
         _observerAdded = false
     }
-
+    
     @objc func willResignActive(){
         mapController?.pauseEngine()
     }
-
+    
     @objc func didBecomeActive(){
         mapController?.activateEngine()
     }
@@ -624,41 +648,41 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
         params.put("longitude", longitude)
         
         BaseTask().request(url: NetDefine.TOILET_LIST, method: .get, params: params
-            , onSuccess: { it in
-                if (it.getInt("rst_code") == 0) {
-                    let jsonArray = it.getJSONArray("toilets")
-                    self.toiletList = [Int:Toilet]()
-
-                    for i in 0 ..< jsonArray.count {
-                        let jsonObject = jsonArray.getJSONObject(i)
-                        let toilet = Toilet()
-                        toilet.toilet_id = jsonObject.getInt("toilet_id")
-                        toilet.member_id = jsonObject.getString("member_id")
-                        toilet.type = "유저"
-                        toilet.m_name = jsonObject.getString("m_name")
-                        toilet.name = jsonObject.getString("name")
-                        toilet.content = jsonObject.getString("content")
-                        toilet.address_new = jsonObject.getString("address_new")
-                        toilet.address_old = jsonObject.getString("address_old")
-                        if (jsonObject.getInt("unisex") == 1) {
-                            toilet.unisex = "Y"
-                        } else {
-                            toilet.unisex = "N"
-                        }
-                        toilet.m_poo = jsonObject.getString("man")
-                        toilet.w_poo = jsonObject.getString("woman")
-                        toilet.latitude = jsonObject.getDouble("latitude")
-                        toilet.longitude = jsonObject.getDouble("longitude")
-                        self.toiletList[toilet.toilet_id] = toilet
-                        self.addPOIItem(toilet: toilet)
-                    }
-                }
-        }
-            , onFailed: { statusCode in
+                           , onSuccess: { it in
+            if (it.getInt("rst_code") == 0) {
+                let jsonArray = it.getJSONArray("toilets")
+                self.toiletList = [Int:Toilet]()
                 
+                for i in 0 ..< jsonArray.count {
+                    let jsonObject = jsonArray.getJSONObject(i)
+                    let toilet = Toilet()
+                    toilet.toilet_id = jsonObject.getInt("toilet_id")
+                    toilet.member_id = jsonObject.getString("member_id")
+                    toilet.type = "유저"
+                    toilet.m_name = jsonObject.getString("m_name")
+                    toilet.name = jsonObject.getString("name")
+                    toilet.content = jsonObject.getString("content")
+                    toilet.address_new = jsonObject.getString("address_new")
+                    toilet.address_old = jsonObject.getString("address_old")
+                    if (jsonObject.getInt("unisex") == 1) {
+                        toilet.unisex = "Y"
+                    } else {
+                        toilet.unisex = "N"
+                    }
+                    toilet.m_poo = jsonObject.getString("man")
+                    toilet.w_poo = jsonObject.getString("woman")
+                    toilet.latitude = jsonObject.getDouble("latitude")
+                    toilet.longitude = jsonObject.getDouble("longitude")
+                    self.toiletList[toilet.toilet_id] = toilet
+                    self.addPOIItem(toilet: toilet)
+                }
+            }
+        }
+                           , onFailed: { statusCode in
+            
         })
     }
-
+    
     /**
      * [GET] 카카오지도 키워드 검색
      */
@@ -671,31 +695,31 @@ class HomeController: BaseController, MapControllerDelegate, KakaoMapEventDelega
         ]
         
         BaseTask().request(url: NetDefine.KAKAO_LOCAL_SEARCH, method: .post, params: params, headers: headers, fullUrl: true
-            , onSuccess: { response in
-                self.keywordList = []
-                let jsonArray = response.getJSONArray("documents")
-
-                for i in 0 ..< jsonArray.count {
-                    let jsonObject = jsonArray.getJSONObject(i)
-                    let keyword = KaKaoKeyword()
-                    keyword.address_name = jsonObject.getString("address_name")
-                    keyword.place_name = jsonObject.getString("place_name")
-                    keyword.latitude = jsonObject.getDouble("y")
-                    keyword.longitude = jsonObject.getDouble("x")
-
-                    self.keywordList.append(keyword)
-                }
-
-                self.tl_search.reloadData()
-        }
-            , onFailed: { statusCode in
+                           , onSuccess: { response in
+            self.keywordList = []
+            let jsonArray = response.getJSONArray("documents")
+            
+            for i in 0 ..< jsonArray.count {
+                let jsonObject = jsonArray.getJSONObject(i)
+                let keyword = KaKaoKeyword()
+                keyword.address_name = jsonObject.getString("address_name")
+                keyword.place_name = jsonObject.getString("place_name")
+                keyword.latitude = jsonObject.getDouble("y")
+                keyword.longitude = jsonObject.getDouble("x")
                 
+                self.keywordList.append(keyword)
+            }
+            
+            self.tl_search.reloadData()
+        }
+                           , onFailed: { statusCode in
+            
         })
     }
     
 }
 
-extension HomeController: UITableViewDelegate, UITableViewDataSource, GADFullScreenContentDelegate {
+extension HomeController: UITableViewDelegate, UITableViewDataSource, FullScreenContentDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return keywordList.count
@@ -716,20 +740,31 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource, GADFullScr
         setKakaoLocal(kaKoKeyword: keywordList[position])
     }
     
-    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        let controller = ObserverManager.getController(name: "ToiletController")
-        controller.segueData.putExtra(key: ToiletController.TOILET, data: self.toilet)
-        ObserverManager.root.startPresent(controller: controller)
-        
+    func ad(_ ad: FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+        openToiletDetail()
         interstitialAd = nil
+        Task {
+            await loadAdMobInterstitial()
+        }
     }
     
-    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
-        let controller = ObserverManager.getController(name: "ToiletController")
-        controller.segueData.putExtra(key: ToiletController.TOILET, data: self.toilet)
-        ObserverManager.root.startPresent(controller: controller)
-        
-        interstitialAd = nil
+    func adDidDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
+        LogManager.e("HO_TEST : isRewardedAd \(isRewardedAd) \(rewardEarned)")
+        if (isRewardedAd) {
+            if (rewardEarned) {
+                openToiletDetail()
+            }
+            Task {
+                rewardedAd = nil
+                await loadAdMobRewardedAd()
+            }
+        } else {
+            openToiletDetail()
+            Task {
+                interstitialAd = nil
+                await loadAdMobInterstitial()
+            }
+        }
     }
     
 }

@@ -78,8 +78,8 @@ class NavMainView: UIView, MFMailComposeViewControllerDelegate {
     }
     
     func refresh() {
-        if (SharedManager.instance.isLoginCheck()) {
-            tv_name.text = SharedManager.instance.getMemberName()
+        if (SharedManager.isLoginCheck) {
+            tv_name.text = SharedManager.memberName
             iv_login.image = UIImage(named: "img_profile")
             btn_logout.setImage(UIImage(named: "ic_logout"), for: .normal)
         } else {
@@ -92,13 +92,13 @@ class NavMainView: UIView, MFMailComposeViewControllerDelegate {
     
     func setListener() {
         layout_login.setOnClickListener {
-            if (!SharedManager.instance.isLoginCheck()) {
+            if (!SharedManager.isLoginCheck) {
                 let controller = ObserverManager.getController(name: "LoginController")
                 ObserverManager.root.startPresent(controller: controller)
             }
         }
         layout_toilet_create.setOnClickListener {
-            if (SharedManager.instance.isLoginCheck()) {
+            if (SharedManager.isLoginCheck) {
                 let controller = ObserverManager.getController(name: "ToiletSearchController")
                 ObserverManager.root.startPresent(controller: controller)
             } else {
@@ -107,7 +107,7 @@ class NavMainView: UIView, MFMailComposeViewControllerDelegate {
             }
         }
         layout_my_info.setOnClickListener {
-            if (SharedManager.instance.isLoginCheck()) {
+            if (SharedManager.isLoginCheck) {
                 let controller = ObserverManager.getController(name: "MyInfoController")
                 ObserverManager.root.startPresent(controller: controller)
             } else {
@@ -134,7 +134,7 @@ class NavMainView: UIView, MFMailComposeViewControllerDelegate {
             ObserverManager.root.startPresent(controller: controller)
         }
         btn_logout.setOnClickListener {
-            if (SharedManager.instance.isLoginCheck()) {
+            if (SharedManager.isLoginCheck) {
                 ObserverManager.logout()
                 self.refresh()
             }

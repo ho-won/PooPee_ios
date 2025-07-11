@@ -156,7 +156,7 @@ class ToiletUpdateDialog: BaseDialog {
         mToilet.content = edt_content.text!
         
         var params: Parameters = Parameters()
-        params.put("member_id", SharedManager.instance.getMemberId())
+        params.put("member_id", SharedManager.memberId)
         params.put("toilet_id", mToilet.toilet_id)
         params.put("name", mToilet.name) // 화장실명
         params.put("content", mToilet.content) // 화장실설명

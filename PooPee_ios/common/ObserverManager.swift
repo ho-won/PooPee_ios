@@ -32,12 +32,12 @@ class ObserverManager {
     }
     
     static func logout() {
-        SharedManager.instance.setLoginCheck(value: false)
-        SharedManager.instance.setMemberId(value: "")
-        SharedManager.instance.setMemberUsername(value: "")
-        SharedManager.instance.setMemberPassword(value: "")
-        SharedManager.instance.setMemberName(value: "")
-        SharedManager.instance.setMemberGender(value: "1")
+        SharedManager.isLoginCheck = false
+        SharedManager.memberId = ""
+        SharedManager.memberUsername = ""
+        SharedManager.memberPassword = ""
+        SharedManager.memberName = ""
+        SharedManager.memberGender = "1"
     }
     
     /**

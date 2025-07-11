@@ -175,7 +175,7 @@ class ToiletCreateDialog: BaseDialog {
     func taskCreateToilet(_ address_new: String, _ address_old: String) {
         ObserverManager.root.showLoading()
         var params: Parameters = Parameters()
-        params.put("member_id", SharedManager.instance.getMemberId())
+        params.put("member_id", SharedManager.memberId)
         params.put("name", edt_title.text!) // 화장실명
         params.put("content", edt_content.text!) // 화장실설명
         

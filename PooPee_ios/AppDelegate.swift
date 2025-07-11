@@ -23,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // override point for customization after application launch.
         KakaoSDK.initSDK(appKey: "53565fe7d8355fff626939459a32e7d0")
         SDKInitializer.InitSDK(appKey: "53565fe7d8355fff626939459a32e7d0")
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
         FirebaseApp.configure()
         return true
     }

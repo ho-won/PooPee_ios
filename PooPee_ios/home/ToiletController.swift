@@ -61,8 +61,8 @@ class ToiletController: BaseController, MFMessageComposeViewControllerDelegate {
         table_view.dataSource = self
         table_view.delegate = self
         
-        if (SharedManager.instance.getReviewCount() < ToiletController.REVIEW_COUNT) {
-            SharedManager.instance.setReviewCount(value: SharedManager.instance.getReviewCount() + 1)
+        if (SharedManager.reviewCount < ToiletController.REVIEW_COUNT) {
+            SharedManager.reviewCount = SharedManager.reviewCount + 1
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -90,7 +90,7 @@ class ToiletController: BaseController, MFMessageComposeViewControllerDelegate {
     func taskCommentList() {
         showLoading()
         var params: Parameters = Parameters()
-        params.put("member_id", SharedManager.instance.getMemberId())
+        params.put("member_id", SharedManager.memberId)
         params.put("toilet_id", mToilet.toilet_id)
         
         BaseTask().request(url: NetDefine.COMMENT_LIST, method: .get, params: params
@@ -132,7 +132,7 @@ class ToiletController: BaseController, MFMessageComposeViewControllerDelegate {
      */
     func taskToiletLike() {
         var params: Parameters = Parameters()
-        params.put("member_id", SharedManager.instance.getMemberId())
+        params.put("member_id", SharedManager.memberId)
         params.put("toilet_id", mToilet.toilet_id)
         
         BaseTask().request(url: NetDefine.TOILET_LIKE, method: .post, params: params
@@ -154,7 +154,7 @@ class ToiletController: BaseController, MFMessageComposeViewControllerDelegate {
     func taskCommentCreate(comment: String) {
         showLoading()
         var params: Parameters = Parameters()
-        params.put("member_id", SharedManager.instance.getMemberId())
+        params.put("member_id", SharedManager.memberId)
         params.put("toilet_id", mToilet.toilet_id)
         params.put("content", comment)
         
@@ -176,7 +176,7 @@ class ToiletController: BaseController, MFMessageComposeViewControllerDelegate {
     func taskCommentDelete(comment: Comment, position: Int) {
         showLoading()
         var params: Parameters = Parameters()
-        params.put("member_id", SharedManager.instance.getMemberId())
+        params.put("member_id", SharedManager.memberId)
         params.put("comment_id", comment.comment_id)
         
         BaseTask().request(url: NetDefine.COMMENT_DELETE, method: .delete, params: params
@@ -201,7 +201,7 @@ class ToiletController: BaseController, MFMessageComposeViewControllerDelegate {
     func taskToiletDelete() {
         showLoading()
         var params: Parameters = Parameters()
-        params.put("member_id", SharedManager.instance.getMemberId())
+        params.put("member_id", SharedManager.memberId)
         params.put("toilet_id", mToilet.toilet_id)
         
         BaseTask().request(url: NetDefine.TOILET_DELETE, method: .delete, params: params
@@ -244,7 +244,7 @@ extension ToiletController: UITableViewDelegate, UITableViewDataSource {
             cell.tv_toilet_content.text = mToilet.content
             cell.tv_like.text = mToilet.like_count
             
-            if (mToilet.member_id == SharedManager.instance.getMemberId()) {
+            if (mToilet.member_id == SharedManager.memberId) {
                 cell.layout_btn_mine.isHidden = false
                 cell.layout_btn_normal.isHidden = true
             } else {
@@ -354,7 +354,7 @@ extension ToiletController: UITableViewDelegate, UITableViewDataSource {
             self.table_view.reloadData()
         }
         cell.layout_report.setOnClickListener {
-            if (SharedManager.instance.isLoginCheck()) {
+            if (SharedManager.isLoginCheck) {
                 let dialog = ToiletReportDialog()
                 dialog.setToilet(self.mToilet)
                 dialog.show(view: ObserverManager.root.view)
@@ -387,7 +387,7 @@ extension ToiletController: UITableViewDelegate, UITableViewDataSource {
             dialog.show(view: ObserverManager.root.view)
         }
         cell.layout_like.setOnClickListener {
-            if (SharedManager.instance.isLoginCheck()) {
+            if (SharedManager.isLoginCheck) {
                 self.taskToiletLike()
             } else {
                 cell.cb_like.setSelected(selected: false)
@@ -400,7 +400,7 @@ extension ToiletController: UITableViewDelegate, UITableViewDataSource {
             UIApplication.shared.open(number, options: self.convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
         }
         cell.btn_comment.setOnClickListener {
-            if (SharedManager.instance.isLoginCheck()) {
+            if (SharedManager.isLoginCheck) {
                 let dialog = CommentCreateDialog(
                     onCommentCreate: { it in
                         self.taskCommentCreate(comment: it)
@@ -421,7 +421,7 @@ extension ToiletController: UITableViewDelegate, UITableViewDataSource {
     
     func openMenu(v: UIView, position: Int) {
         var menuItems: [MenuItem] = []
-        if (mCommentList[position].member_id == SharedManager.instance.getMemberId()) {
+        if (mCommentList[position].member_id == SharedManager.memberId) {
             menuItems.append(MenuItem(id: 1, title: "delete".localized))
             menuItems.append(MenuItem(id: 2, title: "modified".localized))
         } else {
@@ -456,7 +456,7 @@ extension ToiletController: UITableViewDelegate, UITableViewDataSource {
                     dialog.setComment(self.mCommentList[position])
                     dialog.show(view: ObserverManager.root.view)
                 } else if (menuItem.id == 3) {
-                    if (SharedManager.instance.isLoginCheck()) {
+                    if (SharedManager.isLoginCheck) {
                         let dialog = CommentReportDialog()
                         dialog.setComment(self.mCommentList[position])
                         dialog.show(view: ObserverManager.root.view)

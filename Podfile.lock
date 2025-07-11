@@ -49,8 +49,7 @@ PODS:
     - GoogleUtilities/Environment (~> 7.4)
     - GoogleUtilities/UserDefaults (~> 7.4)
     - PromisesObjC (< 3.0, >= 1.2)
-  - Google-Mobile-Ads-SDK (8.12.0):
-    - GoogleAppMeasurement (< 9.0, >= 7.0)
+  - Google-Mobile-Ads-SDK (12.6.0):
     - GoogleUserMessagingPlatform (>= 1.1)
   - GoogleAppMeasurement (8.8.0):
     - GoogleAppMeasurement/AdIdSupport (= 8.8.0)
@@ -76,7 +75,7 @@ PODS:
     - GoogleUtilities/Environment (~> 7.2)
     - nanopb (~> 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleUserMessagingPlatform (2.0.0)
+  - GoogleUserMessagingPlatform (3.0.0)
   - GoogleUtilities/AppDelegateSwizzler (7.5.2):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -165,10 +164,10 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnostics: fe77f42da6329d6d83d21fd9d621a6b704413bfc
   FirebaseCrashlytics: 3660c045c8e45cc4276110562a0ef44cf43c8157
   FirebaseInstallations: 2563cb18a723ef9c6ef18318a49519b75dce613c
-  Google-Mobile-Ads-SDK: fb31b6ef68ef352b551ee29585cd9ceb07230cd0
+  Google-Mobile-Ads-SDK: 198db3cfaaafdacf4ebfa273944c844792d483d1
   GoogleAppMeasurement: 5ba1164e3c844ba84272555e916d0a6d3d977e91
   GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
-  GoogleUserMessagingPlatform: ab890ce5f6620f293a21b6bdd82e416a2c73aeca
+  GoogleUserMessagingPlatform: f8d0cdad3ca835406755d0a69aa634f00e76d576
   GoogleUtilities: 8de2a97a17e15b6b98e38e8770e2d129a57c0040
   KakaoMapsSDK: 6ceb9740762945bcefb1cdb61123e48abf6e6a5d
   KakaoSDKCommon: b4235203f67a5b6ee2df75eaf9bbc863c6d92e09
@@ -182,4 +181,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: e0e0099863eb524dbbf0a63786603d84f1df5a37
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

@@ -68,10 +68,10 @@ class SettingController: BaseController {
     }
     
     func refresh() {
-        if (SharedManager.instance.isLoginCheck()) {
-            tv_login.text = SharedManager.instance.getMemberName()
+        if (SharedManager.isLoginCheck) {
+            tv_login.text = SharedManager.memberName
             tv_logout.isHidden = false
-            if (SharedManager.instance.getMemberGender() == "0") {
+            if (SharedManager.memberGender == "0") {
                 iv_login.image = UIImage(named: "ic_man_profile")
             } else {
                 iv_login.image = UIImage(named: "ic_woman_profile")
@@ -83,12 +83,12 @@ class SettingController: BaseController {
             iv_login.image = UIImage(named: "ic_profile")
             layout_withdraw.setVisibility(gone: true, dimen: 0, attribute: .height)
         }
-        switch_push.isOn = SharedManager.instance.isPush()
+        switch_push.isOn = SharedManager.isPush
     }
     
     func setListener() {
         layout_login.setOnClickListener {
-            if (SharedManager.instance.isLoginCheck()) {
+            if (SharedManager.isLoginCheck) {
                 ObserverManager.logout()
                 self.refresh()
             } else {
@@ -97,7 +97,7 @@ class SettingController: BaseController {
             }
         }
         switch_push.setOnCheckedChangedListener {
-            SharedManager.instance.setPush(value: self.switch_push.isOn)
+            SharedManager.isPush = self.switch_push.isOn
         }
         layout_terms_01.setOnClickListener {
             let controller = ObserverManager.getController(name: "TermsController")
@@ -135,7 +135,7 @@ class SettingController: BaseController {
     func taskWithdraw() {
         showLoading()
         var params: Parameters = Parameters()
-        params.put("member_id", SharedManager.instance.getMemberId())
+        params.put("member_id", SharedManager.memberId)
         
         BaseTask().request(url: NetDefine.USER_DELETE, method: .delete, params: params
             , onSuccess: { it in

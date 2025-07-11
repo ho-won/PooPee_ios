@@ -13,10 +13,14 @@
 
 "banner_ad_unit_id" = "ca-app-pub-2933424745841582/9578971692";
 "interstitial_ad_unit_id" = "ca-app-pub-2933424745841582/5044545873";
+"rewarded_interstitial_ad_unit_id" = "ca-app-pub-2933424745841582/6297090627";
+"rewarded_interstitial_id" = "ca-app-pub-2933424745841582/2042953175";
 
 // test
-//"banner_ad_unit_id" = "ca-app-pub-3940256099942544/6300978111";
-//"interstitial_ad_unit_id" = "ca-app-pub-3940256099942544/1033173712";
+//"banner_ad_unit_id" = "ca-app-pub-3940256099942544/2435281174";
+//"interstitial_ad_unit_id" = "ca-app-pub-3940256099942544/4411468910";
+//"rewarded_interstitial_ad_unit_id" = "ca-app-pub-3940256099942544/6978759866";
+//"rewarded_interstitial_id" = "ca-app-pub-3940256099942544/1712485313";
 
 // word
 "yes" = "예";
@@ -52,6 +56,10 @@
 "dialog_download_request" = "화장실정보 다운로드가 필요합니다. 통신환경을 확인 후 재시도해주세요.";
 "dialog_no_show" = "다시보지않기";
 "dialog_finish" = "PooPee를 종료하시겠습니까?";
+"dialog_reward_01" = "화장실 상세정보 보기";
+"dialog_reward_02" = "광고를 한 번 보면 24시간 동안\n전체화면 광고 없이 쾌적하게 사용할 수 있어요!";
+"dialog_reward_03" = "광고 보고 보기";
+"dialog_reward_04" = "그냥 보기";
 
 // toast
 "toast_checking_service" = "서비스점검중입니다";

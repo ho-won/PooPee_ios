@@ -98,7 +98,7 @@ class MainController: BaseController {
      * 자동로그인 체크.
      */
     func loginCheck() {
-        if (SharedManager.instance.isLoginCheck()) {
+        if (SharedManager.isLoginCheck) {
             taskLogin()
         } else {
             gotoHome()
@@ -118,17 +118,17 @@ class MainController: BaseController {
      */
     func taskLogin() {
         var params: Parameters = Parameters()
-        params.put("username", SharedManager.instance.getMemberUsername())
-        params.put("password", SharedManager.instance.getMemberPassword())
+        params.put("username", SharedManager.memberUsername)
+        params.put("password", SharedManager.memberPassword)
         params.put("pushkey", "test")
         params.put("os", "ios")
         
         BaseTask().request(url: NetDefine.LOGIN, method: .post, params: params
             , onSuccess: { response in
                 if (response.getInt("rst_code") == 0) {
-                    SharedManager.instance.setMemberId(value: response.getString("member_id"))
-                    SharedManager.instance.setMemberName(value: response.getString("name"))
-                    SharedManager.instance.setMemberGender(value: response.getString("gender"))
+                    SharedManager.memberId = response.getString("member_id")
+                    SharedManager.memberName = response.getString("name")
+                    SharedManager.memberGender = response.getString("gender")
                     self.gotoHome()
                 } else {
                     ObserverManager.logout()
@@ -146,12 +146,12 @@ class MainController: BaseController {
      */
     func taskServerCheck() {
         var params: Parameters = Parameters()
-        params.put("date", SharedManager.instance.getNoticeDate())
+        params.put("date", SharedManager.noticeDate)
         
         BaseTask().request(url: NetDefine.SERVER_CHECK, method: .get, params: params
             , onSuccess: { response in
                 if (response.getInt("rst_code") == 0) {
-                    SharedManager.instance.setNoticeImage(value: response.getString("notice_image"))
+                    SharedManager.noticeImage = response.getString("notice_image")
                     self.onVersionCheck(response: response); // 버전체크
                 } else {
                     self.view.makeToast(message: "toast_checking_service".localized)

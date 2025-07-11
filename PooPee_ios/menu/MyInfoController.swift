@@ -59,9 +59,9 @@ class MyInfoController: BaseController {
         edt_name.setPattern(pattern: .alphanumeric_hangul)
         edt_name.maxLength = 20
 
-        edt_name.text = SharedManager.instance.getMemberName()
+        edt_name.text = SharedManager.memberName
         
-        if (SharedManager.instance.getMemberGender() == "0") {
+        if (SharedManager.memberGender == "0") {
             rb_man.setSelected(selected: true)
         } else {
             rb_woman.setSelected(selected: true)
@@ -126,9 +126,9 @@ class MyInfoController: BaseController {
     func taskUpdateUser(password: String, name: String, gender: String) {
         showLoading()
         var params: Parameters = Parameters()
-        params.put("member_id", SharedManager.instance.getMemberId())
+        params.put("member_id", SharedManager.memberId)
 
-        var pw = SharedManager.instance.getMemberPassword()
+        var pw = SharedManager.memberPassword
         if (!password.isEmpty) {
             pw = password
         }
@@ -140,9 +140,9 @@ class MyInfoController: BaseController {
         BaseTask().request(url: NetDefine.USER_UPDATE, method: .put, params: params
             , onSuccess: { it in
             if (it.getInt("rst_code") == 0) {
-                SharedManager.instance.setMemberPassword(value: pw)
-                SharedManager.instance.setMemberName(value: name)
-                SharedManager.instance.setMemberGender(value: gender)
+                SharedManager.memberPassword = pw
+                SharedManager.memberName = name
+                SharedManager.memberGender = gender
                 self.getParentController().view.makeToast(message: "toast_update_complete".localized)
                 self.finish()
             }

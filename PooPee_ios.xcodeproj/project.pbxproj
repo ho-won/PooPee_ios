@@ -11,6 +11,8 @@
 		492017D626B8E532004F0A93 /* ReviewDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492017D526B8E532004F0A93 /* ReviewDialog.swift */; };
 		492017D826B8E546004F0A93 /* ReviewDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 492017D726B8E546004F0A93 /* ReviewDialog.xib */; };
 		9CC8029FB1E92D93FF462A79 /* Pods_PooPee_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4379F460D576256B08017E2F /* Pods_PooPee_ios.framework */; };
+		AA27C28A2E17B5C300585ABB /* RewardDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA27C2892E17B5C300585ABB /* RewardDialog.swift */; };
+		AA27C28C2E17B5D500585ABB /* RewardDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA27C28B2E17B5D500585ABB /* RewardDialog.xib */; };
 		AA2ADE5F2C8AAD31001C304E /* CustomBackgroundLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2ADE5E2C8AAD31001C304E /* CustomBackgroundLabel.swift */; };
 		AA2ADE612C8EB53E001C304E /* DonateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2ADE602C8EB53E001C304E /* DonateController.swift */; };
 		AA2ADE632C8EC6BA001C304E /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2ADE622C8EC6BA001C304E /* IAPManager.swift */; };
@@ -182,6 +184,8 @@
 		AA2229F7233DD93400D9354A /* map_present_background_update.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_present_background_update.png; sourceTree = "<group>"; };
 		AA2229F8233DD93400D9354A /* daum_th_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = daum_th_line.png; sourceTree = "<group>"; };
 		AA2229F9233DD93400D9354A /* map_pin_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_pin_shadow.png; sourceTree = "<group>"; };
+		AA27C2892E17B5C300585ABB /* RewardDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardDialog.swift; sourceTree = "<group>"; };
+		AA27C28B2E17B5D500585ABB /* RewardDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RewardDialog.xib; sourceTree = "<group>"; };
 		AA2ADE5E2C8AAD31001C304E /* CustomBackgroundLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackgroundLabel.swift; sourceTree = "<group>"; };
 		AA2ADE602C8EB53E001C304E /* DonateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateController.swift; sourceTree = "<group>"; };
 		AA2ADE622C8EC6BA001C304E /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
@@ -461,6 +465,8 @@
 				B6F8651625492DDE008F80FA /* ToiletReportDialog.xib */,
 				492017D526B8E532004F0A93 /* ReviewDialog.swift */,
 				492017D726B8E546004F0A93 /* ReviewDialog.xib */,
+				AA27C2892E17B5C300585ABB /* RewardDialog.swift */,
+				AA27C28B2E17B5D500585ABB /* RewardDialog.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -923,6 +929,7 @@
 				B679DCEF23837042000FE802 /* NoticeCell.xib in Resources */,
 				B6275C3524596FF3004165B5 /* PermissionDialog.xib in Resources */,
 				B62354DA236278EF004F615F /* Menu.storyboard in Resources */,
+				AA27C28C2E17B5D500585ABB /* RewardDialog.xib in Resources */,
 				AAC046352331F36100D5D5F6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1077,6 +1084,7 @@
 				B6461A152372685F005E087C /* CommentUpdateDialog.swift in Sources */,
 				AAC046C22331F4BF00D5D5F6 /* CopyController.swift in Sources */,
 				AAC046C02331F4BF00D5D5F6 /* CopyCell.swift in Sources */,
+				AA27C28A2E17B5C300585ABB /* RewardDialog.swift in Sources */,
 				AAC046A32331F4BF00D5D5F6 /* GalleryImage.swift in Sources */,
 				B62354D8236278BD004F615F /* SettingController.swift in Sources */,
 				B6461A0D23726830005E087C /* CommentCreateDialog.swift in Sources */,
@@ -1328,7 +1336,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 41;
 				DEVELOPMENT_TEAM = 2QRKV87SPM;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1348,7 +1356,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework/Resources",
 				);
-				MARKETING_VERSION = 2.21.0;
+				MARKETING_VERSION = 2.24.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -1384,7 +1392,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 41;
 				DEVELOPMENT_TEAM = 2QRKV87SPM;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1403,7 +1411,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework/Resources",
 				);
-				MARKETING_VERSION = 2.21.0;
+				MARKETING_VERSION = 2.24.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
